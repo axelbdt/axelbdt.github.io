@@ -114,7 +114,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong>no_bp-first_fail</strong>: select variable with smallest domain, select smallest value</li>
 <li><strong>no_bp-max_value</strong>: select the max value on the diagonal</li>
 </ul>
-<div id="7fdf72f2" class="cell" data-execution_count="1">
+<div id="812a2b38" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plot</span>
@@ -132,8 +132,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <section id="holes" class="level2">
 <h2 class="anchored" data-anchor-id="holes">500 Holes</h2>
-<p>Same metrics on each graph, some models are removed to change scale and make the graph more readable.</p>
-<div id="5190c782" class="cell" data-execution_count="2">
+<p>Same metrics on every graph, the slowest models are removed to change scale and make the graph more readable.</p>
+<p>max_value generally the fastest by far. Is beaten once by max_product though.</p>
+<div id="00d620d0" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>  plot.time_graph(n<span class="op">=</span><span class="dv">30</span>, holes<span class="op">=</span><span class="dv">500</span>, models<span class="op">=</span>models, instance_numbers<span class="op">=</span>instance_numbers)</span>
@@ -176,7 +177,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="holes-1" class="level2">
 <h2 class="anchored" data-anchor-id="holes-1">600 Holes</h2>
-<div id="4577a7eb" class="cell" data-execution_count="3">
+<div id="bd3a8413" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>  plot.time_graph(n<span class="op">=</span><span class="dv">30</span>, holes<span class="op">=</span><span class="dv">600</span>, models<span class="op">=</span>models, instance_numbers<span class="op">=</span>instance_numbers)</span>
@@ -207,7 +208,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="holes-2" class="level2">
 <h2 class="anchored" data-anchor-id="holes-2">700 Holes</h2>
-<div id="0a268bed" class="cell" data-execution_count="4">
+<div id="d516d53c" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>  plot.time_graph(n<span class="op">=</span><span class="dv">30</span>, holes<span class="op">=</span><span class="dv">700</span>, models<span class="op">=</span>models, instance_numbers<span class="op">=</span>instance_numbers)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>

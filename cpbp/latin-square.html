@@ -106,7 +106,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="latin-square-experiment" class="level1">
 <h1>Latin Square Experiment</h1>
 <p>Latin Square are turned into a COP as we try to maximize the sum of the diagonal.</p>
-<p>Diffrent models and branching schemes are compared on the same instances.</p>
+<p>Different models and branching schemes are compared on the same instances.</p>
 <ul>
 <li><strong>sum_product-max_marginal_regret</strong>: bp with sum product, branching with max marginal regret</li>
 <li><strong>sum_product-max_marginal_regret-oracle</strong>: bp with sum product, oracle on objective, branching with max marginal regret</li>
@@ -116,7 +116,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <p><strong>max_value</strong> generally the fastest by far. Is beaten once by <strong>max_product</strong> though.</p>
 <p><strong>max_product</strong> and <strong>max_value</strong> find the only one solution, the optimal one.</p>
-<div id="d58f6ae2" class="cell" data-execution_count="1">
+<div id="32932526" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plot</span>
@@ -135,7 +135,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="holes" class="level2">
 <h2 class="anchored" data-anchor-id="holes">500 Holes</h2>
 <p>Same metrics on every graph, the slowest models are removed to change scale and make the graph more readable.</p>
-<div id="14dbb1d1" class="cell" data-execution_count="2">
+<div id="0bde519c" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>  plot.time_graph(n<span class="op">=</span><span class="dv">30</span>, holes<span class="op">=</span><span class="dv">500</span>, models<span class="op">=</span>models, instance_numbers<span class="op">=</span>instance_numbers)</span>
@@ -178,7 +178,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="holes-1" class="level2">
 <h2 class="anchored" data-anchor-id="holes-1">600 Holes</h2>
-<div id="7fb670c7" class="cell" data-execution_count="3">
+<div id="c24da97b" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>  plot.time_graph(n<span class="op">=</span><span class="dv">30</span>, holes<span class="op">=</span><span class="dv">600</span>, models<span class="op">=</span>models, instance_numbers<span class="op">=</span>instance_numbers)</span>
@@ -209,7 +209,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="holes-2" class="level2">
 <h2 class="anchored" data-anchor-id="holes-2">700 Holes</h2>
-<div id="8fb7b583" class="cell" data-execution_count="4">
+<div id="ad5268c4" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>  plot.time_graph(n<span class="op">=</span><span class="dv">30</span>, holes<span class="op">=</span><span class="dv">700</span>, models<span class="op">=</span>models, instance_numbers<span class="op">=</span>instance_numbers)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -223,6 +223,98 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
+</section>
+<section id="impact-of-a-constraint-z-0.5-maxz" class="level1">
+<h1>Impact of a constraint z &gt;= 0.5 * max(z)</h1>
+<p>Truncating the domain of the objective to 50% of its maximum value. Won’t make instances unsat or even skip first solutions found (they are usually above this threshold).</p>
+<p>Mostly it doubles the slope of the oracle function.</p>
+<p><strong>max_product-max_marginal_regret-oracle</strong> is almost unaffected.</p>
+<p>Various effects for the other models : speed up, slow down, no effect… depending on the instance.</p>
+<p>Slow down is really surprising for <strong>sum_product-max_marginal_regret</strong> (no-oracle) as it supposedly only restricts the search space.</p>
+<p>Graphs : one color for each model, lighter and left is untruncated, darker and right is truncated.</p>
+<div id="c0893e0d" class="cell" data-execution_count="5">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>  models_truncated <span class="op">=</span> [</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">'sum_product-max_marginal_regret'</span>,</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'sum_product-max_marginal_regret-truncate50'</span>,</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'sum_product-max_marginal_regret-oracle'</span>,</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'sum_product-max_marginal_regret-oracle-truncate50'</span>,</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">'max_product-max_marginal_regret-oracle'</span>,</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">'max_product-max_marginal_regret-oracle-truncate50'</span>,</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  ]</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  plot.time_graph(n<span class="op">=</span><span class="dv">30</span>, holes<span class="op">=</span><span class="dv">500</span>, models<span class="op">=</span>models_truncated, instance_numbers<span class="op">=</span>instance_numbers)</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  plot.time_graph(n<span class="op">=</span><span class="dv">30</span>, holes<span class="op">=</span><span class="dv">600</span>, models<span class="op">=</span>models_truncated, instance_numbers<span class="op">=</span>instance_numbers)</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  plot.time_graph(n<span class="op">=</span><span class="dv">30</span>, holes<span class="op">=</span><span class="dv">700</span>, models<span class="op">=</span>models_truncated, instance_numbers<span class="op">=</span>instance_numbers)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="latin-square_files/figure-html/cell-6-output-1.png" width="758" height="374" class="figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="latin-square_files/figure-html/cell-6-output-2.png" width="758" height="374" class="figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="latin-square_files/figure-html/cell-6-output-3.png" width="758" height="374" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="evolution-of-solution-score" class="level1">
+<h1>Evolution of solution score</h1>
+<div id="d6f50192" class="cell" data-execution_count="6">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>  models_failure <span class="op">=</span> [</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">'sum_product-max_marginal_regret'</span>,</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'sum_product-max_marginal_regret-oracle'</span>,</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'max_product-max_marginal_regret-oracle'</span>,</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  ]</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  plot.quality_graph(n<span class="op">=</span><span class="dv">30</span>, holes<span class="op">=</span><span class="dv">500</span>, models<span class="op">=</span>models_failure, instance_number<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  plot.quality_graph(n<span class="op">=</span><span class="dv">30</span>, holes<span class="op">=</span><span class="dv">500</span>, models<span class="op">=</span>models_failure, instance_number<span class="op">=</span><span class="dv">5</span>)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  plot.quality_graph(n<span class="op">=</span><span class="dv">30</span>, holes<span class="op">=</span><span class="dv">600</span>, models<span class="op">=</span>models_failure, instance_number<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  plot.quality_graph(n<span class="op">=</span><span class="dv">30</span>, holes<span class="op">=</span><span class="dv">700</span>, models<span class="op">=</span>models_failure, instance_number<span class="op">=</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="latin-square_files/figure-html/cell-7-output-1.png" width="682" height="376" class="figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="latin-square_files/figure-html/cell-7-output-2.png" width="668" height="376" class="figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="latin-square_files/figure-html/cell-7-output-3.png" width="668" height="376" class="figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="latin-square_files/figure-html/cell-7-output-4.png" width="668" height="376" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
 </section>
 
 </main>

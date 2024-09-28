@@ -117,7 +117,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><strong>max_value</strong> is fastest, on 600 and 700 holes.</p>
 <p>*max_product<strong> outperforms </strong>sum_product** on 600 and 700 holes. But it is slower on 500 holes.</p>
 <p><strong>max_product</strong> and <strong>max_value</strong> find the only one solution, the optimal one. Except : - One time out for <strong>max_product</strong> - Two solutions for <strong>max_value</strong> for 500 holes instance 5 (see table)</p>
-<div id="b8c25ad7" class="cell" data-execution_count="1">
+<div id="75032da6" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plot</span>
@@ -128,103 +128,75 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">'lds-sum_product-max_marginal_regret'</span>,</span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">'lds-sum_product-max_marginal_regret-oracle'</span>,</span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">'lds-max_product-max_marginal_regret-oracle'</span>,</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">'lds-no_bp-first_fail'</span>,</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">'lds-no_bp-max_value'</span>,</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">'lds-no_bp-max_value'</span>,</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <section id="holes" class="level2">
 <h2 class="anchored" data-anchor-id="holes">500 Holes</h2>
 <p>Same metrics on every graph, the slowest models are removed to change scale and make the graph more readable.</p>
-<div id="f05ac498" class="cell" data-execution_count="2">
+<div id="04c30bfd" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>  plot.hole_tables(n<span class="op">=</span><span class="dv">30</span>, holes<span class="op">=</span><span class="dv">500</span>, models<span class="op">=</span>models, instance_numbers<span class="op">=</span>instance_numbers)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  plot.time_graph(n<span class="op">=</span><span class="dv">30</span>, holes<span class="op">=</span><span class="dv">500</span>, models<span class="op">=</span>models, instance_numbers<span class="op">=</span>instance_numbers)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  models2 <span class="op">=</span> [</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">'lds-sum_product-max_marginal_regret-oracle'</span>,</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">'lds-max_product-max_marginal_regret-oracle'</span>,</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">'lds-no_bp-max_value'</span>,</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  ]</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  plot.time_graph(n<span class="op">=</span><span class="dv">30</span>, holes<span class="op">=</span><span class="dv">500</span>, models<span class="op">=</span>models2, instance_numbers<span class="op">=</span>instance_numbers)</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  models3 <span class="op">=</span> [</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">'lds-sum_product-max_marginal_regret-oracle'</span>,</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">'lds-no_bp-max_value'</span>,</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  ]</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  plot.time_graph(n<span class="op">=</span><span class="dv">30</span>, holes<span class="op">=</span><span class="dv">500</span>, models<span class="op">=</span>models3, instance_numbers<span class="op">=</span>instance_numbers)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  plot.fail_graph(n<span class="op">=</span><span class="dv">30</span>, holes<span class="op">=</span><span class="dv">500</span>, models<span class="op">=</span>models, instance_numbers<span class="op">=</span>instance_numbers)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>### Lds, Sum Product, Max Marginal Regret
-|   Instance |   Best Score |   Choices |   Fails |   Execution Time (ms) |   Solutions | Completed   |
-|-----------:|-------------:|----------:|--------:|----------------------:|------------:|:------------|
-|          1 |          555 |     29586 |     543 |                 73724 |          21 | true        |
-|          2 |          712 |     37087 |     782 |                 90728 |          42 | true        |
-|          3 |          582 |     37179 |     949 |                 81967 |          41 | true        |
-|          4 |          691 |     35479 |    1396 |                 87010 |          41 | true        |
-|          5 |          754 |     49739 |    1404 |                140714 |          53 | true        |
-|          6 |          672 |     37675 |    1090 |                104397 |          41 | true        |
-|          7 |          603 |     36201 |    1171 |                 96651 |          22 | true        |
-|          8 |          696 |     42346 |    1400 |                 99740 |          48 | true        |
-|          9 |          700 |     54804 |    1755 |                140909 |          19 | true        |
-|         10 |          711 |     65635 |    1796 |                176466 |          26 | true        |
+|   Instance |   Score |   Choices |   Fails |   Solutions |
+|-----------:|--------:|----------:|--------:|------------:|
+|          1 |     555 |     29586 |     543 |          21 |
+|          2 |     712 |     37087 |     782 |          42 |
+|          3 |     582 |     37179 |     949 |          41 |
+|          4 |     691 |     35479 |    1396 |          41 |
+|          5 |     754 |     49739 |    1404 |          53 |
+|          6 |     672 |     37675 |    1090 |          41 |
+|          7 |     603 |     36201 |    1171 |          22 |
+|          8 |     696 |     42346 |    1400 |          48 |
+|          9 |     700 |     54804 |    1755 |          19 |
+|         10 |     711 |     65635 |    1796 |          26 |
 
 ### Lds, Sum Product, Max Marginal Regret, Oracle
-|   Instance |   Best Score |   Choices |   Fails |   Execution Time (ms) |   Solutions | Completed   |
-|-----------:|-------------:|----------:|--------:|----------------------:|------------:|:------------|
-|          1 |          555 |     29588 |     533 |                 72164 |          18 | true        |
-|          2 |          712 |     37563 |     864 |                 88805 |          32 | true        |
-|          3 |          582 |     35824 |    1063 |                 80897 |          37 | true        |
-|          4 |          691 |     35489 |    1396 |                 87287 |          42 | true        |
-|          5 |          754 |     57323 |    1403 |                157572 |          57 | true        |
-|          6 |          672 |     38076 |    1090 |                 99541 |          37 | true        |
-|          7 |          603 |     34601 |     855 |                 86332 |          17 | true        |
-|          8 |          696 |     44162 |    1800 |                107891 |          57 | true        |
-|          9 |          700 |     71233 |    2103 |                186454 |          26 | true        |
-|         10 |          711 |     65371 |    1809 |                194066 |          30 | true        |
+|   Instance |   Score |   Choices |   Fails |   Solutions |
+|-----------:|--------:|----------:|--------:|------------:|
+|          1 |     555 |     29588 |     533 |          18 |
+|          2 |     712 |     37563 |     864 |          32 |
+|          3 |     582 |     35824 |    1063 |          37 |
+|          4 |     691 |     35489 |    1396 |          42 |
+|          5 |     754 |     57323 |    1403 |          57 |
+|          6 |     672 |     38076 |    1090 |          37 |
+|          7 |     603 |     34601 |     855 |          17 |
+|          8 |     696 |     44162 |    1800 |          57 |
+|          9 |     700 |     71233 |    2103 |          26 |
+|         10 |     711 |     65371 |    1809 |          30 |
 
 ### Lds, Max Product, Max Marginal Regret, Oracle
-|   Instance | Best Score   | Choices   | Fails   | Execution Time (ms)   | Solutions   | Completed   |
-|-----------:|:-------------|:----------|:--------|:----------------------|:------------|:------------|
-|          1 | 555          | 25618     | 972     | 310076                | 1           | true        |
-|          2 | 712          | 2191      | 218     | 22016                 | 1           | true        |
-|          3 | 582          | 21357     | 725     | 268650                | 1           | true        |
-|          4 | 691          | 32945     | 1236    | 382042                | 1           | true        |
-|          5 | 754          | 20499     | 427     | 271614                | 1           | true        |
-|          6 | 672          | 19550     | 503     | 275832                | 1           | true        |
-|          7 | 603          | 22055     | 843     | 264593                | 1           | true        |
-|          8 | 696          | 6185      | 221     | 65915                 | 1           | true        |
-|          9 | Timed out    | N/A       | N/A     | N/A                   | N/A         | N/A         |
-|         10 | 711          | 18894     | 427     | 260364                | 1           | true        |
-
-### Lds, No Bp, First Fail
-|   Instance |   Best Score |   Choices |   Fails |   Execution Time (ms) |   Solutions | Completed   |
-|-----------:|-------------:|----------:|--------:|----------------------:|------------:|:------------|
-|          1 |          555 |    219027 |   14861 |                 72028 |         123 | true        |
-|          2 |          712 |    472369 |   23900 |                159375 |         216 | true        |
-|          3 |          582 |    578004 |   26102 |                194661 |         172 | true        |
-|          4 |          691 |    480554 |   18631 |                163643 |         135 | true        |
-|          5 |          754 |    265976 |   18201 |                 92038 |         169 | true        |
-|          6 |          672 |    623318 |   32859 |                205054 |         210 | true        |
-|          7 |          603 |    510283 |   16854 |                167806 |         109 | true        |
-|          8 |          696 |    356420 |   15999 |                123871 |         185 | true        |
-|          9 |          700 |    280149 |   25979 |                 95398 |         181 | true        |
-|         10 |          711 |    744184 |   31399 |                245535 |         183 | true        |
+|   Instance | Score     | Choices   | Fails   | Solutions   |
+|-----------:|:----------|:----------|:--------|:------------|
+|          1 | 555       | 25618     | 972     | 1           |
+|          2 | 712       | 2191      | 218     | 1           |
+|          3 | 582       | 21357     | 725     | 1           |
+|          4 | 691       | 32945     | 1236    | 1           |
+|          5 | 754       | 20499     | 427     | 1           |
+|          6 | 672       | 19550     | 503     | 1           |
+|          7 | 603       | 22055     | 843     | 1           |
+|          8 | 696       | 6185      | 221     | 1           |
+|          9 | Timed out | N/A       | N/A     | N/A         |
+|         10 | 711       | 18894     | 427     | 1           |
 
 ### Lds, No Bp, Max Value
-|   Instance |   Best Score |   Choices |   Fails |   Execution Time (ms) |   Solutions | Completed   |
-|-----------:|-------------:|----------:|--------:|----------------------:|------------:|:------------|
-|          1 |          555 |       376 |     199 |                   946 |           1 | true        |
-|          2 |          712 |       445 |     202 |                   751 |           1 | true        |
-|          3 |          582 |    466527 |    9747 |                188035 |           1 | true        |
-|          4 |          691 |       755 |     181 |                  1710 |           1 | true        |
-|          5 |          754 |     44535 |    1828 |                 20544 |           2 | true        |
-|          6 |          672 |      1482 |     187 |                  1351 |           1 | true        |
-|          7 |          603 |    130947 |    4068 |                 62960 |           1 | true        |
-|          8 |          696 |     19093 |     677 |                 10517 |           1 | true        |
-|          9 |          700 |    999699 |   21324 |                426344 |           1 | true        |
-|         10 |          711 |    110076 |    3640 |                 49289 |           1 | true        |
+|   Instance |   Score |   Choices |   Fails |   Solutions |
+|-----------:|--------:|----------:|--------:|------------:|
+|          1 |     555 |       376 |     199 |           1 |
+|          2 |     712 |       445 |     202 |           1 |
+|          3 |     582 |    466527 |    9747 |           1 |
+|          4 |     691 |       755 |     181 |           1 |
+|          5 |     754 |     44535 |    1828 |           2 |
+|          6 |     672 |      1482 |     187 |           1 |
+|          7 |     603 |    130947 |    4068 |           1 |
+|          8 |     696 |     19093 |     677 |           1 |
+|          9 |     700 |    999699 |   21324 |           1 |
+|         10 |     711 |    110076 |    3640 |           1 |
 </code></pre>
 </div>
 <div class="cell-output cell-output-display">
@@ -234,29 +206,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </figure>
 </div>
 </div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="latin-square-lds_files/figure-html/cell-3-output-3.png" width="758" height="374" class="figure-img"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="latin-square-lds_files/figure-html/cell-3-output-4.png" width="758" height="374" class="figure-img"></p>
-</figure>
-</div>
-</div>
 </div>
 </section>
 <section id="holes-1" class="level2">
 <h2 class="anchored" data-anchor-id="holes-1">600 Holes</h2>
-<div id="e84c72b0" class="cell" data-execution_count="3">
+<div id="7fd80a33" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>  plot.hole_tables(n<span class="op">=</span><span class="dv">30</span>, holes<span class="op">=</span><span class="dv">600</span>, models<span class="op">=</span>models, instance_numbers<span class="op">=</span>instance_numbers)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  plot.time_graph(n<span class="op">=</span><span class="dv">30</span>, holes<span class="op">=</span><span class="dv">600</span>, models<span class="op">=</span>models, instance_numbers<span class="op">=</span>instance_numbers)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  plot.fail_graph(n<span class="op">=</span><span class="dv">30</span>, holes<span class="op">=</span><span class="dv">600</span>, models<span class="op">=</span>models, instance_numbers<span class="op">=</span>instance_numbers)</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  models2 <span class="op">=</span> [</span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>      <span class="st">'lds-sum_product-max_marginal_regret'</span>,</span>
@@ -264,78 +222,64 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>      <span class="st">'lds-max_product-max_marginal_regret-oracle'</span>,</span>
 <span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>      <span class="st">'lds-no_bp-max_value'</span>,</span>
 <span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    ]</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  plot.time_graph(n<span class="op">=</span><span class="dv">30</span>, holes<span class="op">=</span><span class="dv">600</span>, models<span class="op">=</span>models2, instance_numbers<span class="op">=</span>instance_numbers)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  plot.fail_graph(n<span class="op">=</span><span class="dv">30</span>, holes<span class="op">=</span><span class="dv">600</span>, models<span class="op">=</span>models2, instance_numbers<span class="op">=</span>instance_numbers)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>### Lds, Sum Product, Max Marginal Regret
-|   Instance |   Best Score |   Choices |   Fails |   Execution Time (ms) |   Solutions | Completed   |
-|-----------:|-------------:|----------:|--------:|----------------------:|------------:|:------------|
-|          1 |          633 |     36855 |     774 |                 85786 |          45 | true        |
-|          2 |          685 |     47492 |     970 |                118903 |          88 | true        |
-|          3 |          759 |     67499 |     768 |                159472 |          85 | true        |
-|          4 |          775 |     70657 |    2959 |                132778 |         106 | true        |
-|          5 |          711 |     66939 |     760 |                143966 |         120 | true        |
-|          6 |          740 |     37321 |     418 |                 88647 |          81 | true        |
-|          7 |          725 |     55352 |    1235 |                131410 |          94 | true        |
-|          8 |          690 |     36784 |     403 |                 95653 |          76 | true        |
-|          9 |          738 |     42483 |     401 |                108739 |          88 | true        |
-|         10 |          674 |     29928 |    1900 |                 70917 |          64 | true        |
+|   Instance |   Score |   Choices |   Fails |   Solutions |
+|-----------:|--------:|----------:|--------:|------------:|
+|          1 |     633 |     36855 |     774 |          45 |
+|          2 |     685 |     47492 |     970 |          88 |
+|          3 |     759 |     67499 |     768 |          85 |
+|          4 |     775 |     70657 |    2959 |         106 |
+|          5 |     711 |     66939 |     760 |         120 |
+|          6 |     740 |     37321 |     418 |          81 |
+|          7 |     725 |     55352 |    1235 |          94 |
+|          8 |     690 |     36784 |     403 |          76 |
+|          9 |     738 |     42483 |     401 |          88 |
+|         10 |     674 |     29928 |    1900 |          64 |
 
 ### Lds, Sum Product, Max Marginal Regret, Oracle
-|   Instance |   Best Score |   Choices |   Fails |   Execution Time (ms) |   Solutions | Completed   |
-|-----------:|-------------:|----------:|--------:|----------------------:|------------:|:------------|
-|          1 |          633 |     36612 |     753 |                 83317 |          50 | true        |
-|          2 |          685 |     32600 |     384 |                 82451 |          66 | true        |
-|          3 |          759 |     51165 |     758 |                122073 |          64 | true        |
-|          4 |          775 |     77147 |    3339 |                151468 |         119 | true        |
-|          5 |          711 |     63582 |     758 |                146026 |         123 | true        |
-|          6 |          740 |     52829 |     405 |                130470 |          78 | true        |
-|          7 |          725 |     45863 |    1367 |                102836 |          67 | true        |
-|          8 |          690 |     40922 |    1227 |                 99109 |          77 | true        |
-|          9 |          738 |     35536 |     397 |                 93578 |          86 | true        |
-|         10 |          674 |     28477 |    1222 |                 65293 |          61 | true        |
+|   Instance |   Score |   Choices |   Fails |   Solutions |
+|-----------:|--------:|----------:|--------:|------------:|
+|          1 |     633 |     36612 |     753 |          50 |
+|          2 |     685 |     32600 |     384 |          66 |
+|          3 |     759 |     51165 |     758 |          64 |
+|          4 |     775 |     77147 |    3339 |         119 |
+|          5 |     711 |     63582 |     758 |         123 |
+|          6 |     740 |     52829 |     405 |          78 |
+|          7 |     725 |     45863 |    1367 |          67 |
+|          8 |     690 |     40922 |    1227 |          77 |
+|          9 |     738 |     35536 |     397 |          86 |
+|         10 |     674 |     28477 |    1222 |          61 |
 
 ### Lds, Max Product, Max Marginal Regret, Oracle
-|   Instance |   Best Score |   Choices |   Fails |   Execution Time (ms) |   Solutions | Completed   |
-|-----------:|-------------:|----------:|--------:|----------------------:|------------:|:------------|
-|          1 |          633 |       604 |     315 |                 13038 |           1 | true        |
-|          2 |          685 |      1131 |     335 |                 17127 |           1 | true        |
-|          3 |          759 |       651 |     331 |                 13456 |           1 | true        |
-|          4 |          775 |       621 |     318 |                 13916 |           1 | true        |
-|          5 |          711 |       604 |     314 |                 12972 |           1 | true        |
-|          6 |          740 |       756 |     316 |                 14170 |           1 | true        |
-|          7 |          725 |       653 |     315 |                 13312 |           1 | true        |
-|          8 |          690 |       878 |     315 |                 15192 |           1 | true        |
-|          9 |          738 |      2087 |     316 |                 28261 |           1 | true        |
-|         10 |          674 |       636 |     319 |                 12525 |           1 | true        |
-
-### Lds, No Bp, First Fail
-|   Instance |   Best Score |   Choices |   Fails |   Execution Time (ms) |   Solutions | Completed   |
-|-----------:|-------------:|----------:|--------:|----------------------:|------------:|:------------|
-|          1 |          633 |    153564 |   16374 |                 58181 |         157 | true        |
-|          2 |          685 |    178709 |   20439 |                 65111 |         184 | true        |
-|          3 |          759 |    151177 |   17112 |                 56790 |         166 | true        |
-|          4 |          775 |    196890 |   29138 |                 70069 |         251 | true        |
-|          5 |          711 |    286818 |   42677 |                101920 |         330 | true        |
-|          6 |          740 |    152742 |   18932 |                 55185 |         187 | true        |
-|          7 |          725 |    218951 |   28515 |                 79601 |         196 | true        |
-|          8 |          690 |    137032 |   16394 |                 51176 |         170 | true        |
-|          9 |          738 |    257245 |   40055 |                 89705 |         250 | true        |
-|         10 |          674 |    133745 |   13919 |                 47431 |         141 | true        |
+|   Instance |   Score |   Choices |   Fails |   Solutions |
+|-----------:|--------:|----------:|--------:|------------:|
+|          1 |     633 |       604 |     315 |           1 |
+|          2 |     685 |      1131 |     335 |           1 |
+|          3 |     759 |       651 |     331 |           1 |
+|          4 |     775 |       621 |     318 |           1 |
+|          5 |     711 |       604 |     314 |           1 |
+|          6 |     740 |       756 |     316 |           1 |
+|          7 |     725 |       653 |     315 |           1 |
+|          8 |     690 |       878 |     315 |           1 |
+|          9 |     738 |      2087 |     316 |           1 |
+|         10 |     674 |       636 |     319 |           1 |
 
 ### Lds, No Bp, Max Value
-|   Instance |   Best Score |   Choices |   Fails |   Execution Time (ms) |   Solutions | Completed   |
-|-----------:|-------------:|----------:|--------:|----------------------:|------------:|:------------|
-|          1 |          633 |      1593 |     298 |                  1489 |           1 | true        |
-|          2 |          685 |       586 |     306 |                   748 |           1 | true        |
-|          3 |          759 |       576 |     299 |                   771 |           1 | true        |
-|          4 |          775 |      1647 |     293 |                  1214 |           1 | true        |
-|          5 |          711 |      1670 |     298 |                  1947 |           1 | true        |
-|          6 |          740 |       580 |     297 |                   714 |           1 | true        |
-|          7 |          725 |       565 |     292 |                   755 |           1 | true        |
-|          8 |          690 |       638 |     293 |                   931 |           1 | true        |
-|          9 |          738 |       586 |     303 |                   632 |           1 | true        |
-|         10 |          674 |       541 |     274 |                   562 |           1 | true        |
+|   Instance |   Score |   Choices |   Fails |   Solutions |
+|-----------:|--------:|----------:|--------:|------------:|
+|          1 |     633 |      1593 |     298 |           1 |
+|          2 |     685 |       586 |     306 |           1 |
+|          3 |     759 |       576 |     299 |           1 |
+|          4 |     775 |      1647 |     293 |           1 |
+|          5 |     711 |      1670 |     298 |           1 |
+|          6 |     740 |       580 |     297 |           1 |
+|          7 |     725 |       565 |     292 |           1 |
+|          8 |     690 |       638 |     293 |           1 |
+|          9 |     738 |       586 |     303 |           1 |
+|         10 |     674 |       541 |     274 |           1 |
 </code></pre>
 </div>
 <div class="cell-output cell-output-display">
@@ -356,82 +300,68 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="holes-2" class="level2">
 <h2 class="anchored" data-anchor-id="holes-2">700 Holes</h2>
-<div id="bb986449" class="cell" data-execution_count="4">
+<div id="6b6ce51a" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>  plot.hole_tables(n<span class="op">=</span><span class="dv">30</span>, holes<span class="op">=</span><span class="dv">700</span>, models<span class="op">=</span>models, instance_numbers<span class="op">=</span>instance_numbers)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  plot.time_graph(n<span class="op">=</span><span class="dv">30</span>, holes<span class="op">=</span><span class="dv">700</span>, models<span class="op">=</span>models, instance_numbers<span class="op">=</span>instance_numbers)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  plot.fail_graph(n<span class="op">=</span><span class="dv">30</span>, holes<span class="op">=</span><span class="dv">700</span>, models<span class="op">=</span>models, instance_numbers<span class="op">=</span>instance_numbers)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>### Lds, Sum Product, Max Marginal Regret
-|   Instance |   Best Score |   Choices |   Fails |   Execution Time (ms) |   Solutions | Completed   |
-|-----------:|-------------:|----------:|--------:|----------------------:|------------:|:------------|
-|          1 |          786 |     65634 |     990 |                151581 |         147 | true        |
-|          2 |          733 |     50028 |     525 |                110599 |         104 | true        |
-|          3 |          742 |    112804 |    4269 |                223085 |         189 | true        |
-|          4 |          820 |     57318 |     977 |                104243 |         153 | true        |
-|          5 |          779 |     85142 |    3299 |                180640 |         151 | true        |
-|          6 |          694 |     39562 |     988 |                 92141 |          97 | true        |
-|          7 |          781 |    105894 |    1456 |                212767 |         166 | true        |
-|          8 |          782 |    108030 |    6968 |                202135 |         185 | true        |
-|          9 |          695 |     73294 |     999 |                153942 |         146 | true        |
-|         10 |          806 |     74811 |     976 |                155540 |         135 | true        |
+|   Instance |   Score |   Choices |   Fails |   Solutions |
+|-----------:|--------:|----------:|--------:|------------:|
+|          1 |     786 |     65634 |     990 |         147 |
+|          2 |     733 |     50028 |     525 |         104 |
+|          3 |     742 |    112804 |    4269 |         189 |
+|          4 |     820 |     57318 |     977 |         153 |
+|          5 |     779 |     85142 |    3299 |         151 |
+|          6 |     694 |     39562 |     988 |          97 |
+|          7 |     781 |    105894 |    1456 |         166 |
+|          8 |     782 |    108030 |    6968 |         185 |
+|          9 |     695 |     73294 |     999 |         146 |
+|         10 |     806 |     74811 |     976 |         135 |
 
 ### Lds, Sum Product, Max Marginal Regret, Oracle
-|   Instance |   Best Score |   Choices |   Fails |   Execution Time (ms) |   Solutions | Completed   |
-|-----------:|-------------:|----------:|--------:|----------------------:|------------:|:------------|
-|          1 |          786 |     69060 |     991 |                163902 |         146 | true        |
-|          2 |          733 |     38793 |     519 |                 87453 |          96 | true        |
-|          3 |          742 |     70460 |     987 |                148770 |         108 | true        |
-|          4 |          820 |     46358 |     978 |                 76226 |         133 | true        |
-|          5 |          779 |     59584 |     527 |                135465 |         122 | true        |
-|          6 |          694 |     36076 |     970 |                 88101 |          80 | true        |
-|          7 |          781 |     79219 |    2033 |                168176 |         146 | true        |
-|          8 |          782 |     64482 |    1569 |                131154 |         110 | true        |
-|          9 |          695 |     57162 |     976 |                122441 |         138 | true        |
-|         10 |          806 |     72634 |     976 |                147130 |         140 | true        |
+|   Instance |   Score |   Choices |   Fails |   Solutions |
+|-----------:|--------:|----------:|--------:|------------:|
+|          1 |     786 |     69060 |     991 |         146 |
+|          2 |     733 |     38793 |     519 |          96 |
+|          3 |     742 |     70460 |     987 |         108 |
+|          4 |     820 |     46358 |     978 |         133 |
+|          5 |     779 |     59584 |     527 |         122 |
+|          6 |     694 |     36076 |     970 |          80 |
+|          7 |     781 |     79219 |    2033 |         146 |
+|          8 |     782 |     64482 |    1569 |         110 |
+|          9 |     695 |     57162 |     976 |         138 |
+|         10 |     806 |     72634 |     976 |         140 |
 
 ### Lds, Max Product, Max Marginal Regret, Oracle
-|   Instance |   Best Score |   Choices |   Fails |   Execution Time (ms) |   Solutions | Completed   |
-|-----------:|-------------:|----------:|--------:|----------------------:|------------:|:------------|
-|          1 |          786 |       826 |     424 |                 27118 |           1 | true        |
-|          2 |          733 |       832 |     430 |                 24513 |           1 | true        |
-|          3 |          742 |       827 |     425 |                 27566 |           1 | true        |
-|          4 |          820 |       866 |     428 |                 28627 |           1 | true        |
-|          5 |          779 |       821 |     409 |                 26511 |           1 | true        |
-|          6 |          694 |       846 |     437 |                 26149 |           1 | true        |
-|          7 |          781 |       870 |     441 |                 26654 |           1 | true        |
-|          8 |          782 |       859 |     439 |                 28641 |           1 | true        |
-|          9 |          695 |       824 |     421 |                 24949 |           1 | true        |
-|         10 |          806 |       867 |     433 |                 27794 |           1 | true        |
-
-### Lds, No Bp, First Fail
-|   Instance |   Best Score |   Choices |   Fails |   Execution Time (ms) |   Solutions | Completed   |
-|-----------:|-------------:|----------:|--------:|----------------------:|------------:|:------------|
-|          1 |          786 |    226214 |   24137 |                100306 |         341 | true        |
-|          2 |          733 |    138694 |    9584 |                 63976 |         219 | true        |
-|          3 |          742 |    173126 |   15199 |                 75554 |         276 | true        |
-|          4 |          820 |    246579 |   31616 |                102519 |         352 | true        |
-|          5 |          779 |    223862 |   24112 |                 98835 |         341 | true        |
-|          6 |          694 |    126237 |    6137 |                 56000 |         237 | true        |
-|          7 |          781 |    208189 |   18363 |                 91021 |         305 | true        |
-|          8 |          782 |    225463 |   21029 |                106504 |         342 | true        |
-|          9 |          695 |    188239 |   14180 |                 82922 |         285 | true        |
-|         10 |          806 |    173805 |   11381 |                 78952 |         267 | true        |
+|   Instance |   Score |   Choices |   Fails |   Solutions |
+|-----------:|--------:|----------:|--------:|------------:|
+|          1 |     786 |       826 |     424 |           1 |
+|          2 |     733 |       832 |     430 |           1 |
+|          3 |     742 |       827 |     425 |           1 |
+|          4 |     820 |       866 |     428 |           1 |
+|          5 |     779 |       821 |     409 |           1 |
+|          6 |     694 |       846 |     437 |           1 |
+|          7 |     781 |       870 |     441 |           1 |
+|          8 |     782 |       859 |     439 |           1 |
+|          9 |     695 |       824 |     421 |           1 |
+|         10 |     806 |       867 |     433 |           1 |
 
 ### Lds, No Bp, Max Value
-|   Instance |   Best Score |   Choices |   Fails |   Execution Time (ms) |   Solutions | Completed   |
-|-----------:|-------------:|----------:|--------:|----------------------:|------------:|:------------|
-|          1 |          786 |       784 |     406 |                  1012 |           1 | true        |
-|          2 |          733 |       793 |     358 |                  1085 |           1 | true        |
-|          3 |          742 |       847 |     430 |                  4622 |           1 | true        |
-|          4 |          820 |       778 |     403 |                  1018 |           1 | true        |
-|          5 |          779 |       792 |     403 |                   814 |           1 | true        |
-|          6 |          694 |       808 |     418 |                  1248 |           1 | true        |
-|          7 |          781 |       822 |     425 |                   756 |           1 | true        |
-|          8 |          782 |      1059 |     397 |                  1097 |           1 | true        |
-|          9 |          695 |       838 |     412 |                  1115 |           1 | true        |
-|         10 |          806 |       770 |     399 |                  1336 |           1 | true        |
+|   Instance |   Score |   Choices |   Fails |   Solutions |
+|-----------:|--------:|----------:|--------:|------------:|
+|          1 |     786 |       784 |     406 |           1 |
+|          2 |     733 |       793 |     358 |           1 |
+|          3 |     742 |       847 |     430 |           1 |
+|          4 |     820 |       778 |     403 |           1 |
+|          5 |     779 |       792 |     403 |           1 |
+|          6 |     694 |       808 |     418 |           1 |
+|          7 |     781 |       822 |     425 |           1 |
+|          8 |     782 |      1059 |     397 |           1 |
+|          9 |     695 |       838 |     412 |           1 |
+|         10 |     806 |       770 |     399 |           1 |
 </code></pre>
 </div>
 <div class="cell-output cell-output-display">
@@ -452,7 +382,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Various effects for the other models : speed up, slow down, no effect… depending on the instance.</p>
 <p>Slow down is really surprising for <strong>sum_product-max_marginal_regret</strong> (no-oracle) as it supposedly only restricts the search space.</p>
 <p>Graphs : one color for each model, lighter and left is untruncated, darker and right is truncated.</p>
-<div id="dfa135f2" class="cell" data-execution_count="5">
+<div id="ee6ccae3" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>  models_truncated <span class="op">=</span> [</span>
@@ -464,9 +394,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">'lds-max_product-max_marginal_regret-oracle-truncate50'</span>,</span>
 <span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  ]</span>
 <span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  plot.time_graph(n<span class="op">=</span><span class="dv">30</span>, holes<span class="op">=</span><span class="dv">500</span>, models<span class="op">=</span>models_truncated, instance_numbers<span class="op">=</span>instance_numbers)</span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  plot.time_graph(n<span class="op">=</span><span class="dv">30</span>, holes<span class="op">=</span><span class="dv">600</span>, models<span class="op">=</span>models_truncated, instance_numbers<span class="op">=</span>instance_numbers)</span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  plot.time_graph(n<span class="op">=</span><span class="dv">30</span>, holes<span class="op">=</span><span class="dv">700</span>, models<span class="op">=</span>models_truncated, instance_numbers<span class="op">=</span>instance_numbers)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  plot.fail_graph(n<span class="op">=</span><span class="dv">30</span>, holes<span class="op">=</span><span class="dv">500</span>, models<span class="op">=</span>models_truncated, instance_numbers<span class="op">=</span>instance_numbers)</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  plot.fail_graph(n<span class="op">=</span><span class="dv">30</span>, holes<span class="op">=</span><span class="dv">600</span>, models<span class="op">=</span>models_truncated, instance_numbers<span class="op">=</span>instance_numbers)</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  plot.fail_graph(n<span class="op">=</span><span class="dv">30</span>, holes<span class="op">=</span><span class="dv">700</span>, models<span class="op">=</span>models_truncated, instance_numbers<span class="op">=</span>instance_numbers)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -494,7 +424,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="evolution-of-solution-score" class="level1">
 <h1>Evolution of solution score</h1>
 <p>Not available yet for LDS.</p>
-<div id="7601dd72" class="cell" data-execution_count="6">
+<div id="7beb73b6" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>  models_failure <span class="op">=</span> [</span>

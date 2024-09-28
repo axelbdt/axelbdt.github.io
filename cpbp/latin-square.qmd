@@ -31,8 +31,8 @@ models = [
   'dfs-sum_product-max_marginal_regret',
   'dfs-sum_product-max_marginal_regret-oracle',
   'dfs-max_product-max_marginal_regret-oracle',
-  'dfs-no_bp-first_fail',
   'dfs-no_bp-max_value',
+  # 'dfs-no_bp-first_fail',
 ]
 ```
 
@@ -44,27 +44,27 @@ Same metrics on every graph, the slowest models are removed to change scale and 
 
 ```{python}
   plot.hole_tables(n=30, holes=500, models=models, instance_numbers=instance_numbers)
-  plot.time_graph(n=30, holes=500, models=models, instance_numbers=instance_numbers)
+  plot.fail_graph(n=30, holes=500, models=models, instance_numbers=instance_numbers)
   
   models2 = [
   'dfs-sum_product-max_marginal_regret-oracle',
   'dfs-max_product-max_marginal_regret-oracle',
   'dfs-no_bp-max_value',
   ]
-  plot.time_graph(n=30, holes=500, models=models2, instance_numbers=instance_numbers)
+  plot.fail_graph(n=30, holes=500, models=models2, instance_numbers=instance_numbers)
 
   models3 = [
     'dfs-sum_product-max_marginal_regret-oracle',
     'dfs-no_bp-max_value',
   ]
-  plot.time_graph(n=30, holes=500, models=models3, instance_numbers=instance_numbers)
+  plot.fail_graph(n=30, holes=500, models=models3, instance_numbers=instance_numbers)
 ```
 
 ## 600 Holes
 
 ```{python}
   plot.hole_tables(n=30, holes=600, models=models, instance_numbers=instance_numbers)
-  plot.time_graph(n=30, holes=600, models=models, instance_numbers=instance_numbers)
+  plot.fail_graph(n=30, holes=600, models=models, instance_numbers=instance_numbers)
 
   models2 = [
       'dfs-sum_product-max_marginal_regret',
@@ -72,14 +72,14 @@ Same metrics on every graph, the slowest models are removed to change scale and 
       'dfs-max_product-max_marginal_regret-oracle',
       'dfs-no_bp-max_value',
     ]
-  plot.time_graph(n=30, holes=600, models=models2, instance_numbers=instance_numbers)
+  plot.fail_graph(n=30, holes=600, models=models2, instance_numbers=instance_numbers)
 ```
 
 ## 700 Holes
 
 ```{python}
   plot.hole_tables(n=30, holes=700, models=models, instance_numbers=instance_numbers)
-  plot.time_graph(n=30, holes=700, models=models, instance_numbers=instance_numbers)
+  plot.fail_graph(n=30, holes=700, models=models, instance_numbers=instance_numbers)
 ```
 
 # Impact of a constraint z >= 0.5 * max(z)
@@ -106,9 +106,9 @@ Graphs : one color for each model, lighter and left is untruncated, darker and r
     'dfs-max_product-max_marginal_regret-oracle-truncate50',
   ]
 
-  plot.time_graph(n=30, holes=500, models=models_truncated, instance_numbers=instance_numbers)
-  plot.time_graph(n=30, holes=600, models=models_truncated, instance_numbers=instance_numbers)
-  plot.time_graph(n=30, holes=700, models=models_truncated, instance_numbers=instance_numbers)
+  plot.fail_graph(n=30, holes=500, models=models_truncated, instance_numbers=instance_numbers)
+  plot.fail_graph(n=30, holes=600, models=models_truncated, instance_numbers=instance_numbers)
+  plot.fail_graph(n=30, holes=700, models=models_truncated, instance_numbers=instance_numbers)
 ```
 
 # Evolution of solution score

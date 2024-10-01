@@ -1,0 +1,70 @@
+---
+title: "Latin Square Experiment"
+author: "Axel Baudot"
+format:
+  html:
+    code-fold: true
+---
+
+# Latin Square Experiment
+
+Latin Square are turned into a COP as we try to maximize the sum of the diagonal.
+
+Different models and branching schemes are compared on the same instances.
+
+```{python}
+import plot
+
+instance_numbers = range(1, 11)
+
+models = [
+  'dfs-sum_product-max_marginal_regret',
+  'lds-sum_product-max_marginal_regret',
+  'dfs-sum_product-max_marginal_regret-oracle',
+  'lds-sum_product-max_marginal_regret-oracle',
+  'dfs-max_product-max_marginal_regret-oracle',
+  'lds-max_product-max_marginal_regret-oracle',
+  'dfs-no_bp-max_value',
+  'lds-no_bp-max_value',
+]
+
+colors = {
+    "dfs-sum_product-max_marginal_regret": "blue",
+    "dfs-sum_product-max_marginal_regret-oracle": "orange",
+    "dfs-max_product-max_marginal_regret-oracle": "green",
+    "dfs-no_bp-first_fail": "red",
+    "dfs-no_bp-max_value": "violet",
+    # trucated models
+    "lds-sum_product-max_marginal_regret": "darkblue",
+    "lds-sum_product-max_marginal_regret-oracle": "darkorange",
+    "lds-max_product-max_marginal_regret-oracle": "darkgreen",
+    "lds-no_bp-first_fail": "darkred",
+    "lds-no_bp-max_value": "darkviolet",
+}
+```
+
+## 500 Holes
+
+Same metrics on every graph, the slowest models are removed to change scale and make the graph more readable.
+
+
+
+```{python}
+  plot.hole_tables(n=30, holes=500, models=models, instance_numbers=instance_numbers)
+  plot.fail_graph(n=30, holes=500, models=models, instance_numbers=instance_numbers, colors=colors)
+```
+
+## 600 Holes
+
+```{python}
+  plot.hole_tables(n=30, holes=600, models=models, instance_numbers=instance_numbers)
+  plot.fail_graph(n=30, holes=600, models=models, instance_numbers=instance_numbers, colors=colors)
+```
+
+## 700 Holes
+
+```{python}
+  plot.hole_tables(n=30, holes=700, models=models, instance_numbers=instance_numbers)
+  plot.fail_graph(n=30, holes=700, models=models, instance_numbers=instance_numbers, colors=colors)
+```
+

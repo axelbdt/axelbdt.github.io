@@ -36,8 +36,26 @@ models = [
   'lds-sum_product-max_marginal_regret',
   'lds-sum_product-max_marginal_regret-oracle',
   'lds-max_product-max_marginal_regret-oracle',
+  'lds-max_product-dom_wdeg_max_marginal-oracle',
   'lds-no_bp-max_value',
+  'lds-no_bp-dom_wdeg',
 ]
+models2 = [
+    'lds-sum_product-max_marginal_regret',
+    'lds-sum_product-max_marginal_regret-oracle',
+    'lds-max_product-max_marginal_regret-oracle',
+    'lds-max_product-dom_wdeg_max_marginal-oracle',
+    'lds-no_bp-max_value',
+    #'lds-no_bp-dom_wdeg',
+  ]
+models3 = [
+    'lds-sum_product-max_marginal_regret',
+    'lds-sum_product-max_marginal_regret-oracle',
+    'lds-max_product-max_marginal_regret-oracle',
+    'lds-max_product-dom_wdeg_max_marginal-oracle',
+    # 'lds-no_bp-max_value',
+    #'lds-no_bp-dom_wdeg',
+  ]
 ```
 
 ## 500 Holes
@@ -49,6 +67,8 @@ Same metrics on every graph, the slowest models are removed to change scale and 
 ```{python}
   plot.hole_tables(n=30, holes=500, models=models, instance_numbers=instance_numbers)
   plot.fail_graph(n=30, holes=500, models=models, instance_numbers=instance_numbers)
+  plot.fail_graph(n=30, holes=500, models=models2, instance_numbers=instance_numbers)
+  plot.fail_graph(n=30, holes=500, models=models3, instance_numbers=instance_numbers)
 ```
 
 ## 600 Holes
@@ -56,13 +76,6 @@ Same metrics on every graph, the slowest models are removed to change scale and 
 ```{python}
   plot.hole_tables(n=30, holes=600, models=models, instance_numbers=instance_numbers)
   plot.fail_graph(n=30, holes=600, models=models, instance_numbers=instance_numbers)
-
-  models2 = [
-      'lds-sum_product-max_marginal_regret',
-      'lds-sum_product-max_marginal_regret-oracle',
-      'lds-max_product-max_marginal_regret-oracle',
-      'lds-no_bp-max_value',
-    ]
   plot.fail_graph(n=30, holes=600, models=models2, instance_numbers=instance_numbers)
 ```
 
@@ -71,6 +84,7 @@ Same metrics on every graph, the slowest models are removed to change scale and 
 ```{python}
   plot.hole_tables(n=30, holes=700, models=models, instance_numbers=instance_numbers)
   plot.fail_graph(n=30, holes=700, models=models, instance_numbers=instance_numbers)
+  plot.fail_graph(n=30, holes=700, models=models2, instance_numbers=instance_numbers)
 ```
 
 # Impact of a constraint z >= 0.5 * max(z)

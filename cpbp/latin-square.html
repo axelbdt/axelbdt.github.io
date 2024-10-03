@@ -116,7 +116,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <p><strong>max_value</strong> generally the fastest by far. Is beaten once by <strong>max_product</strong> though.</p>
 <p><strong>max_product</strong> and <strong>max_value</strong> find the only one solution, the optimal one.</p>
-<div id="56b6787d" class="cell" data-execution_count="1">
+<div id="92314763" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plot</span>
@@ -127,32 +127,38 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">'dfs-sum_product-max_marginal_regret'</span>,</span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">'dfs-sum_product-max_marginal_regret-oracle'</span>,</span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">'dfs-max_product-max_marginal_regret-oracle'</span>,</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">'dfs-no_bp-max_value'</span>,</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 'dfs-no_bp-first_fail',</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">'dfs-max_product-dom_wdeg_max_marginal-oracle'</span>,</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">'dfs-no_bp-max_value'</span>,</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="st">'dfs-no_bp-dom_wdeg'</span>,</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>models2 <span class="op">=</span> [</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">'dfs-sum_product-max_marginal_regret'</span>,</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">'dfs-sum_product-max_marginal_regret-oracle'</span>,</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">'dfs-max_product-max_marginal_regret-oracle'</span>,</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">'dfs-max_product-dom_wdeg_max_marginal-oracle'</span>,</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    <span class="st">'dfs-no_bp-max_value'</span>,</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    <span class="co">#'dfs-no_bp-dom_wdeg',</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>  ]</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>models3 <span class="op">=</span> [</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    <span class="st">'dfs-sum_product-max_marginal_regret'</span>,</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    <span class="st">'dfs-sum_product-max_marginal_regret-oracle'</span>,</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    <span class="st">'dfs-max_product-max_marginal_regret-oracle'</span>,</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    <span class="st">'dfs-max_product-dom_wdeg_max_marginal-oracle'</span>,</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 'dfs-no_bp-max_value',</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    <span class="co">#'dfs-no_bp-dom_wdeg',</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>  ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <section id="holes" class="level2">
 <h2 class="anchored" data-anchor-id="holes">500 Holes</h2>
 <p>Same metrics on every graph, the slowest models are removed to change scale and make the graph more readable.</p>
-<div id="1a121238" class="cell" data-execution_count="2">
+<div id="1a4c6c8b" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>  plot.hole_tables(n<span class="op">=</span><span class="dv">30</span>, holes<span class="op">=</span><span class="dv">500</span>, models<span class="op">=</span>models, instance_numbers<span class="op">=</span>instance_numbers)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  plot.fail_graph(n<span class="op">=</span><span class="dv">30</span>, holes<span class="op">=</span><span class="dv">500</span>, models<span class="op">=</span>models, instance_numbers<span class="op">=</span>instance_numbers)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  models2 <span class="op">=</span> [</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">'dfs-sum_product-max_marginal_regret-oracle'</span>,</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">'dfs-max_product-max_marginal_regret-oracle'</span>,</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">'dfs-no_bp-max_value'</span>,</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  ]</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  plot.fail_graph(n<span class="op">=</span><span class="dv">30</span>, holes<span class="op">=</span><span class="dv">500</span>, models<span class="op">=</span>models2, instance_numbers<span class="op">=</span>instance_numbers)</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  models3 <span class="op">=</span> [</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">'dfs-sum_product-max_marginal_regret-oracle'</span>,</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">'dfs-no_bp-max_value'</span>,</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  ]</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  plot.fail_graph(n<span class="op">=</span><span class="dv">30</span>, holes<span class="op">=</span><span class="dv">500</span>, models<span class="op">=</span>models3, instance_numbers<span class="op">=</span>instance_numbers)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  plot.fail_graph(n<span class="op">=</span><span class="dv">30</span>, holes<span class="op">=</span><span class="dv">500</span>, models<span class="op">=</span>models2, instance_numbers<span class="op">=</span>instance_numbers)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  plot.fail_graph(n<span class="op">=</span><span class="dv">30</span>, holes<span class="op">=</span><span class="dv">500</span>, models<span class="op">=</span>models3, instance_numbers<span class="op">=</span>instance_numbers)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>### Dfs, Sum Product, Max Marginal Regret
@@ -197,6 +203,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 |          9 |     700 |   1064008 |  532005 |           1 |
 |         10 |     711 |      6704 |    3353 |           1 |
 
+### Dfs, Max Product, Dom Wdeg Max Marginal, Oracle
+|   Instance |   Score |   Choices |   Fails |   Solutions |
+|-----------:|--------:|----------:|--------:|------------:|
+|          1 |     555 |      2700 |    1351 |           7 |
+|          2 |     712 |      9694 |    4848 |          27 |
+|          3 |     582 |     27220 |   13611 |          19 |
+|          4 |     691 |      6878 |    3440 |          23 |
+|          5 |     754 |      5574 |    2788 |          16 |
+|          6 |     672 |     10678 |    5340 |          26 |
+|          7 |     603 |     11008 |    5505 |          11 |
+|          8 |     696 |     11818 |    5910 |          20 |
+|          9 |     700 |      4838 |    2420 |          13 |
+|         10 |     711 |     24580 |   12291 |          28 |
+
 ### Dfs, No Bp, Max Value
 |   Instance |   Score |   Choices |   Fails |   Solutions |
 |-----------:|--------:|----------:|--------:|------------:|
@@ -210,6 +230,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 |          8 |     696 |       488 |     245 |           1 |
 |          9 |     700 |    481010 |  240506 |           1 |
 |         10 |     711 |     89612 |   44807 |           1 |
+
+### Dfs, No Bp, Dom Wdeg
+|   Instance |   Score |   Choices |   Fails |   Solutions |
+|-----------:|--------:|----------:|--------:|------------:|
+|          1 |     555 |    227884 |  113943 |         253 |
+|          2 |     712 |    301686 |  150844 |         361 |
+|          3 |     582 |    354262 |  177132 |         301 |
+|          4 |     691 |    290344 |  145173 |         349 |
+|          5 |     754 |    396708 |  198355 |         360 |
+|          6 |     672 |    486896 |  243449 |         363 |
+|          7 |     603 |    336410 |  168206 |         219 |
+|          8 |     696 |    351302 |  175652 |         356 |
+|          9 |     700 |    244926 |  122464 |         293 |
+|         10 |     711 |   3973694 | 1986848 |         317 |
 </code></pre>
 </div>
 <div class="cell-output cell-output-display">
@@ -237,19 +271,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="holes-1" class="level2">
 <h2 class="anchored" data-anchor-id="holes-1">600 Holes</h2>
-<div id="4117f30c" class="cell" data-execution_count="3">
+<div id="aa5d3817" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>  plot.hole_tables(n<span class="op">=</span><span class="dv">30</span>, holes<span class="op">=</span><span class="dv">600</span>, models<span class="op">=</span>models, instance_numbers<span class="op">=</span>instance_numbers)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  plot.fail_graph(n<span class="op">=</span><span class="dv">30</span>, holes<span class="op">=</span><span class="dv">600</span>, models<span class="op">=</span>models, instance_numbers<span class="op">=</span>instance_numbers)</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  models2 <span class="op">=</span> [</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>      <span class="st">'dfs-sum_product-max_marginal_regret'</span>,</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>      <span class="st">'dfs-sum_product-max_marginal_regret-oracle'</span>,</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>      <span class="st">'dfs-max_product-max_marginal_regret-oracle'</span>,</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>      <span class="st">'dfs-no_bp-max_value'</span>,</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    ]</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  plot.fail_graph(n<span class="op">=</span><span class="dv">30</span>, holes<span class="op">=</span><span class="dv">600</span>, models<span class="op">=</span>models2, instance_numbers<span class="op">=</span>instance_numbers)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  plot.fail_graph(n<span class="op">=</span><span class="dv">30</span>, holes<span class="op">=</span><span class="dv">600</span>, models<span class="op">=</span>models2, instance_numbers<span class="op">=</span>instance_numbers)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>### Dfs, Sum Product, Max Marginal Regret
@@ -294,6 +321,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 |          9 |     738 |       622 |     312 |           1 |
 |         10 |     674 |       904 |     453 |           1 |
 
+### Dfs, Max Product, Dom Wdeg Max Marginal, Oracle
+|   Instance |   Score |   Choices |   Fails |   Solutions |
+|-----------:|--------:|----------:|--------:|------------:|
+|          1 |     633 |      2134 |    1068 |           8 |
+|          2 |     685 |      2544 |    1273 |           4 |
+|          3 |     759 |      3904 |    1953 |           9 |
+|          4 |     775 |      2038 |    1020 |           5 |
+|          5 |     711 |      3430 |    1716 |           7 |
+|          6 |     740 |      3382 |    1692 |          10 |
+|          7 |     725 |      1816 |     909 |           8 |
+|          8 |     690 |      2950 |    1476 |           9 |
+|          9 |     738 |      2090 |    1046 |           4 |
+|         10 |     674 |       818 |     410 |           1 |
+
 ### Dfs, No Bp, Max Value
 |   Instance |   Score |   Choices |   Fails |   Solutions |
 |-----------:|--------:|----------:|--------:|------------:|
@@ -307,6 +348,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 |          8 |     690 |       576 |     289 |           1 |
 |          9 |     738 |       568 |     285 |           1 |
 |         10 |     674 |       536 |     269 |           1 |
+
+### Dfs, No Bp, Dom Wdeg
+|   Instance |   Score |   Choices |   Fails |   Solutions |
+|-----------:|--------:|----------:|--------:|------------:|
+|          1 |     633 |    220790 |  110396 |         341 |
+|          2 |     685 |    271662 |  135832 |         435 |
+|          3 |     759 |    294998 |  147500 |         467 |
+|          4 |     775 |    322446 |  161224 |         519 |
+|          5 |     711 |    305308 |  152655 |         456 |
+|          6 |     740 |    298812 |  149407 |         443 |
+|          7 |     725 |    291448 |  145725 |         425 |
+|          8 |     690 |    264804 |  132403 |         444 |
+|          9 |     738 |    330120 |  165061 |         519 |
+|         10 |     674 |    224384 |  112193 |         346 |
 </code></pre>
 </div>
 <div class="cell-output cell-output-display">
@@ -327,11 +382,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="holes-2" class="level2">
 <h2 class="anchored" data-anchor-id="holes-2">700 Holes</h2>
-<div id="bdbe61e4" class="cell" data-execution_count="4">
+<div id="12c8c4ae" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>  plot.hole_tables(n<span class="op">=</span><span class="dv">30</span>, holes<span class="op">=</span><span class="dv">700</span>, models<span class="op">=</span>models, instance_numbers<span class="op">=</span>instance_numbers)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  plot.fail_graph(n<span class="op">=</span><span class="dv">30</span>, holes<span class="op">=</span><span class="dv">700</span>, models<span class="op">=</span>models, instance_numbers<span class="op">=</span>instance_numbers)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  plot.fail_graph(n<span class="op">=</span><span class="dv">30</span>, holes<span class="op">=</span><span class="dv">700</span>, models<span class="op">=</span>models, instance_numbers<span class="op">=</span>instance_numbers)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  plot.fail_graph(n<span class="op">=</span><span class="dv">30</span>, holes<span class="op">=</span><span class="dv">700</span>, models<span class="op">=</span>models2, instance_numbers<span class="op">=</span>instance_numbers)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>### Dfs, Sum Product, Max Marginal Regret
@@ -376,6 +432,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 |          9 |     695 |       808 |     405 |           1 |
 |         10 |     806 |       878 |     440 |           1 |
 
+### Dfs, Max Product, Dom Wdeg Max Marginal, Oracle
+|   Instance |   Score |   Choices |   Fails |   Solutions |
+|-----------:|--------:|----------:|--------:|------------:|
+|          1 |     786 |      1048 |     525 |           1 |
+|          2 |     733 |      1060 |     531 |           1 |
+|          3 |     742 |      1060 |     531 |           1 |
+|          4 |     820 |      1056 |     529 |           1 |
+|          5 |     779 |      1096 |     549 |           1 |
+|          6 |     694 |      1050 |     526 |           1 |
+|          7 |     781 |      1086 |     544 |           1 |
+|          8 |     782 |      1052 |     527 |           1 |
+|          9 |     695 |      1064 |     533 |           1 |
+|         10 |     806 |      1070 |     536 |           1 |
+
 ### Dfs, No Bp, Max Value
 |   Instance |   Score |   Choices |   Fails |   Solutions |
 |-----------:|--------:|----------:|--------:|------------:|
@@ -389,12 +459,33 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 |          8 |     782 |       792 |     397 |           1 |
 |          9 |     695 |       924 |     463 |           1 |
 |         10 |     806 |       744 |     373 |           1 |
+
+### Dfs, No Bp, Dom Wdeg
+|   Instance |   Score |   Choices |   Fails |   Solutions |
+|-----------:|--------:|----------:|--------:|------------:|
+|          1 |     786 |    616706 |  308354 |         696 |
+|          2 |     733 |    445442 |  222722 |         464 |
+|          3 |     742 |    560514 |  280258 |         625 |
+|          4 |     820 |    647522 |  323762 |         709 |
+|          5 |     779 |    629038 |  314520 |         680 |
+|          6 |     694 |    434574 |  217288 |         497 |
+|          7 |     781 |    627966 |  313984 |         684 |
+|          8 |     782 |    602862 |  301432 |         667 |
+|          9 |     695 |    460716 |  230359 |         526 |
+|         10 |     806 |    651818 |  325910 |         702 |
 </code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
 <p><img src="latin-square_files/figure-html/cell-5-output-2.png" width="758" height="374" class="figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="latin-square_files/figure-html/cell-5-output-3.png" width="758" height="374" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -409,7 +500,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Various effects for the other models : speed up, slow down, no effect… depending on the instance.</p>
 <p>Slow down is really surprising for <strong>sum_product-max_marginal_regret</strong> (no-oracle) as it supposedly only restricts the search space.</p>
 <p>Graphs : one color for each model, lighter and left is untruncated, darker and right is truncated.</p>
-<div id="b3d08fdb" class="cell" data-execution_count="5">
+<div id="68c3a566" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>  models_truncated <span class="op">=</span> [</span>
@@ -450,7 +541,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="evolution-of-solution-score" class="level1">
 <h1>Evolution of solution score</h1>
-<div id="9895a84b" class="cell" data-execution_count="6">
+<div id="564347b6" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>  models_failure <span class="op">=</span> [</span>

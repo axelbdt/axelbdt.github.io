@@ -105,16 +105,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="latin-square-experiment-lds-pseudodiagonal" class="level1">
 <h1>Latin Square Experiment : LDS, pseudodiagonal</h1>
-<p>Latin Square are turned into a COP as we try to maximize the sum of the “pseudodiagonal” : a rectangular area of 2*15 cells.</p>
+<p>Latin Square are turned into a COP as we try to maximize the sum of the “pseudodiagonal” : a rectangular area of 6*5 cells.</p>
 <p>Different models and branching schemes are compared on the same instances.</p>
 <ul>
 <li><strong>sum_product-max_marginal_regret</strong>: bp with sum product, branching with max marginal regret</li>
 <li><strong>sum_product-max_marginal_regret-oracle</strong>: bp with sum product, oracle on objective, branching with max marginal regret</li>
 <li><strong>max_product-max_marginal_regret-oracle</strong>: bp with max product, oracle on objective, branching with max marginal regret</li>
 <li><strong>max_product-dom_wdeg_max_marginal-oracle</strong>: bp with max product, oracle on objective, variable selection with dom_wdeg, value selection with max_marginal</li>
+<li><strong>sum_product-dom_wdeg_max_marginal-oracle</strong>: bp with sum product, variable selection with dom_wdeg, value selection with max_marginal</li>
 <li><strong>no_bp-max_value</strong>: select the max value on the diagonal</li>
 </ul>
-<div id="92c71218" class="cell" data-execution_count="1">
+<div id="6585646b" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plot</span>
@@ -137,7 +138,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <section id="holes" class="level2">
 <h2 class="anchored" data-anchor-id="holes">400 Holes</h2>
-<div id="75ec24a9" class="cell" data-execution_count="2">
+<div id="d6acbcee" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>  plot.hole_tables(n<span class="op">=</span><span class="dv">30</span>, holes<span class="op">=</span><span class="dv">400</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>instance_numbers, objective<span class="op">=</span><span class="st">"pseudodiagonal_30_6_6"</span>)</span>
@@ -149,44 +150,44 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>### Lds, Sum Product, Max Marginal Regret
 |   Instance |   Score |   Choices |   Fails |   Solutions | Completed   |
 |-----------:|--------:|----------:|--------:|------------:|:------------|
-|          1 |     575 |  18781374 | 4464881 |          18 | false       |
-|          2 |     562 |   4885005 |  472935 |          12 | false       |
+|          1 |     575 |  17551308 | 4140467 |          18 | false       |
+|          2 |     562 |   4751347 |  458829 |          12 | false       |
 |          3 |     573 |   3220244 |  167029 |          19 | true        |
 |          4 |     558 |   1366135 |   94637 |          18 | true        |
-|          5 |     502 |   5268588 |  299815 |          12 | false       |
+|          5 |     494 |   5080104 |  293747 |          11 | false       |
 |          6 |     514 |    570276 |   42260 |          14 | true        |
 |          7 |     580 |  18049348 | 8836707 |          16 | true        |
-|          8 |     547 |  18803897 | 5072423 |          11 | false       |
+|          8 |     547 |  18054710 | 4716626 |          11 | false       |
 |          9 |     539 |   1039701 |   65946 |          15 | true        |
-|         10 |     569 |   7370764 | 1105847 |          19 | false       |
+|         10 |     569 |   7420885 | 1109062 |          19 | false       |
 
 ### Lds, Max Product, Max Marginal Regret, Oracle
 |   Instance | Score   |   Choices |   Fails |   Solutions | Completed   |
 |-----------:|:--------|----------:|--------:|------------:|:------------|
-|          1 | N/A     |   1801346 |  173330 |           0 | false       |
-|          2 | N/A     |   1946482 |  145947 |           0 | false       |
-|          3 | N/A     |   1939271 |  189819 |           0 | false       |
+|          1 | N/A     |   1884440 |  180341 |           0 | false       |
+|          2 | N/A     |   1973801 |  147426 |           0 | false       |
+|          3 | N/A     |   1952209 |  190763 |           0 | false       |
 |          4 | 558     |   1052189 |   74585 |           6 | true        |
-|          5 | N/A     |   1866564 |  176346 |           0 | false       |
+|          5 | N/A     |   1996456 |  186562 |           0 | false       |
 |          6 | 514     |    557935 |   60063 |           2 | true        |
 |          7 | 580     |   1720135 |  222455 |           4 | true        |
-|          8 | 546     |   2038462 |  315468 |           1 | false       |
+|          8 | 546     |   2170106 |  338454 |           1 | false       |
 |          9 | 539     |    696984 |   72641 |           1 | true        |
-|         10 | 578     |   1967448 |  301987 |           1 | false       |
+|         10 | 578     |   1914700 |  288638 |           1 | false       |
 
 ### Lds, Max Product, Dom Wdeg Max Marginal, Oracle
 |   Instance |   Score |   Choices |   Fails |   Solutions | Completed   |
 |-----------:|--------:|----------:|--------:|------------:|:------------|
 |          1 |     575 |   1793155 |  155323 |          13 | true        |
 |          2 |     566 |    759351 |   57862 |          14 | true        |
-|          3 |     470 |   2227308 |  194417 |           3 | false       |
+|          3 |     470 |   2138259 |  188136 |           3 | false       |
 |          4 |     558 |    587205 |   36608 |          15 | true        |
 |          5 |     527 |   2641327 |  218063 |          17 | true        |
 |          6 |     514 |   1907184 |  168811 |          11 | true        |
-|          7 |     554 |   2553233 |  204490 |          12 | false       |
-|          8 |     541 |   2114150 |  229226 |          10 | false       |
+|          7 |     566 |   2897838 |  224172 |          14 | false       |
+|          8 |     545 |   2243933 |  241612 |          12 | false       |
 |          9 |     539 |    320453 |   19647 |          12 | true        |
-|         10 |     509 |   2466254 |  219862 |           5 | false       |
+|         10 |     494 |   2423209 |  216505 |           4 | false       |
 
 ### Lds, Sum Product, Dom Wdeg Max Marginal
 |   Instance |   Score |   Choices |   Fails |   Solutions | Completed   |
@@ -205,16 +206,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 ### Lds, No Bp, Max Value
 |   Instance |   Score |   Choices |   Fails |   Solutions | Completed   |
 |-----------:|--------:|----------:|--------:|------------:|:------------|
-|          1 |     564 |  23159946 | 2809208 |           2 | false       |
+|          1 |     564 |  23440305 | 2849014 |           2 | false       |
 |          2 |     566 |  16601411 | 2239649 |           2 | true        |
 |          3 |     573 |  24353797 | 1996673 |           2 | true        |
 |          4 |     558 |    778791 |   68879 |           3 | true        |
-|          5 |     518 |  19113987 | 3342138 |           1 | false       |
+|          5 |     518 |  20215194 | 3555839 |           1 | false       |
 |          6 |     514 |    845363 |   94520 |           2 | true        |
 |          7 |     580 |  11605654 | 1553429 |           4 | true        |
 |          8 |     547 |   9265879 | 1515638 |           3 | true        |
 |          9 |     539 |  24370007 | 2930691 |           1 | true        |
-|         10 |     568 |  27427088 | 2436300 |           1 | false       |
+|         10 |     568 |  27440869 | 2440086 |           1 | false       |
 </code></pre>
 </div>
 <div class="cell-output cell-output-display">
@@ -236,7 +237,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="holes-1" class="level2">
 <h2 class="anchored" data-anchor-id="holes-1">500 Holes</h2>
 <p>Same metrics on every graph, the slowest models are removed to change scale and make the graph more readable.</p>
-<div id="6937c1c9" class="cell" data-execution_count="3">
+<div id="d190b9a2" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>  plot.hole_tables(n<span class="op">=</span><span class="dv">30</span>, holes<span class="op">=</span><span class="dv">500</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>instance_numbers, objective<span class="op">=</span><span class="st">"pseudodiagonal_30_6_6"</span>)</span>
@@ -247,16 +248,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>### Lds, Sum Product, Max Marginal Regret
 |   Instance |   Score |   Choices |    Fails |   Solutions | Completed   |
 |-----------:|--------:|----------:|---------:|------------:|:------------|
-|          1 |     619 |  21817067 |  8929945 |          13 | false       |
-|          2 |     629 |  23249272 |  5844840 |          13 | false       |
-|          3 |     611 |  26858500 | 11289616 |          30 | false       |
-|          4 |     634 |  26179400 |  5539548 |          17 | false       |
-|          5 |     647 |  19565901 |  3974379 |          17 | false       |
-|          6 |     639 |  19238676 |  4799910 |          24 | false       |
-|          7 |     586 |  25847175 | 10958341 |          20 | false       |
-|          8 |     627 |  15998212 |  5833400 |          26 | false       |
-|          9 |     654 |  26281062 |  7271326 |          22 | false       |
-|         10 |     668 |  28080374 |  5700071 |          43 | false       |
+|          1 |     619 |  22302815 |  9134303 |          13 | false       |
+|          2 |     629 |  23163291 |  5827007 |          13 | false       |
+|          3 |     611 |  27557413 | 11584404 |          30 | false       |
+|          4 |     634 |  19587788 |  4237979 |          17 | false       |
+|          5 |     647 |  19676593 |  3999056 |          17 | false       |
+|          6 |     639 |  19615226 |  4885361 |          24 | false       |
+|          7 |     586 |  26868825 | 11400811 |          20 | false       |
+|          8 |     627 |  16190269 |  5911381 |          26 | false       |
+|          9 |     654 |  27271030 |  7684945 |          22 | false       |
+|         10 |     668 |  26948656 |  5461488 |          43 | false       |
 
 ### Lds, Max Product, Max Marginal Regret, Oracle
 |   Instance |   Score |   Choices |   Fails |   Solutions | Completed   |
@@ -270,7 +271,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 |          7 |     586 |    156061 |   15807 |           8 | true        |
 |          8 |     627 |     61089 |   24494 |           4 | true        |
 |          9 |     654 |     51374 |    7187 |           3 | true        |
-|         10 |     678 |    640551 |  151684 |           8 | false       |
+|         10 |     678 |    629026 |  145921 |           8 | false       |
 
 ### Lds, Max Product, Dom Wdeg Max Marginal, Oracle
 |   Instance |   Score |   Choices |   Fails |   Solutions | Completed   |
@@ -333,7 +334,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="holes-2" class="level2">
 <h2 class="anchored" data-anchor-id="holes-2">600 Holes</h2>
-<div id="d920ac3f" class="cell" data-execution_count="4">
+<div id="640e68a6" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>  plot.hole_tables(n<span class="op">=</span><span class="dv">30</span>, holes<span class="op">=</span><span class="dv">600</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>instance_numbers, objective<span class="op">=</span><span class="st">"pseudodiagonal_30_6_6"</span>)</span>
@@ -344,44 +345,44 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>### Lds, Sum Product, Max Marginal Regret
 |   Instance |   Score |   Choices |   Fails |   Solutions | Completed   |
 |-----------:|--------:|----------:|--------:|------------:|:------------|
-|          1 |     700 |  16123174 | 5115619 |          24 | false       |
-|          2 |     613 |  20799440 | 3966608 |          26 | false       |
-|          3 |     676 |  18232396 | 4143843 |          33 | false       |
-|          4 |     716 |  11828842 | 1633635 |          44 | false       |
-|          5 |     714 |  21747019 | 5062010 |          41 | false       |
-|          6 |     697 |  14353856 | 1375037 |          28 | false       |
-|          7 |     682 |  19173375 | 3641110 |          29 | false       |
-|          8 |     667 |  19119306 | 4114753 |          24 | false       |
-|          9 |     672 |  22639800 | 4560069 |          39 | false       |
-|         10 |     705 |  17806030 | 3807598 |          40 | false       |
+|          1 |     700 |  15757005 | 4982243 |          24 | false       |
+|          2 |     613 |  20322670 | 3854116 |          26 | false       |
+|          3 |     676 |  17908687 | 4077494 |          33 | false       |
+|          4 |     716 |  12541416 | 1820879 |          44 | false       |
+|          5 |     714 |  21046518 | 4891636 |          41 | false       |
+|          6 |     697 |  13810863 | 1229159 |          28 | false       |
+|          7 |     682 |  19575138 | 3728338 |          29 | false       |
+|          8 |     667 |  19606349 | 4227761 |          24 | false       |
+|          9 |     672 |  22553343 | 4544223 |          39 | false       |
+|         10 |     705 |  18413314 | 3911592 |          40 | false       |
 
 ### Lds, Max Product, Max Marginal Regret, Oracle
 |   Instance |   Score |   Choices |   Fails |   Solutions | Completed   |
 |-----------:|--------:|----------:|--------:|------------:|:------------|
 |          1 |     701 |     14272 |    5350 |           8 | true        |
-|          2 |     616 |    302099 |  144698 |           8 | false       |
-|          3 |     682 |    213379 |   94539 |           4 | false       |
-|          4 |     721 |    191454 |   65020 |           9 | false       |
-|          5 |     719 |    114526 |   43571 |          10 | false       |
-|          6 |     701 |    180708 |   60158 |           7 | false       |
-|          7 |     682 |    262208 |  123741 |           2 | false       |
-|          8 |     677 |    150018 |   59506 |           3 | false       |
-|          9 |     684 |    159965 |   56727 |           6 | false       |
-|         10 |     718 |    258748 |  120598 |          10 | false       |
+|          2 |     616 |    332321 |  159809 |           8 | false       |
+|          3 |     682 |    217462 |   96580 |           4 | false       |
+|          4 |     721 |    193314 |   65561 |           9 | false       |
+|          5 |     720 |    116414 |   44515 |          11 | false       |
+|          6 |     701 |    178569 |   59417 |           7 | false       |
+|          7 |     682 |    269832 |  127553 |           2 | false       |
+|          8 |     677 |    158484 |   63739 |           3 | false       |
+|          9 |     684 |    156061 |   55605 |           6 | false       |
+|         10 |     718 |    268726 |  125588 |          10 | false       |
 
 ### Lds, Max Product, Dom Wdeg Max Marginal, Oracle
 |   Instance |   Score |   Choices |   Fails |   Solutions | Completed   |
 |-----------:|--------:|----------:|--------:|------------:|:------------|
 |          1 |     701 |     10258 |    2345 |           7 | true        |
 |          2 |     616 |     41995 |   19439 |           6 | true        |
-|          3 |     682 |    281344 |  136491 |           6 | false       |
-|          4 |     723 |    119903 |   49108 |           9 | false       |
-|          5 |     720 |    157522 |   75502 |           8 | false       |
-|          6 |     704 |    103512 |   36757 |           6 | false       |
-|          7 |     682 |    180615 |   86644 |           4 | false       |
-|          8 |     677 |    195943 |   92366 |           3 | false       |
-|          9 |     685 |    125268 |   52103 |           5 | false       |
-|         10 |     718 |    299743 |  147890 |           4 | false       |
+|          3 |     682 |    278673 |  135155 |           6 | false       |
+|          4 |     723 |    120743 |   49503 |           9 | false       |
+|          5 |     720 |    150838 |   72159 |           8 | false       |
+|          6 |     704 |    100514 |   35532 |           6 | false       |
+|          7 |     682 |    177697 |   85185 |           4 | false       |
+|          8 |     677 |    194120 |   91454 |           3 | false       |
+|          9 |     685 |    130716 |   54824 |           5 | false       |
+|         10 |     718 |    312651 |  154344 |           4 | false       |
 
 ### Lds, Sum Product, Dom Wdeg Max Marginal
 |   Instance |   Score |   Choices |   Fails |   Solutions | Completed   |
@@ -391,7 +392,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 |          3 |     682 |    857674 |  421138 |          18 | true        |
 |          4 |     723 |  13178768 | 6541411 |          43 | true        |
 |          5 |     720 |    423659 |  202993 |          32 | true        |
-|          6 |     704 |  14819573 | 7326525 |          30 | false       |
+|          6 |     704 |  15491780 | 7662628 |          30 | false       |
 |          7 |     682 |    447639 |  214617 |          36 | true        |
 |          8 |     677 |   1219287 |  597582 |          33 | true        |
 |          9 |     685 |   2789380 | 1377837 |          34 | true        |
@@ -403,13 +404,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 |          1 |     701 |    199801 |    90310 |           9 | true        |
 |          2 |     616 |   3824084 |  1896431 |           4 | true        |
 |          3 |     682 |   6897221 |  3424100 |           8 | true        |
-|          4 |     723 |  35824344 | 15716750 |           8 | false       |
+|          4 |     723 |  35033675 | 15389069 |           8 | false       |
 |          5 |     720 |   7909695 |  3914256 |           8 | true        |
-|          6 |     704 |  34365696 | 15155317 |           8 | false       |
+|          6 |     704 |  32248133 | 14223975 |           8 | false       |
 |          7 |     682 |   7448692 |  3693753 |           4 | true        |
-|          8 |     677 |  36570359 | 18079207 |           1 | false       |
-|          9 |     685 |  32493305 | 14958243 |           6 | false       |
-|         10 |     718 |  38815636 | 19023168 |          13 | false       |
+|          8 |     677 |  33593344 | 16590699 |           1 | false       |
+|          9 |     685 |  32578009 | 14997972 |           6 | false       |
+|         10 |     718 |  38962206 | 19096454 |          13 | false       |
 </code></pre>
 </div>
 <div class="cell-output cell-output-display">
@@ -430,7 +431,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="holes-3" class="level2">
 <h2 class="anchored" data-anchor-id="holes-3">700 Holes</h2>
-<div id="655686e4" class="cell" data-execution_count="5">
+<div id="36385ca8" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>  plot.hole_tables(n<span class="op">=</span><span class="dv">30</span>, holes<span class="op">=</span><span class="dv">700</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>instance_numbers, objective<span class="op">=</span><span class="st">"pseudodiagonal_30_6_6"</span>)</span>
@@ -441,72 +442,72 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>### Lds, Sum Product, Max Marginal Regret
 |   Instance |   Score |   Choices |   Fails |   Solutions | Completed   |
 |-----------:|--------:|----------:|--------:|------------:|:------------|
-|          1 |     683 |  16648115 | 3681473 |          67 | false       |
-|          2 |     678 |  10294643 |  734945 |          33 | false       |
-|          3 |     709 |  11645395 | 2016657 |          46 | false       |
-|          4 |     718 |   9166345 |  658472 |          24 | false       |
-|          5 |     652 |  12524617 | 2376409 |          36 | false       |
-|          6 |     710 |  10043330 |  713824 |          35 | false       |
-|          7 |     663 |   7403228 |  513543 |          45 | false       |
-|          8 |     669 |   9254422 |  636190 |          29 | false       |
-|          9 |     681 |  10231649 |  716477 |          52 | false       |
-|         10 |     681 |  11244684 |  956742 |          32 | false       |
+|          1 |     683 |  17282577 | 3815691 |          67 | false       |
+|          2 |     678 |  10516292 |  746811 |          33 | false       |
+|          3 |     709 |  11543679 | 1992117 |          46 | false       |
+|          4 |     718 |   9620119 |  682009 |          24 | false       |
+|          5 |     652 |  11333964 | 2084556 |          36 | false       |
+|          6 |     710 |  10549793 |  744586 |          35 | false       |
+|          7 |     663 |   7472862 |  516867 |          45 | false       |
+|          8 |     669 |   9719455 |  661105 |          29 | false       |
+|          9 |     681 |  10622288 |  740538 |          52 | false       |
+|         10 |     681 |  10625922 |  800615 |          32 | false       |
 
 ### Lds, Max Product, Max Marginal Regret, Oracle
 |   Instance |   Score |   Choices |   Fails |   Solutions | Completed   |
 |-----------:|--------:|----------:|--------:|------------:|:------------|
-|          1 |     703 |     95331 |   32735 |           7 | false       |
-|          2 |     737 |   2736832 | 1338350 |           7 | false       |
-|          3 |     736 |     95765 |   31151 |          12 | false       |
-|          4 |     736 |    213431 |   70521 |           8 | false       |
-|          5 |     677 |    259705 |   68690 |           5 | false       |
-|          6 |     732 |     90327 |   30369 |           5 | false       |
-|          7 |     723 |    102287 |   33814 |           5 | false       |
-|          8 |     693 |    116542 |   37874 |           6 | false       |
-|          9 |     708 |     74566 |   22984 |          10 | false       |
-|         10 |     703 |     98889 |   33714 |           4 | false       |
+|          1 |     703 |     88095 |   30256 |           7 | false       |
+|          2 |     737 |   3043475 | 1491667 |           7 | false       |
+|          3 |     736 |     93979 |   30583 |          12 | false       |
+|          4 |     736 |    218357 |   72320 |           8 | false       |
+|          5 |     677 |    550087 |   95026 |           5 | false       |
+|          6 |     732 |    133210 |   45370 |           5 | false       |
+|          7 |     723 |    159204 |   53259 |           5 | false       |
+|          8 |     693 |    167028 |   54571 |           6 | false       |
+|          9 |     708 |    106169 |   34217 |          10 | false       |
+|         10 |     703 |    153101 |   52026 |           4 | false       |
 
 ### Lds, Max Product, Dom Wdeg Max Marginal, Oracle
 |   Instance |   Score |   Choices |   Fails |   Solutions | Completed   |
 |-----------:|--------:|----------:|--------:|------------:|:------------|
-|          1 |     703 |    117978 |   44513 |           2 | false       |
+|          1 |     703 |    177930 |   63578 |           2 | false       |
 |          2 |     737 |   1525422 |  756541 |           6 | true        |
-|          3 |     737 |    138339 |   62044 |           4 | false       |
-|          4 |     737 |     60010 |   19426 |           5 | false       |
-|          5 |     677 |    141632 |   51086 |           2 | false       |
-|          6 |     732 |     67560 |   23280 |           7 | false       |
-|          7 |     723 |     59230 |   18421 |           5 | false       |
-|          8 |     693 |     43270 |   13300 |           4 | false       |
-|          9 |     708 |     73979 |   25395 |           3 | false       |
-|         10 |     703 |    351210 |  160523 |           6 | false       |
+|          3 |     737 |    238519 |  109287 |           4 | false       |
+|          4 |     737 |     62414 |   20517 |           5 | false       |
+|          5 |     677 |    145883 |   52348 |           2 | false       |
+|          6 |     732 |     65131 |   22503 |           7 | false       |
+|          7 |     723 |     62184 |   19460 |           5 | false       |
+|          8 |     693 |     43716 |   13476 |           4 | false       |
+|          9 |     708 |     72899 |   25044 |           3 | false       |
+|         10 |     703 |    355491 |  162510 |           6 | false       |
 
 ### Lds, Sum Product, Dom Wdeg Max Marginal
 |   Instance |   Score |   Choices |   Fails |   Solutions | Completed   |
 |-----------:|--------:|----------:|--------:|------------:|:------------|
-|          1 |     703 |  13392154 | 6602410 |          39 | false       |
+|          1 |     703 |  13369924 | 6591295 |          39 | false       |
 |          2 |     737 |   4748807 | 2357900 |          37 | true        |
-|          3 |     737 |  12772265 | 6330342 |          43 | false       |
-|          4 |     737 |   8896473 | 4168692 |          25 | false       |
-|          5 |     677 |  11268866 | 5593693 |          31 | false       |
-|          6 |     732 |  10343096 | 5017892 |          41 | false       |
-|          7 |     721 |   9308500 | 3886355 |          57 | false       |
-|          8 |     690 |   8753185 | 3768694 |          45 | false       |
-|          9 |     707 |  13841260 | 6497030 |          56 | false       |
-|         10 |     703 |  16544841 | 8136571 |          50 | false       |
+|          3 |     737 |  12606231 | 6247325 |          43 | false       |
+|          4 |     737 |   9085437 | 4263163 |          25 | false       |
+|          5 |     677 |  11272484 | 5595504 |          31 | false       |
+|          6 |     732 |  10705522 | 5199103 |          41 | false       |
+|          7 |     720 |   9110671 | 3801183 |          56 | false       |
+|          8 |     690 |   8056384 | 3480474 |          45 | false       |
+|          9 |     707 |  13585286 | 6376121 |          56 | false       |
+|         10 |     703 |  17321096 | 8524699 |          50 | false       |
 
 ### Lds, No Bp, Max Value
 |   Instance |   Score |   Choices |    Fails |   Solutions | Completed   |
 |-----------:|--------:|----------:|---------:|------------:|:------------|
-|          1 |     703 |  21322001 |  9800044 |          10 | false       |
-|          2 |     737 |  26071570 | 12788437 |           9 | false       |
-|          3 |     737 |  20394396 |  9863017 |           9 | false       |
-|          4 |     737 |  21500065 |  9056594 |           3 | false       |
-|          5 |     677 |  24338188 | 10643630 |           6 | false       |
-|          6 |     732 |  27263880 | 11315919 |           4 | false       |
-|          7 |     723 |  24097346 |  9848219 |           2 | false       |
-|          8 |     693 |  23446554 |  9777214 |           4 | false       |
-|          9 |     708 |  23260163 |  9877736 |           6 | false       |
-|         10 |     703 |  23318165 | 10259841 |           5 | false       |
+|          1 |     703 |  21314668 |  9796375 |          10 | false       |
+|          2 |     737 |  26790659 | 13147983 |           9 | false       |
+|          3 |     737 |  20356746 |  9844193 |           9 | false       |
+|          4 |     737 |  21571558 |  9090421 |           3 | false       |
+|          5 |     677 |  24401602 | 10673245 |           6 | false       |
+|          6 |     732 |  27013661 | 11214953 |           4 | false       |
+|          7 |     723 |  23391906 |  9510839 |           2 | false       |
+|          8 |     693 |  23532828 |  9813929 |           4 | false       |
+|          9 |     708 |  23428668 |  9947393 |           6 | false       |
+|         10 |     703 |  23555862 | 10361560 |           5 | false       |
 </code></pre>
 </div>
 <div class="cell-output cell-output-display">

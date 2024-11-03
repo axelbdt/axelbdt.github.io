@@ -115,7 +115,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong>sum_product-dom_wdeg_max_marginal-oracle</strong>: bp with sum product, variable selection with dom_wdeg, value selection with max_marginal</li>
 <li><strong>no_bp-max_value</strong>: select the max value on the diagonal</li>
 </ul>
-<div id="0f39d124" class="cell" data-execution_count="1">
+<div id="9884da03" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plot</span>
@@ -139,7 +139,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <section id="holes" class="level2">
 <h2 class="anchored" data-anchor-id="holes">150 Holes</h2>
-<div id="65bcc2f4" class="cell" data-execution_count="2">
+<div id="48fa45a8" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>  plot.hole_tables(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">150</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>instance_numbers, objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>)</span>
@@ -237,7 +237,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="holes-1" class="level2">
 <h2 class="anchored" data-anchor-id="holes-1">200 Holes</h2>
 <p>Same metrics on every graph, the slowest models are removed to change scale and make the graph more readable.</p>
-<div id="b5a9ffeb" class="cell" data-execution_count="3">
+<div id="f6715610" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>  plot.hole_tables(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">200</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>instance_numbers, objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>)</span>
@@ -342,14 +342,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="holes-2" class="level2">
 <h2 class="anchored" data-anchor-id="holes-2">300 Holes</h2>
-<div id="1292a604" class="cell" data-execution_count="4">
+<div id="3d11d5c7" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>  plot.hole_tables(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">300</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>instance_numbers, objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  plot.fail_graph(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">300</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>instance_numbers, objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>)</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  plot.fail_graph(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">300</span>, models<span class="op">=</span>models2, instance_numbers<span class="op">=</span>instance_numbers, objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>)</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  plot.fail_graph(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">300</span>, models<span class="op">=</span>models2, instance_numbers<span class="op">=</span>[i <span class="cf">for</span> i <span class="kw">in</span> instance_numbers <span class="cf">if</span> (i <span class="kw">not</span> <span class="kw">in</span> [<span class="dv">2</span>, <span class="dv">10</span>])], objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>)</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  plot.fail_graph(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">300</span>, models<span class="op">=</span>models2, instance_numbers<span class="op">=</span>[i <span class="cf">for</span> i <span class="kw">in</span> instance_numbers <span class="cf">if</span> (i <span class="kw">not</span> <span class="kw">in</span> [<span class="dv">2</span>, <span class="dv">6</span>, <span class="dv">10</span>])], objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  plot.fail_graph(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">300</span>, models<span class="op">=</span>models2, instance_numbers<span class="op">=</span>[i <span class="cf">for</span> i <span class="kw">in</span> instance_numbers <span class="cf">if</span> (i <span class="kw">not</span> <span class="kw">in</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">10</span>])], objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  plot.fail_graph(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">300</span>, models<span class="op">=</span>models2, instance_numbers<span class="op">=</span>[i <span class="cf">for</span> i <span class="kw">in</span> instance_numbers <span class="cf">if</span> (i <span class="kw">not</span> <span class="kw">in</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">6</span>, <span class="dv">10</span>])], objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>### Lds, Sum Product, Max Marginal Regret

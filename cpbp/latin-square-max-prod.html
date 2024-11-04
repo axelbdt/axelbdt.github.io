@@ -58,16 +58,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="latin-square-drop-sum-prod-max-regret_files/libs/clipboard/clipboard.min.js"></script>
-<script src="latin-square-drop-sum-prod-max-regret_files/libs/quarto-html/quarto.js"></script>
-<script src="latin-square-drop-sum-prod-max-regret_files/libs/quarto-html/popper.min.js"></script>
-<script src="latin-square-drop-sum-prod-max-regret_files/libs/quarto-html/tippy.umd.min.js"></script>
-<script src="latin-square-drop-sum-prod-max-regret_files/libs/quarto-html/anchor.min.js"></script>
-<link href="latin-square-drop-sum-prod-max-regret_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="latin-square-drop-sum-prod-max-regret_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="latin-square-drop-sum-prod-max-regret_files/libs/bootstrap/bootstrap.min.js"></script>
-<link href="latin-square-drop-sum-prod-max-regret_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="latin-square-drop-sum-prod-max-regret_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="latin-square-max-prod_files/libs/clipboard/clipboard.min.js"></script>
+<script src="latin-square-max-prod_files/libs/quarto-html/quarto.js"></script>
+<script src="latin-square-max-prod_files/libs/quarto-html/popper.min.js"></script>
+<script src="latin-square-max-prod_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="latin-square-max-prod_files/libs/quarto-html/anchor.min.js"></script>
+<link href="latin-square-max-prod_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="latin-square-max-prod_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="latin-square-max-prod_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="latin-square-max-prod_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="latin-square-max-prod_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 
 
 </head>
@@ -103,32 +103,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="latin-square-why-drop-sum-product-with-max-marginal-regret" class="level1">
-<h1>Latin Square : Why drop sum-product with max marginal regret?</h1>
-<p>Sum-product with max marginal regret is beaten by max product with max marginal regret and sum-product with dom wdeg max marginal.</p>
-<p>Sum-product is especially bad for optimality proofs.</p>
-<section id="vs-max-product-with-max-marginal-regret" class="level2">
-<h2 class="anchored" data-anchor-id="vs-max-product-with-max-marginal-regret">vs max product with max marginal regret</h2>
+<section id="latin-square-choosing-the-heuristic-with-max-product-bp" class="level1">
+<h1>Latin Square : choosing the heuristic with max product BP</h1>
 <ul>
-<li><strong>1st solution</strong>: found with almost no fail, score is higher with max product</li>
-<li><strong>last solution</strong>: take less fails with max product</li>
-<li><strong>optimality proof</strong>: takes much longuer with sum product</li>
+<li><strong>1st solution</strong>: both find solutions close to optimal quite fast, max-marginal-regret sometime finds better, even optimal solutions first.</li>
+<li><strong>last solution</strong>: both improve solution fast, max-marginal-regret finds a few instance “difficult” with a disproportionate number of fails</li>
+<li><strong>optimality proof</strong>: max-marginal-regret proves optimality with 2-10x more fails, + a few “difficult” instances</li>
 </ul>
-<p>Max product is better than sum product with max marginal regret heuristic.</p>
-</section>
-<section id="vs-sum-product-with-dom-wdeg-max-marginal" class="level2">
-<h2 class="anchored" data-anchor-id="vs-sum-product-with-dom-wdeg-max-marginal">vs sum product with dom wdeg max marginal</h2>
-<ul>
-<li><strong>1st solution</strong>: found with almost no fail, equivalent quality</li>
-<li><strong>last solution</strong>: all in 100s fails, about 1.5x more fails with max marginal</li>
-<li><strong>optimality proof</strong>: takes much longer (x10-50) with dom wdeg</li>
-</ul>
-</section>
+<p>Domwdeg seems more robust overall, especially if an optimality proof is required. Max-marginal-regret might be useful to find one good solution solution fast, and no optimality proof.</p>
 <section id="plots" class="level2">
 <h2 class="anchored" data-anchor-id="plots">Plots</h2>
-<section id="vs-max-product-with-max-marginal-regret-1" class="level3">
-<h3 class="anchored" data-anchor-id="vs-max-product-with-max-marginal-regret-1">VS max product with max marginal regret</h3>
-<div id="c4a8cea7" class="cell" data-execution_count="1">
+<div id="a6704d14" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plot</span>
@@ -136,37 +121,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>all_instances <span class="op">=</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">11</span>)</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>models1 <span class="op">=</span> [</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">'lds-sum_product-max_marginal_regret'</span>,</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">'lds-max_product-max_marginal_regret-oracle'</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">'lds-max_product-max_marginal_regret-oracle'</span>,</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">'lds-max_product-dom_wdeg_max_marginal-oracle'</span>,</span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <section id="holes" class="level4">
 <h4 class="anchored" data-anchor-id="holes">200 Holes</h4>
-<p>Same metrics on every graph, the slowest models are removed to change scale and make the graph more readable.</p>
-<div id="99ab6d4e" class="cell" data-execution_count="2">
+<div id="264390ad" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>  plot.hole_tables(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">200</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>all_instances, objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  plot.fail_graph(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">200</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>all_instances, objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  plot.quality_graph(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">200</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>all_instances, objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>, log_scale_fails<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  plot.quality_graph(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">200</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>all_instances, objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>### Lds, Sum Product, Max Marginal Regret
-|   i |   fs Sc |   fs #f |   ls Sc |   ls #f |   #fail |   #sols | comp.   |
-|----:|--------:|--------:|--------:|--------:|--------:|--------:|:--------|
-|   1 |     178 |       0 |     229 |     338 | 8433585 |      12 | false   |
-|   2 |     227 |      14 |     284 |     272 |   26523 |       8 | true    |
-|   3 |     158 |       2 |     241 |     150 |     333 |       8 | true    |
-|   4 |     171 |       3 |     247 |     243 |     686 |      15 | true    |
-|   5 |     202 |       6 |     244 |     265 |     440 |       8 | true    |
-|   6 |     176 |       0 |     232 |      90 |    3209 |       9 | true    |
-|   7 |     201 |       1 |     250 |     329 |   71482 |      16 | true    |
-|   8 |     206 |       1 |     252 |     186 |     218 |      11 | true    |
-|   9 |     132 |       3 |     222 |    2472 |  213125 |      14 | true    |
-|  10 |     157 |       1 |     220 |     193 | 1764764 |      14 | true    |
-
-### Lds, Max Product, Max Marginal Regret, Oracle
+<pre><code>### Lds, Max Product, Max Marginal Regret, Oracle
 |   i |   fs Sc |   fs #f |   ls Sc |   ls #f |   #fail |   #sols | comp.   |
 |----:|--------:|--------:|--------:|--------:|--------:|--------:|:--------|
 |   1 |     212 |      21 |     229 |     419 |   23180 |       4 | true    |
@@ -179,19 +149,33 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 |   8 |     249 |      38 |     252 |      82 |     133 |       2 | true    |
 |   9 |     217 |     194 |     222 |    4798 |    5068 |       4 | true    |
 |  10 |     214 |      22 |     220 |     160 |     412 |       5 | true    |
+
+### Lds, Max Product, Dom Wdeg Max Marginal, Oracle
+|   i |   fs Sc |   fs #f |   ls Sc |   ls #f |   #fail |   #sols | comp.   |
+|----:|--------:|--------:|--------:|--------:|--------:|--------:|:--------|
+|   1 |     187 |      12 |     229 |     536 |     833 |      11 | true    |
+|   2 |     259 |      14 |     284 |     440 |     505 |       9 | true    |
+|   3 |     230 |      21 |     241 |     121 |     209 |       6 | true    |
+|   4 |     221 |      13 |     247 |      38 |     181 |       5 | true    |
+|   5 |     236 |      14 |     244 |     128 |     261 |       5 | true    |
+|   6 |     220 |      17 |     232 |      19 |     133 |       2 | true    |
+|   7 |     244 |       6 |     250 |      73 |     145 |       3 | true    |
+|   8 |     233 |      19 |     252 |      67 |     137 |       6 | true    |
+|   9 |     206 |       6 |     222 |     346 |     466 |       6 | true    |
+|  10 |     196 |      10 |     220 |     118 |     245 |       6 | true    |
 </code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="latin-square-drop-sum-prod-max-regret_files/figure-html/cell-3-output-2.png" width="757" height="374" class="figure-img"></p>
+<p><img src="latin-square-max-prod_files/figure-html/cell-3-output-2.png" width="757" height="374" class="figure-img"></p>
 </figure>
 </div>
 </div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="latin-square-drop-sum-prod-max-regret_files/figure-html/cell-3-output-3.png" width="758" height="564" class="figure-img"></p>
+<p><img src="latin-square-max-prod_files/figure-html/cell-3-output-3.png" width="758" height="564" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -199,29 +183,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="holes-1" class="level4">
 <h4 class="anchored" data-anchor-id="holes-1">250 Holes</h4>
-<div id="69c1c51e" class="cell" data-execution_count="3">
+<div id="a6d72f8b" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>  plot.hole_tables(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">250</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>all_instances, objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  plot.fail_graph(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">250</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>all_instances, objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>)</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  plot.quality_graph(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">250</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>all_instances, objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>, log_scale_fails<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  plot.quality_graph(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">250</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>all_instances, objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>### Lds, Sum Product, Max Marginal Regret
-|   i |   fs Sc |   fs #f |   ls Sc |   ls #f |    #fail |   #sols | comp.   |
-|----:|--------:|--------:|--------:|--------:|---------:|--------:|:--------|
-|   1 |     191 |       0 |     272 |     722 | 21393406 |      18 | false   |
-|   2 |     179 |       0 |     266 |    3726 | 23749124 |      24 | false   |
-|   3 |     164 |       0 |     224 |   19555 |  4991692 |      15 | false   |
-|   4 |     217 |       0 |     275 |   12816 | 13298153 |      18 | false   |
-|   5 |     179 |       0 |     267 |    6590 | 21221125 |      20 | false   |
-|   6 |     198 |       2 |     266 |     118 | 25116596 |      11 | false   |
-|   7 |     159 |       3 |     265 |   13374 | 36069849 |      18 | false   |
-|   8 |     193 |       0 |     286 |     402 | 11929081 |      15 | false   |
-|   9 |     148 |       0 |     241 |     730 | 11100289 |      19 | false   |
-|  10 |     187 |       1 |     270 |   18019 |   797659 |      17 | true    |
-
-### Lds, Max Product, Max Marginal Regret, Oracle
+<pre><code>### Lds, Max Product, Max Marginal Regret, Oracle
 |   i |   fs Sc |   fs #f |   ls Sc |   ls #f |   #fail |   #sols | comp.   |
 |----:|--------:|--------:|--------:|--------:|--------:|--------:|:--------|
 |   1 |     268 |       3 |     272 |     200 |    3812 |       3 | true    |
@@ -234,19 +204,33 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 |   8 |     280 |       0 |     286 |      82 |    1327 |       2 | true    |
 |   9 |     230 |       1 |     241 |     100 |     963 |       5 | true    |
 |  10 |     264 |      16 |     270 |     400 |     898 |       7 | true    |
+
+### Lds, Max Product, Dom Wdeg Max Marginal, Oracle
+|   i |   fs Sc |   fs #f |   ls Sc |   ls #f |   #fail |   #sols | comp.   |
+|----:|--------:|--------:|--------:|--------:|--------:|--------:|:--------|
+|   1 |     261 |       2 |     272 |     119 |    1341 |       4 | true    |
+|   2 |     247 |       1 |     266 |     241 |   62211 |       7 | true    |
+|   3 |     221 |       2 |     224 |     200 |    2018 |       3 | true    |
+|   4 |     269 |       0 |     275 |     185 |     597 |       3 | true    |
+|   5 |     264 |       1 |     267 |     129 |     451 |       4 | true    |
+|   6 |     249 |       3 |     266 |      95 |     244 |       5 | true    |
+|   7 |     259 |       4 |     265 |     559 |    2684 |       5 | true    |
+|   8 |     270 |       1 |     286 |     119 |     437 |       7 | true    |
+|   9 |     233 |       0 |     241 |     103 |     785 |       3 | true    |
+|  10 |     257 |       9 |     270 |     178 |     429 |       8 | true    |
 </code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="latin-square-drop-sum-prod-max-regret_files/figure-html/cell-4-output-2.png" width="757" height="374" class="figure-img"></p>
+<p><img src="latin-square-max-prod_files/figure-html/cell-4-output-2.png" width="757" height="374" class="figure-img"></p>
 </figure>
 </div>
 </div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="latin-square-drop-sum-prod-max-regret_files/figure-html/cell-4-output-3.png" width="758" height="564" class="figure-img"></p>
+<p><img src="latin-square-max-prod_files/figure-html/cell-4-output-3.png" width="758" height="564" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -254,29 +238,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="holes-2" class="level4">
 <h4 class="anchored" data-anchor-id="holes-2">300 Holes</h4>
-<div id="0b7df406" class="cell" data-execution_count="4">
+<div id="9aec56ef" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>  plot.hole_tables(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">300</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>all_instances, objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  plot.fail_graph(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">300</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>all_instances, objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>)</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  plot.quality_graph(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">300</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>all_instances, objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>, log_scale_fails<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  plot.quality_graph(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">300</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>all_instances, objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>### Lds, Sum Product, Max Marginal Regret
-|   i |   fs Sc |   fs #f |   ls Sc |   ls #f |   #fail |   #sols | comp.   |
-|----:|--------:|--------:|--------:|--------:|--------:|--------:|:--------|
-|   1 |     193 |       0 |     305 |    1632 | 9439594 |      31 | false   |
-|   2 |     241 |       1 |     322 |    4899 | 8629131 |      23 | false   |
-|   3 |     214 |       1 |     301 |   46218 | 7244237 |      18 | false   |
-|   4 |     195 |       0 |     302 |   36940 | 8578493 |      19 | false   |
-|   5 |     179 |       0 |     272 | 8113705 | 8590086 |      28 | false   |
-|   6 |     170 |       0 |     282 |    1721 | 8053172 |      30 | false   |
-|   7 |     201 |       0 |     275 |   37350 | 8045363 |      14 | false   |
-|   8 |     188 |       1 |     284 |     600 | 7496594 |      17 | false   |
-|   9 |     190 |       0 |     280 |    1140 | 6475873 |      16 | false   |
-|  10 |     210 |       1 |     287 |    2020 | 8291767 |      25 | false   |
-
-### Lds, Max Product, Max Marginal Regret, Oracle
+<pre><code>### Lds, Max Product, Max Marginal Regret, Oracle
 |   i |   fs Sc |   fs #f |   ls Sc |   ls #f |   #fail |   #sols | comp.   |
 |----:|--------:|--------:|--------:|--------:|--------:|--------:|:--------|
 |   1 |     300 |       0 |     305 |     151 |  324172 |       5 | false   |
@@ -289,201 +259,37 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 |   8 |     284 |       0 |     284 |       0 |   90347 |       1 | true    |
 |   9 |     280 |       1 |     280 |       1 |   13431 |       1 | true    |
 |  10 |     287 |       5 |     295 |   13613 |  647784 |       8 | false   |
-</code></pre>
-</div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="latin-square-drop-sum-prod-max-regret_files/figure-html/cell-5-output-2.png" width="757" height="374" class="figure-img"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="latin-square-drop-sum-prod-max-regret_files/figure-html/cell-5-output-3.png" width="758" height="564" class="figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-</section>
-<section id="vs-sum-product-with-dom-wdeg-max-marginal-1" class="level3">
-<h3 class="anchored" data-anchor-id="vs-sum-product-with-dom-wdeg-max-marginal-1">VS Sum Product with Dom WDeg Max Marginal</h3>
-<div id="1671f5a3" class="cell" data-execution_count="5">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>models1 <span class="op">=</span> [</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">'lds-sum_product-max_marginal_regret'</span>,</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">'lds-sum_product-dom_wdeg_max_marginal'</span>,</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<section id="holes-3" class="level4">
-<h4 class="anchored" data-anchor-id="holes-3">200 Holes</h4>
-<div id="27db4f9d" class="cell" data-execution_count="6">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>  plot.hole_tables(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">200</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>all_instances, objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>)</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  plot.fail_graph(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">200</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>all_instances, objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>)</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  plot.quality_graph(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">200</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>all_instances, objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>, log_scale_fails<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>### Lds, Sum Product, Max Marginal Regret
-|   i |   fs Sc |   fs #f |   ls Sc |   ls #f |   #fail |   #sols | comp.   |
-|----:|--------:|--------:|--------:|--------:|--------:|--------:|:--------|
-|   1 |     178 |       0 |     229 |     338 | 8433585 |      12 | false   |
-|   2 |     227 |      14 |     284 |     272 |   26523 |       8 | true    |
-|   3 |     158 |       2 |     241 |     150 |     333 |       8 | true    |
-|   4 |     171 |       3 |     247 |     243 |     686 |      15 | true    |
-|   5 |     202 |       6 |     244 |     265 |     440 |       8 | true    |
-|   6 |     176 |       0 |     232 |      90 |    3209 |       9 | true    |
-|   7 |     201 |       1 |     250 |     329 |   71482 |      16 | true    |
-|   8 |     206 |       1 |     252 |     186 |     218 |      11 | true    |
-|   9 |     132 |       3 |     222 |    2472 |  213125 |      14 | true    |
-|  10 |     157 |       1 |     220 |     193 | 1764764 |      14 | true    |
 
-### Lds, Sum Product, Dom Wdeg Max Marginal
+### Lds, Max Product, Dom Wdeg Max Marginal, Oracle
 |   i |   fs Sc |   fs #f |   ls Sc |   ls #f |   #fail |   #sols | comp.   |
 |----:|--------:|--------:|--------:|--------:|--------:|--------:|:--------|
-|   1 |     166 |       0 |     229 |     139 |     325 |      16 | true    |
-|   2 |     236 |       5 |     284 |     228 |     328 |      14 | true    |
-|   3 |     184 |       0 |     241 |      80 |     190 |      11 | true    |
-|   4 |     164 |       0 |     247 |     264 |     362 |      19 | true    |
-|   5 |     181 |       3 |     244 |     225 |     310 |      13 | true    |
-|   6 |     189 |       2 |     232 |      74 |     163 |       9 | true    |
-|   7 |     194 |       0 |     250 |     158 |     257 |      17 | true    |
-|   8 |     228 |       0 |     252 |      82 |     188 |       5 | true    |
-|   9 |     139 |       0 |     222 |     476 |     588 |      18 | true    |
-|  10 |     183 |       3 |     220 |     102 |     257 |       9 | true    |
+|   1 |     291 |       3 |     305 |     131 |   52495 |       4 | true    |
+|   2 |     321 |       0 |     322 |     192 |   38216 |       2 | true    |
+|   3 |     303 |       0 |     308 |     262 |   15377 |       4 | true    |
+|   4 |     293 |       0 |     302 |    1283 |    9687 |       6 | true    |
+|   5 |     270 |       0 |     272 |     185 |    7694 |       2 | true    |
+|   6 |     281 |       0 |     282 |     190 |   33323 |       2 | true    |
+|   7 |     275 |       0 |     277 |     173 |    9531 |       2 | true    |
+|   8 |     274 |       0 |     284 |     192 |   11309 |       5 | true    |
+|   9 |     279 |       0 |     280 |     164 |    6700 |       2 | true    |
+|  10 |     286 |       0 |     295 |     323 |  250813 |       4 | false   |
 </code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="latin-square-drop-sum-prod-max-regret_files/figure-html/cell-7-output-2.png" width="757" height="374" class="figure-img"></p>
+<p><img src="latin-square-max-prod_files/figure-html/cell-5-output-2.png" width="757" height="374" class="figure-img"></p>
 </figure>
 </div>
 </div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="latin-square-drop-sum-prod-max-regret_files/figure-html/cell-7-output-3.png" width="758" height="564" class="figure-img"></p>
+<p><img src="latin-square-max-prod_files/figure-html/cell-5-output-3.png" width="758" height="564" class="figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
-</section>
-<section id="holes-4" class="level4">
-<h4 class="anchored" data-anchor-id="holes-4">250 Holes</h4>
-<div id="ca46e450" class="cell" data-execution_count="7">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>  plot.hole_tables(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">250</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>all_instances, objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>)</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  plot.fail_graph(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">250</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>all_instances, objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>)</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  plot.quality_graph(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">250</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>all_instances, objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>, log_scale_fails<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>### Lds, Sum Product, Max Marginal Regret
-|   i |   fs Sc |   fs #f |   ls Sc |   ls #f |    #fail |   #sols | comp.   |
-|----:|--------:|--------:|--------:|--------:|---------:|--------:|:--------|
-|   1 |     191 |       0 |     272 |     722 | 21393406 |      18 | false   |
-|   2 |     179 |       0 |     266 |    3726 | 23749124 |      24 | false   |
-|   3 |     164 |       0 |     224 |   19555 |  4991692 |      15 | false   |
-|   4 |     217 |       0 |     275 |   12816 | 13298153 |      18 | false   |
-|   5 |     179 |       0 |     267 |    6590 | 21221125 |      20 | false   |
-|   6 |     198 |       2 |     266 |     118 | 25116596 |      11 | false   |
-|   7 |     159 |       3 |     265 |   13374 | 36069849 |      18 | false   |
-|   8 |     193 |       0 |     286 |     402 | 11929081 |      15 | false   |
-|   9 |     148 |       0 |     241 |     730 | 11100289 |      19 | false   |
-|  10 |     187 |       1 |     270 |   18019 |   797659 |      17 | true    |
-
-### Lds, Sum Product, Dom Wdeg Max Marginal
-|   i |   fs Sc |   fs #f |   ls Sc |   ls #f |   #fail |   #sols | comp.   |
-|----:|--------:|--------:|--------:|--------:|--------:|--------:|:--------|
-|   1 |     177 |       2 |     272 |     501 |    2142 |      20 | true    |
-|   2 |     189 |       0 |     266 |     388 |   65996 |      17 | true    |
-|   3 |     163 |       0 |     224 |     708 |    3105 |      20 | true    |
-|   4 |     224 |       0 |     275 |     160 |     449 |      11 | true    |
-|   5 |     193 |       0 |     267 |     665 |    1030 |      18 | true    |
-|   6 |     200 |       0 |     266 |     178 |     409 |      14 | true    |
-|   7 |     144 |       2 |     265 |     760 |    3603 |      25 | true    |
-|   8 |     206 |       0 |     286 |     165 |     384 |      16 | true    |
-|   9 |     144 |       0 |     241 |     485 |    1149 |      22 | true    |
-|  10 |     206 |       0 |     270 |     524 |     871 |      19 | true    |
-</code></pre>
-</div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="latin-square-drop-sum-prod-max-regret_files/figure-html/cell-8-output-2.png" width="757" height="374" class="figure-img"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="latin-square-drop-sum-prod-max-regret_files/figure-html/cell-8-output-3.png" width="758" height="564" class="figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="holes-5" class="level4">
-<h4 class="anchored" data-anchor-id="holes-5">300 Holes</h4>
-<div id="a5aa99c6" class="cell" data-execution_count="8">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>  plot.hole_tables(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">300</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>all_instances, objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>)</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  plot.fail_graph(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">300</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>all_instances, objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>)</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  plot.quality_graph(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">300</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>all_instances, objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>, log_scale_fails<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>### Lds, Sum Product, Max Marginal Regret
-|   i |   fs Sc |   fs #f |   ls Sc |   ls #f |   #fail |   #sols | comp.   |
-|----:|--------:|--------:|--------:|--------:|--------:|--------:|:--------|
-|   1 |     193 |       0 |     305 |    1632 | 9439594 |      31 | false   |
-|   2 |     241 |       1 |     322 |    4899 | 8629131 |      23 | false   |
-|   3 |     214 |       1 |     301 |   46218 | 7244237 |      18 | false   |
-|   4 |     195 |       0 |     302 |   36940 | 8578493 |      19 | false   |
-|   5 |     179 |       0 |     272 | 8113705 | 8590086 |      28 | false   |
-|   6 |     170 |       0 |     282 |    1721 | 8053172 |      30 | false   |
-|   7 |     201 |       0 |     275 |   37350 | 8045363 |      14 | false   |
-|   8 |     188 |       1 |     284 |     600 | 7496594 |      17 | false   |
-|   9 |     190 |       0 |     280 |    1140 | 6475873 |      16 | false   |
-|  10 |     210 |       1 |     287 |    2020 | 8291767 |      25 | false   |
-
-### Lds, Sum Product, Dom Wdeg Max Marginal
-|   i |   fs Sc |   fs #f |   ls Sc |   ls #f |   #fail |   #sols | comp.   |
-|----:|--------:|--------:|--------:|--------:|--------:|--------:|:--------|
-|   1 |     176 |       0 |     305 |    1031 |   67123 |      27 | true    |
-|   2 |     254 |       0 |     322 |     495 |   55759 |      14 | true    |
-|   3 |     205 |       0 |     308 |    2195 |   25419 |      23 | true    |
-|   4 |     193 |       0 |     302 |     599 |   15644 |      21 | true    |
-|   5 |     198 |       0 |     272 |     913 |   11574 |      26 | true    |
-|   6 |     171 |       0 |     282 |     272 |   40571 |      16 | true    |
-|   7 |     180 |       0 |     277 |     686 |   13511 |      18 | true    |
-|   8 |     160 |       0 |     284 |     737 |   13704 |      21 | true    |
-|   9 |     162 |       0 |     280 |     469 |    7537 |      19 | true    |
-|  10 |     177 |       0 |     295 |   34109 |  583349 |      39 | true    |
-</code></pre>
-</div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="latin-square-drop-sum-prod-max-regret_files/figure-html/cell-9-output-2.png" width="757" height="374" class="figure-img"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="latin-square-drop-sum-prod-max-regret_files/figure-html/cell-9-output-3.png" width="758" height="564" class="figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
 </section>
 </section>
 </section>

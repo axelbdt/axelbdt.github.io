@@ -128,7 +128,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="plots">Plots</h2>
 <section id="vs-max-product-with-max-marginal-regret-1" class="level3">
 <h3 class="anchored" data-anchor-id="vs-max-product-with-max-marginal-regret-1">VS max product with max marginal regret</h3>
-<div id="f92d2172" class="cell" data-execution_count="1">
+<div id="53b0a644" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plot</span>
@@ -144,13 +144,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="holes" class="level4">
 <h4 class="anchored" data-anchor-id="holes">200 Holes</h4>
 <p>Same metrics on every graph, the slowest models are removed to change scale and make the graph more readable.</p>
-<div id="14652e95" class="cell" data-execution_count="2">
+<div id="54f631a5" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>  plot.hole_tables(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">200</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>all_instances, objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  plot.fail_graph(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">200</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>all_instances, objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  plot.quality_graph(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">200</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>all_instances, objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>, log_scale_fails<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  plot.quality_graph2(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">200</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>all_instances[<span class="dv">0</span>:<span class="dv">5</span>], objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>, log_scale_fails<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  plot.quality_graph2(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">200</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>all_instances[:<span class="dv">5</span>], objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>, log_scale_fails<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  plot.quality_graph2(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">200</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>all_instances[<span class="dv">5</span>:], objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>, log_scale_fails<span class="op">=</span><span class="va">True</span>, legend<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>### Lds, Sum Product, Max Marginal Regret
@@ -203,17 +204,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </figure>
 </div>
 </div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="latin-square-drop-sum-prod-max-regret_files/figure-html/cell-3-output-5.png" width="758" height="564" class="figure-img"></p>
+</figure>
+</div>
+</div>
 </div>
 </section>
 <section id="holes-1" class="level4">
 <h4 class="anchored" data-anchor-id="holes-1">250 Holes</h4>
-<div id="008cf953" class="cell" data-execution_count="3">
+<div id="e9c0304d" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>  plot.hole_tables(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">250</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>all_instances, objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  plot.fail_graph(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">250</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>all_instances, objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>)</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  plot.quality_graph(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">250</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>all_instances, objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>, log_scale_fails<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  plot.quality_graph2(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">250</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>all_instances[<span class="dv">0</span>:<span class="dv">5</span>], objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>, log_scale_fails<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  plot.quality_graph2(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">250</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>all_instances[:<span class="dv">5</span>], objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>, log_scale_fails<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  plot.quality_graph2(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">250</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>all_instances[<span class="dv">5</span>:], objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>, log_scale_fails<span class="op">=</span><span class="va">True</span>, legend<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>### Lds, Sum Product, Max Marginal Regret
@@ -266,17 +275,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </figure>
 </div>
 </div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="latin-square-drop-sum-prod-max-regret_files/figure-html/cell-4-output-5.png" width="758" height="564" class="figure-img"></p>
+</figure>
+</div>
+</div>
 </div>
 </section>
 <section id="holes-2" class="level4">
 <h4 class="anchored" data-anchor-id="holes-2">300 Holes</h4>
-<div id="6357de12" class="cell" data-execution_count="4">
+<div id="6072f0da" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>  plot.hole_tables(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">300</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>all_instances, objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  plot.fail_graph(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">300</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>all_instances, objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>)</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  plot.quality_graph(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">300</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>all_instances, objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>, log_scale_fails<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  plot.quality_graph2(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">300</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>all_instances[<span class="dv">0</span>:<span class="dv">5</span>], objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>, log_scale_fails<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  plot.quality_graph2(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">300</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>all_instances[:<span class="dv">5</span>], objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>, log_scale_fails<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  plot.quality_graph2(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">300</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>all_instances[<span class="dv">5</span>:], objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>, log_scale_fails<span class="op">=</span><span class="va">True</span>, legend<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>### Lds, Sum Product, Max Marginal Regret
@@ -329,12 +346,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </figure>
 </div>
 </div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="latin-square-drop-sum-prod-max-regret_files/figure-html/cell-5-output-5.png" width="758" height="564" class="figure-img"></p>
+</figure>
+</div>
+</div>
 </div>
 </section>
 </section>
 <section id="vs-sum-product-with-dom-wdeg-max-marginal-1" class="level3">
 <h3 class="anchored" data-anchor-id="vs-sum-product-with-dom-wdeg-max-marginal-1">VS Sum Product with Dom WDeg Max Marginal</h3>
-<div id="6c11fce0" class="cell" data-execution_count="5">
+<div id="c48ec39e" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>models1 <span class="op">=</span> [</span>
@@ -345,13 +369,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <section id="holes-3" class="level4">
 <h4 class="anchored" data-anchor-id="holes-3">200 Holes</h4>
-<div id="a9343253" class="cell" data-execution_count="6">
+<div id="e3fcb73b" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>  plot.hole_tables(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">200</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>all_instances, objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>)</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  plot.fail_graph(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">200</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>all_instances, objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>)</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  plot.quality_graph(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">200</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>all_instances, objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>, log_scale_fails<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  plot.quality_graph2(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">200</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>all_instances[<span class="dv">0</span>:<span class="dv">5</span>], objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>, log_scale_fails<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  plot.quality_graph2(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">200</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>all_instances[:<span class="dv">5</span>], objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>, log_scale_fails<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  plot.quality_graph2(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">200</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>all_instances[<span class="dv">5</span>:], objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>, log_scale_fails<span class="op">=</span><span class="va">True</span>, legend<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>### Lds, Sum Product, Max Marginal Regret
@@ -404,17 +429,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </figure>
 </div>
 </div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="latin-square-drop-sum-prod-max-regret_files/figure-html/cell-7-output-5.png" width="758" height="564" class="figure-img"></p>
+</figure>
+</div>
+</div>
 </div>
 </section>
 <section id="holes-4" class="level4">
 <h4 class="anchored" data-anchor-id="holes-4">250 Holes</h4>
-<div id="ec7b51c7" class="cell" data-execution_count="7">
+<div id="f70b8a9d" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>  plot.hole_tables(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">250</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>all_instances, objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>)</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  plot.fail_graph(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">250</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>all_instances, objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>)</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  plot.quality_graph(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">250</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>all_instances, objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>, log_scale_fails<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  plot.quality_graph2(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">250</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>all_instances[<span class="dv">0</span>:<span class="dv">5</span>], objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>, log_scale_fails<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  plot.quality_graph2(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">250</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>all_instances[:<span class="dv">5</span>], objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>, log_scale_fails<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  plot.quality_graph2(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">250</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>all_instances[<span class="dv">5</span>:], objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>, log_scale_fails<span class="op">=</span><span class="va">True</span>, legend<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>### Lds, Sum Product, Max Marginal Regret
@@ -467,17 +500,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </figure>
 </div>
 </div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="latin-square-drop-sum-prod-max-regret_files/figure-html/cell-8-output-5.png" width="758" height="564" class="figure-img"></p>
+</figure>
+</div>
+</div>
 </div>
 </section>
 <section id="holes-5" class="level4">
 <h4 class="anchored" data-anchor-id="holes-5">300 Holes</h4>
-<div id="0a27eef5" class="cell" data-execution_count="8">
+<div id="1e0c66bc" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>  plot.hole_tables(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">300</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>all_instances, objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>)</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  plot.fail_graph(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">300</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>all_instances, objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>)</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  plot.quality_graph(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">300</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>all_instances, objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>, log_scale_fails<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  plot.quality_graph2(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">300</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>all_instances[<span class="dv">0</span>:<span class="dv">5</span>], objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>, log_scale_fails<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  plot.quality_graph2(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">300</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>all_instances[:<span class="dv">5</span>], objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>, log_scale_fails<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  plot.quality_graph2(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">300</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>all_instances[<span class="dv">5</span>:], objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>, log_scale_fails<span class="op">=</span><span class="va">True</span>, legend<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>### Lds, Sum Product, Max Marginal Regret
@@ -527,6 +568,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div>
 <figure class="figure">
 <p><img src="latin-square-drop-sum-prod-max-regret_files/figure-html/cell-9-output-4.png" width="727" height="567" class="figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="latin-square-drop-sum-prod-max-regret_files/figure-html/cell-9-output-5.png" width="758" height="564" class="figure-img"></p>
 </figure>
 </div>
 </div>

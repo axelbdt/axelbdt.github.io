@@ -130,7 +130,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="plots" class="level2">
 <h2 class="anchored" data-anchor-id="plots">Plots</h2>
-<div id="d511118b" class="cell" data-execution_count="1">
+<div id="4e1aeb5e" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plot</span>
@@ -147,12 +147,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <section id="holes" class="level4">
 <h4 class="anchored" data-anchor-id="holes">200 Holes</h4>
-<div id="fd00f8d1" class="cell" data-execution_count="2">
+<div id="3d7867f9" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>  plot.hole_tables(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">200</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>all_instances, objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  plot.fail_graph(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">200</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>all_instances, objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  plot.quality_graph(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">200</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>all_instances, objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  plot.quality_graph(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">200</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>all_instances, objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  plot.quality_graph2(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">200</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>all_instances[<span class="dv">0</span>:<span class="dv">3</span>], objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>### Lds, Sum Product, Dom Wdeg Max Marginal
@@ -226,16 +227,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </figure>
 </div>
 </div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="latin-square-dom-wdeg_files/figure-html/cell-3-output-4.png" width="729" height="565" class="figure-img"></p>
+</figure>
+</div>
+</div>
 </div>
 </section>
 <section id="holes-1" class="level4">
 <h4 class="anchored" data-anchor-id="holes-1">250 Holes</h4>
-<div id="134ef853" class="cell" data-execution_count="3">
+<div id="ba817733" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>  plot.hole_tables(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">250</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>all_instances, objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  plot.fail_graph(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">250</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>all_instances, objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>)</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  plot.quality_graph(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">250</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>all_instances, objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  plot.quality_graph(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">250</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>all_instances, objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  plot.quality_graph2(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">250</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>all_instances[<span class="dv">0</span>:<span class="dv">3</span>], objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>### Lds, Sum Product, Dom Wdeg Max Marginal
@@ -309,16 +318,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </figure>
 </div>
 </div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="latin-square-dom-wdeg_files/figure-html/cell-4-output-4.png" width="729" height="565" class="figure-img"></p>
+</figure>
+</div>
+</div>
 </div>
 </section>
 <section id="holes-2" class="level4">
 <h4 class="anchored" data-anchor-id="holes-2">300 Holes</h4>
-<div id="5a21f205" class="cell" data-execution_count="4">
+<div id="423fb9ba" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>  plot.hole_tables(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">300</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>all_instances, objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  plot.fail_graph(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">300</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>all_instances, objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>)</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  plot.quality_graph(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">300</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>all_instances, objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  plot.quality_graph(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">300</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>all_instances, objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  plot.quality_graph2(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">300</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>all_instances[<span class="dv">0</span>:<span class="dv">3</span>], objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>### Lds, Sum Product, Dom Wdeg Max Marginal
@@ -389,6 +406,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div>
 <figure class="figure">
 <p><img src="latin-square-dom-wdeg_files/figure-html/cell-5-output-3.png" width="758" height="564" class="figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="latin-square-dom-wdeg_files/figure-html/cell-5-output-4.png" width="729" height="565" class="figure-img"></p>
 </figure>
 </div>
 </div>

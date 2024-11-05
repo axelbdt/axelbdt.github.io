@@ -115,107 +115,116 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong>sum_product-dom_wdeg_max_marginal-oracle</strong>: bp with sum product, variable selection with dom_wdeg, value selection with max_marginal</li>
 <li><strong>no_bp-max_value</strong>: select the max value on the diagonal</li>
 </ul>
-<div id="9884da03" class="cell" data-execution_count="1">
+<div id="26fcbba3" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plot</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>instance_numbers <span class="op">=</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">11</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>all_instances <span class="op">=</span> <span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">11</span>)</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>models1 <span class="op">=</span> [</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">'lds-sum_product-max_marginal_regret'</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 'lds-sum_product-max_marginal_regret',</span></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">'lds-max_product-max_marginal_regret-oracle'</span>,</span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">'lds-max_product-dom_wdeg_max_marginal-oracle'</span>,</span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">'lds-sum_product-dom_wdeg_max_marginal'</span>,</span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">'lds-no_bp-max_value'</span>,</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>]</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>models2 <span class="op">=</span> [</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="st">'lds-max_product-max_marginal_regret-oracle'</span>,</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="st">'lds-max_product-dom_wdeg_max_marginal-oracle'</span>,</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="st">'lds-sum_product-dom_wdeg_max_marginal'</span>,</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="st">'lds-no_bp-max_value'</span>,</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="st">'lds-no_bp-dom_wdeg_best_value'</span>,</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>models2 <span class="op">=</span> [</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="st">'lds-max_product-max_marginal_regret-oracle'</span>,</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="st">'lds-max_product-dom_wdeg_max_marginal-oracle'</span>,</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="st">'lds-sum_product-dom_wdeg_max_marginal'</span>,</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  <span class="st">'lds-no_bp-max_value'</span>,</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>models3 <span class="op">=</span> [</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>  <span class="st">'lds-max_product-dom_wdeg_max_marginal-oracle'</span>,</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>  <span class="st">'lds-sum_product-dom_wdeg_max_marginal'</span>,</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <section id="holes" class="level2">
-<h2 class="anchored" data-anchor-id="holes">150 Holes</h2>
-<div id="48fa45a8" class="cell" data-execution_count="2">
+<h2 class="anchored" data-anchor-id="holes">200 Holes</h2>
+<p>Same metrics on every graph, the slowest models are removed to change scale and make the graph more readable.</p>
+<div id="934c9ebe" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>  plot.hole_tables(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">150</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>instance_numbers, objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  plot.fail_graph(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">150</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>instance_numbers, objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  plot.fail_graph(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">150</span>, models<span class="op">=</span>models2, instance_numbers<span class="op">=</span>instance_numbers, objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>  plot.hole_tables(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">200</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>all_instances, objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  plot.fail_graph(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">200</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>all_instances, objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  plot.quality_graph(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">200</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>[i <span class="cf">for</span> i <span class="kw">in</span> all_instances <span class="cf">if</span> (i <span class="kw">not</span> <span class="kw">in</span> [])], objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="co">#plot.fail_graph(n=20, holes=200, models=models2, instance_numbers=all_instances, objective="pseudodiagonal_20_5_5")</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="co">#plot.fail_graph(n=20, holes=200, models=models2, instance_numbers=[i for i in all_instances if (i not in [1, 9])], objective="pseudodiagonal_20_5_5", legend=False)</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="co">#plot.quality_graph(n=20, holes=200, models=models2, instance_numbers=[i for i in all_instances if (i not in [1, 9])], objective="pseudodiagonal_20_5_5")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>### Lds, Sum Product, Max Marginal Regret
-|   Instance | Score   | Choices   | Fails   | Solutions   | Completed   |
-|-----------:|:--------|:----------|:--------|:------------|:------------|
-|          1 | 158     | 20        | 15      | 1           | true        |
-|          2 | 222     | 10        | 9       | 1           | true        |
-|          3 | N/A     | N/A       | N/A     | N/A         | N/A         |
-|          4 | N/A     | N/A       | N/A     | N/A         | N/A         |
-|          5 | 207     | 8         | 8       | 2           | true        |
-|          6 | 162     | 17        | 13      | 2           | true        |
-|          7 | 205     | 10        | 9       | 1           | true        |
-|          8 | N/A     | N/A       | N/A     | N/A         | N/A         |
-|          9 | 148     | 16        | 13      | 1           | true        |
-|         10 | 190     | 6         | 6       | 1           | true        |
-
-### Lds, Max Product, Max Marginal Regret, Oracle
-|   Instance | Score   | Choices   | Fails   | Solutions   | Completed   |
-|-----------:|:--------|:----------|:--------|:------------|:------------|
-|          1 | 158     | 20        | 15      | 1           | true        |
-|          2 | 222     | 10        | 9       | 1           | true        |
-|          3 | N/A     | N/A       | N/A     | N/A         | N/A         |
-|          4 | N/A     | N/A       | N/A     | N/A         | N/A         |
-|          5 | 207     | 8         | 8       | 1           | true        |
-|          6 | 162     | 12        | 11      | 1           | true        |
-|          7 | 205     | 8         | 8       | 1           | true        |
-|          8 | N/A     | N/A       | N/A     | N/A         | N/A         |
-|          9 | 148     | 14        | 12      | 1           | true        |
-|         10 | 190     | 6         | 6       | 1           | true        |
+<pre><code>### Lds, Max Product, Max Marginal Regret, Oracle
+|   i |   fs Sc |   fs #f |   ls Sc |   ls #f |   #fail |   #sols | comp.   |
+|----:|--------:|--------:|--------:|--------:|--------:|--------:|:--------|
+|   1 |     212 |      21 |     229 |     419 |   23180 |       4 | true    |
+|   2 |     277 |      17 |     284 |     245 |     513 |       5 | true    |
+|   3 |     229 |      27 |     241 |     178 |     298 |       3 | true    |
+|   4 |     230 |       1 |     247 |      22 |     282 |       2 | true    |
+|   5 |     236 |      12 |     244 |     295 |     441 |       7 | true    |
+|   6 |     221 |      24 |     232 |      42 |     333 |       3 | true    |
+|   7 |     247 |      15 |     250 |      73 |     165 |       3 | true    |
+|   8 |     249 |      38 |     252 |      82 |     133 |       2 | true    |
+|   9 |     217 |     194 |     222 |    4798 |    5068 |       4 | true    |
+|  10 |     214 |      22 |     220 |     160 |     412 |       5 | true    |
 
 ### Lds, Max Product, Dom Wdeg Max Marginal, Oracle
-|   Instance | Score   | Choices   | Fails   | Solutions   | Completed   |
-|-----------:|:--------|:----------|:--------|:------------|:------------|
-|          1 | 158     | 20        | 15      | 1           | true        |
-|          2 | 222     | 10        | 9       | 1           | true        |
-|          3 | N/A     | N/A       | N/A     | N/A         | N/A         |
-|          4 | N/A     | N/A       | N/A     | N/A         | N/A         |
-|          5 | 207     | 8         | 8       | 1           | true        |
-|          6 | 162     | 12        | 11      | 1           | true        |
-|          7 | 205     | 8         | 8       | 1           | true        |
-|          8 | N/A     | N/A       | N/A     | N/A         | N/A         |
-|          9 | 148     | 14        | 12      | 1           | true        |
-|         10 | 190     | 6         | 6       | 1           | true        |
+|   i |   fs Sc |   fs #f |   ls Sc |   ls #f |   #fail |   #sols | comp.   |
+|----:|--------:|--------:|--------:|--------:|--------:|--------:|:--------|
+|   1 |     187 |      12 |     229 |     536 |     833 |      11 | true    |
+|   2 |     259 |      14 |     284 |     440 |     505 |       9 | true    |
+|   3 |     230 |      21 |     241 |     121 |     209 |       6 | true    |
+|   4 |     221 |      13 |     247 |      38 |     181 |       5 | true    |
+|   5 |     236 |      14 |     244 |     128 |     261 |       5 | true    |
+|   6 |     220 |      17 |     232 |      19 |     133 |       2 | true    |
+|   7 |     244 |       6 |     250 |      73 |     145 |       3 | true    |
+|   8 |     233 |      19 |     252 |      67 |     137 |       6 | true    |
+|   9 |     206 |       6 |     222 |     346 |     466 |       6 | true    |
+|  10 |     196 |      10 |     220 |     118 |     245 |       6 | true    |
 
 ### Lds, Sum Product, Dom Wdeg Max Marginal
-|   Instance | Score   | Choices   | Fails   | Solutions   | Completed   |
-|-----------:|:--------|:----------|:--------|:------------|:------------|
-|          1 | 158     | 20        | 15      | 1           | true        |
-|          2 | 222     | 10        | 9       | 1           | true        |
-|          3 | N/A     | N/A       | N/A     | N/A         | N/A         |
-|          4 | N/A     | N/A       | N/A     | N/A         | N/A         |
-|          5 | 207     | 8         | 8       | 2           | true        |
-|          6 | 162     | 17        | 13      | 2           | true        |
-|          7 | 205     | 10        | 9       | 1           | true        |
-|          8 | N/A     | N/A       | N/A     | N/A         | N/A         |
-|          9 | 148     | 16        | 13      | 1           | true        |
-|         10 | 190     | 6         | 6       | 1           | true        |
+|   i |   fs Sc |   fs #f |   ls Sc |   ls #f |   #fail |   #sols | comp.   |
+|----:|--------:|--------:|--------:|--------:|--------:|--------:|:--------|
+|   1 |     166 |       0 |     229 |     139 |     325 |      16 | true    |
+|   2 |     236 |       5 |     284 |     228 |     328 |      14 | true    |
+|   3 |     184 |       0 |     241 |      80 |     190 |      11 | true    |
+|   4 |     164 |       0 |     247 |     264 |     362 |      19 | true    |
+|   5 |     181 |       3 |     244 |     225 |     310 |      13 | true    |
+|   6 |     189 |       2 |     232 |      74 |     163 |       9 | true    |
+|   7 |     194 |       0 |     250 |     158 |     257 |      17 | true    |
+|   8 |     228 |       0 |     252 |      82 |     188 |       5 | true    |
+|   9 |     139 |       0 |     222 |     476 |     588 |      18 | true    |
+|  10 |     183 |       3 |     220 |     102 |     257 |       9 | true    |
 
 ### Lds, No Bp, Max Value
-|   Instance | Score   | Choices   | Fails   | Solutions   | Completed   |
-|-----------:|:--------|:----------|:--------|:------------|:------------|
-|          1 | 158     | 18        | 14      | 1           | true        |
-|          2 | 222     | 10        | 9       | 1           | true        |
-|          3 | N/A     | N/A       | N/A     | N/A         | N/A         |
-|          4 | N/A     | N/A       | N/A     | N/A         | N/A         |
-|          5 | 207     | 8         | 8       | 1           | true        |
-|          6 | 162     | 12        | 11      | 1           | true        |
-|          7 | 205     | 8         | 8       | 1           | true        |
-|          8 | N/A     | N/A       | N/A     | N/A         | N/A         |
-|          9 | 148     | 14        | 12      | 1           | true        |
-|         10 | 190     | 6         | 6       | 1           | true        |
+|   i |   fs Sc |   fs #f |   ls Sc |   ls #f |   #fail |   #sols | comp.   |
+|----:|--------:|--------:|--------:|--------:|--------:|--------:|:--------|
+|   1 |     212 |       1 |     229 |    2970 |   24928 |       8 | true    |
+|   2 |     268 |      50 |     284 |     722 |    1507 |       6 | true    |
+|   3 |     237 |      15 |     241 |     267 |     394 |       2 | true    |
+|   4 |     247 |      10 |     247 |      10 |     448 |       1 | true    |
+|   5 |     236 |     230 |     244 |     760 |     940 |       4 | true    |
+|   6 |     225 |      91 |     232 |     415 |     627 |       4 | true    |
+|   7 |     247 |      18 |     250 |     114 |     858 |       3 | true    |
+|   8 |     247 |      23 |     252 |      24 |      46 |       2 | true    |
+|   9 |     214 |     107 |     222 |     179 |     620 |       2 | true    |
+|  10 |     217 |      58 |     220 |     170 |     546 |       3 | true    |
+
+### Lds, No Bp, Dom Wdeg Best Value
+|   i |   fs Sc |   fs #f |   ls Sc |   ls #f |   #fail |   #sols | comp.   |
+|----:|--------:|--------:|--------:|--------:|--------:|--------:|:--------|
+|   1 |     229 |       3 |     229 |       3 |     159 |       1 | true    |
+|   2 |     266 |       3 |     284 |     326 |     397 |       6 | true    |
+|   3 |     237 |       0 |     241 |     106 |     252 |       3 | true    |
+|   4 |     243 |       2 |     247 |      55 |     204 |       3 | true    |
+|   5 |     236 |       9 |     244 |     209 |     313 |       5 | true    |
+|   6 |     220 |       0 |     232 |     109 |     227 |       4 | true    |
+|   7 |     250 |       1 |     250 |       1 |      82 |       1 | true    |
+|   8 |     252 |       2 |     252 |       2 |      68 |       1 | true    |
+|   9 |     211 |       0 |     222 |     126 |     240 |       3 | true    |
+|  10 |     214 |       0 |     220 |      47 |     173 |       3 | true    |
 </code></pre>
 </div>
 <div class="cell-output cell-output-display">
@@ -228,93 +237,95 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="latin-square-pseudo_files/figure-html/cell-3-output-3.png" width="758" height="374" class="figure-img"></p>
+<p><img src="latin-square-pseudo_files/figure-html/cell-3-output-3.png" width="949" height="566" class="figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
 </section>
 <section id="holes-1" class="level2">
-<h2 class="anchored" data-anchor-id="holes-1">200 Holes</h2>
-<p>Same metrics on every graph, the slowest models are removed to change scale and make the graph more readable.</p>
-<div id="f6715610" class="cell" data-execution_count="3">
+<h2 class="anchored" data-anchor-id="holes-1">250 Holes</h2>
+<div id="c3dc143d" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>  plot.hole_tables(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">200</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>instance_numbers, objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  plot.fail_graph(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">200</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>instance_numbers, objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>)</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  plot.fail_graph(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">200</span>, models<span class="op">=</span>models2, instance_numbers<span class="op">=</span>instance_numbers, objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>)</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  plot.fail_graph(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">200</span>, models<span class="op">=</span>models2, instance_numbers<span class="op">=</span>[i <span class="cf">for</span> i <span class="kw">in</span> instance_numbers <span class="cf">if</span> (i <span class="kw">not</span> <span class="kw">in</span> [<span class="dv">1</span>, <span class="dv">9</span>])], objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>, legend<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>  plot.hole_tables(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">250</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>all_instances, objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  plot.fail_graph(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">250</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>all_instances, objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  plot.quality_graph(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">250</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>[i <span class="cf">for</span> i <span class="kw">in</span> all_instances <span class="cf">if</span> (i <span class="kw">not</span> <span class="kw">in</span> [])], objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="co">#plot.fail_graph(n=20, holes=250, models=models2, instance_numbers=all_instances, objective="pseudodiagonal_20_5_5")</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="co">#plot.fail_graph(n=20, holes=250, models=models3, instance_numbers=all_instances, objective="pseudodiagonal_20_5_5")</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="co">#plot.fail_graph(n=20, holes=250, models=models3, instance_numbers=[i for i in all_instances if (i not in [2])], objective="pseudodiagonal_20_5_5")</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">#plot.quality_graph(n=20, holes=250, models=models2, instance_numbers=[i for i in all_instances if (i not in [7])], objective="pseudodiagonal_20_5_5")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>### Lds, Sum Product, Max Marginal Regret
-|   Instance |   Score |   Choices |   Fails |   Solutions | Completed   |
-|-----------:|--------:|----------:|--------:|------------:|:------------|
-|          1 |     229 |  19338807 | 8433585 |          12 | false       |
-|          2 |     284 |     55373 |   26523 |           8 | true        |
-|          3 |     241 |      1797 |     333 |           8 | true        |
-|          4 |     247 |      2641 |     686 |          15 | true        |
-|          5 |     244 |      1671 |     440 |           8 | true        |
-|          6 |     232 |      7387 |    3209 |           9 | true        |
-|          7 |     250 |    146600 |   71482 |          16 | true        |
-|          8 |     252 |      1334 |     218 |          11 | true        |
-|          9 |     222 |    439945 |  213125 |          14 | true        |
-|         10 |     220 |   3565369 | 1764764 |          14 | true        |
-
-### Lds, Max Product, Max Marginal Regret, Oracle
-|   Instance |   Score |   Choices |   Fails |   Solutions | Completed   |
-|-----------:|--------:|----------:|--------:|------------:|:------------|
-|          1 |     229 |     47841 |   23180 |           4 | true        |
-|          2 |     284 |      1744 |     513 |           5 | true        |
-|          3 |     241 |      1098 |     298 |           3 | true        |
-|          4 |     247 |       622 |     282 |           2 | true        |
-|          5 |     244 |      1704 |     441 |           7 | true        |
-|          6 |     232 |      1180 |     333 |           3 | true        |
-|          7 |     250 |       577 |     165 |           3 | true        |
-|          8 |     252 |       866 |     133 |           2 | true        |
-|          9 |     222 |     19916 |    5068 |           4 | true        |
-|         10 |     220 |      1475 |     412 |           5 | true        |
+<pre><code>### Lds, Max Product, Max Marginal Regret, Oracle
+|   i |   fs Sc |   fs #f |   ls Sc |   ls #f |   #fail |   #sols | comp.   |
+|----:|--------:|--------:|--------:|--------:|--------:|--------:|:--------|
+|   1 |     268 |       3 |     272 |     200 |    3812 |       3 | true    |
+|   2 |     261 |       0 |     266 |     238 | 3080754 |       4 | false   |
+|   3 |     219 |       4 |     224 |     172 |   13502 |       3 | true    |
+|   4 |     267 |       8 |     275 |     183 |    2522 |       5 | true    |
+|   5 |     259 |      12 |     267 |     110 |    3566 |       5 | true    |
+|   6 |     266 |       0 |     266 |       0 |     375 |       1 | true    |
+|   7 |     263 |       9 |     265 |    1810 |   12912 |       3 | true    |
+|   8 |     280 |       0 |     286 |      82 |    1327 |       2 | true    |
+|   9 |     230 |       1 |     241 |     100 |     963 |       5 | true    |
+|  10 |     264 |      16 |     270 |     400 |     898 |       7 | true    |
 
 ### Lds, Max Product, Dom Wdeg Max Marginal, Oracle
-|   Instance |   Score |   Choices |   Fails |   Solutions | Completed   |
-|-----------:|--------:|----------:|--------:|------------:|:------------|
-|          1 |     229 |      4544 |     833 |          11 | true        |
-|          2 |     284 |      3910 |     505 |           9 | true        |
-|          3 |     241 |      1480 |     209 |           6 | true        |
-|          4 |     247 |       872 |     181 |           5 | true        |
-|          5 |     244 |      1543 |     261 |           5 | true        |
-|          6 |     232 |       503 |     133 |           2 | true        |
-|          7 |     250 |       515 |     145 |           3 | true        |
-|          8 |     252 |      1050 |     137 |           6 | true        |
-|          9 |     222 |      3578 |     466 |           6 | true        |
-|         10 |     220 |      1183 |     245 |           6 | true        |
+|   i |   fs Sc |   fs #f |   ls Sc |   ls #f |   #fail |   #sols | comp.   |
+|----:|--------:|--------:|--------:|--------:|--------:|--------:|:--------|
+|   1 |     261 |       2 |     272 |     119 |    1341 |       4 | true    |
+|   2 |     247 |       1 |     266 |     241 |   62211 |       7 | true    |
+|   3 |     221 |       2 |     224 |     200 |    2018 |       3 | true    |
+|   4 |     269 |       0 |     275 |     185 |     597 |       3 | true    |
+|   5 |     264 |       1 |     267 |     129 |     451 |       4 | true    |
+|   6 |     249 |       3 |     266 |      95 |     244 |       5 | true    |
+|   7 |     259 |       4 |     265 |     559 |    2684 |       5 | true    |
+|   8 |     270 |       1 |     286 |     119 |     437 |       7 | true    |
+|   9 |     233 |       0 |     241 |     103 |     785 |       3 | true    |
+|  10 |     257 |       9 |     270 |     178 |     429 |       8 | true    |
 
 ### Lds, Sum Product, Dom Wdeg Max Marginal
-|   Instance |   Score |   Choices |   Fails |   Solutions | Completed   |
-|-----------:|--------:|----------:|--------:|------------:|:------------|
-|          1 |     229 |      1517 |     325 |          16 | true        |
-|          2 |     284 |      1382 |     328 |          14 | true        |
-|          3 |     241 |      1216 |     190 |          11 | true        |
-|          4 |     247 |      2072 |     362 |          19 | true        |
-|          5 |     244 |      1693 |     310 |          13 | true        |
-|          6 |     232 |      1064 |     163 |           9 | true        |
-|          7 |     250 |      1582 |     257 |          17 | true        |
-|          8 |     252 |       723 |     188 |           5 | true        |
-|          9 |     222 |      2728 |     588 |          18 | true        |
-|         10 |     220 |      1491 |     257 |           9 | true        |
+|   i |   fs Sc |   fs #f |   ls Sc |   ls #f |   #fail |   #sols | comp.   |
+|----:|--------:|--------:|--------:|--------:|--------:|--------:|:--------|
+|   1 |     177 |       2 |     272 |     501 |    2142 |      20 | true    |
+|   2 |     189 |       0 |     266 |     388 |   65996 |      17 | true    |
+|   3 |     163 |       0 |     224 |     708 |    3105 |      20 | true    |
+|   4 |     224 |       0 |     275 |     160 |     449 |      11 | true    |
+|   5 |     193 |       0 |     267 |     665 |    1030 |      18 | true    |
+|   6 |     200 |       0 |     266 |     178 |     409 |      14 | true    |
+|   7 |     144 |       2 |     265 |     760 |    3603 |      25 | true    |
+|   8 |     206 |       0 |     286 |     165 |     384 |      16 | true    |
+|   9 |     144 |       0 |     241 |     485 |    1149 |      22 | true    |
+|  10 |     206 |       0 |     270 |     524 |     871 |      19 | true    |
 
 ### Lds, No Bp, Max Value
-|   Instance |   Score |   Choices |   Fails |   Solutions | Completed   |
-|-----------:|--------:|----------:|--------:|------------:|:------------|
-|          1 |     229 |     52010 |   24928 |           8 | true        |
-|          2 |     284 |      5611 |    1507 |           6 | true        |
-|          3 |     241 |      1231 |     394 |           2 | true        |
-|          4 |     247 |       952 |     448 |           1 | true        |
-|          5 |     244 |      4873 |     940 |           4 | true        |
-|          6 |     232 |      3562 |     627 |           4 | true        |
-|          7 |     250 |      2138 |     858 |           3 | true        |
-|          8 |     252 |       441 |      46 |           2 | true        |
-|          9 |     222 |      2485 |     620 |           2 | true        |
-|         10 |     220 |      1535 |     546 |           3 | true        |
+|   i |   fs Sc |   fs #f |   ls Sc |   ls #f |   #fail |   #sols | comp.   |
+|----:|--------:|--------:|--------:|--------:|--------:|--------:|:--------|
+|   1 |     268 |       0 |     272 |     204 |    5141 |       4 | true    |
+|   2 |     255 |       1 |     266 |     108 |  111032 |       4 | true    |
+|   3 |     219 |       1 |     224 |     131 |   19313 |       3 | true    |
+|   4 |     267 |       5 |     275 |     170 |    3584 |       3 | true    |
+|   5 |     259 |       0 |     267 |     211 |   11787 |       4 | true    |
+|   6 |     266 |      16 |     266 |      16 |     171 |       1 | true    |
+|   7 |     262 |       1 |     265 |    1971 |  293749 |       4 | true    |
+|   8 |     286 |       1 |     286 |       1 |     841 |       1 | true    |
+|   9 |     235 |       0 |     241 |     119 |    1484 |       3 | true    |
+|  10 |     262 |      13 |     270 |     473 |    1796 |       6 | true    |
+
+### Lds, No Bp, Dom Wdeg Best Value
+|   i |   fs Sc |   fs #f |   ls Sc |   ls #f |   #fail |   #sols | comp.   |
+|----:|--------:|--------:|--------:|--------:|--------:|--------:|:--------|
+|   1 |     257 |       1 |     272 |     247 |    1725 |       4 | true    |
+|   2 |     254 |       2 |     266 |     126 |   57666 |       4 | true    |
+|   3 |     221 |       1 |     224 |     196 |    2130 |       3 | true    |
+|   4 |     274 |       1 |     275 |     103 |     471 |       2 | true    |
+|   5 |     262 |       2 |     267 |     148 |     601 |       4 | true    |
+|   6 |     264 |       4 |     266 |      86 |     195 |       3 | true    |
+|   7 |     259 |       0 |     265 |     551 |    2751 |       6 | true    |
+|   8 |     280 |       0 |     286 |     131 |     452 |       3 | true    |
+|   9 |     223 |       1 |     241 |     117 |     800 |       3 | true    |
+|  10 |     267 |       0 |     270 |     318 |     557 |       4 | true    |
 </code></pre>
 </div>
 <div class="cell-output cell-output-display">
@@ -327,14 +338,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="latin-square-pseudo_files/figure-html/cell-4-output-3.png" width="758" height="374" class="figure-img"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="latin-square-pseudo_files/figure-html/cell-4-output-4.png" width="758" height="374" class="figure-img"></p>
+<p><img src="latin-square-pseudo_files/figure-html/cell-4-output-3.png" width="950" height="566" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -342,85 +346,87 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="holes-2" class="level2">
 <h2 class="anchored" data-anchor-id="holes-2">300 Holes</h2>
-<div id="3d11d5c7" class="cell" data-execution_count="4">
+<div id="7cc905a6" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>  plot.hole_tables(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">300</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>instance_numbers, objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  plot.fail_graph(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">300</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>instance_numbers, objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>)</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  plot.fail_graph(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">300</span>, models<span class="op">=</span>models2, instance_numbers<span class="op">=</span>instance_numbers, objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>)</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  plot.fail_graph(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">300</span>, models<span class="op">=</span>models2, instance_numbers<span class="op">=</span>[i <span class="cf">for</span> i <span class="kw">in</span> instance_numbers <span class="cf">if</span> (i <span class="kw">not</span> <span class="kw">in</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">10</span>])], objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>)</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  plot.fail_graph(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">300</span>, models<span class="op">=</span>models2, instance_numbers<span class="op">=</span>[i <span class="cf">for</span> i <span class="kw">in</span> instance_numbers <span class="cf">if</span> (i <span class="kw">not</span> <span class="kw">in</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">6</span>, <span class="dv">10</span>])], objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>  plot.hole_tables(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">300</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>all_instances, objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  plot.fail_graph(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">300</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>[i <span class="cf">for</span> i <span class="kw">in</span> all_instances <span class="cf">if</span> (i <span class="kw">not</span> <span class="kw">in</span> [])], objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  plot.quality_graph(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">300</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>[i <span class="cf">for</span> i <span class="kw">in</span> all_instances <span class="cf">if</span> (i <span class="kw">not</span> <span class="kw">in</span> [])], objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># plot.fail_graph(n=20, holes=300, models=models2, instance_numbers=all_instances, objective="pseudodiagonal_20_5_5")</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># plot.fail_graph(n=20, holes=300, models=models2, instance_numbers=[i for i in all_instances if (i not in [1, 2, 10])], objective="pseudodiagonal_20_5_5")</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># plot.fail_graph(n=20, holes=300, models=models2, instance_numbers=[i for i in all_instances if (i not in [1, 2, 6, 10])], objective="pseudodiagonal_20_5_5")</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># plot.quality_graph(n=20, holes=300, models=models2, instance_numbers=[i for i in all_instances if (i not in [10])], objective="pseudodiagonal_20_5_5")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>### Lds, Sum Product, Max Marginal Regret
-|   Instance |   Score |   Choices |   Fails |   Solutions | Completed   |
-|-----------:|--------:|----------:|--------:|------------:|:------------|
-|          1 |     305 |  33056915 | 9439594 |          31 | false       |
-|          2 |     322 |  28016808 | 8629131 |          23 | false       |
-|          3 |     301 |  31142414 | 7244237 |          18 | false       |
-|          4 |     302 |  37077393 | 8578493 |          19 | false       |
-|          5 |     272 |  38266395 | 8590086 |          28 | false       |
-|          6 |     282 |  33676419 | 8053172 |          30 | false       |
-|          7 |     275 |  34434619 | 8045363 |          14 | false       |
-|          8 |     284 |  31448988 | 7496594 |          17 | false       |
-|          9 |     280 |  32983855 | 6475873 |          16 | false       |
-|         10 |     287 |  36090484 | 8291767 |          25 | false       |
-
-### Lds, Max Product, Max Marginal Regret, Oracle
-|   Instance |   Score |   Choices |   Fails |   Solutions | Completed   |
-|-----------:|--------:|----------:|--------:|------------:|:------------|
-|          1 |     305 |   1448522 |  324172 |           5 | false       |
-|          2 |     322 |  12551541 | 6201274 |           4 | false       |
-|          3 |     308 |     47644 |   23331 |           3 | true        |
-|          4 |     302 |     81438 |   39854 |           6 | true        |
-|          5 |     272 |     46591 |   22939 |           1 | true        |
-|          6 |     282 |    332538 |  163587 |           7 | true        |
-|          7 |     277 |    189127 |   93292 |           2 | true        |
-|          8 |     284 |    183295 |   90347 |           1 | true        |
-|          9 |     280 |     27335 |   13431 |           1 | true        |
-|         10 |     295 |   1315698 |  647784 |           8 | false       |
+<pre><code>### Lds, Max Product, Max Marginal Regret, Oracle
+|   i |   fs Sc |   fs #f |   ls Sc |   ls #f |   #fail |   #sols | comp.   |
+|----:|--------:|--------:|--------:|--------:|--------:|--------:|:--------|
+|   1 |     300 |       0 |     305 |     151 |  324172 |       5 | false   |
+|   2 |     316 |       0 |     322 |     464 | 6201274 |       4 | false   |
+|   3 |     306 |       2 |     308 |     613 |   23331 |       3 | true    |
+|   4 |     290 |       3 |     302 |     337 |   39854 |       6 | true    |
+|   5 |     272 |       0 |     272 |       0 |   22939 |       1 | true    |
+|   6 |     272 |       0 |     282 |    1183 |  163587 |       7 | true    |
+|   7 |     276 |       0 |     277 |     203 |   93292 |       2 | true    |
+|   8 |     284 |       0 |     284 |       0 |   90347 |       1 | true    |
+|   9 |     280 |       1 |     280 |       1 |   13431 |       1 | true    |
+|  10 |     287 |       5 |     295 |   13613 |  647784 |       8 | false   |
 
 ### Lds, Max Product, Dom Wdeg Max Marginal, Oracle
-|   Instance |   Score |   Choices |   Fails |   Solutions | Completed   |
-|-----------:|--------:|----------:|--------:|------------:|:------------|
-|          1 |     305 |    106498 |   52495 |           4 | true        |
-|          2 |     322 |     77380 |   38216 |           2 | true        |
-|          3 |     308 |     31969 |   15377 |           4 | true        |
-|          4 |     302 |     20558 |    9687 |           6 | true        |
-|          5 |     272 |     15808 |    7694 |           2 | true        |
-|          6 |     282 |     67811 |   33323 |           2 | true        |
-|          7 |     277 |     19486 |    9531 |           2 | true        |
-|          8 |     284 |     23915 |   11309 |           5 | true        |
-|          9 |     280 |     13772 |    6700 |           2 | true        |
-|         10 |     295 |    509242 |  250813 |           4 | false       |
+|   i |   fs Sc |   fs #f |   ls Sc |   ls #f |   #fail |   #sols | comp.   |
+|----:|--------:|--------:|--------:|--------:|--------:|--------:|:--------|
+|   1 |     291 |       3 |     305 |     131 |   52495 |       4 | true    |
+|   2 |     321 |       0 |     322 |     192 |   38216 |       2 | true    |
+|   3 |     303 |       0 |     308 |     262 |   15377 |       4 | true    |
+|   4 |     293 |       0 |     302 |    1283 |    9687 |       6 | true    |
+|   5 |     270 |       0 |     272 |     185 |    7694 |       2 | true    |
+|   6 |     281 |       0 |     282 |     190 |   33323 |       2 | true    |
+|   7 |     275 |       0 |     277 |     173 |    9531 |       2 | true    |
+|   8 |     274 |       0 |     284 |     192 |   11309 |       5 | true    |
+|   9 |     279 |       0 |     280 |     164 |    6700 |       2 | true    |
+|  10 |     286 |       0 |     295 |     323 |  250813 |       4 | false   |
 
 ### Lds, Sum Product, Dom Wdeg Max Marginal
-|   Instance |   Score |   Choices |   Fails |   Solutions | Completed   |
-|-----------:|--------:|----------:|--------:|------------:|:------------|
-|          1 |     305 |    140444 |   67123 |          27 | true        |
-|          2 |     322 |    115024 |   55759 |          14 | true        |
-|          3 |     308 |     55883 |   25419 |          23 | true        |
-|          4 |     302 |     35915 |   15644 |          21 | true        |
-|          5 |     272 |     28378 |   11574 |          26 | true        |
-|          6 |     282 |     85485 |   40571 |          16 | true        |
-|          7 |     277 |     30405 |   13511 |          18 | true        |
-|          8 |     284 |     31850 |   13704 |          21 | true        |
-|          9 |     280 |     19112 |    7537 |          19 | true        |
-|         10 |     295 |   1184079 |  583349 |          39 | true        |
+|   i |   fs Sc |   fs #f |   ls Sc |   ls #f |   #fail |   #sols | comp.   |
+|----:|--------:|--------:|--------:|--------:|--------:|--------:|:--------|
+|   1 |     176 |       0 |     305 |    1031 |   67123 |      27 | true    |
+|   2 |     254 |       0 |     322 |     495 |   55759 |      14 | true    |
+|   3 |     205 |       0 |     308 |    2195 |   25419 |      23 | true    |
+|   4 |     193 |       0 |     302 |     599 |   15644 |      21 | true    |
+|   5 |     198 |       0 |     272 |     913 |   11574 |      26 | true    |
+|   6 |     171 |       0 |     282 |     272 |   40571 |      16 | true    |
+|   7 |     180 |       0 |     277 |     686 |   13511 |      18 | true    |
+|   8 |     160 |       0 |     284 |     737 |   13704 |      21 | true    |
+|   9 |     162 |       0 |     280 |     469 |    7537 |      19 | true    |
+|  10 |     177 |       0 |     295 |   34109 |  583349 |      39 | true    |
 
 ### Lds, No Bp, Max Value
-|   Instance |   Score |   Choices |   Fails |   Solutions | Completed   |
-|-----------:|--------:|----------:|--------:|------------:|:------------|
-|          1 |     305 |    506386 |  250250 |           2 | true        |
-|          2 |     322 |    494884 |  244718 |           4 | true        |
-|          3 |     308 |    154967 |   76035 |           4 | true        |
-|          4 |     302 |    127459 |   62445 |           6 | true        |
-|          5 |     272 |     90996 |   44831 |           1 | true        |
-|          6 |     282 |   1946014 |  964686 |           5 | true        |
-|          7 |     277 |    319779 |  157523 |           2 | true        |
-|          8 |     284 |    306162 |  150965 |           1 | true        |
-|          9 |     280 |     99325 |   48846 |           2 | true        |
-|         10 |     295 |  12867587 | 6381983 |           5 | true        |
+|   i |   fs Sc |   fs #f |   ls Sc |   ls #f |   #fail |   #sols | comp.   |
+|----:|--------:|--------:|--------:|--------:|--------:|--------:|:--------|
+|   1 |     300 |       0 |     305 |     145 |  250250 |       2 | true    |
+|   2 |     316 |       1 |     322 |     282 |  244718 |       4 | true    |
+|   3 |     304 |       1 |     308 |     189 |   76035 |       4 | true    |
+|   4 |     290 |       0 |     302 |     418 |   62445 |       6 | true    |
+|   5 |     272 |       1 |     272 |       1 |   44831 |       1 | true    |
+|   6 |     267 |       0 |     282 |     477 |  964686 |       5 | true    |
+|   7 |     276 |       0 |     277 |     148 |  157523 |       2 | true    |
+|   8 |     284 |       0 |     284 |       0 |  150965 |       1 | true    |
+|   9 |     276 |       0 |     280 |     154 |   48846 |       2 | true    |
+|  10 |     289 |       0 |     295 |   31312 | 6381983 |       5 | true    |
+
+### Lds, No Bp, Dom Wdeg Best Value
+|   i |   fs Sc |   fs #f |   ls Sc |   ls #f |   #fail |   #sols | comp.   |
+|----:|--------:|--------:|--------:|--------:|--------:|--------:|:--------|
+|   1 |     305 |       0 |     305 |       0 |   52529 |       1 | true    |
+|   2 |     321 |       0 |     322 |     188 |   40199 |       2 | true    |
+|   3 |     303 |       0 |     308 |     420 |   15540 |       4 | true    |
+|   4 |     293 |       0 |     302 |     343 |    8939 |       5 | true    |
+|   5 |     270 |       0 |     272 |     198 |    7615 |       2 | true    |
+|   6 |     281 |       0 |     282 |     243 |   34990 |       2 | true    |
+|   7 |     275 |       1 |     277 |     179 |    9807 |       2 | true    |
+|   8 |     281 |       0 |     284 |     200 |   11533 |       3 | true    |
+|   9 |     279 |       4 |     280 |     159 |    6618 |       2 | true    |
+|  10 |     294 |       2 |     295 |     157 |  414758 |       2 | true    |
 </code></pre>
 </div>
 <div class="cell-output cell-output-display">
@@ -433,21 +439,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="latin-square-pseudo_files/figure-html/cell-5-output-3.png" width="758" height="374" class="figure-img"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="latin-square-pseudo_files/figure-html/cell-5-output-4.png" width="758" height="374" class="figure-img"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="latin-square-pseudo_files/figure-html/cell-5-output-5.png" width="758" height="374" class="figure-img"></p>
+<p><img src="latin-square-pseudo_files/figure-html/cell-5-output-3.png" width="947" height="566" class="figure-img"></p>
 </figure>
 </div>
 </div>

@@ -116,7 +116,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <p><strong>max_value</strong> generally the fastest by far. Is beaten once by <strong>max_product</strong> though.</p>
 <p><strong>max_product</strong> and <strong>max_value</strong> find the only one solution, the optimal one.</p>
-<div id="92314763" class="cell" data-execution_count="1">
+<div id="90efe154" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plot</span>
@@ -152,7 +152,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="holes" class="level2">
 <h2 class="anchored" data-anchor-id="holes">500 Holes</h2>
 <p>Same metrics on every graph, the slowest models are removed to change scale and make the graph more readable.</p>
-<div id="1a4c6c8b" class="cell" data-execution_count="2">
+<div id="07210982" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>  plot.hole_tables(n<span class="op">=</span><span class="dv">30</span>, holes<span class="op">=</span><span class="dv">500</span>, models<span class="op">=</span>models, instance_numbers<span class="op">=</span>instance_numbers)</span>
@@ -162,88 +162,88 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>### Dfs, Sum Product, Max Marginal Regret
-|   Instance | Score     | Choices   | Fails   | Solutions   |
-|-----------:|:----------|:----------|:--------|:------------|
-|          1 | 555       | 19702     | 9852    | 51          |
-|          2 | 712       | 19842     | 9922    | 91          |
-|          3 | 582       | 20516     | 10259   | 102         |
-|          4 | 691       | 45468     | 22735   | 123         |
-|          5 | 754       | 50206     | 25104   | 114         |
-|          6 | 672       | 18472     | 9237    | 83          |
-|          7 | 603       | 141498    | 70750   | 72          |
-|          8 | Timed out | N/A       | N/A     | N/A         |
-|          9 | 700       | 240942    | 120472  | 109         |
-|         10 | 711       | 71474     | 35738   | 71          |
+|   Instance | Score   |   Choices |   Fails |   Solutions | Completed   |
+|-----------:|:--------|----------:|--------:|------------:|:------------|
+|          1 | 555     |     19702 |    9852 |          51 | true        |
+|          2 | 712     |     19842 |    9922 |          91 | true        |
+|          3 | 582     |     20516 |   10259 |         102 | true        |
+|          4 | 691     |     45468 |   22735 |         123 | true        |
+|          5 | 754     |     50206 |   25104 |         114 | true        |
+|          6 | 672     |     18472 |    9237 |          83 | true        |
+|          7 | 603     |    141498 |   70750 |          72 | true        |
+|          8 | N/A     |     14214 |    6983 |          61 | false       |
+|          9 | 700     |    240942 |  120472 |         109 | true        |
+|         10 | 711     |     71474 |   35738 |          71 | true        |
 
 ### Dfs, Sum Product, Max Marginal Regret, Oracle
-|   Instance |   Score |   Choices |   Fails |   Solutions |
-|-----------:|--------:|----------:|--------:|------------:|
-|          1 |     555 |     19754 |    9878 |          45 |
-|          2 |     712 |     36262 |   18132 |         113 |
-|          3 |     582 |     16556 |    8279 |         100 |
-|          4 |     691 |     45516 |   22759 |         123 |
-|          5 |     754 |     44150 |   22076 |         121 |
-|          6 |     672 |     18464 |    9233 |          83 |
-|          7 |     603 |     23668 |   11835 |          51 |
-|          8 |     696 |    122600 |   61301 |         103 |
-|          9 |     700 |    239596 |  119799 |          84 |
-|         10 |     711 |     47512 |   23757 |          67 |
+|   Instance |   Score |   Choices |   Fails |   Solutions | Completed   |
+|-----------:|--------:|----------:|--------:|------------:|:------------|
+|          1 |     555 |     19754 |    9878 |          45 | true        |
+|          2 |     712 |     36262 |   18132 |         113 | true        |
+|          3 |     582 |     16556 |    8279 |         100 | true        |
+|          4 |     691 |     45516 |   22759 |         123 | true        |
+|          5 |     754 |     44150 |   22076 |         121 | true        |
+|          6 |     672 |     18464 |    9233 |          83 | true        |
+|          7 |     603 |     23668 |   11835 |          51 | true        |
+|          8 |     696 |    122600 |   61301 |         103 | true        |
+|          9 |     700 |    239596 |  119799 |          84 | true        |
+|         10 |     711 |     47512 |   23757 |          67 | true        |
 
 ### Dfs, Max Product, Max Marginal Regret, Oracle
-|   Instance |   Score |   Choices |   Fails |   Solutions |
-|-----------:|--------:|----------:|--------:|------------:|
-|          1 |     555 |      1026 |     514 |           1 |
-|          2 |     712 |      3336 |    1669 |           1 |
-|          3 |     582 |       420 |     211 |           1 |
-|          4 |     691 |       922 |     462 |           1 |
-|          5 |     754 |    425980 |  212991 |           1 |
-|          6 |     672 |     27510 |   13756 |           1 |
-|          7 |     603 |      5796 |    2899 |           1 |
-|          8 |     696 |       418 |     210 |           1 |
-|          9 |     700 |   1064008 |  532005 |           1 |
-|         10 |     711 |      6704 |    3353 |           1 |
+|   Instance |   Score |   Choices |   Fails |   Solutions | Completed   |
+|-----------:|--------:|----------:|--------:|------------:|:------------|
+|          1 |     555 |      1026 |     514 |           1 | true        |
+|          2 |     712 |      3336 |    1669 |           1 | true        |
+|          3 |     582 |       420 |     211 |           1 | true        |
+|          4 |     691 |       922 |     462 |           1 | true        |
+|          5 |     754 |    425980 |  212991 |           1 | true        |
+|          6 |     672 |     27510 |   13756 |           1 | true        |
+|          7 |     603 |      5796 |    2899 |           1 | true        |
+|          8 |     696 |       418 |     210 |           1 | true        |
+|          9 |     700 |   1064008 |  532005 |           1 | true        |
+|         10 |     711 |      6704 |    3353 |           1 | true        |
 
 ### Dfs, Max Product, Dom Wdeg Max Marginal, Oracle
-|   Instance |   Score |   Choices |   Fails |   Solutions |
-|-----------:|--------:|----------:|--------:|------------:|
-|          1 |     555 |      2700 |    1351 |           7 |
-|          2 |     712 |      9694 |    4848 |          27 |
-|          3 |     582 |     27220 |   13611 |          19 |
-|          4 |     691 |      6878 |    3440 |          23 |
-|          5 |     754 |      5574 |    2788 |          16 |
-|          6 |     672 |     10678 |    5340 |          26 |
-|          7 |     603 |     11008 |    5505 |          11 |
-|          8 |     696 |     11818 |    5910 |          20 |
-|          9 |     700 |      4838 |    2420 |          13 |
-|         10 |     711 |     24580 |   12291 |          28 |
+|   Instance |   Score |   Choices |   Fails |   Solutions | Completed   |
+|-----------:|--------:|----------:|--------:|------------:|:------------|
+|          1 |     555 |      2700 |    1351 |           7 | true        |
+|          2 |     712 |      9694 |    4848 |          27 | true        |
+|          3 |     582 |     27220 |   13611 |          19 | true        |
+|          4 |     691 |      6878 |    3440 |          23 | true        |
+|          5 |     754 |      5574 |    2788 |          16 | true        |
+|          6 |     672 |     10678 |    5340 |          26 | true        |
+|          7 |     603 |     11008 |    5505 |          11 | true        |
+|          8 |     696 |     11818 |    5910 |          20 | true        |
+|          9 |     700 |      4838 |    2420 |          13 | true        |
+|         10 |     711 |     24580 |   12291 |          28 | true        |
 
 ### Dfs, No Bp, Max Value
-|   Instance |   Score |   Choices |   Fails |   Solutions |
-|-----------:|--------:|----------:|--------:|------------:|
-|          1 |     555 |       826 |     414 |           1 |
-|          2 |     712 |       414 |     208 |           1 |
-|          3 |     582 |      2690 |    1346 |           1 |
-|          4 |     691 |     35570 |   17786 |           1 |
-|          5 |     754 |     94048 |   47025 |           1 |
-|          6 |     672 |      1682 |     842 |           1 |
-|          7 |     603 |    543424 |  271713 |           1 |
-|          8 |     696 |       488 |     245 |           1 |
-|          9 |     700 |    481010 |  240506 |           1 |
-|         10 |     711 |     89612 |   44807 |           1 |
+|   Instance |   Score |   Choices |   Fails |   Solutions | Completed   |
+|-----------:|--------:|----------:|--------:|------------:|:------------|
+|          1 |     555 |       826 |     414 |           1 | true        |
+|          2 |     712 |       414 |     208 |           1 | true        |
+|          3 |     582 |      2690 |    1346 |           1 | true        |
+|          4 |     691 |     35570 |   17786 |           1 | true        |
+|          5 |     754 |     94048 |   47025 |           1 | true        |
+|          6 |     672 |      1682 |     842 |           1 | true        |
+|          7 |     603 |    543424 |  271713 |           1 | true        |
+|          8 |     696 |       488 |     245 |           1 | true        |
+|          9 |     700 |    481010 |  240506 |           1 | true        |
+|         10 |     711 |     89612 |   44807 |           1 | true        |
 
 ### Dfs, No Bp, Dom Wdeg
-|   Instance |   Score |   Choices |   Fails |   Solutions |
-|-----------:|--------:|----------:|--------:|------------:|
-|          1 |     555 |    227884 |  113943 |         253 |
-|          2 |     712 |    301686 |  150844 |         361 |
-|          3 |     582 |    354262 |  177132 |         301 |
-|          4 |     691 |    290344 |  145173 |         349 |
-|          5 |     754 |    396708 |  198355 |         360 |
-|          6 |     672 |    486896 |  243449 |         363 |
-|          7 |     603 |    336410 |  168206 |         219 |
-|          8 |     696 |    351302 |  175652 |         356 |
-|          9 |     700 |    244926 |  122464 |         293 |
-|         10 |     711 |   3973694 | 1986848 |         317 |
+|   Instance |   Score |   Choices |   Fails |   Solutions | Completed   |
+|-----------:|--------:|----------:|--------:|------------:|:------------|
+|          1 |     555 |    227884 |  113943 |         253 | true        |
+|          2 |     712 |    301686 |  150844 |         361 | true        |
+|          3 |     582 |    354262 |  177132 |         301 | true        |
+|          4 |     691 |    290344 |  145173 |         349 | true        |
+|          5 |     754 |    396708 |  198355 |         360 | true        |
+|          6 |     672 |    486896 |  243449 |         363 | true        |
+|          7 |     603 |    336410 |  168206 |         219 | true        |
+|          8 |     696 |    351302 |  175652 |         356 | true        |
+|          9 |     700 |    244926 |  122464 |         293 | true        |
+|         10 |     711 |   3973694 | 1986848 |         317 | true        |
 </code></pre>
 </div>
 <div class="cell-output cell-output-display">
@@ -271,7 +271,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="holes-1" class="level2">
 <h2 class="anchored" data-anchor-id="holes-1">600 Holes</h2>
-<div id="aa5d3817" class="cell" data-execution_count="3">
+<div id="4a0f115f" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>  plot.hole_tables(n<span class="op">=</span><span class="dv">30</span>, holes<span class="op">=</span><span class="dv">600</span>, models<span class="op">=</span>models, instance_numbers<span class="op">=</span>instance_numbers)</span>
@@ -280,88 +280,88 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>### Dfs, Sum Product, Max Marginal Regret
-|   Instance |   Score |   Choices |   Fails |   Solutions |
-|-----------:|--------:|----------:|--------:|------------:|
-|          1 |     633 |     13590 |    6796 |          62 |
-|          2 |     685 |     21004 |   10503 |         116 |
-|          3 |     759 |     28764 |   14383 |         114 |
-|          4 |     775 |     41360 |   20681 |         165 |
-|          5 |     711 |     35672 |   17837 |         160 |
-|          6 |     740 |     25718 |   12860 |         123 |
-|          7 |     725 |     25178 |   12590 |         131 |
-|          8 |     690 |     16128 |    8065 |          87 |
-|          9 |     738 |     25762 |   12882 |         144 |
-|         10 |     674 |     11730 |    5866 |          71 |
+|   Instance |   Score |   Choices |   Fails |   Solutions | Completed   |
+|-----------:|--------:|----------:|--------:|------------:|:------------|
+|          1 |     633 |     13590 |    6796 |          62 | true        |
+|          2 |     685 |     21004 |   10503 |         116 | true        |
+|          3 |     759 |     28764 |   14383 |         114 | true        |
+|          4 |     775 |     41360 |   20681 |         165 | true        |
+|          5 |     711 |     35672 |   17837 |         160 | true        |
+|          6 |     740 |     25718 |   12860 |         123 | true        |
+|          7 |     725 |     25178 |   12590 |         131 | true        |
+|          8 |     690 |     16128 |    8065 |          87 | true        |
+|          9 |     738 |     25762 |   12882 |         144 | true        |
+|         10 |     674 |     11730 |    5866 |          71 | true        |
 
 ### Dfs, Sum Product, Max Marginal Regret, Oracle
-|   Instance |   Score |   Choices |   Fails |   Solutions |
-|-----------:|--------:|----------:|--------:|------------:|
-|          1 |     633 |     11924 |    5963 |          47 |
-|          2 |     685 |     16010 |    8006 |         100 |
-|          3 |     759 |     20970 |   10486 |         102 |
-|          4 |     775 |     41462 |   20732 |         164 |
-|          5 |     711 |     38830 |   19416 |         173 |
-|          6 |     740 |     21072 |   10537 |         112 |
-|          7 |     725 |     20936 |   10469 |         101 |
-|          8 |     690 |     16858 |    8430 |          98 |
-|          9 |     738 |    198456 |   99229 |         121 |
-|         10 |     674 |     11306 |    5654 |          66 |
+|   Instance |   Score |   Choices |   Fails |   Solutions | Completed   |
+|-----------:|--------:|----------:|--------:|------------:|:------------|
+|          1 |     633 |     11924 |    5963 |          47 | true        |
+|          2 |     685 |     16010 |    8006 |         100 | true        |
+|          3 |     759 |     20970 |   10486 |         102 | true        |
+|          4 |     775 |     41462 |   20732 |         164 | true        |
+|          5 |     711 |     38830 |   19416 |         173 | true        |
+|          6 |     740 |     21072 |   10537 |         112 | true        |
+|          7 |     725 |     20936 |   10469 |         101 | true        |
+|          8 |     690 |     16858 |    8430 |          98 | true        |
+|          9 |     738 |    198456 |   99229 |         121 | true        |
+|         10 |     674 |     11306 |    5654 |          66 | true        |
 
 ### Dfs, Max Product, Max Marginal Regret, Oracle
-|   Instance |   Score |   Choices |   Fails |   Solutions |
-|-----------:|--------:|----------:|--------:|------------:|
-|          1 |     633 |       580 |     291 |           1 |
-|          2 |     685 |       636 |     319 |           1 |
-|          3 |     759 |       628 |     315 |           1 |
-|          4 |     775 |       602 |     302 |           1 |
-|          5 |     711 |       582 |     292 |           1 |
-|          6 |     740 |       650 |     326 |           1 |
-|          7 |     725 |       676 |     339 |           1 |
-|          8 |     690 |       668 |     335 |           1 |
-|          9 |     738 |       622 |     312 |           1 |
-|         10 |     674 |       904 |     453 |           1 |
+|   Instance |   Score |   Choices |   Fails |   Solutions | Completed   |
+|-----------:|--------:|----------:|--------:|------------:|:------------|
+|          1 |     633 |       580 |     291 |           1 | true        |
+|          2 |     685 |       636 |     319 |           1 | true        |
+|          3 |     759 |       628 |     315 |           1 | true        |
+|          4 |     775 |       602 |     302 |           1 | true        |
+|          5 |     711 |       582 |     292 |           1 | true        |
+|          6 |     740 |       650 |     326 |           1 | true        |
+|          7 |     725 |       676 |     339 |           1 | true        |
+|          8 |     690 |       668 |     335 |           1 | true        |
+|          9 |     738 |       622 |     312 |           1 | true        |
+|         10 |     674 |       904 |     453 |           1 | true        |
 
 ### Dfs, Max Product, Dom Wdeg Max Marginal, Oracle
-|   Instance |   Score |   Choices |   Fails |   Solutions |
-|-----------:|--------:|----------:|--------:|------------:|
-|          1 |     633 |      2134 |    1068 |           8 |
-|          2 |     685 |      2544 |    1273 |           4 |
-|          3 |     759 |      3904 |    1953 |           9 |
-|          4 |     775 |      2038 |    1020 |           5 |
-|          5 |     711 |      3430 |    1716 |           7 |
-|          6 |     740 |      3382 |    1692 |          10 |
-|          7 |     725 |      1816 |     909 |           8 |
-|          8 |     690 |      2950 |    1476 |           9 |
-|          9 |     738 |      2090 |    1046 |           4 |
-|         10 |     674 |       818 |     410 |           1 |
+|   Instance |   Score |   Choices |   Fails |   Solutions | Completed   |
+|-----------:|--------:|----------:|--------:|------------:|:------------|
+|          1 |     633 |      2134 |    1068 |           8 | true        |
+|          2 |     685 |      2544 |    1273 |           4 | true        |
+|          3 |     759 |      3904 |    1953 |           9 | true        |
+|          4 |     775 |      2038 |    1020 |           5 | true        |
+|          5 |     711 |      3430 |    1716 |           7 | true        |
+|          6 |     740 |      3382 |    1692 |          10 | true        |
+|          7 |     725 |      1816 |     909 |           8 | true        |
+|          8 |     690 |      2950 |    1476 |           9 | true        |
+|          9 |     738 |      2090 |    1046 |           4 | true        |
+|         10 |     674 |       818 |     410 |           1 | true        |
 
 ### Dfs, No Bp, Max Value
-|   Instance |   Score |   Choices |   Fails |   Solutions |
-|-----------:|--------:|----------:|--------:|------------:|
-|          1 |     633 |       740 |     371 |           1 |
-|          2 |     685 |       562 |     282 |           1 |
-|          3 |     759 |       556 |     279 |           1 |
-|          4 |     775 |       714 |     358 |           1 |
-|          5 |     711 |       610 |     306 |           1 |
-|          6 |     740 |       580 |     291 |           1 |
-|          7 |     725 |       604 |     303 |           1 |
-|          8 |     690 |       576 |     289 |           1 |
-|          9 |     738 |       568 |     285 |           1 |
-|         10 |     674 |       536 |     269 |           1 |
+|   Instance |   Score |   Choices |   Fails |   Solutions | Completed   |
+|-----------:|--------:|----------:|--------:|------------:|:------------|
+|          1 |     633 |       740 |     371 |           1 | true        |
+|          2 |     685 |       562 |     282 |           1 | true        |
+|          3 |     759 |       556 |     279 |           1 | true        |
+|          4 |     775 |       714 |     358 |           1 | true        |
+|          5 |     711 |       610 |     306 |           1 | true        |
+|          6 |     740 |       580 |     291 |           1 | true        |
+|          7 |     725 |       604 |     303 |           1 | true        |
+|          8 |     690 |       576 |     289 |           1 | true        |
+|          9 |     738 |       568 |     285 |           1 | true        |
+|         10 |     674 |       536 |     269 |           1 | true        |
 
 ### Dfs, No Bp, Dom Wdeg
-|   Instance |   Score |   Choices |   Fails |   Solutions |
-|-----------:|--------:|----------:|--------:|------------:|
-|          1 |     633 |    220790 |  110396 |         341 |
-|          2 |     685 |    271662 |  135832 |         435 |
-|          3 |     759 |    294998 |  147500 |         467 |
-|          4 |     775 |    322446 |  161224 |         519 |
-|          5 |     711 |    305308 |  152655 |         456 |
-|          6 |     740 |    298812 |  149407 |         443 |
-|          7 |     725 |    291448 |  145725 |         425 |
-|          8 |     690 |    264804 |  132403 |         444 |
-|          9 |     738 |    330120 |  165061 |         519 |
-|         10 |     674 |    224384 |  112193 |         346 |
+|   Instance |   Score |   Choices |   Fails |   Solutions | Completed   |
+|-----------:|--------:|----------:|--------:|------------:|:------------|
+|          1 |     633 |    220790 |  110396 |         341 | true        |
+|          2 |     685 |    271662 |  135832 |         435 | true        |
+|          3 |     759 |    294998 |  147500 |         467 | true        |
+|          4 |     775 |    322446 |  161224 |         519 | true        |
+|          5 |     711 |    305308 |  152655 |         456 | true        |
+|          6 |     740 |    298812 |  149407 |         443 | true        |
+|          7 |     725 |    291448 |  145725 |         425 | true        |
+|          8 |     690 |    264804 |  132403 |         444 | true        |
+|          9 |     738 |    330120 |  165061 |         519 | true        |
+|         10 |     674 |    224384 |  112193 |         346 | true        |
 </code></pre>
 </div>
 <div class="cell-output cell-output-display">
@@ -382,7 +382,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="holes-2" class="level2">
 <h2 class="anchored" data-anchor-id="holes-2">700 Holes</h2>
-<div id="12c8c4ae" class="cell" data-execution_count="4">
+<div id="f1f553d2" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>  plot.hole_tables(n<span class="op">=</span><span class="dv">30</span>, holes<span class="op">=</span><span class="dv">700</span>, models<span class="op">=</span>models, instance_numbers<span class="op">=</span>instance_numbers)</span>
@@ -391,88 +391,88 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>### Dfs, Sum Product, Max Marginal Regret
-|   Instance |   Score |   Choices |   Fails |   Solutions |
-|-----------:|--------:|----------:|--------:|------------:|
-|          1 |     786 |     57136 |   28569 |         181 |
-|          2 |     733 |     34556 |   17279 |         107 |
-|          3 |     742 |     66798 |   33400 |         209 |
-|          4 |     820 |     48146 |   24074 |         196 |
-|          5 |     779 |     60656 |   30329 |         186 |
-|          6 |     694 |     36298 |   18150 |         118 |
-|          7 |     781 |     61894 |   30948 |         217 |
-|          8 |     782 |     75706 |   37854 |         242 |
-|          9 |     695 |     47494 |   23748 |         196 |
-|         10 |     806 |     47648 |   23825 |         190 |
+|   Instance |   Score |   Choices |   Fails |   Solutions | Completed   |
+|-----------:|--------:|----------:|--------:|------------:|:------------|
+|          1 |     786 |     57136 |   28569 |         181 | true        |
+|          2 |     733 |     34556 |   17279 |         107 | true        |
+|          3 |     742 |     66798 |   33400 |         209 | true        |
+|          4 |     820 |     48146 |   24074 |         196 | true        |
+|          5 |     779 |     60656 |   30329 |         186 | true        |
+|          6 |     694 |     36298 |   18150 |         118 | true        |
+|          7 |     781 |     61894 |   30948 |         217 | true        |
+|          8 |     782 |     75706 |   37854 |         242 | true        |
+|          9 |     695 |     47494 |   23748 |         196 | true        |
+|         10 |     806 |     47648 |   23825 |         190 | true        |
 
 ### Dfs, Sum Product, Max Marginal Regret, Oracle
-|   Instance |   Score |   Choices |   Fails |   Solutions |
-|-----------:|--------:|----------:|--------:|------------:|
-|          1 |     786 |     53426 |   26714 |         162 |
-|          2 |     733 |     25344 |   12673 |         106 |
-|          3 |     742 |     50794 |   25398 |         134 |
-|          4 |     820 |     41626 |   20814 |         166 |
-|          5 |     779 |     39402 |   19702 |         160 |
-|          6 |     694 |     30628 |   15315 |          86 |
-|          7 |     781 |     55250 |   27626 |         180 |
-|          8 |     782 |     48040 |   24021 |         142 |
-|          9 |     695 |     41818 |   20910 |         157 |
-|         10 |     806 |     52518 |   26260 |         196 |
+|   Instance |   Score |   Choices |   Fails |   Solutions | Completed   |
+|-----------:|--------:|----------:|--------:|------------:|:------------|
+|          1 |     786 |     53426 |   26714 |         162 | true        |
+|          2 |     733 |     25344 |   12673 |         106 | true        |
+|          3 |     742 |     50794 |   25398 |         134 | true        |
+|          4 |     820 |     41626 |   20814 |         166 | true        |
+|          5 |     779 |     39402 |   19702 |         160 | true        |
+|          6 |     694 |     30628 |   15315 |          86 | true        |
+|          7 |     781 |     55250 |   27626 |         180 | true        |
+|          8 |     782 |     48040 |   24021 |         142 | true        |
+|          9 |     695 |     41818 |   20910 |         157 | true        |
+|         10 |     806 |     52518 |   26260 |         196 | true        |
 
 ### Dfs, Max Product, Max Marginal Regret, Oracle
-|   Instance |   Score |   Choices |   Fails |   Solutions |
-|-----------:|--------:|----------:|--------:|------------:|
-|          1 |     786 |       800 |     401 |           1 |
-|          2 |     733 |       806 |     404 |           1 |
-|          3 |     742 |       804 |     403 |           1 |
-|          4 |     820 |       826 |     414 |           1 |
-|          5 |     779 |       806 |     404 |           1 |
-|          6 |     694 |       820 |     411 |           1 |
-|          7 |     781 |       842 |     422 |           1 |
-|          8 |     782 |       842 |     422 |           1 |
-|          9 |     695 |       808 |     405 |           1 |
-|         10 |     806 |       878 |     440 |           1 |
+|   Instance |   Score |   Choices |   Fails |   Solutions | Completed   |
+|-----------:|--------:|----------:|--------:|------------:|:------------|
+|          1 |     786 |       800 |     401 |           1 | true        |
+|          2 |     733 |       806 |     404 |           1 | true        |
+|          3 |     742 |       804 |     403 |           1 | true        |
+|          4 |     820 |       826 |     414 |           1 | true        |
+|          5 |     779 |       806 |     404 |           1 | true        |
+|          6 |     694 |       820 |     411 |           1 | true        |
+|          7 |     781 |       842 |     422 |           1 | true        |
+|          8 |     782 |       842 |     422 |           1 | true        |
+|          9 |     695 |       808 |     405 |           1 | true        |
+|         10 |     806 |       878 |     440 |           1 | true        |
 
 ### Dfs, Max Product, Dom Wdeg Max Marginal, Oracle
-|   Instance |   Score |   Choices |   Fails |   Solutions |
-|-----------:|--------:|----------:|--------:|------------:|
-|          1 |     786 |      1048 |     525 |           1 |
-|          2 |     733 |      1060 |     531 |           1 |
-|          3 |     742 |      1060 |     531 |           1 |
-|          4 |     820 |      1056 |     529 |           1 |
-|          5 |     779 |      1096 |     549 |           1 |
-|          6 |     694 |      1050 |     526 |           1 |
-|          7 |     781 |      1086 |     544 |           1 |
-|          8 |     782 |      1052 |     527 |           1 |
-|          9 |     695 |      1064 |     533 |           1 |
-|         10 |     806 |      1070 |     536 |           1 |
+|   Instance |   Score |   Choices |   Fails |   Solutions | Completed   |
+|-----------:|--------:|----------:|--------:|------------:|:------------|
+|          1 |     786 |      1048 |     525 |           1 | true        |
+|          2 |     733 |      1060 |     531 |           1 | true        |
+|          3 |     742 |      1060 |     531 |           1 | true        |
+|          4 |     820 |      1056 |     529 |           1 | true        |
+|          5 |     779 |      1096 |     549 |           1 | true        |
+|          6 |     694 |      1050 |     526 |           1 | true        |
+|          7 |     781 |      1086 |     544 |           1 | true        |
+|          8 |     782 |      1052 |     527 |           1 | true        |
+|          9 |     695 |      1064 |     533 |           1 | true        |
+|         10 |     806 |      1070 |     536 |           1 | true        |
 
 ### Dfs, No Bp, Max Value
-|   Instance |   Score |   Choices |   Fails |   Solutions |
-|-----------:|--------:|----------:|--------:|------------:|
-|          1 |     786 |       758 |     380 |           1 |
-|          2 |     733 |       756 |     379 |           1 |
-|          3 |     742 |       864 |     433 |           1 |
-|          4 |     820 |       752 |     377 |           1 |
-|          5 |     779 |       760 |     381 |           1 |
-|          6 |     694 |       782 |     392 |           1 |
-|          7 |     781 |       796 |     399 |           1 |
-|          8 |     782 |       792 |     397 |           1 |
-|          9 |     695 |       924 |     463 |           1 |
-|         10 |     806 |       744 |     373 |           1 |
+|   Instance |   Score |   Choices |   Fails |   Solutions | Completed   |
+|-----------:|--------:|----------:|--------:|------------:|:------------|
+|          1 |     786 |       758 |     380 |           1 | true        |
+|          2 |     733 |       756 |     379 |           1 | true        |
+|          3 |     742 |       864 |     433 |           1 | true        |
+|          4 |     820 |       752 |     377 |           1 | true        |
+|          5 |     779 |       760 |     381 |           1 | true        |
+|          6 |     694 |       782 |     392 |           1 | true        |
+|          7 |     781 |       796 |     399 |           1 | true        |
+|          8 |     782 |       792 |     397 |           1 | true        |
+|          9 |     695 |       924 |     463 |           1 | true        |
+|         10 |     806 |       744 |     373 |           1 | true        |
 
 ### Dfs, No Bp, Dom Wdeg
-|   Instance |   Score |   Choices |   Fails |   Solutions |
-|-----------:|--------:|----------:|--------:|------------:|
-|          1 |     786 |    616706 |  308354 |         696 |
-|          2 |     733 |    445442 |  222722 |         464 |
-|          3 |     742 |    560514 |  280258 |         625 |
-|          4 |     820 |    647522 |  323762 |         709 |
-|          5 |     779 |    629038 |  314520 |         680 |
-|          6 |     694 |    434574 |  217288 |         497 |
-|          7 |     781 |    627966 |  313984 |         684 |
-|          8 |     782 |    602862 |  301432 |         667 |
-|          9 |     695 |    460716 |  230359 |         526 |
-|         10 |     806 |    651818 |  325910 |         702 |
+|   Instance |   Score |   Choices |   Fails |   Solutions | Completed   |
+|-----------:|--------:|----------:|--------:|------------:|:------------|
+|          1 |     786 |    616706 |  308354 |         696 | true        |
+|          2 |     733 |    445442 |  222722 |         464 | true        |
+|          3 |     742 |    560514 |  280258 |         625 | true        |
+|          4 |     820 |    647522 |  323762 |         709 | true        |
+|          5 |     779 |    629038 |  314520 |         680 | true        |
+|          6 |     694 |    434574 |  217288 |         497 | true        |
+|          7 |     781 |    627966 |  313984 |         684 | true        |
+|          8 |     782 |    602862 |  301432 |         667 | true        |
+|          9 |     695 |    460716 |  230359 |         526 | true        |
+|         10 |     806 |    651818 |  325910 |         702 | true        |
 </code></pre>
 </div>
 <div class="cell-output cell-output-display">
@@ -500,7 +500,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Various effects for the other models : speed up, slow down, no effect… depending on the instance.</p>
 <p>Slow down is really surprising for <strong>sum_product-max_marginal_regret</strong> (no-oracle) as it supposedly only restricts the search space.</p>
 <p>Graphs : one color for each model, lighter and left is untruncated, darker and right is truncated.</p>
-<div id="68c3a566" class="cell" data-execution_count="5">
+<div id="4900b837" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>  models_truncated <span class="op">=</span> [</span>
@@ -534,63 +534,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div>
 <figure class="figure">
 <p><img src="latin-square_files/figure-html/cell-6-output-3.png" width="758" height="374" class="figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="evolution-of-solution-score" class="level1">
-<h1>Evolution of solution score</h1>
-<div id="564347b6" class="cell" data-execution_count="6">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>  models_failure <span class="op">=</span> [</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">'dfs-sum_product-max_marginal_regret'</span>,</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'dfs-sum_product-max_marginal_regret-oracle'</span>,</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'dfs-max_product-max_marginal_regret-oracle'</span>,</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  ]</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  plot.quality_graph(n<span class="op">=</span><span class="dv">30</span>, holes<span class="op">=</span><span class="dv">500</span>, models<span class="op">=</span>models_failure, instance_number<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  plot.quality_graph(n<span class="op">=</span><span class="dv">30</span>, holes<span class="op">=</span><span class="dv">500</span>, models<span class="op">=</span>models_failure, instance_number<span class="op">=</span><span class="dv">5</span>)</span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  plot.quality_graph(n<span class="op">=</span><span class="dv">30</span>, holes<span class="op">=</span><span class="dv">600</span>, models<span class="op">=</span>models_failure, instance_number<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  plot.quality_graph(n<span class="op">=</span><span class="dv">30</span>, holes<span class="op">=</span><span class="dv">700</span>, models<span class="op">=</span>models_failure, instance_number<span class="op">=</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stderr">
-<pre><code>No artists with labels found to put in legend.  Note that artists whose label start with an underscore are ignored when legend() is called with no argument.</code></pre>
-</div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="latin-square_files/figure-html/cell-7-output-2.png" width="674" height="376" class="figure-img"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>No artists with labels found to put in legend.  Note that artists whose label start with an underscore are ignored when legend() is called with no argument.</code></pre>
-</div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="latin-square_files/figure-html/cell-7-output-4.png" width="674" height="376" class="figure-img"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>No artists with labels found to put in legend.  Note that artists whose label start with an underscore are ignored when legend() is called with no argument.</code></pre>
-</div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="latin-square_files/figure-html/cell-7-output-6.png" width="674" height="376" class="figure-img"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>No artists with labels found to put in legend.  Note that artists whose label start with an underscore are ignored when legend() is called with no argument.</code></pre>
-</div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="latin-square_files/figure-html/cell-7-output-8.png" width="674" height="376" class="figure-img"></p>
 </figure>
 </div>
 </div>

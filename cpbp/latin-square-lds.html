@@ -117,7 +117,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><strong>max_value</strong> is fastest, on 600 and 700 holes.</p>
 <p>*max_product<strong> outperforms </strong>sum_product** on 600 and 700 holes. But it is slower on 500 holes.</p>
 <p><strong>max_product</strong> and <strong>max_value</strong> find the only one solution, the optimal one. Except : - One time out for <strong>max_product</strong> - Two solutions for <strong>max_value</strong> for 500 holes instance 5 (see table)</p>
-<div id="73935f20" class="cell" data-execution_count="1">
+<div id="b0d241b2" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plot</span>
@@ -153,7 +153,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="holes" class="level2">
 <h2 class="anchored" data-anchor-id="holes">500 Holes</h2>
 <p>Same metrics on every graph, the slowest models are removed to change scale and make the graph more readable.</p>
-<div id="4775e2a1" class="cell" data-execution_count="2">
+<div id="f20ba361" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>  plot.hole_tables(n<span class="op">=</span><span class="dv">30</span>, holes<span class="op">=</span><span class="dv">500</span>, models<span class="op">=</span>models, instance_numbers<span class="op">=</span>instance_numbers)</span>
@@ -163,88 +163,88 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>### Lds, Sum Product, Max Marginal Regret
-|   Instance |   Score |   Choices |   Fails |   Solutions |
-|-----------:|--------:|----------:|--------:|------------:|
-|          1 |     555 |     29586 |     543 |          21 |
-|          2 |     712 |     37087 |     782 |          42 |
-|          3 |     582 |     37179 |     949 |          41 |
-|          4 |     691 |     35479 |    1396 |          41 |
-|          5 |     754 |     49739 |    1404 |          53 |
-|          6 |     672 |     37675 |    1090 |          41 |
-|          7 |     603 |     36201 |    1171 |          22 |
-|          8 |     696 |     42346 |    1400 |          48 |
-|          9 |     700 |     54804 |    1755 |          19 |
-|         10 |     711 |     65635 |    1796 |          26 |
+|   Instance |   Score |   Choices |   Fails |   Solutions | Completed   |
+|-----------:|--------:|----------:|--------:|------------:|:------------|
+|          1 |     555 |     29586 |     543 |          21 | true        |
+|          2 |     712 |     37087 |     782 |          42 | true        |
+|          3 |     582 |     37179 |     949 |          41 | true        |
+|          4 |     691 |     35479 |    1396 |          41 | true        |
+|          5 |     754 |     49739 |    1404 |          53 | true        |
+|          6 |     672 |     37675 |    1090 |          41 | true        |
+|          7 |     603 |     36201 |    1171 |          22 | true        |
+|          8 |     696 |     42346 |    1400 |          48 | true        |
+|          9 |     700 |     54804 |    1755 |          19 | true        |
+|         10 |     711 |     65635 |    1796 |          26 | true        |
 
 ### Lds, Sum Product, Max Marginal Regret, Oracle
-|   Instance |   Score |   Choices |   Fails |   Solutions |
-|-----------:|--------:|----------:|--------:|------------:|
-|          1 |     555 |     29588 |     533 |          18 |
-|          2 |     712 |     37563 |     864 |          32 |
-|          3 |     582 |     35824 |    1063 |          37 |
-|          4 |     691 |     35489 |    1396 |          42 |
-|          5 |     754 |     57323 |    1403 |          57 |
-|          6 |     672 |     38076 |    1090 |          37 |
-|          7 |     603 |     34601 |     855 |          17 |
-|          8 |     696 |     44162 |    1800 |          57 |
-|          9 |     700 |     71233 |    2103 |          26 |
-|         10 |     711 |     65371 |    1809 |          30 |
+|   Instance |   Score |   Choices |   Fails |   Solutions | Completed   |
+|-----------:|--------:|----------:|--------:|------------:|:------------|
+|          1 |     555 |     29588 |     533 |          18 | true        |
+|          2 |     712 |     37563 |     864 |          32 | true        |
+|          3 |     582 |     35824 |    1063 |          37 | true        |
+|          4 |     691 |     35489 |    1396 |          42 | true        |
+|          5 |     754 |     57323 |    1403 |          57 | true        |
+|          6 |     672 |     38076 |    1090 |          37 | true        |
+|          7 |     603 |     34601 |     855 |          17 | true        |
+|          8 |     696 |     44162 |    1800 |          57 | true        |
+|          9 |     700 |     71233 |    2103 |          26 | true        |
+|         10 |     711 |     65371 |    1809 |          30 | true        |
 
+Error while parsing logs/latin-square/latin-square30-holes500-9-diagonal-lds-max_product-max_marginal_regret-oracle.out: list index out of range
 ### Lds, Max Product, Max Marginal Regret, Oracle
-|   Instance | Score     | Choices   | Fails   | Solutions   |
-|-----------:|:----------|:----------|:--------|:------------|
-|          1 | 555       | 25618     | 972     | 1           |
-|          2 | 712       | 2191      | 218     | 1           |
-|          3 | 582       | 21357     | 725     | 1           |
-|          4 | 691       | 32945     | 1236    | 1           |
-|          5 | 754       | 20499     | 427     | 1           |
-|          6 | 672       | 19550     | 503     | 1           |
-|          7 | 603       | 22055     | 843     | 1           |
-|          8 | 696       | 6185      | 221     | 1           |
-|          9 | Timed out | N/A       | N/A     | N/A         |
-|         10 | 711       | 18894     | 427     | 1           |
+|   Instance |   Score |   Choices |   Fails |   Solutions | Completed   |
+|-----------:|--------:|----------:|--------:|------------:|:------------|
+|          1 |     555 |     25618 |     972 |           1 | true        |
+|          2 |     712 |      2191 |     218 |           1 | true        |
+|          3 |     582 |     21357 |     725 |           1 | true        |
+|          4 |     691 |     32945 |    1236 |           1 | true        |
+|          5 |     754 |     20499 |     427 |           1 | true        |
+|          6 |     672 |     19550 |     503 |           1 | true        |
+|          7 |     603 |     22055 |     843 |           1 | true        |
+|          8 |     696 |      6185 |     221 |           1 | true        |
+|         10 |     711 |     18894 |     427 |           1 | true        |
 
 ### Lds, Max Product, Dom Wdeg Max Marginal, Oracle
-|   Instance |   Score |   Choices |   Fails |   Solutions |
-|-----------:|--------:|----------:|--------:|------------:|
-|          1 |     555 |      8057 |     643 |           6 |
-|          2 |     712 |     30157 |     507 |           5 |
-|          3 |     582 |     49836 |    1432 |          11 |
-|          4 |     691 |     43134 |    1336 |          14 |
-|          5 |     754 |     25519 |     522 |           8 |
-|          6 |     672 |     38958 |     768 |           9 |
-|          7 |     603 |     43680 |    1409 |          10 |
-|          8 |     696 |     43391 |    1097 |          13 |
-|          9 |     700 |     16889 |     565 |           9 |
-|         10 |     711 |     47694 |    1715 |          19 |
+|   Instance |   Score |   Choices |   Fails |   Solutions | Completed   |
+|-----------:|--------:|----------:|--------:|------------:|:------------|
+|          1 |     555 |      8057 |     643 |           6 | true        |
+|          2 |     712 |     30157 |     507 |           5 | true        |
+|          3 |     582 |     49836 |    1432 |          11 | true        |
+|          4 |     691 |     43134 |    1336 |          14 | true        |
+|          5 |     754 |     25519 |     522 |           8 | true        |
+|          6 |     672 |     38958 |     768 |           9 | true        |
+|          7 |     603 |     43680 |    1409 |          10 | true        |
+|          8 |     696 |     43391 |    1097 |          13 | true        |
+|          9 |     700 |     16889 |     565 |           9 | true        |
+|         10 |     711 |     47694 |    1715 |          19 | true        |
 
 ### Lds, No Bp, Max Value
-|   Instance |   Score |   Choices |   Fails |   Solutions |
-|-----------:|--------:|----------:|--------:|------------:|
-|          1 |     555 |       376 |     199 |           1 |
-|          2 |     712 |       445 |     202 |           1 |
-|          3 |     582 |    466527 |    9747 |           1 |
-|          4 |     691 |       755 |     181 |           1 |
-|          5 |     754 |     44535 |    1828 |           2 |
-|          6 |     672 |      1482 |     187 |           1 |
-|          7 |     603 |    130947 |    4068 |           1 |
-|          8 |     696 |     19093 |     677 |           1 |
-|          9 |     700 |    999699 |   21324 |           1 |
-|         10 |     711 |    110076 |    3640 |           1 |
+|   Instance |   Score |   Choices |   Fails |   Solutions | Completed   |
+|-----------:|--------:|----------:|--------:|------------:|:------------|
+|          1 |     555 |       376 |     199 |           1 | true        |
+|          2 |     712 |       445 |     202 |           1 | true        |
+|          3 |     582 |    466527 |    9747 |           1 | true        |
+|          4 |     691 |       755 |     181 |           1 | true        |
+|          5 |     754 |     44535 |    1828 |           2 | true        |
+|          6 |     672 |      1482 |     187 |           1 | true        |
+|          7 |     603 |    130947 |    4068 |           1 | true        |
+|          8 |     696 |     19093 |     677 |           1 | true        |
+|          9 |     700 |    999699 |   21324 |           1 | true        |
+|         10 |     711 |    110076 |    3640 |           1 | true        |
 
 ### Lds, No Bp, Dom Wdeg
-|   Instance |   Score |   Choices |   Fails |   Solutions |
-|-----------:|--------:|----------:|--------:|------------:|
-|          1 |     555 |    762688 |   34938 |         210 |
-|          2 |     712 |   1402737 |   43300 |         234 |
-|          3 |     582 |   1270264 |   36632 |         233 |
-|          4 |     691 |    830275 |   23709 |         196 |
-|          5 |     754 |   1081766 |   28162 |         220 |
-|          6 |     672 |   1683446 |   46670 |         261 |
-|          7 |     603 |    789138 |   26951 |         175 |
-|          8 |     696 |   1361955 |   47368 |         295 |
-|          9 |     700 |    759105 |   26365 |         234 |
-|         10 |     711 |   1713578 |   51638 |         285 |
+|   Instance |   Score |   Choices |   Fails |   Solutions | Completed   |
+|-----------:|--------:|----------:|--------:|------------:|:------------|
+|          1 |     555 |    762688 |   34938 |         210 | true        |
+|          2 |     712 |   1402737 |   43300 |         234 | true        |
+|          3 |     582 |   1270264 |   36632 |         233 | true        |
+|          4 |     691 |    830275 |   23709 |         196 | true        |
+|          5 |     754 |   1081766 |   28162 |         220 | true        |
+|          6 |     672 |   1683446 |   46670 |         261 | true        |
+|          7 |     603 |    789138 |   26951 |         175 | true        |
+|          8 |     696 |   1361955 |   47368 |         295 | true        |
+|          9 |     700 |    759105 |   26365 |         234 | true        |
+|         10 |     711 |   1713578 |   51638 |         285 | true        |
 </code></pre>
 </div>
 <div class="cell-output cell-output-display">
@@ -272,7 +272,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="holes-1" class="level2">
 <h2 class="anchored" data-anchor-id="holes-1">600 Holes</h2>
-<div id="a98d1d4e" class="cell" data-execution_count="3">
+<div id="6eddfc60" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>  plot.hole_tables(n<span class="op">=</span><span class="dv">30</span>, holes<span class="op">=</span><span class="dv">600</span>, models<span class="op">=</span>models, instance_numbers<span class="op">=</span>instance_numbers)</span>
@@ -281,88 +281,88 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>### Lds, Sum Product, Max Marginal Regret
-|   Instance |   Score |   Choices |   Fails |   Solutions |
-|-----------:|--------:|----------:|--------:|------------:|
-|          1 |     633 |     36855 |     774 |          45 |
-|          2 |     685 |     47492 |     970 |          88 |
-|          3 |     759 |     67499 |     768 |          85 |
-|          4 |     775 |     70657 |    2959 |         106 |
-|          5 |     711 |     66939 |     760 |         120 |
-|          6 |     740 |     37321 |     418 |          81 |
-|          7 |     725 |     55352 |    1235 |          94 |
-|          8 |     690 |     36784 |     403 |          76 |
-|          9 |     738 |     42483 |     401 |          88 |
-|         10 |     674 |     29928 |    1900 |          64 |
+|   Instance |   Score |   Choices |   Fails |   Solutions | Completed   |
+|-----------:|--------:|----------:|--------:|------------:|:------------|
+|          1 |     633 |     36855 |     774 |          45 | true        |
+|          2 |     685 |     47492 |     970 |          88 | true        |
+|          3 |     759 |     67499 |     768 |          85 | true        |
+|          4 |     775 |     70657 |    2959 |         106 | true        |
+|          5 |     711 |     66939 |     760 |         120 | true        |
+|          6 |     740 |     37321 |     418 |          81 | true        |
+|          7 |     725 |     55352 |    1235 |          94 | true        |
+|          8 |     690 |     36784 |     403 |          76 | true        |
+|          9 |     738 |     42483 |     401 |          88 | true        |
+|         10 |     674 |     29928 |    1900 |          64 | true        |
 
 ### Lds, Sum Product, Max Marginal Regret, Oracle
-|   Instance |   Score |   Choices |   Fails |   Solutions |
-|-----------:|--------:|----------:|--------:|------------:|
-|          1 |     633 |     36612 |     753 |          50 |
-|          2 |     685 |     32600 |     384 |          66 |
-|          3 |     759 |     51165 |     758 |          64 |
-|          4 |     775 |     77147 |    3339 |         119 |
-|          5 |     711 |     63582 |     758 |         123 |
-|          6 |     740 |     52829 |     405 |          78 |
-|          7 |     725 |     45863 |    1367 |          67 |
-|          8 |     690 |     40922 |    1227 |          77 |
-|          9 |     738 |     35536 |     397 |          86 |
-|         10 |     674 |     28477 |    1222 |          61 |
+|   Instance |   Score |   Choices |   Fails |   Solutions | Completed   |
+|-----------:|--------:|----------:|--------:|------------:|:------------|
+|          1 |     633 |     36612 |     753 |          50 | true        |
+|          2 |     685 |     32600 |     384 |          66 | true        |
+|          3 |     759 |     51165 |     758 |          64 | true        |
+|          4 |     775 |     77147 |    3339 |         119 | true        |
+|          5 |     711 |     63582 |     758 |         123 | true        |
+|          6 |     740 |     52829 |     405 |          78 | true        |
+|          7 |     725 |     45863 |    1367 |          67 | true        |
+|          8 |     690 |     40922 |    1227 |          77 | true        |
+|          9 |     738 |     35536 |     397 |          86 | true        |
+|         10 |     674 |     28477 |    1222 |          61 | true        |
 
 ### Lds, Max Product, Max Marginal Regret, Oracle
-|   Instance |   Score |   Choices |   Fails |   Solutions |
-|-----------:|--------:|----------:|--------:|------------:|
-|          1 |     633 |       604 |     315 |           1 |
-|          2 |     685 |      1131 |     335 |           1 |
-|          3 |     759 |       651 |     331 |           1 |
-|          4 |     775 |       621 |     318 |           1 |
-|          5 |     711 |       604 |     314 |           1 |
-|          6 |     740 |       756 |     316 |           1 |
-|          7 |     725 |       653 |     315 |           1 |
-|          8 |     690 |       878 |     315 |           1 |
-|          9 |     738 |      2087 |     316 |           1 |
-|         10 |     674 |       636 |     319 |           1 |
+|   Instance |   Score |   Choices |   Fails |   Solutions | Completed   |
+|-----------:|--------:|----------:|--------:|------------:|:------------|
+|          1 |     633 |       604 |     315 |           1 | true        |
+|          2 |     685 |      1131 |     335 |           1 | true        |
+|          3 |     759 |       651 |     331 |           1 | true        |
+|          4 |     775 |       621 |     318 |           1 | true        |
+|          5 |     711 |       604 |     314 |           1 | true        |
+|          6 |     740 |       756 |     316 |           1 | true        |
+|          7 |     725 |       653 |     315 |           1 | true        |
+|          8 |     690 |       878 |     315 |           1 | true        |
+|          9 |     738 |      2087 |     316 |           1 | true        |
+|         10 |     674 |       636 |     319 |           1 | true        |
 
 ### Lds, Max Product, Dom Wdeg Max Marginal, Oracle
-|   Instance |   Score |   Choices |   Fails |   Solutions |
-|-----------:|--------:|----------:|--------:|------------:|
-|          1 |     633 |      6014 |     419 |          10 |
-|          2 |     685 |      4777 |     799 |           4 |
-|          3 |     759 |      8140 |     430 |           9 |
-|          4 |     775 |      3103 |     422 |           5 |
-|          5 |     711 |      4895 |     454 |           5 |
-|          6 |     740 |      5369 |     428 |          11 |
-|          7 |     725 |      3510 |     437 |           7 |
-|          8 |     690 |      2479 |     429 |           8 |
-|          9 |     738 |      6237 |     423 |           4 |
-|         10 |     674 |       837 |     429 |           1 |
+|   Instance |   Score |   Choices |   Fails |   Solutions | Completed   |
+|-----------:|--------:|----------:|--------:|------------:|:------------|
+|          1 |     633 |      6014 |     419 |          10 | true        |
+|          2 |     685 |      4777 |     799 |           4 | true        |
+|          3 |     759 |      8140 |     430 |           9 | true        |
+|          4 |     775 |      3103 |     422 |           5 | true        |
+|          5 |     711 |      4895 |     454 |           5 | true        |
+|          6 |     740 |      5369 |     428 |          11 | true        |
+|          7 |     725 |      3510 |     437 |           7 | true        |
+|          8 |     690 |      2479 |     429 |           8 | true        |
+|          9 |     738 |      6237 |     423 |           4 | true        |
+|         10 |     674 |       837 |     429 |           1 | true        |
 
 ### Lds, No Bp, Max Value
-|   Instance |   Score |   Choices |   Fails |   Solutions |
-|-----------:|--------:|----------:|--------:|------------:|
-|          1 |     633 |      1593 |     298 |           1 |
-|          2 |     685 |       586 |     306 |           1 |
-|          3 |     759 |       576 |     299 |           1 |
-|          4 |     775 |      1647 |     293 |           1 |
-|          5 |     711 |      1670 |     298 |           1 |
-|          6 |     740 |       580 |     297 |           1 |
-|          7 |     725 |       565 |     292 |           1 |
-|          8 |     690 |       638 |     293 |           1 |
-|          9 |     738 |       586 |     303 |           1 |
-|         10 |     674 |       541 |     274 |           1 |
+|   Instance |   Score |   Choices |   Fails |   Solutions | Completed   |
+|-----------:|--------:|----------:|--------:|------------:|:------------|
+|          1 |     633 |      1593 |     298 |           1 | true        |
+|          2 |     685 |       586 |     306 |           1 | true        |
+|          3 |     759 |       576 |     299 |           1 | true        |
+|          4 |     775 |      1647 |     293 |           1 | true        |
+|          5 |     711 |      1670 |     298 |           1 | true        |
+|          6 |     740 |       580 |     297 |           1 | true        |
+|          7 |     725 |       565 |     292 |           1 | true        |
+|          8 |     690 |       638 |     293 |           1 | true        |
+|          9 |     738 |       586 |     303 |           1 | true        |
+|         10 |     674 |       541 |     274 |           1 | true        |
 
 ### Lds, No Bp, Dom Wdeg
-|   Instance |   Score |   Choices |   Fails |   Solutions |
-|-----------:|--------:|----------:|--------:|------------:|
-|          1 |     633 |    174120 |   34829 |         229 |
-|          2 |     685 |    246483 |   34427 |         284 |
-|          3 |     759 |    269515 |   42748 |         323 |
-|          4 |     775 |    277433 |   51257 |         393 |
-|          5 |     711 |    417205 |   56158 |         399 |
-|          6 |     740 |    209599 |   34105 |         275 |
-|          7 |     725 |    404851 |   55180 |         395 |
-|          8 |     690 |    276336 |   44913 |         357 |
-|          9 |     738 |    279926 |   40061 |         296 |
-|         10 |     674 |    263124 |   30149 |         258 |
+|   Instance |   Score |   Choices |   Fails |   Solutions | Completed   |
+|-----------:|--------:|----------:|--------:|------------:|:------------|
+|          1 |     633 |    174120 |   34829 |         229 | true        |
+|          2 |     685 |    246483 |   34427 |         284 | true        |
+|          3 |     759 |    269515 |   42748 |         323 | true        |
+|          4 |     775 |    277433 |   51257 |         393 | true        |
+|          5 |     711 |    417205 |   56158 |         399 | true        |
+|          6 |     740 |    209599 |   34105 |         275 | true        |
+|          7 |     725 |    404851 |   55180 |         395 | true        |
+|          8 |     690 |    276336 |   44913 |         357 | true        |
+|          9 |     738 |    279926 |   40061 |         296 | true        |
+|         10 |     674 |    263124 |   30149 |         258 | true        |
 </code></pre>
 </div>
 <div class="cell-output cell-output-display">
@@ -383,7 +383,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="holes-2" class="level2">
 <h2 class="anchored" data-anchor-id="holes-2">700 Holes</h2>
-<div id="af432d21" class="cell" data-execution_count="4">
+<div id="8fc67052" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>  plot.hole_tables(n<span class="op">=</span><span class="dv">30</span>, holes<span class="op">=</span><span class="dv">700</span>, models<span class="op">=</span>models, instance_numbers<span class="op">=</span>instance_numbers)</span>
@@ -392,88 +392,88 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>### Lds, Sum Product, Max Marginal Regret
-|   Instance |   Score |   Choices |   Fails |   Solutions |
-|-----------:|--------:|----------:|--------:|------------:|
-|          1 |     786 |     65634 |     990 |         147 |
-|          2 |     733 |     50028 |     525 |         104 |
-|          3 |     742 |    112804 |    4269 |         189 |
-|          4 |     820 |     57318 |     977 |         153 |
-|          5 |     779 |     85142 |    3299 |         151 |
-|          6 |     694 |     39562 |     988 |          97 |
-|          7 |     781 |    105894 |    1456 |         166 |
-|          8 |     782 |    108030 |    6968 |         185 |
-|          9 |     695 |     73294 |     999 |         146 |
-|         10 |     806 |     74811 |     976 |         135 |
+|   Instance |   Score |   Choices |   Fails |   Solutions | Completed   |
+|-----------:|--------:|----------:|--------:|------------:|:------------|
+|          1 |     786 |     65634 |     990 |         147 | true        |
+|          2 |     733 |     50028 |     525 |         104 | true        |
+|          3 |     742 |    112804 |    4269 |         189 | true        |
+|          4 |     820 |     57318 |     977 |         153 | true        |
+|          5 |     779 |     85142 |    3299 |         151 | true        |
+|          6 |     694 |     39562 |     988 |          97 | true        |
+|          7 |     781 |    105894 |    1456 |         166 | true        |
+|          8 |     782 |    108030 |    6968 |         185 | true        |
+|          9 |     695 |     73294 |     999 |         146 | true        |
+|         10 |     806 |     74811 |     976 |         135 | true        |
 
 ### Lds, Sum Product, Max Marginal Regret, Oracle
-|   Instance |   Score |   Choices |   Fails |   Solutions |
-|-----------:|--------:|----------:|--------:|------------:|
-|          1 |     786 |     69060 |     991 |         146 |
-|          2 |     733 |     38793 |     519 |          96 |
-|          3 |     742 |     70460 |     987 |         108 |
-|          4 |     820 |     46358 |     978 |         133 |
-|          5 |     779 |     59584 |     527 |         122 |
-|          6 |     694 |     36076 |     970 |          80 |
-|          7 |     781 |     79219 |    2033 |         146 |
-|          8 |     782 |     64482 |    1569 |         110 |
-|          9 |     695 |     57162 |     976 |         138 |
-|         10 |     806 |     72634 |     976 |         140 |
+|   Instance |   Score |   Choices |   Fails |   Solutions | Completed   |
+|-----------:|--------:|----------:|--------:|------------:|:------------|
+|          1 |     786 |     69060 |     991 |         146 | true        |
+|          2 |     733 |     38793 |     519 |          96 | true        |
+|          3 |     742 |     70460 |     987 |         108 | true        |
+|          4 |     820 |     46358 |     978 |         133 | true        |
+|          5 |     779 |     59584 |     527 |         122 | true        |
+|          6 |     694 |     36076 |     970 |          80 | true        |
+|          7 |     781 |     79219 |    2033 |         146 | true        |
+|          8 |     782 |     64482 |    1569 |         110 | true        |
+|          9 |     695 |     57162 |     976 |         138 | true        |
+|         10 |     806 |     72634 |     976 |         140 | true        |
 
 ### Lds, Max Product, Max Marginal Regret, Oracle
-|   Instance |   Score |   Choices |   Fails |   Solutions |
-|-----------:|--------:|----------:|--------:|------------:|
-|          1 |     786 |       826 |     424 |           1 |
-|          2 |     733 |       832 |     430 |           1 |
-|          3 |     742 |       827 |     425 |           1 |
-|          4 |     820 |       866 |     428 |           1 |
-|          5 |     779 |       821 |     409 |           1 |
-|          6 |     694 |       846 |     437 |           1 |
-|          7 |     781 |       870 |     441 |           1 |
-|          8 |     782 |       859 |     439 |           1 |
-|          9 |     695 |       824 |     421 |           1 |
-|         10 |     806 |       867 |     433 |           1 |
+|   Instance |   Score |   Choices |   Fails |   Solutions | Completed   |
+|-----------:|--------:|----------:|--------:|------------:|:------------|
+|          1 |     786 |       826 |     424 |           1 | true        |
+|          2 |     733 |       832 |     430 |           1 | true        |
+|          3 |     742 |       827 |     425 |           1 | true        |
+|          4 |     820 |       866 |     428 |           1 | true        |
+|          5 |     779 |       821 |     409 |           1 | true        |
+|          6 |     694 |       846 |     437 |           1 | true        |
+|          7 |     781 |       870 |     441 |           1 | true        |
+|          8 |     782 |       859 |     439 |           1 | true        |
+|          9 |     695 |       824 |     421 |           1 | true        |
+|         10 |     806 |       867 |     433 |           1 | true        |
 
 ### Lds, Max Product, Dom Wdeg Max Marginal, Oracle
-|   Instance |   Score |   Choices |   Fails |   Solutions |
-|-----------:|--------:|----------:|--------:|------------:|
-|          1 |     786 |      1074 |     551 |           1 |
-|          2 |     733 |      1088 |     553 |           1 |
-|          3 |     742 |      1081 |     551 |           1 |
-|          4 |     820 |      1080 |     553 |           1 |
-|          5 |     779 |      1120 |     570 |           1 |
-|          6 |     694 |      1065 |     539 |           1 |
-|          7 |     781 |      1108 |     554 |           1 |
-|          8 |     782 |      1078 |     553 |           1 |
-|          9 |     695 |      1090 |     559 |           1 |
-|         10 |     806 |      1085 |     553 |           1 |
+|   Instance |   Score |   Choices |   Fails |   Solutions | Completed   |
+|-----------:|--------:|----------:|--------:|------------:|:------------|
+|          1 |     786 |      1074 |     551 |           1 | true        |
+|          2 |     733 |      1088 |     553 |           1 | true        |
+|          3 |     742 |      1081 |     551 |           1 | true        |
+|          4 |     820 |      1080 |     553 |           1 | true        |
+|          5 |     779 |      1120 |     570 |           1 | true        |
+|          6 |     694 |      1065 |     539 |           1 | true        |
+|          7 |     781 |      1108 |     554 |           1 | true        |
+|          8 |     782 |      1078 |     553 |           1 | true        |
+|          9 |     695 |      1090 |     559 |           1 | true        |
+|         10 |     806 |      1085 |     553 |           1 | true        |
 
 ### Lds, No Bp, Max Value
-|   Instance |   Score |   Choices |   Fails |   Solutions |
-|-----------:|--------:|----------:|--------:|------------:|
-|          1 |     786 |       784 |     406 |           1 |
-|          2 |     733 |       793 |     358 |           1 |
-|          3 |     742 |       847 |     430 |           1 |
-|          4 |     820 |       778 |     403 |           1 |
-|          5 |     779 |       792 |     403 |           1 |
-|          6 |     694 |       808 |     418 |           1 |
-|          7 |     781 |       822 |     425 |           1 |
-|          8 |     782 |      1059 |     397 |           1 |
-|          9 |     695 |       838 |     412 |           1 |
-|         10 |     806 |       770 |     399 |           1 |
+|   Instance |   Score |   Choices |   Fails |   Solutions | Completed   |
+|-----------:|--------:|----------:|--------:|------------:|:------------|
+|          1 |     786 |       784 |     406 |           1 | true        |
+|          2 |     733 |       793 |     358 |           1 | true        |
+|          3 |     742 |       847 |     430 |           1 | true        |
+|          4 |     820 |       778 |     403 |           1 | true        |
+|          5 |     779 |       792 |     403 |           1 | true        |
+|          6 |     694 |       808 |     418 |           1 | true        |
+|          7 |     781 |       822 |     425 |           1 | true        |
+|          8 |     782 |      1059 |     397 |           1 | true        |
+|          9 |     695 |       838 |     412 |           1 | true        |
+|         10 |     806 |       770 |     399 |           1 | true        |
 
 ### Lds, No Bp, Dom Wdeg
-|   Instance |   Score |   Choices |   Fails |   Solutions |
-|-----------:|--------:|----------:|--------:|------------:|
-|          1 |     786 |    437417 |   79982 |         589 |
-|          2 |     733 |    281407 |   35584 |         381 |
-|          3 |     742 |    401914 |   58986 |         515 |
-|          4 |     820 |    415311 |   72972 |         576 |
-|          5 |     779 |    336892 |   74666 |         501 |
-|          6 |     694 |    348308 |   27542 |         445 |
-|          7 |     781 |    404805 |   72854 |         590 |
-|          8 |     782 |    349308 |   89943 |         524 |
-|          9 |     695 |    383097 |   63669 |         479 |
-|         10 |     806 |    373225 |   76624 |         599 |
+|   Instance |   Score |   Choices |   Fails |   Solutions | Completed   |
+|-----------:|--------:|----------:|--------:|------------:|:------------|
+|          1 |     786 |    437417 |   79982 |         589 | true        |
+|          2 |     733 |    281407 |   35584 |         381 | true        |
+|          3 |     742 |    401914 |   58986 |         515 | true        |
+|          4 |     820 |    415311 |   72972 |         576 | true        |
+|          5 |     779 |    336892 |   74666 |         501 | true        |
+|          6 |     694 |    348308 |   27542 |         445 | true        |
+|          7 |     781 |    404805 |   72854 |         590 | true        |
+|          8 |     782 |    349308 |   89943 |         524 | true        |
+|          9 |     695 |    383097 |   63669 |         479 | true        |
+|         10 |     806 |    373225 |   76624 |         599 | true        |
 </code></pre>
 </div>
 <div class="cell-output cell-output-display">
@@ -501,7 +501,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Various effects for the other models : speed up, slow down, no effect… depending on the instance.</p>
 <p>Slow down is really surprising for <strong>sum_product-max_marginal_regret</strong> (no-oracle) as it supposedly only restricts the search space.</p>
 <p>Graphs : one color for each model, lighter and left is untruncated, darker and right is truncated.</p>
-<div id="544a2f1d" class="cell" data-execution_count="5">
+<div id="130675e9" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>  models_truncated <span class="op">=</span> [</span>
@@ -543,7 +543,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="evolution-of-solution-score" class="level1">
 <h1>Evolution of solution score</h1>
 <p>Not available yet for LDS.</p>
-<div id="57ba1db8" class="cell" data-execution_count="6">
+<div id="8a91b5a3" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>  models_failure <span class="op">=</span> [</span>

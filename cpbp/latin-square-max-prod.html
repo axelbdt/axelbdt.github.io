@@ -113,7 +113,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Domwdeg seems more robust overall, especially if an optimality proof is required. Max-marginal-regret might be useful to find one good solution solution fast, and no optimality proof.</p>
 <section id="plots" class="level2">
 <h2 class="anchored" data-anchor-id="plots">Plots</h2>
-<div id="2ab4c844" class="cell" data-execution_count="1">
+<div id="8a8f99d0" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plot</span>
@@ -128,7 +128,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <section id="holes" class="level4">
 <h4 class="anchored" data-anchor-id="holes">200 Holes</h4>
-<div id="cda1621b" class="cell" data-execution_count="2">
+<div id="527e80f3" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>  plot.hole_tables(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">200</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>all_instances, objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>)</span>
@@ -141,16 +141,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>### Lds, Max Product, Max Marginal Regret, Oracle
 |   i |   fs Sc |   fs #f |   ls Sc |   ls #f |   #fail |   #sols | comp.   |
 |----:|--------:|--------:|--------:|--------:|--------:|--------:|:--------|
-|   1 |     212 |      21 |     229 |     419 |   23180 |       4 | true    |
-|   2 |     277 |      17 |     284 |     245 |     513 |       5 | true    |
-|   3 |     229 |      27 |     241 |     178 |     298 |       3 | true    |
-|   4 |     230 |       1 |     247 |      22 |     282 |       2 | true    |
-|   5 |     236 |      12 |     244 |     295 |     441 |       7 | true    |
-|   6 |     221 |      24 |     232 |      42 |     333 |       3 | true    |
-|   7 |     247 |      15 |     250 |      73 |     165 |       3 | true    |
-|   8 |     249 |      38 |     252 |      82 |     133 |       2 | true    |
-|   9 |     217 |     194 |     222 |    4798 |    5068 |       4 | true    |
-|  10 |     214 |      22 |     220 |     160 |     412 |       5 | true    |
+|   1 |     222 |      14 |     229 |      32 |     147 |       2 | true    |
+|   2 |     276 |      56 |     284 |     153 |     229 |       2 | true    |
+|   3 |     235 |     103 |     241 |     290 |     344 |       4 | true    |
+|   4 |     245 |       0 |     247 |      85 |     188 |       3 | true    |
+|   5 |     244 |      11 |     244 |      11 |     110 |       1 | true    |
+|   6 |     228 |       8 |     232 |      93 |     211 |       3 | true    |
+|   7 |     244 |       0 |     250 |      41 |     111 |       3 | true    |
+|   8 |     252 |       0 |     252 |       0 |      50 |       1 | true    |
+|   9 |     220 |      44 |     222 |     305 |     457 |       2 | true    |
+|  10 |     220 |       5 |     220 |       5 |     304 |       1 | true    |
 
 ### Lds, Max Product, Dom Wdeg Max Marginal, Oracle
 |   i |   fs Sc |   fs #f |   ls Sc |   ls #f |   #fail |   #sols | comp.   |
@@ -199,7 +199,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="holes-1" class="level4">
 <h4 class="anchored" data-anchor-id="holes-1">250 Holes</h4>
-<div id="a4b2a790" class="cell" data-execution_count="3">
+<div id="65e7fc3c" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>  plot.hole_tables(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">250</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>all_instances, objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>)</span>
@@ -212,16 +212,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>### Lds, Max Product, Max Marginal Regret, Oracle
 |   i |   fs Sc |   fs #f |   ls Sc |   ls #f |   #fail |   #sols | comp.   |
 |----:|--------:|--------:|--------:|--------:|--------:|--------:|:--------|
-|   1 |     268 |       3 |     272 |     200 |    3812 |       3 | true    |
-|   2 |     261 |       0 |     266 |     238 | 3080754 |       4 | false   |
-|   3 |     219 |       4 |     224 |     172 |   13502 |       3 | true    |
-|   4 |     267 |       8 |     275 |     183 |    2522 |       5 | true    |
-|   5 |     259 |      12 |     267 |     110 |    3566 |       5 | true    |
-|   6 |     266 |       0 |     266 |       0 |     375 |       1 | true    |
-|   7 |     263 |       9 |     265 |    1810 |   12912 |       3 | true    |
-|   8 |     280 |       0 |     286 |      82 |    1327 |       2 | true    |
-|   9 |     230 |       1 |     241 |     100 |     963 |       5 | true    |
-|  10 |     264 |      16 |     270 |     400 |     898 |       7 | true    |
+|   1 |     272 |      10 |     272 |      10 |     440 |       1 | true    |
+|   2 |     265 |       0 |     266 |      90 |   32940 |       2 | true    |
+|   3 |     221 |       0 |     224 |     222 |    1596 |       3 | true    |
+|   4 |     275 |       0 |     275 |       0 |     322 |       1 | true    |
+|   5 |     267 |       1 |     267 |       1 |     282 |       1 | true    |
+|   6 |     265 |       0 |     266 |      79 |     170 |       2 | true    |
+|   7 |     263 |       3 |     265 |     182 |     583 |       3 | true    |
+|   8 |     286 |       1 |     286 |       1 |     274 |       1 | true    |
+|   9 |     236 |       2 |     241 |      95 |     636 |       2 | true    |
+|  10 |     267 |       0 |     270 |     299 |     530 |       4 | true    |
 
 ### Lds, Max Product, Dom Wdeg Max Marginal, Oracle
 |   i |   fs Sc |   fs #f |   ls Sc |   ls #f |   #fail |   #sols | comp.   |
@@ -270,7 +270,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="holes-2" class="level4">
 <h4 class="anchored" data-anchor-id="holes-2">300 Holes</h4>
-<div id="3461a3a7" class="cell" data-execution_count="4">
+<div id="764326b1" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>  plot.hole_tables(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">300</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>all_instances, objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>)</span>
@@ -281,18 +281,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>### Lds, Max Product, Max Marginal Regret, Oracle
-|   i |   fs Sc |   fs #f |   ls Sc |   ls #f |   #fail |   #sols | comp.   |
-|----:|--------:|--------:|--------:|--------:|--------:|--------:|:--------|
-|   1 |     300 |       0 |     305 |     151 |  324172 |       5 | false   |
-|   2 |     316 |       0 |     322 |     464 | 6201274 |       4 | false   |
-|   3 |     306 |       2 |     308 |     613 |   23331 |       3 | true    |
-|   4 |     290 |       3 |     302 |     337 |   39854 |       6 | true    |
-|   5 |     272 |       0 |     272 |       0 |   22939 |       1 | true    |
-|   6 |     272 |       0 |     282 |    1183 |  163587 |       7 | true    |
-|   7 |     276 |       0 |     277 |     203 |   93292 |       2 | true    |
-|   8 |     284 |       0 |     284 |       0 |   90347 |       1 | true    |
-|   9 |     280 |       1 |     280 |       1 |   13431 |       1 | true    |
-|  10 |     287 |       5 |     295 |   13613 |  647784 |       8 | false   |
+|   i |   fs Sc |   fs #f |   ls Sc |   ls #f |    #fail |   #sols | comp.   |
+|----:|--------:|--------:|--------:|--------:|---------:|--------:|:--------|
+|   1 |     305 |       1 |     305 |       1 |  6053929 |       1 | false   |
+|   2 |     321 |       0 |     322 |     158 |     7845 |       2 | true    |
+|   3 |     307 |       0 |     308 |     188 |    12636 |       2 | true    |
+|   4 |     296 |       0 |     302 |     303 |     4965 |       3 | true    |
+|   5 |     270 |       0 |     272 |     172 |     2539 |       3 | true    |
+|   6 |     281 |       2 |     282 |     184 |  1007274 |       2 | false   |
+|   7 |     275 |       4 |     277 |     148 |     2860 |       3 | true    |
+|   8 |     284 |       0 |     284 |       0 | 22981631 |       1 | false   |
+|   9 |     277 |       1 |     280 |     127 |  2417108 |       2 | false   |
+|  10 |     294 |       0 |     295 |     460 |     8574 |       2 | true    |
 
 ### Lds, Max Product, Dom Wdeg Max Marginal, Oracle
 |   i |   fs Sc |   fs #f |   ls Sc |   ls #f |   #fail |   #sols | comp.   |

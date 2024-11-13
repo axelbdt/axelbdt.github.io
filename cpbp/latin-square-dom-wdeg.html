@@ -130,7 +130,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="plots" class="level2">
 <h2 class="anchored" data-anchor-id="plots">Plots</h2>
-<div id="4e1aeb5e" class="cell" data-execution_count="1">
+<div id="474299b0" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plot</span>
@@ -141,13 +141,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">'lds-sum_product-dom_wdeg_max_marginal'</span>,</span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">'lds-max_product-dom_wdeg_max_marginal-oracle'</span>,</span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">'lds-no_bp-dom_wdeg_best_value'</span>,</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">'lds-no_bp-max_value'</span>,</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 'lds-no_bp-max_value',</span></span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <section id="holes" class="level4">
 <h4 class="anchored" data-anchor-id="holes">200 Holes</h4>
-<div id="3d7867f9" class="cell" data-execution_count="2">
+<div id="c35e6395" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>  plot.hole_tables(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">200</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>all_instances, objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>)</span>
@@ -197,20 +197,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 |   8 |     252 |       2 |     252 |       2 |      68 |       1 | true    |
 |   9 |     211 |       0 |     222 |     126 |     240 |       3 | true    |
 |  10 |     214 |       0 |     220 |      47 |     173 |       3 | true    |
-
-### Lds, No Bp, Max Value
-|   i |   fs Sc |   fs #f |   ls Sc |   ls #f |   #fail |   #sols | comp.   |
-|----:|--------:|--------:|--------:|--------:|--------:|--------:|:--------|
-|   1 |     212 |       1 |     229 |    2970 |   24928 |       8 | true    |
-|   2 |     268 |      50 |     284 |     722 |    1507 |       6 | true    |
-|   3 |     237 |      15 |     241 |     267 |     394 |       2 | true    |
-|   4 |     247 |      10 |     247 |      10 |     448 |       1 | true    |
-|   5 |     236 |     230 |     244 |     760 |     940 |       4 | true    |
-|   6 |     225 |      91 |     232 |     415 |     627 |       4 | true    |
-|   7 |     247 |      18 |     250 |     114 |     858 |       3 | true    |
-|   8 |     247 |      23 |     252 |      24 |      46 |       2 | true    |
-|   9 |     214 |     107 |     222 |     179 |     620 |       2 | true    |
-|  10 |     217 |      58 |     220 |     170 |     546 |       3 | true    |
 </code></pre>
 </div>
 <div class="cell-output cell-output-display">
@@ -238,7 +224,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="holes-1" class="level4">
 <h4 class="anchored" data-anchor-id="holes-1">250 Holes</h4>
-<div id="ba817733" class="cell" data-execution_count="3">
+<div id="4fa4ecaf" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>  plot.hole_tables(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">250</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>all_instances, objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>)</span>
@@ -288,20 +274,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 |   8 |     280 |       0 |     286 |     131 |     452 |       3 | true    |
 |   9 |     223 |       1 |     241 |     117 |     800 |       3 | true    |
 |  10 |     267 |       0 |     270 |     318 |     557 |       4 | true    |
-
-### Lds, No Bp, Max Value
-|   i |   fs Sc |   fs #f |   ls Sc |   ls #f |   #fail |   #sols | comp.   |
-|----:|--------:|--------:|--------:|--------:|--------:|--------:|:--------|
-|   1 |     268 |       0 |     272 |     204 |    5141 |       4 | true    |
-|   2 |     255 |       1 |     266 |     108 |  111032 |       4 | true    |
-|   3 |     219 |       1 |     224 |     131 |   19313 |       3 | true    |
-|   4 |     267 |       5 |     275 |     170 |    3584 |       3 | true    |
-|   5 |     259 |       0 |     267 |     211 |   11787 |       4 | true    |
-|   6 |     266 |      16 |     266 |      16 |     171 |       1 | true    |
-|   7 |     262 |       1 |     265 |    1971 |  293749 |       4 | true    |
-|   8 |     286 |       1 |     286 |       1 |     841 |       1 | true    |
-|   9 |     235 |       0 |     241 |     119 |    1484 |       3 | true    |
-|  10 |     262 |      13 |     270 |     473 |    1796 |       6 | true    |
 </code></pre>
 </div>
 <div class="cell-output cell-output-display">
@@ -314,7 +286,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="latin-square-dom-wdeg_files/figure-html/cell-4-output-3.png" width="758" height="564" class="figure-img"></p>
+<p><img src="latin-square-dom-wdeg_files/figure-html/cell-4-output-3.png" width="757" height="564" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -329,7 +301,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="holes-2" class="level4">
 <h4 class="anchored" data-anchor-id="holes-2">300 Holes</h4>
-<div id="423fb9ba" class="cell" data-execution_count="4">
+<div id="50a57a49" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>  plot.hole_tables(n<span class="op">=</span><span class="dv">20</span>, holes<span class="op">=</span><span class="dv">300</span>, models<span class="op">=</span>models1, instance_numbers<span class="op">=</span>all_instances, objective<span class="op">=</span><span class="st">"pseudodiagonal_20_5_5"</span>)</span>
@@ -379,20 +351,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 |   8 |     281 |       0 |     284 |     200 |   11533 |       3 | true    |
 |   9 |     279 |       4 |     280 |     159 |    6618 |       2 | true    |
 |  10 |     294 |       2 |     295 |     157 |  414758 |       2 | true    |
-
-### Lds, No Bp, Max Value
-|   i |   fs Sc |   fs #f |   ls Sc |   ls #f |   #fail |   #sols | comp.   |
-|----:|--------:|--------:|--------:|--------:|--------:|--------:|:--------|
-|   1 |     300 |       0 |     305 |     145 |  250250 |       2 | true    |
-|   2 |     316 |       1 |     322 |     282 |  244718 |       4 | true    |
-|   3 |     304 |       1 |     308 |     189 |   76035 |       4 | true    |
-|   4 |     290 |       0 |     302 |     418 |   62445 |       6 | true    |
-|   5 |     272 |       1 |     272 |       1 |   44831 |       1 | true    |
-|   6 |     267 |       0 |     282 |     477 |  964686 |       5 | true    |
-|   7 |     276 |       0 |     277 |     148 |  157523 |       2 | true    |
-|   8 |     284 |       0 |     284 |       0 |  150965 |       1 | true    |
-|   9 |     276 |       0 |     280 |     154 |   48846 |       2 | true    |
-|  10 |     289 |       0 |     295 |   31312 | 6381983 |       5 | true    |
 </code></pre>
 </div>
 <div class="cell-output cell-output-display">

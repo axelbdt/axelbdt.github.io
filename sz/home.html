@@ -9,7 +9,7 @@
       :root {
         --smart-gray: #333333;
         --zen-green: #118501;
-        --bg-cream: #f5f5f0;
+        --bg-cream: #ffffff; /*#f5f5f0;*/
         --light-gray: #e8e8e8;
         --text-gray: #2c3333;
         --text-light-gray: #aaaaaa;
@@ -98,6 +98,53 @@
         margin: 1em 0;
       }
 
+      .service-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .service-image {
+        width: 40%;
+        height: auto;
+      }
+
+      .cta-section {
+        text-align: center;
+        background-color: var(--bg-cream);
+        padding: 40px 30px;
+        margin: 30px 0;
+        border-radius: 8px;
+      }
+
+      .cta-section h2 {
+        margin-bottom: 1.5rem;
+      }
+
+      .cta-text {
+        max-width: 600px;
+        margin: 0 auto 2rem auto;
+      }
+
+      .cta-button {
+        display: inline-block;
+        background-color: var(--zen-green);
+        color: white;
+        padding: 14px 32px;
+        border-radius: 6px;
+        text-decoration: none;
+        font-size: 1.1rem;
+        transition: background-color 0.3s ease;
+      }
+
+      .cta-button:hover {
+        background-color: #0d6b01;
+      }
+
+      .cta-image {
+        width: 40%;
+      }
+
       @media (max-width: 600px) {
         body {
           padding: 0 15px;
@@ -139,25 +186,54 @@
       </section>
       <section>
         <h2>Nos Services</h2>
-        <ul>
-          <li>
-            <strong>Coaching carrière personnalisé</strong> - Définissez votre
-            trajectoire professionnelle idéale et les étapes pour y parvenir
-          </li>
-          <li>
-            <strong>Bilan de compétences approfondi</strong> - Découvrez vos
-            forces uniques et transformez-les en atouts professionnels
-          </li>
-          <li>
-            <strong>Préparation d'entretiens</strong> - Abordez vos entretiens
-            avec confiance et authenticité
-          </li>
-          <li>
-            <strong>Gestion du stress professionnel</strong> - Développez une
-            efficacité sereine face aux défis quotidiens
-          </li>
-        </ul>
+        <div class="service-container">
+          <ul>
+            <li>
+              <strong>Coaching carrière personnalisé</strong><br />
+              Définissez votre trajectoire professionnelle idéale et les étapes
+              pour y parvenir
+            </li>
+            <li>
+              <strong>Bilan de compétences approfondi</strong><br />
+              Découvrez vos forces uniques et faites-en des atouts
+              professionnels
+            </li>
+            <li>
+              <strong>Préparation d'entretiens</strong><br />
+              Abordez vos entretiens avec confiance et authenticité
+            </li>
+            <li>
+              <strong>Gestion du stress professionnel</strong><br />
+              Développez une efficacité sereine face aux défis quotidiens
+            </li>
+          </ul>
+
+          <img
+            class="service-image"
+            src="img/undraw_Team_up_re_84ok.png"
+            alt="Collaboration"
+          />
+        </div>
       </section>
+
+      <section class="cta-section">
+        <h2>Faisons connaissance</h2>
+        <img
+          class="cta-image"
+          src="img/undraw_Remote_meeting_re_abe7.png"
+          alt="Consultation"
+        />
+        <div class="cta-text">
+          <p>
+            Prenez 30 minutes pour explorer ensemble vos objectifs
+            professionnels et voir comment nous pouvons vous accompagner.
+          </p>
+        </div>
+        <a href="#calendrier" class="cta-button">
+          Réserver une première consultation
+        </a>
+      </section>
+
       <section>
         <h2>Notre Approche</h2>
         <h3>

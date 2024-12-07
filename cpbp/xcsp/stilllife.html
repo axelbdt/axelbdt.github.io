@@ -8,7 +8,7 @@
 
 <meta name="author" content="Axel Baudot">
 
-<title>Knapsack XCSP</title>
+<title>Still Life XCSP</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -58,16 +58,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="knapsack_files/libs/clipboard/clipboard.min.js"></script>
-<script src="knapsack_files/libs/quarto-html/quarto.js"></script>
-<script src="knapsack_files/libs/quarto-html/popper.min.js"></script>
-<script src="knapsack_files/libs/quarto-html/tippy.umd.min.js"></script>
-<script src="knapsack_files/libs/quarto-html/anchor.min.js"></script>
-<link href="knapsack_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="knapsack_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="knapsack_files/libs/bootstrap/bootstrap.min.js"></script>
-<link href="knapsack_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="knapsack_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="stilllife_files/libs/clipboard/clipboard.min.js"></script>
+<script src="stilllife_files/libs/quarto-html/quarto.js"></script>
+<script src="stilllife_files/libs/quarto-html/popper.min.js"></script>
+<script src="stilllife_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="stilllife_files/libs/quarto-html/anchor.min.js"></script>
+<link href="stilllife_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="stilllife_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="stilllife_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="stilllife_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="stilllife_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 
 
 </head>
@@ -80,7 +80,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Knapsack XCSP</h1>
+<h1 class="title">Still Life XCSP</h1>
 </div>
 
 
@@ -103,7 +103,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<div id="e2871480" class="cell" data-execution_count="1">
+<div id="878fadae" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> process</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -111,7 +111,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <section id="max-marginal-regret" class="level1">
 <h1>Max-Marginal-Regret</h1>
-<div id="6a4bbed6" class="cell" data-execution_count="2">
+<div id="9eb6c46c" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>models <span class="op">=</span> [</span>
@@ -124,40 +124,57 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="knapsack_files/figure-html/cell-3-output-1.png" width="787" height="91" class="figure-img"></p>
+<p><img src="stilllife_files/figure-html/cell-3-output-1.png" width="787" height="91" class="figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
-<section id="s30" class="level2">
-<h2 class="anchored" data-anchor-id="s30">S30</h2>
-<div id="73125a8e" class="cell" data-execution_count="3">
+<section id="s4" class="level2">
+<h2 class="anchored" data-anchor-id="s4">s4</h2>
+<div id="4e99fc81" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>logs <span class="op">=</span> process.all_logs(<span class="st">"knapsack"</span>, <span class="st">"s30"</span>, models)</span>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>logs <span class="op">=</span> process.all_logs(<span class="st">"stilllife"</span>, <span class="st">"s4"</span>, models)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>process.plot_quality_graph(logs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="knapsack_files/figure-html/cell-4-output-1.png" width="758" height="564" class="figure-img"></p>
+<p><img src="stilllife_files/figure-html/cell-4-output-1.png" width="758" height="564" class="figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
 </section>
-<section id="s60" class="level2">
-<h2 class="anchored" data-anchor-id="s60">S60</h2>
-<div id="482f492b" class="cell" data-execution_count="4">
+<section id="s8" class="level2">
+<h2 class="anchored" data-anchor-id="s8">s8</h2>
+<div id="3893572a" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>logs <span class="op">=</span> process.all_logs(<span class="st">"knapsack"</span>, <span class="st">"s60"</span>, models)</span>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>logs <span class="op">=</span> process.all_logs(<span class="st">"stilllife"</span>, <span class="st">"s8"</span>, models)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>process.plot_quality_graph(logs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="knapsack_files/figure-html/cell-5-output-1.png" width="757" height="564" class="figure-img"></p>
+<p><img src="stilllife_files/figure-html/cell-5-output-1.png" width="758" height="564" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="s12" class="level2">
+<h2 class="anchored" data-anchor-id="s12">s12</h2>
+<div id="210dad8b" class="cell" data-execution_count="5">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>logs <span class="op">=</span> process.all_logs(<span class="st">"stilllife"</span>, <span class="st">"s12"</span>, models)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>process.plot_quality_graph(logs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="stilllife_files/figure-html/cell-6-output-1.png" width="758" height="564" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -166,53 +183,70 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="dom-wdeg-max-marginal" class="level1">
 <h1>Dom-WDeg-Max-Marginal</h1>
-<div id="0e848eac" class="cell" data-execution_count="5">
+<div id="15dc2123" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>models <span class="op">=</span> [</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  (<span class="st">"sum-product"</span>, <span class="st">"dom-wdeg-max-marginal"</span>, <span class="st">"false"</span>),</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  (<span class="st">"sum-product"</span>, <span class="st">"dom-wdeg-max-marginal"</span>, <span class="st">"true"</span>),</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  (<span class="st">"max-product"</span>, <span class="st">"dom-wdeg-max-marginal"</span>, <span class="st">"true"</span>),</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>]</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>process.plot_colors(models)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>models <span class="op">=</span> [</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  (<span class="st">"sum-product"</span>, <span class="st">"dom-wdeg-max-marginal"</span>, <span class="st">"false"</span>),</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  (<span class="st">"sum-product"</span>, <span class="st">"dom-wdeg-max-marginal"</span>, <span class="st">"true"</span>),</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  (<span class="st">"max-product"</span>, <span class="st">"dom-wdeg-max-marginal"</span>, <span class="st">"true"</span>),</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>process.plot_colors(models)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="knapsack_files/figure-html/cell-6-output-1.png" width="787" height="91" class="figure-img"></p>
+<p><img src="stilllife_files/figure-html/cell-7-output-1.png" width="787" height="91" class="figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
-<section id="s30-1" class="level2">
-<h2 class="anchored" data-anchor-id="s30-1">S30</h2>
-<div id="5ecee22d" class="cell" data-execution_count="6">
+<section id="s4-1" class="level2">
+<h2 class="anchored" data-anchor-id="s4-1">s4</h2>
+<div id="9225fd04" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>logs <span class="op">=</span> process.all_logs(<span class="st">"knapsack"</span>, <span class="st">"s30"</span>, models)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>process.plot_quality_graph(logs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="knapsack_files/figure-html/cell-7-output-1.png" width="758" height="564" class="figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="s60-1" class="level2">
-<h2 class="anchored" data-anchor-id="s60-1">S60</h2>
-<div id="b3edf682" class="cell" data-execution_count="7">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>logs <span class="op">=</span> process.all_logs(<span class="st">"knapsack"</span>, <span class="st">"s60"</span>, models)</span>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>logs <span class="op">=</span> process.all_logs(<span class="st">"stilllife"</span>, <span class="st">"s4"</span>, models)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>process.plot_quality_graph(logs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="knapsack_files/figure-html/cell-8-output-1.png" width="758" height="564" class="figure-img"></p>
+<p><img src="stilllife_files/figure-html/cell-8-output-1.png" width="758" height="564" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="s8-1" class="level2">
+<h2 class="anchored" data-anchor-id="s8-1">s8</h2>
+<div id="e58480fd" class="cell" data-execution_count="8">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>logs <span class="op">=</span> process.all_logs(<span class="st">"stilllife"</span>, <span class="st">"s8"</span>, models)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>process.plot_quality_graph(logs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="stilllife_files/figure-html/cell-9-output-1.png" width="758" height="564" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="s12-1" class="level2">
+<h2 class="anchored" data-anchor-id="s12-1">s12</h2>
+<div id="650cb1b7" class="cell" data-execution_count="9">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>logs <span class="op">=</span> process.all_logs(<span class="st">"stilllife"</span>, <span class="st">"s12"</span>, models)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>process.plot_quality_graph(logs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="stilllife_files/figure-html/cell-10-output-1.png" width="758" height="564" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -221,52 +255,69 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="max-product" class="level1">
 <h1>Max-Product</h1>
-<div id="466006b2" class="cell" data-execution_count="8">
+<div id="0cc59327" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>models <span class="op">=</span> [</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  (<span class="st">"max-product"</span>, <span class="st">"max-marginal-regret"</span>, <span class="st">"true"</span>),</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  (<span class="st">"max-product"</span>, <span class="st">"dom-wdeg-max-marginal"</span>, <span class="st">"true"</span>),</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>]</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>process.plot_colors(models)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>models <span class="op">=</span> [</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  (<span class="st">"max-product"</span>, <span class="st">"max-marginal-regret"</span>, <span class="st">"true"</span>),</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  (<span class="st">"max-product"</span>, <span class="st">"dom-wdeg-max-marginal"</span>, <span class="st">"true"</span>),</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>process.plot_colors(models)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="knapsack_files/figure-html/cell-9-output-1.png" width="787" height="67" class="figure-img"></p>
+<p><img src="stilllife_files/figure-html/cell-11-output-1.png" width="787" height="67" class="figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
-<section id="s30-2" class="level2">
-<h2 class="anchored" data-anchor-id="s30-2">S30</h2>
-<div id="acbbe386" class="cell" data-execution_count="9">
+<section id="s4-2" class="level2">
+<h2 class="anchored" data-anchor-id="s4-2">s4</h2>
+<div id="b63e36a0" class="cell" data-execution_count="11">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>logs <span class="op">=</span> process.all_logs(<span class="st">"knapsack"</span>, <span class="st">"s30"</span>, models)</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>process.plot_quality_graph(logs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>logs <span class="op">=</span> process.all_logs(<span class="st">"stilllife"</span>, <span class="st">"s4"</span>, models)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>process.plot_quality_graph(logs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="knapsack_files/figure-html/cell-10-output-1.png" width="754" height="564" class="figure-img"></p>
+<p><img src="stilllife_files/figure-html/cell-12-output-1.png" width="758" height="564" class="figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
 </section>
-<section id="s60-2" class="level2">
-<h2 class="anchored" data-anchor-id="s60-2">S60</h2>
-<div id="f0b2576d" class="cell" data-execution_count="10">
+<section id="s8-2" class="level2">
+<h2 class="anchored" data-anchor-id="s8-2">s8</h2>
+<div id="605127e7" class="cell" data-execution_count="12">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>logs <span class="op">=</span> process.all_logs(<span class="st">"knapsack"</span>, <span class="st">"s60"</span>, models)</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>process.plot_quality_graph(logs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>logs <span class="op">=</span> process.all_logs(<span class="st">"stilllife"</span>, <span class="st">"s8"</span>, models)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>process.plot_quality_graph(logs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="knapsack_files/figure-html/cell-11-output-1.png" width="758" height="564" class="figure-img"></p>
+<p><img src="stilllife_files/figure-html/cell-13-output-1.png" width="758" height="564" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="s12-2" class="level2">
+<h2 class="anchored" data-anchor-id="s12-2">s12</h2>
+<div id="522782a3" class="cell" data-execution_count="13">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>logs <span class="op">=</span> process.all_logs(<span class="st">"stilllife"</span>, <span class="st">"s12"</span>, models)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>process.plot_quality_graph(logs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="stilllife_files/figure-html/cell-14-output-1.png" width="758" height="564" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -275,54 +326,71 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="sum-product" class="level1">
 <h1>Sum-Product</h1>
-<div id="31ce0325" class="cell" data-execution_count="11">
+<div id="143f72f5" class="cell" data-execution_count="14">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>models <span class="op">=</span> [</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  (<span class="st">"sum-product"</span>, <span class="st">"max-marginal-regret"</span>, <span class="st">"false"</span>),</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  (<span class="st">"sum-product"</span>, <span class="st">"max-marginal-regret"</span>, <span class="st">"true"</span>),</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  (<span class="st">"sum-product"</span>, <span class="st">"dom-wdeg-max-marginal"</span>, <span class="st">"false"</span>),</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  (<span class="st">"sum-product"</span>, <span class="st">"dom-wdeg-max-marginal"</span>, <span class="st">"true"</span>),</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>]</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>process.plot_colors(models)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>models <span class="op">=</span> [</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  (<span class="st">"sum-product"</span>, <span class="st">"max-marginal-regret"</span>, <span class="st">"false"</span>),</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  (<span class="st">"sum-product"</span>, <span class="st">"max-marginal-regret"</span>, <span class="st">"true"</span>),</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  (<span class="st">"sum-product"</span>, <span class="st">"dom-wdeg-max-marginal"</span>, <span class="st">"false"</span>),</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  (<span class="st">"sum-product"</span>, <span class="st">"dom-wdeg-max-marginal"</span>, <span class="st">"true"</span>),</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>process.plot_colors(models)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="knapsack_files/figure-html/cell-12-output-1.png" width="787" height="115" class="figure-img"></p>
+<p><img src="stilllife_files/figure-html/cell-15-output-1.png" width="787" height="115" class="figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
-<section id="s30-3" class="level2">
-<h2 class="anchored" data-anchor-id="s30-3">S30</h2>
-<div id="849edfb5" class="cell" data-execution_count="12">
+<section id="s4-3" class="level2">
+<h2 class="anchored" data-anchor-id="s4-3">s4</h2>
+<div id="459a7701" class="cell" data-execution_count="15">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>logs <span class="op">=</span> process.all_logs(<span class="st">"knapsack"</span>, <span class="st">"s30"</span>, models)</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>process.plot_quality_graph(logs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>logs <span class="op">=</span> process.all_logs(<span class="st">"stilllife"</span>, <span class="st">"s4"</span>, models)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>process.plot_quality_graph(logs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="knapsack_files/figure-html/cell-13-output-1.png" width="758" height="564" class="figure-img"></p>
+<p><img src="stilllife_files/figure-html/cell-16-output-1.png" width="757" height="564" class="figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
 </section>
-<section id="s60-3" class="level2">
-<h2 class="anchored" data-anchor-id="s60-3">S60</h2>
-<div id="3fee95e4" class="cell" data-execution_count="13">
+<section id="s8-3" class="level2">
+<h2 class="anchored" data-anchor-id="s8-3">s8</h2>
+<div id="904c01bf" class="cell" data-execution_count="16">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>logs <span class="op">=</span> process.all_logs(<span class="st">"knapsack"</span>, <span class="st">"s60"</span>, models)</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>process.plot_quality_graph(logs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>logs <span class="op">=</span> process.all_logs(<span class="st">"stilllife"</span>, <span class="st">"s8"</span>, models)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>process.plot_quality_graph(logs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="knapsack_files/figure-html/cell-14-output-1.png" width="758" height="564" class="figure-img"></p>
+<p><img src="stilllife_files/figure-html/cell-17-output-1.png" width="758" height="564" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="s12-3" class="level2">
+<h2 class="anchored" data-anchor-id="s12-3">s12</h2>
+<div id="60b318e9" class="cell" data-execution_count="17">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>logs <span class="op">=</span> process.all_logs(<span class="st">"stilllife"</span>, <span class="st">"s12"</span>, models)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>process.plot_quality_graph(logs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="stilllife_files/figure-html/cell-18-output-1.png" width="758" height="564" class="figure-img"></p>
 </figure>
 </div>
 </div>

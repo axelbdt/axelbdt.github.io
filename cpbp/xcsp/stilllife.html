@@ -103,39 +103,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<div id="e910c671" class="cell" data-execution_count="1">
+<div id="bc62f259" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> process</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> process</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>problem <span class="op">=</span> <span class="st">"stilllife"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <section id="max-marginal-regret" class="level1">
 <h1>Max-Marginal-Regret</h1>
-<div id="5550a6df" class="cell" data-execution_count="2">
+<div id="070c2a31" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>models <span class="op">=</span> [</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  (<span class="st">"sum-product"</span>, <span class="st">"max-marginal-regret"</span>, <span class="st">"false"</span>),</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  (<span class="st">"sum-product"</span>, <span class="st">"max-marginal-regret"</span>, <span class="st">"true"</span>),</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  (<span class="st">"max-product"</span>, <span class="st">"max-marginal-regret"</span>, <span class="st">"true"</span>),</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>]</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>process.plot_colors(models)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>models <span class="op">=</span> process.MAX_MARGINAL_REGRET_MODELS</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>process.plot_colors(models)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="stilllife_files/figure-html/cell-3-output-1.png" width="787" height="91" class="figure-img"></p>
+<p><img src="stilllife_files/figure-html/cell-3-output-1.png" width="787" height="115" class="figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
 <section id="s4" class="level2">
 <h2 class="anchored" data-anchor-id="s4">s4</h2>
-<div id="6ac43570" class="cell" data-execution_count="3">
+<div id="2fff2745" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>logs <span class="op">=</span> process.all_logs(<span class="st">"stilllife"</span>, <span class="st">"s4"</span>, models)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>process.plot_quality_graph(logs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>process.plot_quality_graph(problem, <span class="st">"s4"</span>, models)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -148,11 +144,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="s8" class="level2">
 <h2 class="anchored" data-anchor-id="s8">s8</h2>
-<div id="0d6eb743" class="cell" data-execution_count="4">
+<div id="662c6425" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>logs <span class="op">=</span> process.all_logs(<span class="st">"stilllife"</span>, <span class="st">"s8"</span>, models)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>process.plot_quality_graph(logs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>process.plot_quality_graph(problem, <span class="st">"s8"</span>, models)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -165,11 +160,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="s12" class="level2">
 <h2 class="anchored" data-anchor-id="s12">s12</h2>
-<div id="1e6c1830" class="cell" data-execution_count="5">
+<div id="a9fd581b" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>logs <span class="op">=</span> process.all_logs(<span class="st">"stilllife"</span>, <span class="st">"s12"</span>, models)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>process.plot_quality_graph(logs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>process.plot_quality_graph(problem, <span class="st">"s12"</span>, models)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -180,13 +174,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="wastage-12-ish" class="level2">
-<h2 class="anchored" data-anchor-id="wastage-12-ish">Wastage 12-ish</h2>
-<div id="27414117" class="cell" data-execution_count="6">
+<section id="wastage-8-ish" class="level2">
+<h2 class="anchored" data-anchor-id="wastage-8-ish">Wastage 8-ish</h2>
+<div id="415b0e80" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>logs <span class="op">=</span> process.all_logs(<span class="st">"stilllife"</span>, <span class="st">"wst12"</span>, models)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>process.plot_quality_graph(logs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>process.plot_quality_graph(problem, <span class="st">"wst8"</span>, models)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -198,33 +191,28 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section>
 </section>
-<section id="dom-wdeg-max-marginal" class="level1">
-<h1>Dom-WDeg-Max-Marginal</h1>
-<div id="bc377a7d" class="cell" data-execution_count="7">
+<section id="switch" class="level1">
+<h1>Switch</h1>
+<div id="ddfefe1c" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>models <span class="op">=</span> [</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  (<span class="st">"sum-product"</span>, <span class="st">"dom-wdeg-max-marginal"</span>, <span class="st">"false"</span>),</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  (<span class="st">"sum-product"</span>, <span class="st">"dom-wdeg-max-marginal"</span>, <span class="st">"true"</span>),</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  (<span class="st">"max-product"</span>, <span class="st">"dom-wdeg-max-marginal"</span>, <span class="st">"true"</span>),</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>]</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>process.plot_colors(models)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>models <span class="op">=</span> process.MAX_PRODUCT_SWITCH_MODELS</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>process.plot_colors(models)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="stilllife_files/figure-html/cell-8-output-1.png" width="787" height="91" class="figure-img"></p>
+<p><img src="stilllife_files/figure-html/cell-8-output-1.png" width="787" height="67" class="figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
 <section id="s4-1" class="level2">
 <h2 class="anchored" data-anchor-id="s4-1">s4</h2>
-<div id="ca6f3c49" class="cell" data-execution_count="8">
+<div id="0e39eeeb" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>logs <span class="op">=</span> process.all_logs(<span class="st">"stilllife"</span>, <span class="st">"s4"</span>, models)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>process.plot_quality_graph(logs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>process.plot_quality_graph(problem, <span class="st">"s4"</span>, models)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -237,11 +225,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="s8-1" class="level2">
 <h2 class="anchored" data-anchor-id="s8-1">s8</h2>
-<div id="a16d5dbf" class="cell" data-execution_count="9">
+<div id="7ebe951d" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>logs <span class="op">=</span> process.all_logs(<span class="st">"stilllife"</span>, <span class="st">"s8"</span>, models)</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>process.plot_quality_graph(logs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>process.plot_quality_graph(problem, <span class="st">"s8"</span>, models)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -254,11 +241,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="s12-1" class="level2">
 <h2 class="anchored" data-anchor-id="s12-1">s12</h2>
-<div id="0a0003f1" class="cell" data-execution_count="10">
+<div id="37592a47" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>logs <span class="op">=</span> process.all_logs(<span class="st">"stilllife"</span>, <span class="st">"s12"</span>, models)</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>process.plot_quality_graph(logs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>process.plot_quality_graph(problem, <span class="st">"s12"</span>, models)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -269,13 +255,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="wastage-12-ish-1" class="level2">
-<h2 class="anchored" data-anchor-id="wastage-12-ish-1">Wastage 12-ish</h2>
-<div id="e6cb085f" class="cell" data-execution_count="11">
+<section id="wastage-8-ish-1" class="level2">
+<h2 class="anchored" data-anchor-id="wastage-8-ish-1">Wastage 8-ish</h2>
+<div id="48c6cea4" class="cell" data-execution_count="11">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>logs <span class="op">=</span> process.all_logs(<span class="st">"stilllife"</span>, <span class="st">"wst12"</span>, models)</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>process.plot_quality_graph(logs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>process.plot_quality_graph(problem, <span class="st">"wst8"</span>, models)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -287,32 +272,28 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section>
 </section>
-<section id="max-product" class="level1">
-<h1>Max-Product</h1>
-<div id="cc1f7454" class="cell" data-execution_count="12">
+<section id="dom-wdeg-max-marginal" class="level1">
+<h1>Dom-WDeg-Max-Marginal</h1>
+<div id="3a5fe628" class="cell" data-execution_count="12">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>models <span class="op">=</span> [</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  (<span class="st">"max-product"</span>, <span class="st">"max-marginal-regret"</span>, <span class="st">"true"</span>),</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  (<span class="st">"max-product"</span>, <span class="st">"dom-wdeg-max-marginal"</span>, <span class="st">"true"</span>),</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>]</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>process.plot_colors(models)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>models <span class="op">=</span> process.DOM_WDEG_MAX_MARGINAL_MODELS</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>process.plot_colors(models)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="stilllife_files/figure-html/cell-13-output-1.png" width="787" height="67" class="figure-img"></p>
+<p><img src="stilllife_files/figure-html/cell-13-output-1.png" width="787" height="91" class="figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
 <section id="s4-2" class="level2">
 <h2 class="anchored" data-anchor-id="s4-2">s4</h2>
-<div id="c662d5ff" class="cell" data-execution_count="13">
+<div id="58d18e5a" class="cell" data-execution_count="13">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>logs <span class="op">=</span> process.all_logs(<span class="st">"stilllife"</span>, <span class="st">"s4"</span>, models)</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>process.plot_quality_graph(logs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>process.plot_quality_graph(problem, <span class="st">"s4"</span>, models)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -325,11 +306,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="s8-2" class="level2">
 <h2 class="anchored" data-anchor-id="s8-2">s8</h2>
-<div id="98c0ec3e" class="cell" data-execution_count="14">
+<div id="3089aa47" class="cell" data-execution_count="14">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>logs <span class="op">=</span> process.all_logs(<span class="st">"stilllife"</span>, <span class="st">"s8"</span>, models)</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>process.plot_quality_graph(logs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>process.plot_quality_graph(problem, <span class="st">"s8"</span>, models)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -342,11 +322,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="s12-2" class="level2">
 <h2 class="anchored" data-anchor-id="s12-2">s12</h2>
-<div id="c8bb4709" class="cell" data-execution_count="15">
+<div id="8421518b" class="cell" data-execution_count="15">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>logs <span class="op">=</span> process.all_logs(<span class="st">"stilllife"</span>, <span class="st">"s12"</span>, models)</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>process.plot_quality_graph(logs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>process.plot_quality_graph(problem, <span class="st">"s12"</span>, models)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -357,13 +336,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="wastage-12-ish-2" class="level2">
-<h2 class="anchored" data-anchor-id="wastage-12-ish-2">Wastage 12-ish</h2>
-<div id="0fdd33aa" class="cell" data-execution_count="16">
+<section id="wastage-8-ish-2" class="level2">
+<h2 class="anchored" data-anchor-id="wastage-8-ish-2">Wastage 8-ish</h2>
+<div id="5a71f04b" class="cell" data-execution_count="16">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>logs <span class="op">=</span> process.all_logs(<span class="st">"stilllife"</span>, <span class="st">"wst12"</span>, models)</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>process.plot_quality_graph(logs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>process.plot_quality_graph(problem, <span class="st">"wst8"</span>, models)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -375,18 +353,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section>
 </section>
-<section id="sum-product" class="level1">
-<h1>Sum-Product</h1>
-<div id="608b8c64" class="cell" data-execution_count="17">
+<section id="max-product" class="level1">
+<h1>Max-Product</h1>
+<div id="beb63e5d" class="cell" data-execution_count="17">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>models <span class="op">=</span> [</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  (<span class="st">"sum-product"</span>, <span class="st">"max-marginal-regret"</span>, <span class="st">"false"</span>),</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  (<span class="st">"sum-product"</span>, <span class="st">"max-marginal-regret"</span>, <span class="st">"true"</span>),</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  (<span class="st">"sum-product"</span>, <span class="st">"dom-wdeg-max-marginal"</span>, <span class="st">"false"</span>),</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  (<span class="st">"sum-product"</span>, <span class="st">"dom-wdeg-max-marginal"</span>, <span class="st">"true"</span>),</span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>]</span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>process.plot_colors(models)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>models <span class="op">=</span> process.MAX_PRODUCT_MODELS</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>process.plot_colors(models)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -398,16 +371,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <section id="s4-3" class="level2">
 <h2 class="anchored" data-anchor-id="s4-3">s4</h2>
-<div id="f7ae3d80" class="cell" data-execution_count="18">
+<div id="78e5a097" class="cell" data-execution_count="18">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>logs <span class="op">=</span> process.all_logs(<span class="st">"stilllife"</span>, <span class="st">"s4"</span>, models)</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>process.plot_quality_graph(logs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>process.plot_quality_graph(problem, <span class="st">"s4"</span>, models)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="stilllife_files/figure-html/cell-19-output-1.png" width="757" height="564" class="figure-img"></p>
+<p><img src="stilllife_files/figure-html/cell-19-output-1.png" width="758" height="564" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -415,11 +387,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="s8-3" class="level2">
 <h2 class="anchored" data-anchor-id="s8-3">s8</h2>
-<div id="ae548c37" class="cell" data-execution_count="19">
+<div id="db11fbc5" class="cell" data-execution_count="19">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>logs <span class="op">=</span> process.all_logs(<span class="st">"stilllife"</span>, <span class="st">"s8"</span>, models)</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>process.plot_quality_graph(logs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>process.plot_quality_graph(problem, <span class="st">"s8"</span>, models)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -432,11 +403,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="s12-3" class="level2">
 <h2 class="anchored" data-anchor-id="s12-3">s12</h2>
-<div id="0f7d7e44" class="cell" data-execution_count="20">
+<div id="7b27eb3f" class="cell" data-execution_count="20">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>logs <span class="op">=</span> process.all_logs(<span class="st">"stilllife"</span>, <span class="st">"s12"</span>, models)</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>process.plot_quality_graph(logs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>process.plot_quality_graph(problem, <span class="st">"s12"</span>, models)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -447,18 +417,98 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="wastage-12-ish-3" class="level2">
-<h2 class="anchored" data-anchor-id="wastage-12-ish-3">Wastage 12-ish</h2>
-<div id="3c4679f8" class="cell" data-execution_count="21">
+<section id="wastage-8-ish-3" class="level2">
+<h2 class="anchored" data-anchor-id="wastage-8-ish-3">Wastage 8-ish</h2>
+<div id="7296b81d" class="cell" data-execution_count="21">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>logs <span class="op">=</span> process.all_logs(<span class="st">"stilllife"</span>, <span class="st">"wst12"</span>, models)</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>process.plot_quality_graph(logs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>process.plot_quality_graph(problem, <span class="st">"wst8"</span>, models)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
 <p><img src="stilllife_files/figure-html/cell-22-output-1.png" width="758" height="564" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="sum-product" class="level1">
+<h1>Sum-Product</h1>
+<div id="fd224137" class="cell" data-execution_count="22">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>models <span class="op">=</span> process.SUM_PRODUCT_MODELS</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>process.plot_colors(models)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="stilllife_files/figure-html/cell-23-output-1.png" width="787" height="115" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<section id="s4-4" class="level2">
+<h2 class="anchored" data-anchor-id="s4-4">s4</h2>
+<div id="ac819141" class="cell" data-execution_count="23">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>process.plot_quality_graph(problem, <span class="st">"s4"</span>, models)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="stilllife_files/figure-html/cell-24-output-1.png" width="758" height="564" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="s8-4" class="level2">
+<h2 class="anchored" data-anchor-id="s8-4">s8</h2>
+<div id="139279b8" class="cell" data-execution_count="24">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>process.plot_quality_graph(problem, <span class="st">"s8"</span>, models)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="stilllife_files/figure-html/cell-25-output-1.png" width="757" height="564" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="s12-4" class="level2">
+<h2 class="anchored" data-anchor-id="s12-4">s12</h2>
+<div id="bedaf920" class="cell" data-execution_count="25">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>process.plot_quality_graph(problem, <span class="st">"s12"</span>, models)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="stilllife_files/figure-html/cell-26-output-1.png" width="758" height="564" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="wastage-8-ish-4" class="level2">
+<h2 class="anchored" data-anchor-id="wastage-8-ish-4">Wastage 8-ish</h2>
+<div id="cdad24f5" class="cell" data-execution_count="26">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>process.plot_quality_graph(problem, <span class="st">"wst8"</span>, models)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="stilllife_files/figure-html/cell-27-output-1.png" width="758" height="564" class="figure-img"></p>
 </figure>
 </div>
 </div>

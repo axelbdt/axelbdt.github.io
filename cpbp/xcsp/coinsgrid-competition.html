@@ -103,7 +103,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<div id="ed0b8871" class="cell" data-execution_count="1">
+<div id="bf34eff7" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> process</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -111,31 +111,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <section id="max-marginal-regret" class="level1">
 <h1>Max-Marginal-Regret</h1>
-<div id="71f67dd8" class="cell" data-execution_count="2">
+<div id="584b1bc2" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>models <span class="op">=</span> [</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  (<span class="st">"sum-product"</span>, <span class="st">"max-marginal-regret"</span>, <span class="st">"false"</span>),</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  (<span class="st">"sum-product"</span>, <span class="st">"max-marginal-regret"</span>, <span class="st">"true"</span>),</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  (<span class="st">"max-product"</span>, <span class="st">"max-marginal-regret"</span>, <span class="st">"true"</span>),</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>]</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>process.plot_colors(models)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>problem <span class="op">=</span> <span class="st">"coinsgrid"</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>models <span class="op">=</span> process.MAX_MARGINAL_REGRET_MODELS</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>process.plot_colors(models)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="coinsgrid-competition_files/figure-html/cell-3-output-1.png" width="787" height="91" class="figure-img"></p>
+<p><img src="coinsgrid-competition_files/figure-html/cell-3-output-1.png" width="787" height="115" class="figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
 <section id="size-8" class="level2">
 <h2 class="anchored" data-anchor-id="size-8">size 8</h2>
-<div id="2e5c1382" class="cell" data-execution_count="3">
+<div id="d4054f3a" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>logs <span class="op">=</span> process.all_logs(<span class="st">"coinsgrid"</span>, <span class="st">"c22-8"</span>, models)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>process.plot_quality_graph(logs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>process.plot_quality_graph(problem, <span class="st">"c22-08"</span>, models)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -148,11 +144,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="size-16" class="level2">
 <h2 class="anchored" data-anchor-id="size-16">size 16</h2>
-<div id="61e577fa" class="cell" data-execution_count="4">
+<div id="65d42c00" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>logs <span class="op">=</span> process.all_logs(<span class="st">"coinsgrid"</span>, <span class="st">"c22-16"</span>, models)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>process.plot_quality_graph(logs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>process.plot_quality_graph(problem, <span class="st">"c22-16"</span>, models)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -163,234 +158,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="size-25" class="level2">
-<h2 class="anchored" data-anchor-id="size-25">size 25</h2>
-<div id="a12ccdac" class="cell" data-execution_count="5">
+<section id="size-22" class="level2">
+<h2 class="anchored" data-anchor-id="size-22">size 22</h2>
+<div id="924218d5" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>logs <span class="op">=</span> process.all_logs(<span class="st">"coinsgrid"</span>, <span class="st">"c22-25"</span>, models)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>process.plot_quality_graph(logs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>process.plot_quality_graph(problem, <span class="st">"c22-25"</span>, models)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
 <p><img src="coinsgrid-competition_files/figure-html/cell-6-output-1.png" width="758" height="564" class="figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-</section>
-<section id="dom-wdeg-max-marginal" class="level1">
-<h1>Dom-WDeg-Max-Marginal</h1>
-<div id="5198325f" class="cell" data-execution_count="6">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>models <span class="op">=</span> [</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  (<span class="st">"sum-product"</span>, <span class="st">"dom-wdeg-max-marginal"</span>, <span class="st">"false"</span>),</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  (<span class="st">"sum-product"</span>, <span class="st">"dom-wdeg-max-marginal"</span>, <span class="st">"true"</span>),</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  (<span class="st">"max-product"</span>, <span class="st">"dom-wdeg-max-marginal"</span>, <span class="st">"true"</span>),</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>]</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>process.plot_colors(models)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="coinsgrid-competition_files/figure-html/cell-7-output-1.png" width="787" height="91" class="figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-<section id="size-8-1" class="level2">
-<h2 class="anchored" data-anchor-id="size-8-1">size 8</h2>
-<div id="0c42a4b7" class="cell" data-execution_count="7">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>logs <span class="op">=</span> process.all_logs(<span class="st">"coinsgrid"</span>, <span class="st">"c22-8"</span>, models)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>process.plot_quality_graph(logs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="coinsgrid-competition_files/figure-html/cell-8-output-1.png" width="758" height="564" class="figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="size-16-1" class="level2">
-<h2 class="anchored" data-anchor-id="size-16-1">size 16</h2>
-<div id="75a2c629" class="cell" data-execution_count="8">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>logs <span class="op">=</span> process.all_logs(<span class="st">"coinsgrid"</span>, <span class="st">"c22-16"</span>, models)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>process.plot_quality_graph(logs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="coinsgrid-competition_files/figure-html/cell-9-output-1.png" width="758" height="564" class="figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="size-25-1" class="level2">
-<h2 class="anchored" data-anchor-id="size-25-1">size 25</h2>
-<div id="8604facf" class="cell" data-execution_count="9">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>logs <span class="op">=</span> process.all_logs(<span class="st">"coinsgrid"</span>, <span class="st">"c22-25"</span>, models)</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>process.plot_quality_graph(logs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="coinsgrid-competition_files/figure-html/cell-10-output-1.png" width="758" height="564" class="figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-</section>
-<section id="max-product" class="level1">
-<h1>Max-product</h1>
-<div id="9be2c553" class="cell" data-execution_count="10">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>models <span class="op">=</span> [</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  (<span class="st">"max-product"</span>, <span class="st">"max-marginal-regret"</span>, <span class="st">"true"</span>),</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  (<span class="st">"max-product"</span>, <span class="st">"dom-wdeg-max-marginal"</span>, <span class="st">"true"</span>),</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>]</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>process.plot_colors(models)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="coinsgrid-competition_files/figure-html/cell-11-output-1.png" width="787" height="67" class="figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-<section id="size-8-2" class="level2">
-<h2 class="anchored" data-anchor-id="size-8-2">size 8</h2>
-<div id="c8f917e6" class="cell" data-execution_count="11">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>logs <span class="op">=</span> process.all_logs(<span class="st">"coinsgrid"</span>, <span class="st">"c22-8"</span>, models)</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>process.plot_quality_graph(logs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="coinsgrid-competition_files/figure-html/cell-12-output-1.png" width="755" height="564" class="figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="size-16-2" class="level2">
-<h2 class="anchored" data-anchor-id="size-16-2">size 16</h2>
-<div id="57a3c3b1" class="cell" data-execution_count="12">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>logs <span class="op">=</span> process.all_logs(<span class="st">"coinsgrid"</span>, <span class="st">"c22-16"</span>, models)</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>process.plot_quality_graph(logs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="coinsgrid-competition_files/figure-html/cell-13-output-1.png" width="758" height="564" class="figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="size-25-2" class="level2">
-<h2 class="anchored" data-anchor-id="size-25-2">size 25</h2>
-<div id="decd729a" class="cell" data-execution_count="13">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>logs <span class="op">=</span> process.all_logs(<span class="st">"coinsgrid"</span>, <span class="st">"c22-25"</span>, models)</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>process.plot_quality_graph(logs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="coinsgrid-competition_files/figure-html/cell-14-output-1.png" width="758" height="564" class="figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-</section>
-<section id="sum-product" class="level1">
-<h1>Sum-product</h1>
-<div id="6acff9a7" class="cell" data-execution_count="14">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>models <span class="op">=</span> [</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  (<span class="st">"sum-product"</span>, <span class="st">"max-marginal-regret"</span>, <span class="st">"true"</span>),</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  (<span class="st">"sum-product"</span>, <span class="st">"dom-wdeg-max-marginal"</span>, <span class="st">"true"</span>),</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  (<span class="st">"sum-product"</span>, <span class="st">"max-marginal-regret"</span>, <span class="st">"false"</span>),</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  (<span class="st">"sum-product"</span>, <span class="st">"dom-wdeg-max-marginal"</span>, <span class="st">"false"</span>),</span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>]</span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>process.plot_colors(models)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="coinsgrid-competition_files/figure-html/cell-15-output-1.png" width="787" height="115" class="figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-<section id="size-8-3" class="level2">
-<h2 class="anchored" data-anchor-id="size-8-3">size 8</h2>
-<div id="5ced451f" class="cell" data-execution_count="15">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>logs <span class="op">=</span> process.all_logs(<span class="st">"coinsgrid"</span>, <span class="st">"c22-8"</span>, models)</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>process.plot_quality_graph(logs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="coinsgrid-competition_files/figure-html/cell-16-output-1.png" width="758" height="564" class="figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="size-16-3" class="level2">
-<h2 class="anchored" data-anchor-id="size-16-3">size 16</h2>
-<div id="8cd596e0" class="cell" data-execution_count="16">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>logs <span class="op">=</span> process.all_logs(<span class="st">"coinsgrid"</span>, <span class="st">"c22-16"</span>, models)</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>process.plot_quality_graph(logs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="coinsgrid-competition_files/figure-html/cell-17-output-1.png" width="758" height="564" class="figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="size-25-3" class="level2">
-<h2 class="anchored" data-anchor-id="size-25-3">size 25</h2>
-<div id="0d8bdb3d" class="cell" data-execution_count="17">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>logs <span class="op">=</span> process.all_logs(<span class="st">"coinsgrid"</span>, <span class="st">"c22-25"</span>, models)</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>process.plot_quality_graph(logs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="coinsgrid-competition_files/figure-html/cell-18-output-1.png" width="758" height="564" class="figure-img"></p>
 </figure>
 </div>
 </div>

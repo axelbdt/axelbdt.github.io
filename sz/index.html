@@ -13,12 +13,13 @@
         --light-gray: #e8e8e8;
         --text-gray: #2c3333;
         --text-light-gray: #aaaaaa;
+        --bg-beige: #fceacf;
       }
 
       body {
         font-family: "Helvetica Neue", Arial, sans-serif;
         line-height: 1.6;
-        background-color: var(--light-gray);
+        background-color: var(--bg-beige);
         color: var(--text-gray);
         margin: 0;
         padding: 0 20px;
@@ -56,7 +57,6 @@
       main {
         max-width: 800px;
         margin: 0 auto;
-        padding: 20px 0;
       }
 
       section {
@@ -96,6 +96,14 @@
 
       p {
         margin: 1em 0;
+      }
+
+      .service-icon {
+        vertical-align: middle;
+        width: 1em;
+        height: 1em;
+        margin-right: 0.5em;
+        color: var(--zen-green);
       }
 
       .service-container {
@@ -145,6 +153,11 @@
         width: 40%;
       }
 
+      footer {
+        text-align: center;
+        margin: 2em 0;
+      }
+
       @media (max-width: 600px) {
         body {
           padding: 0 15px;
@@ -182,7 +195,93 @@
     <header>
       <h1><span class="smart">Smart</span><span class="zen">Zen</span></h1>
       <p>Révélez votre potentiel professionnel dans la sérénité</p>
+      <a href="https://zcal.co/ismaelsmartzen" class="cta-button">
+        Planifier une consultation
+      </a>
     </header>
+    <section>
+      <h2>Nos Services</h2>
+      <div class="service-container">
+        <ul>
+          <li>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 16 16"
+              fill="currentColor"
+              class="service-icon"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M9.808 4.057a.75.75 0 0 1 .92-.527l3.116.849a.75.75 0 0 1 .528.915l-.823 3.121a.75.75 0 0 1-1.45-.382l.337-1.281a23.484 23.484 0 0 0-3.609 3.056.75.75 0 0 1-1.07.01L6 8.06l-3.72 3.72a.75.75 0 1 1-1.06-1.061l4.25-4.25a.75.75 0 0 1 1.06 0l1.756 1.755a25.015 25.015 0 0 1 3.508-2.85l-1.46-.398a.75.75 0 0 1-.526-.92Z"
+                clip-rule="evenodd"
+              />
+            </svg>
+
+            <strong> Coaching carrière personnalisé</strong><br />
+            Tracez un parcours professionnel qui vous ressemble
+          </li>
+          <li>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 16 16"
+              fill="currentColor"
+              class="service-icon"
+            >
+              <path
+                d="M7.702 1.368a.75.75 0 0 1 .597 0c2.098.91 4.105 1.99 6.004 3.223a.75.75 0 0 1-.194 1.348A34.27 34.27 0 0 0 8.341 8.25a.75.75 0 0 1-.682 0c-.625-.32-1.262-.62-1.909-.901v-.542a36.878 36.878 0 0 1 2.568-1.33.75.75 0 0 0-.636-1.357 38.39 38.39 0 0 0-3.06 1.605.75.75 0 0 0-.372.648v.365c-.773-.294-1.56-.56-2.359-.8a.75.75 0 0 1-.194-1.347 40.901 40.901 0 0 1 6.005-3.223ZM4.25 8.348c-.53-.212-1.067-.411-1.611-.596a40.973 40.973 0 0 0-.418 2.97.75.75 0 0 0 .474.776c.175.068.35.138.524.21a5.544 5.544 0 0 1-.58.681.75.75 0 1 0 1.06 1.06c.35-.349.655-.726.915-1.124a29.282 29.282 0 0 0-1.395-.617A5.483 5.483 0 0 0 4.25 8.5v-.152Z"
+              />
+              <path
+                d="M7.603 13.96c-.96-.6-1.958-1.147-2.989-1.635a6.981 6.981 0 0 0 1.12-3.341c.419.192.834.393 1.244.602a2.25 2.25 0 0 0 2.045 0 32.787 32.787 0 0 1 4.338-1.834c.175.978.315 1.969.419 2.97a.75.75 0 0 1-.474.776 29.385 29.385 0 0 0-4.909 2.461.75.75 0 0 1-.794 0Z"
+              />
+            </svg>
+
+            <strong> Bilan de compétences approfondi</strong><br />
+            Découvrez vos forces uniques et faites-en des atouts
+          </li>
+          <li>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 16 16"
+              fill="currentColor"
+              class="service-icon"
+            >
+              <path
+                d="M1 8.849c0 1 .738 1.851 1.734 1.947L3 10.82v2.429a.75.75 0 0 0 1.28.53l1.82-1.82A3.484 3.484 0 0 1 5.5 10V9A3.5 3.5 0 0 1 9 5.5h4V4.151c0-1-.739-1.851-1.734-1.947a44.539 44.539 0 0 0-8.532 0C1.738 2.3 1 3.151 1 4.151V8.85Z"
+              />
+              <path
+                d="M7 9a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2h-.25v1.25a.75.75 0 0 1-1.28.53L9.69 12H9a2 2 0 0 1-2-2V9Z"
+              />
+            </svg>
+
+            <strong>Préparation d'entretiens</strong><br />
+            Abordez vos entretiens avec confiance et authenticité
+          </li>
+          <li>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 16 16"
+              fill="currentColor"
+              class="service-icon"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M15 8A7 7 0 1 1 1 8a7 7 0 0 1 14 0ZM6 8c.552 0 1-.672 1-1.5S6.552 5 6 5s-1 .672-1 1.5S5.448 8 6 8Zm5-1.5c0 .828-.448 1.5-1 1.5s-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5Zm.005 4.245a.75.75 0 0 0-1.06 0 2.75 2.75 0 0 1-3.89 0 .75.75 0 0 0-1.06 1.06 4.25 4.25 0 0 0 6.01 0 .75.75 0 0 0 0-1.06Z"
+                clip-rule="evenodd"
+              />
+            </svg>
+
+            <strong>Gestion du stress professionnel</strong><br />
+            Développez une efficacité sereine face aux défis quotidiens
+          </li>
+        </ul>
+
+        <img
+          class="service-image"
+          src="img/undraw_Team_up_re_84ok.png"
+          alt="Collaboration"
+        />
+      </div>
+    </section>
     <main>
       <section>
         <h2>
@@ -203,37 +302,6 @@
           ce qui fait la richesse de notre accompagnement.
         </p>
       </section>
-      <section>
-        <h2>Nos Services</h2>
-        <div class="service-container">
-          <ul>
-            <li>
-              <strong>Coaching carrière personnalisé</strong><br />
-              Définissez votre trajectoire professionnelle idéale et les étapes
-              pour y parvenir
-            </li>
-            <li>
-              <strong>Bilan de compétences approfondi</strong><br />
-              Découvrez vos forces uniques et faites-en des atouts
-              professionnels
-            </li>
-            <li>
-              <strong>Préparation d'entretiens</strong><br />
-              Abordez vos entretiens avec confiance et authenticité
-            </li>
-            <li>
-              <strong>Gestion du stress professionnel</strong><br />
-              Développez une efficacité sereine face aux défis quotidiens
-            </li>
-          </ul>
-
-          <img
-            class="service-image"
-            src="img/undraw_Team_up_re_84ok.png"
-            alt="Collaboration"
-          />
-        </div>
-      </section>
 
       <section class="cta-section">
         <h2>Faisons Connaissance</h2>
@@ -248,8 +316,8 @@
             professionnels et voir comment nous pouvons vous accompagner.
           </p>
         </div>
-        <a href="#calendrier" class="cta-button">
-          Réserver une première consultation
+        <a href="https://zcal.co/ismaelsmartzen" class="cta-button">
+          Planifier une consultation
         </a>
       </section>
 
@@ -307,5 +375,6 @@
         </p>
       </section>
     </main>
+    <footer>&copy; 2025 SmartZen. Tous droits réservés.</footer>
   </body>
 </html>

@@ -1,0 +1,776 @@
+<!doctype html>
+<html lang="pt-PT">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      JJG Facility Service - Serviços de Limpeza Profissional em Lisboa
+    </title>
+    <!-- Favicon -->
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/img/favicon/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/img/favicon/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/img/favicon/favicon-16x16.png"
+    />
+    <link rel="manifest" href="/img/favicon/site.webmanifest" />
+    <link rel="shortcut icon" href="/img/favicon/favicon.ico" />
+    <meta name="msapplication-TileColor" content="#a43722" />
+    <meta
+      name="msapplication-config"
+      content="/img/favicon/browserconfig.xml"
+    />
+    <meta name="theme-color" content="#ffffff" />
+
+    <!-- SEO -->
+    <meta
+      name="description"
+      content="A JJG Facility Service oferece serviços de limpeza profissional para escritórios, condomínios, espaços comerciais e mais em Lisboa. Qualidade e confiança garantidas."
+    />
+    <meta
+      name="keywords"
+      content="limpeza profissional, serviços de limpeza, Lisboa, escritórios, condomínios, limpeza comercial, JJG Facility Service, limpeza de vidros"
+    />
+    <meta name="author" content="JJG Facility Service" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://jels-clean.pt/" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://jels-clean.pt/" />
+    <meta
+      property="og:title"
+      content="JJG Facility Service - Serviços de Limpeza Profissional em Lisboa"
+    />
+    <meta
+      property="og:description"
+      content="Serviços de limpeza profissional para escritórios, condomínios, espaços comerciais e mais em Lisboa. Qualidade e confiança garantidas."
+    />
+    <meta
+      property="og:image"
+      content="https://jels-clean.pt/img/logo-150-150.png"
+    />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://jels-clean.pt/" />
+    <meta
+      property="twitter:title"
+      content="JJG Facility Service - Serviços de Limpeza Profissional em Lisboa"
+    />
+    <meta
+      property="twitter:description"
+      content="Serviços de limpeza profissional para escritórios, condomínios, espaços comerciais e mais em Lisboa. Qualidade e confiança garantidas."
+    />
+    <meta
+      property="twitter:image"
+      content="https://jels-clean.pt/img/logo-150-150.png"
+    />
+    <style>
+      :root {
+        --primary-color: #a43722;
+        --secondary-color: #484f55;
+        --light-gray: #f4f4f4;
+        --white: #ffffff;
+        --off-white: #fafafa;
+        --heading-font: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        --body-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+        --light-link-hover: #ffd0b5;
+      }
+
+      body {
+        font-family: var(--body-font);
+        line-height: 1.6;
+        color: var(--secondary-color);
+        margin: 0;
+        padding: 0;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      header {
+        background-color: var(--primary-color);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .header-content {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: space-between;
+        padding: 10px 0;
+      }
+
+      .logo {
+        width: 120px;
+        height: 120px;
+        margin: 5px;
+      }
+
+      nav ul {
+        list-style-type: none;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+      }
+
+      nav ul li {
+        margin: 0 15px;
+      }
+
+      nav ul li a {
+        text-decoration: none;
+        color: var(--white);
+        font-weight: bold;
+        font-family: var(--heading-font);
+        font-weight: 500;
+        letter-spacing: 0.2px;
+      }
+
+      nav ul li a:hover {
+        color: var(--light-link-hover);
+        transition: color 0.3s ease;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-family: var(--heading-font);
+        font-weight: 600;
+        color: var(--primary-color);
+      }
+
+      h1 {
+        font-size: 2.2rem;
+        letter-spacing: -0.5px;
+      }
+
+      h2 {
+        font-size: 1.8rem;
+        letter-spacing: -0.3px;
+      }
+
+      h3 {
+        font-size: 1.4rem;
+      }
+
+      .about-text h1 {
+        text-align: center;
+      }
+
+      .cta-button {
+        display: inline-block;
+        background-color: var(--primary-color);
+        color: var(--white);
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+        transition: color 0.3s ease;
+        margin-top: 20px;
+        font-family: var(--heading-font);
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .cta-button:hover {
+        background-color: #8a2e1c;
+        color: var(--light-link-hover);
+      }
+
+      .text-link {
+        color: var(--primary-color);
+        text-decoration: none;
+        font-weight: bold;
+        transition: color 0.3s ease;
+      }
+
+      .text-link:hover {
+        color: #8a2e1c;
+      }
+
+      section {
+        padding: 40px 0;
+      }
+
+      .grid {
+        display: grid;
+        gap: 20px;
+      }
+
+      .services-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      .values-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .grid-item {
+        background-color: var(--off-white);
+        padding: 20px;
+        border-radius: 5px;
+        transition:
+          transform 0.3s ease,
+          box-shadow 0.3s ease;
+      }
+
+      .grid-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .grid-item h3 {
+        font-weight: 600;
+      }
+
+      .icon-title {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+
+      .icon-title svg {
+        width: 40px;
+        height: 40px;
+        margin-right: 10px;
+        color: var(--primary-color);
+      }
+
+      footer {
+        font-family: var(--heading-font);
+        font-size: 0.9rem;
+        background-color: var(--secondary-color);
+        color: var(--white);
+        text-align: center;
+        padding: 20px 0;
+        margin-top: 40px;
+      }
+
+      .about-section {
+        display: flex;
+        align-items: center;
+        gap: 40px;
+      }
+
+      .about-image {
+        flex: 1;
+        max-width: 300px;
+      }
+
+      .about-content {
+        flex: 2;
+      }
+
+      #about-cta {
+        display: flex;
+        justify-content: center;
+      }
+
+      .contact-info {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-bottom: 20px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .contact-info a:hover {
+        background-color: var(--light-gray);
+      }
+
+      .contact-item {
+        flex-basis: calc(50% - 30px);
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+        margin-left: 10px;
+        margin-right: 10px;
+        border-radius: 5px;
+        padding: 5px;
+      }
+
+      .contact-icon {
+        margin-right: 10px;
+        color: var(--primary-color);
+      }
+
+      .contact-image {
+        width: 100%;
+        max-height: 300px;
+        object-fit: cover;
+        object-position: center;
+        margin-top: 20px;
+      }
+      .contact-info a {
+        color: var(--primary-color);
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+
+      @media (max-width: 1024px) {
+        .services-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (max-width: 768px) {
+        .contact-item {
+          flex-basis: 100%;
+        }
+
+        .header-content {
+          flex-direction: column;
+        }
+
+        nav ul {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        nav ul li {
+          margin: 10px 0;
+        }
+
+        .services-grid,
+        .values-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .about-section {
+          flex-direction: column;
+        }
+
+        .about-image {
+          max-width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <div class="header-content">
+          <nav>
+            <ul>
+              <li><a href="#servicos">Serviços</a></li>
+              <li><a href="#valores">Nossos Valores</a></li>
+              <li><a href="#contactos">Contactos</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="about-section">
+        <picture>
+          <source
+            srcset="img/logo-300-300.png"
+            type="image/jpg"
+            media="(max-width: 768px)"
+          />
+          <source srcset="img/logo-500-500.png" type="image/jpg" />
+          <img
+            src="img/who-1000-1500.jpg"
+            alt="Quem Somos"
+            class="about-image"
+          />
+        </picture>
+        <div class="about-content">
+          <div class="about-text">
+            <h1>JJG Facility Service</h1>
+            <p>
+              A JJG Facility Service é uma empresa em constante expansão,
+              composta por profissionais altamente experientes e responsáveis,
+              que visa proporcionar serviços de higiene e limpeza de qualidade e
+              máxima satisfação aos nossos parceiros.
+            </p>
+            <p>
+              No mercado pautamo-nos pelos seguintes parâmetros essenciais:
+              Qualidade, Satisfação e Compromisso Ambiental.
+            </p>
+          </div>
+          <div id="about-cta">
+            <a href="#contactos" class="cta-button">Solicite um Orçamento</a>
+          </div>
+        </div>
+      </section>
+
+      <section id="servicos">
+        <h2>Nossos Serviços</h2>
+        <div class="grid services-grid">
+          <div class="grid-item">
+            <div class="icon-title">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="40"
+                height="40"
+                fill="#000000"
+                viewBox="0 0 256 256"
+              >
+                <path
+                  d="M248,208H232V96a8,8,0,0,0,0-16H184V48a8,8,0,0,0,0-16H40a8,8,0,0,0,0,16V208H24a8,8,0,0,0,0,16H248a8,8,0,0,0,0-16ZM216,96V208H184V96ZM56,48H168V208H144V160a8,8,0,0,0-8-8H88a8,8,0,0,0-8,8v48H56Zm72,160H96V168h32ZM72,80a8,8,0,0,1,8-8H96a8,8,0,0,1,0,16H80A8,8,0,0,1,72,80Zm48,0a8,8,0,0,1,8-8h16a8,8,0,0,1,0,16H128A8,8,0,0,1,120,80ZM72,120a8,8,0,0,1,8-8H96a8,8,0,0,1,0,16H80A8,8,0,0,1,72,120Zm48,0a8,8,0,0,1,8-8h16a8,8,0,0,1,0,16H128A8,8,0,0,1,120,120Z"
+                ></path>
+              </svg>
+              <h3>Escritórios</h3>
+            </div>
+            <p>
+              Ambientes de trabalho impecáveis para aumentar a produtividade e o
+              bem-estar dos colaboradores.
+            </p>
+          </div>
+          <div class="grid-item">
+            <div class="icon-title">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="40"
+                height="40"
+                fill="#000000"
+                viewBox="0 0 256 256"
+              >
+                <path
+                  d="M240,208h-8V72a8,8,0,0,0-8-8H184V40a8,8,0,0,0-8-8H80a8,8,0,0,0-8,8V96H32a8,8,0,0,0-8,8V208H16a8,8,0,0,0,0,16H240a8,8,0,0,0,0-16ZM40,112H80a8,8,0,0,0,8-8V48h80V72a8,8,0,0,0,8,8h40V208H152V168a8,8,0,0,0-8-8H112a8,8,0,0,0-8,8v40H40Zm96,96H120V176h16ZM112,72a8,8,0,0,1,8-8h16a8,8,0,0,1,0,16H120A8,8,0,0,1,112,72Zm0,32a8,8,0,0,1,8-8h16a8,8,0,0,1,0,16H120A8,8,0,0,1,112,104Zm56,0a8,8,0,0,1,8-8h16a8,8,0,0,1,0,16H176A8,8,0,0,1,168,104ZM88,136a8,8,0,0,1-8,8H64a8,8,0,0,1,0-16H80A8,8,0,0,1,88,136Zm0,32a8,8,0,0,1-8,8H64a8,8,0,0,1,0-16H80A8,8,0,0,1,88,168Zm24-32a8,8,0,0,1,8-8h16a8,8,0,0,1,0,16H120A8,8,0,0,1,112,136Zm56,0a8,8,0,0,1,8-8h16a8,8,0,0,1,0,16H176A8,8,0,0,1,168,136Zm0,32a8,8,0,0,1,8-8h16a8,8,0,0,1,0,16H176A8,8,0,0,1,168,168Z"
+                ></path>
+              </svg>
+              <h3>Condomínios</h3>
+            </div>
+            <p>
+              Manutenção abrangente de áreas comuns, garantindo um espaço
+              agradável e valorizado para os moradores.
+            </p>
+          </div>
+          <div class="grid-item">
+            <div class="icon-title">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="40"
+                height="40"
+                fill="#000000"
+                viewBox="0 0 256 256"
+              >
+                <path
+                  d="M240,208H224V136l2.34,2.34A8,8,0,0,0,237.66,127L139.31,28.68a16,16,0,0,0-22.62,0L18.34,127a8,8,0,0,0,11.32,11.31L32,136v72H16a8,8,0,0,0,0,16H240a8,8,0,0,0,0-16ZM48,120l80-80,80,80v88H160V152a8,8,0,0,0-8-8H104a8,8,0,0,0-8,8v56H48Zm96,88H112V160h32Z"
+                ></path>
+              </svg>
+              <h3>Limpeza Doméstica</h3>
+            </div>
+            <p>
+              Soluções personalizadas para manter sua casa limpa e confortável,
+              adaptadas às suas necessidades específicas.
+            </p>
+          </div>
+          <div class="grid-item">
+            <div class="icon-title">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="40"
+                height="40"
+                fill="#000000"
+                viewBox="0 0 256 256"
+              >
+                <path
+                  d="M232,96a7.89,7.89,0,0,0-.3-2.2L217.35,43.6A16.07,16.07,0,0,0,202,32H54A16.07,16.07,0,0,0,38.65,43.6L24.31,93.8A7.89,7.89,0,0,0,24,96h0v16a40,40,0,0,0,16,32v72a8,8,0,0,0,8,8H208a8,8,0,0,0,8-8V144a40,40,0,0,0,16-32V96ZM54,48H202l11.42,40H42.61Zm50,56h48v8a24,24,0,0,1-48,0Zm-16,0v8a24,24,0,0,1-35.12,21.26,7.88,7.88,0,0,0-1.82-1.06A24,24,0,0,1,40,112v-8ZM200,208H56V151.2a40.57,40.57,0,0,0,8,.8,40,40,0,0,0,32-16,40,40,0,0,0,64,0,40,40,0,0,0,32,16,40.57,40.57,0,0,0,8-.8Zm4.93-75.8a8.08,8.08,0,0,0-1.8,1.05A24,24,0,0,1,168,112v-8h48v8A24,24,0,0,1,204.93,132.2Z"
+                ></path>
+              </svg>
+              <h3>Espaços Comerciais</h3>
+            </div>
+            <p>
+              Limpeza especializada para lojas, restaurantes e outros
+              estabelecimentos, criando um ambiente acolhedor para clientes.
+            </p>
+          </div>
+          <div class="grid-item">
+            <div class="icon-title">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="40"
+                height="40"
+                fill="#000000"
+                viewBox="0 0 256 256"
+              >
+                <path
+                  d="M224,152V136a96.37,96.37,0,0,0-64-90.51V40a16,16,0,0,0-16-16H112A16,16,0,0,0,96,40v5.49A96.37,96.37,0,0,0,32,136v16a16,16,0,0,0-16,16v24a16,16,0,0,0,16,16H224a16,16,0,0,0,16-16V168A16,16,0,0,0,224,152Zm-16-16v16H160V62.67A80.36,80.36,0,0,1,208,136ZM144,40V152H112V40ZM48,136A80.36,80.36,0,0,1,96,62.67V152H48Zm176,56H32V168H224v24Z"
+                ></path>
+              </svg>
+              <h3>Limpeza Pós-Obra</h3>
+            </div>
+            <p>
+              Remoção eficiente de resíduos de construção, preparando o espaço
+              para uso imediato após reformas ou construções.
+            </p>
+          </div>
+          <div class="grid-item">
+            <div class="icon-title">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="40"
+                height="40"
+                fill="#000000"
+                viewBox="0 0 256 256"
+              >
+                <path
+                  d="M200,80v32a8,8,0,0,1-16,0V88H160a8,8,0,0,1,0-16h32A8,8,0,0,1,200,80ZM96,168H72V144a8,8,0,0,0-16,0v32a8,8,0,0,0,8,8H96a8,8,0,0,0,0-16ZM232,56V200a16,16,0,0,1-16,16H40a16,16,0,0,1-16-16V56A16,16,0,0,1,40,40H216A16,16,0,0,1,232,56ZM216,200V56H40V200H216Z"
+                ></path>
+              </svg>
+              <h3>Limpeza de Vidros</h3>
+            </div>
+            <p>
+              Técnicas avançadas para deixar vidros e janelas cristalinos,
+              melhorando a aparência e a luminosidade dos ambientes.
+            </p>
+          </div>
+          <div class="grid-item">
+            <div class="icon-title">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="40"
+                height="40"
+                fill="#000000"
+                viewBox="0 0 256 256"
+              >
+                <path
+                  d="M116,176a8,8,0,0,1-8,8H80a8,8,0,0,1,0-16h28A8,8,0,0,1,116,176Zm60-8H148a8,8,0,0,0,0,16h28a8,8,0,0,0,0-16Zm64,48a8,8,0,0,1-8,8H24a8,8,0,0,1,0-16h8V88a8,8,0,0,1,12.8-6.4L96,120V88a8,8,0,0,1,12.8-6.4l38.74,29.05L159.1,29.74A16.08,16.08,0,0,1,174.94,16h18.12A16.08,16.08,0,0,1,208.9,29.74l15,105.13s.08.78.08,1.13v72h8A8,8,0,0,1,240,216Zm-77.86-94.4,8.53,6.4h36.11L193.06,32H174.94ZM48,208H208V144H168a8,8,0,0,1-4.8-1.6l-14.4-10.8,0,0L112,104v32a8,8,0,0,1-12.8,6.4L48,104Z"
+                ></path>
+              </svg>
+              <h3>Armazéns</h3>
+            </div>
+            <p>
+              Limpeza industrial para grandes espaços, assegurando um ambiente
+              de trabalho seguro e organizado.
+            </p>
+          </div>
+          <div class="grid-item">
+            <div class="icon-title">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="40"
+                height="40"
+                fill="#000000"
+                viewBox="0 0 256 256"
+              >
+                <path
+                  d="M248,120h-8V88a16,16,0,0,0-16-16H208V64a16,16,0,0,0-16-16H168a16,16,0,0,0-16,16v56H104V64A16,16,0,0,0,88,48H64A16,16,0,0,0,48,64v8H32A16,16,0,0,0,16,88v32H8a8,8,0,0,0,0,16h8v32a16,16,0,0,0,16,16H48v8a16,16,0,0,0,16,16H88a16,16,0,0,0,16-16V136h48v56a16,16,0,0,0,16,16h24a16,16,0,0,0,16-16v-8h16a16,16,0,0,0,16-16V136h8a8,8,0,0,0,0-16ZM32,168V88H48v80Zm56,24H64V64H88V192Zm104,0H168V64h24V175.82c0,.06,0,.12,0,.18s0,.12,0,.18V192Zm32-24H208V88h16Z"
+                ></path>
+              </svg>
+              <h3>Ginásios</h3>
+            </div>
+            <p>
+              Higienização rigorosa de equipamentos e instalações, promovendo um
+              ambiente saudável para a prática de exercícios.
+            </p>
+          </div>
+        </div>
+        <p>
+          Além destes, oferecemos soluções de limpeza personalizadas para
+          diversos outros espaços.
+          <a href="#contactos" class="text-link">Entre em contato</a> para
+          discutir suas necessidades específicas!
+        </p>
+      </section>
+
+      <section id="valores">
+        <h2>Os Nossos Valores</h2>
+        <div class="grid values-grid">
+          <div class="grid-item">
+            <div class="icon-title">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="40"
+                height="40"
+                fill="#000000"
+                viewBox="0 0 256 256"
+              >
+                <path
+                  d="M254.3,107.91,228.78,56.85a16,16,0,0,0-21.47-7.15L182.44,62.13,130.05,48.27a8.14,8.14,0,0,0-4.1,0L73.56,62.13,48.69,49.7a16,16,0,0,0-21.47,7.15L1.7,107.9a16,16,0,0,0,7.15,21.47l27,13.51,55.49,39.63a8.06,8.06,0,0,0,2.71,1.25l64,16a8,8,0,0,0,7.6-2.1l55.07-55.08,26.42-13.21a16,16,0,0,0,7.15-21.46Zm-54.89,33.37L165,113.72a8,8,0,0,0-10.68.61C136.51,132.27,116.66,130,104,122L147.24,80h31.81l27.21,54.41ZM41.53,64,62,74.22,36.43,125.27,16,115.06Zm116,119.13L99.42,168.61l-49.2-35.14,28-56L128,64.28l9.8,2.59-45,43.68-.08.09a16,16,0,0,0,2.72,24.81c20.56,13.13,45.37,11,64.91-5L188,152.66Zm62-57.87-25.52-51L214.47,64,240,115.06Zm-87.75,92.67a8,8,0,0,1-7.75,6.06,8.13,8.13,0,0,1-1.95-.24L80.41,213.33a7.89,7.89,0,0,1-2.71-1.25L51.35,193.26a8,8,0,0,1,9.3-13l25.11,17.94L126,208.24A8,8,0,0,1,131.82,217.94Z"
+                ></path>
+              </svg>
+              <h3>Confiança</h3>
+            </div>
+            <p>
+              Garantimos um ambiente seguro e confiável para os nossos clientes.
+            </p>
+          </div>
+          <div class="grid-item">
+            <div class="icon-title">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="40"
+                height="40"
+                fill="#000000"
+                viewBox="0 0 256 256"
+              >
+                <path
+                  d="M216,96A88,88,0,1,0,72,163.83V240a8,8,0,0,0,11.58,7.16L128,225l44.43,22.21A8.07,8.07,0,0,0,176,248a8,8,0,0,0,8-8V163.83A87.85,87.85,0,0,0,216,96ZM56,96a72,72,0,1,1,72,72A72.08,72.08,0,0,1,56,96ZM168,227.06l-36.43-18.21a8,8,0,0,0-7.16,0L88,227.06V174.37a87.89,87.89,0,0,0,80,0ZM128,152A56,56,0,1,0,72,96,56.06,56.06,0,0,0,128,152Zm0-96A40,40,0,1,1,88,96,40,40,0,0,1,128,56Z"
+                ></path>
+              </svg>
+              <h3>Excelência</h3>
+            </div>
+            <p>
+              Buscamos constantemente a perfeição em todas as nossas atividades
+              diárias.
+            </p>
+          </div>
+          <div class="grid-item">
+            <div class="icon-title">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="40"
+                height="40"
+                fill="#000000"
+                viewBox="0 0 256 256"
+              >
+                <path
+                  d="M230.33,141.06a24.34,24.34,0,0,0-18.61-4.77C230.5,117.33,240,98.48,240,80c0-26.47-21.29-48-47.46-48A47.58,47.58,0,0,0,156,48.75,47.58,47.58,0,0,0,119.46,32C93.29,32,72,53.53,72,80c0,11,3.24,21.69,10.06,33a31.87,31.87,0,0,0-14.75,8.4L44.69,144H16A16,16,0,0,0,0,160v40a16,16,0,0,0,16,16H120a7.93,7.93,0,0,0,1.94-.24l64-16a6.94,6.94,0,0,0,1.19-.4L226,182.82l.44-.2a24.6,24.6,0,0,0,3.93-41.56ZM119.46,48A31.15,31.15,0,0,1,148.6,67a8,8,0,0,0,14.8,0,31.15,31.15,0,0,1,29.14-19C209.59,48,224,62.65,224,80c0,19.51-15.79,41.58-45.66,63.9l-11.09,2.55A28,28,0,0,0,140,112H100.68C92.05,100.36,88,90.12,88,80,88,62.65,102.41,48,119.46,48ZM16,160H40v40H16Zm203.43,8.21-38,16.18L119,200H56V155.31l22.63-22.62A15.86,15.86,0,0,1,89.94,128H140a12,12,0,0,1,0,24H112a8,8,0,0,0,0,16h32a8.32,8.32,0,0,0,1.79-.2l67-15.41.31-.08a8.6,8.6,0,0,1,6.3,15.9Z"
+                ></path>
+              </svg>
+              <h3>Integridade</h3>
+            </div>
+            <p>
+              Mantemos os mais altos padrões éticos, priorizando honestidade e
+              transparência em todas as relações.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="contactos">
+        <h2>Contactos</h2>
+        <p>
+          Entre em contato conosco para solicitar um orçamento ou tirar dúvidas
+          sobre nossos serviços.
+        </p>
+        <div class="contact-info">
+          <a
+            href="https://www.google.pt/maps/place/JJG+Facility+Service/@38.7440795,-9.1597358,10z/data=!4m6!3m5!1s0x27f957891149ef0f:0xfdbd80bb0feca370!8m2!3d38.5335609!4d-8.8151114!16s%2Fg%2F11wv6_9sg5?entry=ttu&g_ep=EgoyMDI1MDEyMi4wIKXMDSoASAFQAw%3D%3D"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="contact-item"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="contact-icon"
+            >
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+              <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+            Travessa da Quinta da Areia n°5 r/c esquerdo,<br />
+            2845-168 Fogueteiro-Amora
+          </a>
+          <a href="tel:+351931997871" class="contact-item">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="contact-icon"
+            >
+              <path
+                d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
+              ></path>
+            </svg>
+            931997871</a
+          >
+          <a href="mailto:geral@jels-clean.pt" class="contact-item">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="contact-icon"
+            >
+              <path
+                d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+              ></path>
+              <polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
+            geral@jels-clean.pt</a
+          >
+          <a
+            href="http://jels-clean.pt"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="contact-item"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="contact-icon"
+            >
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="2" y1="12" x2="22" y2="12"></line>
+              <path
+                d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
+              ></path>
+            </svg>
+            jels-clean.pt</a
+          >
+        </div>
+        <picture>
+          <source
+            srcset="img/lisbon-1200-800.jpg"
+            type="image/jpg"
+            media="(max-width: 768px)"
+          />
+          <source srcset="img/lisbon-2400-1600.jpg" type="image/jpg" />
+          <img
+            src="img/lisbon-2400-1600.jpg"
+            alt="Paisagem de Lisboa"
+            class="contact-image"
+          />
+        </picture>
+      </section>
+    </main>
+
+    <footer>
+      <p>&copy; 2024 JJG Facility Service. Todos os direitos reservados.</p>
+      <p>NIPC: 517843250 | C.R.C. Lisboa</p>
+    </footer>
+  </body>
+</html>

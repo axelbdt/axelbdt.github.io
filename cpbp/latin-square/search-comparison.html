@@ -67,15 +67,47 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="search-comparison_files/libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="search-comparison_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="search-comparison_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="search-comparison_files/libs/bootstrap/bootstrap-3a573759c8af697ec766c17f5d99f015.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="search-comparison_files/libs/bootstrap/bootstrap-4e36703a9dd4e0c5f2cd63618d5fc552.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 
 
 </head>
 
-<body class="fullcontent">
+<body>
 
 <div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
-
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#latin-square-search-strategy-comparison-dfs-vs-lds" id="toc-latin-square-search-strategy-comparison-dfs-vs-lds" class="nav-link active" data-scroll-target="#latin-square-search-strategy-comparison-dfs-vs-lds">Latin Square: Search Strategy Comparison (DFS vs LDS)</a>
+  <ul class="collapse">
+  <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup">Setup</a></li>
+  </ul></li>
+  <li><a href="#sum-product-algorithm" id="toc-sum-product-algorithm" class="nav-link" data-scroll-target="#sum-product-algorithm">Sum-product Algorithm</a>
+  <ul class="collapse">
+  <li><a href="#all-instances-sum-product" id="toc-all-instances-sum-product" class="nav-link" data-scroll-target="#all-instances-sum-product">All Instances (Sum-product)</a></li>
+  <li><a href="#hole-count-breakdown-sum-product" id="toc-hole-count-breakdown-sum-product" class="nav-link" data-scroll-target="#hole-count-breakdown-sum-product">Hole Count Breakdown (Sum-product)</a>
+  <ul class="collapse">
+  <li><a href="#holes-sum-product" id="toc-holes-sum-product" class="nav-link" data-scroll-target="#holes-sum-product">200 Holes (Sum-product)</a></li>
+  <li><a href="#holes-sum-product-1" id="toc-holes-sum-product-1" class="nav-link" data-scroll-target="#holes-sum-product-1">250 Holes (Sum-product)</a></li>
+  <li><a href="#holes-sum-product-2" id="toc-holes-sum-product-2" class="nav-link" data-scroll-target="#holes-sum-product-2">300 Holes (Sum-product)</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#max-product-algorithm" id="toc-max-product-algorithm" class="nav-link" data-scroll-target="#max-product-algorithm">Max-product Algorithm</a>
+  <ul class="collapse">
+  <li><a href="#all-instances-max-product" id="toc-all-instances-max-product" class="nav-link" data-scroll-target="#all-instances-max-product">All Instances (Max-product)</a></li>
+  <li><a href="#hole-count-breakdown-max-product" id="toc-hole-count-breakdown-max-product" class="nav-link" data-scroll-target="#hole-count-breakdown-max-product">Hole Count Breakdown (Max-product)</a>
+  <ul class="collapse">
+  <li><a href="#holes-max-product" id="toc-holes-max-product" class="nav-link" data-scroll-target="#holes-max-product">200 Holes (Max-product)</a></li>
+  <li><a href="#holes-max-product-1" id="toc-holes-max-product-1" class="nav-link" data-scroll-target="#holes-max-product-1">250 Holes (Max-product)</a></li>
+  <li><a href="#holes-max-product-2" id="toc-holes-max-product-2" class="nav-link" data-scroll-target="#holes-max-product-2">300 Holes (Max-product)</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#summary-of-findings" id="toc-summary-of-findings" class="nav-link" data-scroll-target="#summary-of-findings">Summary of Findings</a></li>
+  </ul>
+</nav>
+</div>
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
@@ -108,7 +140,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>This notebook compares Depth-First Search (DFS) and Limited Discrepancy Search (LDS) strategies for solving Latin Square optimization problems using both Sum-product and Max-product belief propagation algorithms.</p>
 <section id="setup" class="level2">
 <h2 class="anchored" data-anchor-id="setup">Setup</h2>
-<div id="37c32d8a" class="cell" data-execution_count="1">
+<div id="efc658ad" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Configure logging for the notebook</span></span>
@@ -135,9 +167,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>all_instances <span class="op">=</span> <span class="bu">list</span>(<span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">11</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stderr">
-<pre><code>2025-03-05 20:04:02,660 - data_loader - INFO - Loaded 30 optimal solutions from solutions
-2025-03-05 20:04:02,671 - data_loader - INFO - Scanning 6980 files in logs
-2025-03-05 20:04:05,669 - data_loader - INFO - Scanned 6980 files, loaded 6980 experiments</code></pre>
+<pre><code>2025-03-05 20:18:47,959 - data_loader - INFO - Loaded 30 optimal solutions from solutions
+2025-03-05 20:18:47,969 - data_loader - INFO - Scanning 6980 files in logs
+2025-03-05 20:18:52,419 - data_loader - INFO - Scanned 6980 files, loaded 6980 experiments</code></pre>
 </div>
 </div>
 </section>
@@ -147,7 +179,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>In this section, we analyze the performance of DFS vs LDS search strategies when using the Sum-product belief propagation algorithm with max-marginal-regret branching.</p>
 <section id="all-instances-sum-product" class="level2">
 <h2 class="anchored" data-anchor-id="all-instances-sum-product">All Instances (Sum-product)</h2>
-<div id="c2932db0" class="cell" data-execution_count="2">
+<div id="32bfdf07" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create filter for sum-product with max-marginal-regret across all hole counts</span></span>
@@ -170,8 +202,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stderr">
-<pre><code>2025-03-05 20:04:05,692 - data_loader - INFO - Filtered 60 results out of 1840
-2025-03-05 20:04:05,695 - data_loader - INFO - Loaded 60 experiments</code></pre>
+<pre><code>2025-03-05 20:18:52,456 - data_loader - INFO - Filtered 60 results out of 1840
+2025-03-05 20:18:52,457 - data_loader - INFO - Loaded 60 experiments</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div>
@@ -186,7 +218,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="hole-count-breakdown-sum-product">Hole Count Breakdown (Sum-product)</h2>
 <section id="holes-sum-product" class="level3">
 <h3 class="anchored" data-anchor-id="holes-sum-product">200 Holes (Sum-product)</h3>
-<div id="eab30dd2" class="cell" data-execution_count="3">
+<div id="503e25db" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 200 Holes - Sum-Product</span></span>
@@ -213,8 +245,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stderr">
-<pre><code>2025-03-05 20:04:06,523 - data_loader - INFO - Filtered 20 results out of 1840
-2025-03-05 20:04:06,525 - data_loader - INFO - Loaded 20 experiments</code></pre>
+<pre><code>2025-03-05 20:18:54,299 - data_loader - INFO - Filtered 20 results out of 1840
+2025-03-05 20:18:54,301 - data_loader - INFO - Loaded 20 experiments</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>### search_type: lds
@@ -267,7 +299,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="holes-sum-product-1" class="level3">
 <h3 class="anchored" data-anchor-id="holes-sum-product-1">250 Holes (Sum-product)</h3>
-<div id="6131ef9b" class="cell" data-execution_count="4">
+<div id="23accb16" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 250 Holes - Sum-Product</span></span>
@@ -294,8 +326,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stderr">
-<pre><code>2025-03-05 20:04:08,508 - data_loader - INFO - Filtered 20 results out of 1840
-2025-03-05 20:04:08,511 - data_loader - INFO - Loaded 20 experiments</code></pre>
+<pre><code>2025-03-05 20:18:56,734 - data_loader - INFO - Filtered 20 results out of 1840
+2025-03-05 20:18:56,740 - data_loader - INFO - Loaded 20 experiments</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>### search_type: dfs
@@ -348,7 +380,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="holes-sum-product-2" class="level3">
 <h3 class="anchored" data-anchor-id="holes-sum-product-2">300 Holes (Sum-product)</h3>
-<div id="89beaea4" class="cell" data-execution_count="5">
+<div id="482f6331" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 300 Holes - Sum-Product</span></span>
@@ -375,8 +407,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stderr">
-<pre><code>2025-03-05 20:04:10,337 - data_loader - INFO - Filtered 20 results out of 1840
-2025-03-05 20:04:10,338 - data_loader - INFO - Loaded 20 experiments</code></pre>
+<pre><code>2025-03-05 20:18:59,082 - data_loader - INFO - Filtered 20 results out of 1840
+2025-03-05 20:18:59,092 - data_loader - INFO - Loaded 20 experiments</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>### search_type: lds
@@ -434,7 +466,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>In this section, we analyze the performance of DFS vs LDS search strategies when using the Max-product belief propagation algorithm with max-marginal-regret branching.</p>
 <section id="all-instances-max-product" class="level2">
 <h2 class="anchored" data-anchor-id="all-instances-max-product">All Instances (Max-product)</h2>
-<div id="6b3531fc" class="cell" data-execution_count="6">
+<div id="ed532be9" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create filter for max-product with max-marginal-regret across all hole counts</span></span>
@@ -457,8 +489,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stderr">
-<pre><code>2025-03-05 20:04:12,331 - data_loader - INFO - Filtered 60 results out of 1840
-2025-03-05 20:04:12,332 - data_loader - INFO - Loaded 60 experiments</code></pre>
+<pre><code>2025-03-05 20:19:02,223 - data_loader - INFO - Filtered 60 results out of 1840
+2025-03-05 20:19:02,224 - data_loader - INFO - Loaded 60 experiments</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div>
@@ -473,7 +505,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="hole-count-breakdown-max-product">Hole Count Breakdown (Max-product)</h2>
 <section id="holes-max-product" class="level3">
 <h3 class="anchored" data-anchor-id="holes-max-product">200 Holes (Max-product)</h3>
-<div id="596784ed" class="cell" data-execution_count="7">
+<div id="7b0dbbe9" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 200 Holes - Max-Product</span></span>
@@ -500,8 +532,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stderr">
-<pre><code>2025-03-05 20:04:13,212 - data_loader - INFO - Filtered 20 results out of 1840
-2025-03-05 20:04:13,213 - data_loader - INFO - Loaded 20 experiments</code></pre>
+<pre><code>2025-03-05 20:19:02,875 - data_loader - INFO - Filtered 20 results out of 1840
+2025-03-05 20:19:02,876 - data_loader - INFO - Loaded 20 experiments</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>### search_type: dfs
@@ -554,7 +586,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="holes-max-product-1" class="level3">
 <h3 class="anchored" data-anchor-id="holes-max-product-1">250 Holes (Max-product)</h3>
-<div id="a4a8f28a" class="cell" data-execution_count="8">
+<div id="d9649767" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 250 Holes - Max-Product</span></span>
@@ -581,8 +613,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stderr">
-<pre><code>2025-03-05 20:04:15,097 - data_loader - INFO - Filtered 20 results out of 1840
-2025-03-05 20:04:15,099 - data_loader - INFO - Loaded 20 experiments</code></pre>
+<pre><code>2025-03-05 20:19:04,225 - data_loader - INFO - Filtered 20 results out of 1840
+2025-03-05 20:19:04,227 - data_loader - INFO - Loaded 20 experiments</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>### search_type: lds
@@ -635,7 +667,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="holes-max-product-2" class="level3">
 <h3 class="anchored" data-anchor-id="holes-max-product-2">300 Holes (Max-product)</h3>
-<div id="ca2f3b47" class="cell" data-execution_count="9">
+<div id="9de22a2b" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 300 Holes - Max-Product</span></span>
@@ -662,8 +694,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stderr">
-<pre><code>2025-03-05 20:04:16,798 - data_loader - INFO - Filtered 20 results out of 1840
-2025-03-05 20:04:16,800 - data_loader - INFO - Loaded 20 experiments</code></pre>
+<pre><code>2025-03-05 20:19:05,782 - data_loader - INFO - Filtered 20 results out of 1840
+2025-03-05 20:19:05,785 - data_loader - INFO - Loaded 20 experiments</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>### search_type: dfs

@@ -58,16 +58,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="search-comparison_files/libs/clipboard/clipboard.min.js"></script>
-<script src="search-comparison_files/libs/quarto-html/quarto.js"></script>
-<script src="search-comparison_files/libs/quarto-html/popper.min.js"></script>
-<script src="search-comparison_files/libs/quarto-html/tippy.umd.min.js"></script>
-<script src="search-comparison_files/libs/quarto-html/anchor.min.js"></script>
-<link href="search-comparison_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="search-comparison_files/libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="search-comparison_files/libs/bootstrap/bootstrap.min.js"></script>
-<link href="search-comparison_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="search-comparison_files/libs/bootstrap/bootstrap-4e36703a9dd4e0c5f2cd63618d5fc552.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="oracle-comparison_files/libs/clipboard/clipboard.min.js"></script>
+<script src="oracle-comparison_files/libs/quarto-html/quarto.js"></script>
+<script src="oracle-comparison_files/libs/quarto-html/popper.min.js"></script>
+<script src="oracle-comparison_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="oracle-comparison_files/libs/quarto-html/anchor.min.js"></script>
+<link href="oracle-comparison_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="oracle-comparison_files/libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="oracle-comparison_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="oracle-comparison_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="oracle-comparison_files/libs/bootstrap/bootstrap-4e36703a9dd4e0c5f2cd63618d5fc552.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 
 
 </head>
@@ -80,11 +80,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#latin-square-search-strategy-comparison-dfs-vs-lds" id="toc-latin-square-search-strategy-comparison-dfs-vs-lds" class="nav-link active" data-scroll-target="#latin-square-search-strategy-comparison-dfs-vs-lds">Latin Square: Search Strategy Comparison (DFS vs LDS)</a></li>
-  <li><a href="#max-marginal-regret-branching" id="toc-max-marginal-regret-branching" class="nav-link" data-scroll-target="#max-marginal-regret-branching">Max-marginal-regret Branching</a></li>
-  <li><a href="#max-marginal-strength-branching" id="toc-max-marginal-strength-branching" class="nav-link" data-scroll-target="#max-marginal-strength-branching">Max marginal strength Branching</a></li>
-  <li><a href="#doom-wdeg-max-marginal-branching" id="toc-doom-wdeg-max-marginal-branching" class="nav-link" data-scroll-target="#doom-wdeg-max-marginal-branching">Doom WDeg + Max Marginal Branching</a></li>
-  <li><a href="#max-marginal-branching" id="toc-max-marginal-branching" class="nav-link" data-scroll-target="#max-marginal-branching">Max Marginal Branching</a></li>
+  <li><a href="#latin-square-influence-of-the-oracle-weight" id="toc-latin-square-influence-of-the-oracle-weight" class="nav-link active" data-scroll-target="#latin-square-influence-of-the-oracle-weight">Latin Square: Influence of the Oracle Weight</a></li>
+  <li><a href="#max-product" id="toc-max-product" class="nav-link" data-scroll-target="#max-product">Max Product</a>
+  <ul class="collapse">
+  <li><a href="#max-marginal-regret" id="toc-max-marginal-regret" class="nav-link" data-scroll-target="#max-marginal-regret">Max Marginal Regret</a></li>
+  <li><a href="#dom-wdeg-max-marginal" id="toc-dom-wdeg-max-marginal" class="nav-link" data-scroll-target="#dom-wdeg-max-marginal">Dom WDeg + Max Marginal</a></li>
+  </ul></li>
+  <li><a href="#sum-product" id="toc-sum-product" class="nav-link" data-scroll-target="#sum-product">Sum Product</a>
+  <ul class="collapse">
+  <li><a href="#max-marginal-regret-1" id="toc-max-marginal-regret-1" class="nav-link" data-scroll-target="#max-marginal-regret-1">Max Marginal Regret</a></li>
+  <li><a href="#max-marginal-strength" id="toc-max-marginal-strength" class="nav-link" data-scroll-target="#max-marginal-strength">Max Marginal Strength</a></li>
+  </ul></li>
   </ul>
 </nav>
 </div>
@@ -115,10 +121,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="latin-square-search-strategy-comparison-dfs-vs-lds" class="level1">
-<h1>Latin Square: Search Strategy Comparison (DFS vs LDS)</h1>
-<p>This notebook compares Depth-First Search (DFS) and Limited Discrepancy Search (LDS) strategies for solving Latin Square optimization problems using both Sum-product and Max-product belief propagation algorithms.</p>
-<div id="a72503d8" class="cell" data-execution_count="1">
+<section id="latin-square-influence-of-the-oracle-weight" class="level1">
+<h1>Latin Square: Influence of the Oracle Weight</h1>
+<p>This notebook compares the influence of the oracle weight on the resolution performance.</p>
+<p>Search type is LDS.</p>
+<div id="641b0fe6" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Configure logging for the notebook</span></span>
@@ -130,7 +137,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    BPAlgorithm, Branching, ExperimentFilter</span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> visualization <span class="im">import</span> (</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    create_comparison_table, </span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    create_comparison_table,</span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    plot_normalized_solution_quality,</span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    plot_optimal_solutions_reached</span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>)</span>
@@ -145,159 +152,171 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>all_instances <span class="op">=</span> <span class="bu">list</span>(<span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">11</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stderr">
-<pre><code>2025-03-06 16:28:56,490 - data_loader - INFO - Loaded 30 optimal solutions from solutions
-2025-03-06 16:28:56,499 - data_loader - INFO - Scanning 8760 files in logs
-2025-03-06 16:28:59,279 - data_loader - INFO - Scanned 8760 files, loaded 8760 experiments</code></pre>
+<pre><code>2025-03-06 16:28:45,516 - data_loader - INFO - Loaded 30 optimal solutions from solutions
+2025-03-06 16:28:45,524 - data_loader - INFO - Scanning 8760 files in logs
+2025-03-06 16:28:48,339 - data_loader - INFO - Scanned 8760 files, loaded 8760 experiments</code></pre>
 </div>
 </div>
+<p>In this section, we provide a comprehensive comparison of both search strategies (Depth-First Search and Limited Discrepancy Search) across both belief propagation algorithms (Sum-product and Max-product).</p>
 </section>
-<section id="max-marginal-regret-branching" class="level1">
-<h1>Max-marginal-regret Branching</h1>
-<div id="faa3ca1a" class="cell" data-execution_count="2">
+<section id="max-product" class="level1">
+<h1>Max Product</h1>
+<section id="max-marginal-regret" class="level3">
+<h3 class="anchored" data-anchor-id="max-marginal-regret">Max Marginal Regret</h3>
+<div id="ed2a8bbc" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a filter for all algorithms with max-marginal-regret branching</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>all_algorithms_filter <span class="op">=</span> ExperimentFilter.from_dict({</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'algorithm.branching'</span>: <span class="st">'max_marginal_regret'</span>,</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'algorithm.oracle_weight'</span>: <span class="fl">1.0</span>,</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'algorithm.max_iter'</span>: <span class="dv">10</span>,</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Load all data matching the filter</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>combined_df <span class="op">=</span> data_loader.load_experiments_for_comparison(all_algorithms_filter)</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the number of instances reaching optimal solutions, grouped by BP algorithm and search type</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plot_optimal_solutions_reached(</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    combined_df, </span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    group_by<span class="op">=</span>[<span class="st">'search_type'</span>, <span class="st">'bp'</span>], </span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    log_scale<span class="op">=</span><span class="va">True</span></span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Instances Reaching Optimal Solutions - All Search Strategies and BP Algorithms"</span>)</span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'algorithm.bp'</span>: BPAlgorithm.MAX_PRODUCT,</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'algorithm.branching'</span>: Branching.MAX_MARGINAL_REGRET,</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'search_type'</span>: <span class="st">'lds'</span>,</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">'algorithm.max_iter'</span>: <span class="dv">10</span>,</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Load all data matching the filter</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>combined_df <span class="op">=</span> data_loader.load_experiments_for_comparison(all_algorithms_filter)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the number of instances reaching optimal solutions, grouped by BP algorithm and search type</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plot_optimal_solutions_reached(</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    combined_df,</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    group_by<span class="op">=</span>[<span class="st">'oracle_weight'</span>],</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    log_scale<span class="op">=</span><span class="va">True</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Instances Reaching Optimal Solutions - All Search Strategies and BP Algorithms"</span>)</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stderr">
-<pre><code>2025-03-06 16:28:59,309 - data_loader - INFO - Filtered 120 results out of 8760
-2025-03-06 16:28:59,310 - data_loader - INFO - Loaded 120 experiments</code></pre>
+<pre><code>2025-03-06 16:28:48,369 - data_loader - INFO - Filtered 150 results out of 8760
+2025-03-06 16:28:48,370 - data_loader - INFO - Loaded 150 experiments</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="search-comparison_files/figure-html/cell-3-output-2.png" width="758" height="564" class="figure-img"></p>
+<p><img src="oracle-comparison_files/figure-html/cell-3-output-2.png" width="758" height="564" class="figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
 </section>
-<section id="max-marginal-strength-branching" class="level1">
-<h1>Max marginal strength Branching</h1>
-<div id="d311ee05" class="cell" data-execution_count="3">
+<section id="dom-wdeg-max-marginal" class="level3">
+<h3 class="anchored" data-anchor-id="dom-wdeg-max-marginal">Dom WDeg + Max Marginal</h3>
+<div id="9f891aa8" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a filter for all algorithms with max-marginal-strength branching</span></span>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a filter for all algorithms with max-marginal-regret branching</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>all_algorithms_filter <span class="op">=</span> ExperimentFilter.from_dict({</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'algorithm.branching'</span>: <span class="st">'max_marginal_strength'</span>,</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'algorithm.oracle_weight'</span>: <span class="fl">1.0</span>,</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'algorithm.max_iter'</span>: <span class="dv">10</span>,</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Load all data matching the filter</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>combined_df <span class="op">=</span> data_loader.load_experiments_for_comparison(all_algorithms_filter)</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the number of instances reaching optimal solutions, grouped by BP algorithm and search type</span></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plot_optimal_solutions_reached(</span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    combined_df, </span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    group_by<span class="op">=</span>[<span class="st">'search_type'</span>, <span class="st">'bp'</span>], </span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    log_scale<span class="op">=</span><span class="va">True</span></span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Instances Reaching Optimal Solutions - All Search Strategies and BP Algorithms"</span>)</span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'algorithm.bp'</span>: BPAlgorithm.MAX_PRODUCT,</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'algorithm.branching'</span>: Branching.DOM_WDEG_MAX_MARGINAL,</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'search_type'</span>: <span class="st">'lds'</span>,</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">'algorithm.max_iter'</span>: <span class="dv">10</span>,</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">'algorithm.max_iter'</span>: <span class="dv">10</span>,</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Load all data matching the filter</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>combined_df <span class="op">=</span> data_loader.load_experiments_for_comparison(all_algorithms_filter)</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the number of instances reaching optimal solutions, grouped by BP algorithm and search type</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plot_optimal_solutions_reached(</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    combined_df,</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    group_by<span class="op">=</span>[<span class="st">'oracle_weight'</span>],</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>    log_scale<span class="op">=</span><span class="va">True</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Instances Reaching Optimal Solutions - All Search Strategies and BP Algorithms"</span>)</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stderr">
-<pre><code>2025-03-06 16:29:00,231 - data_loader - INFO - Filtered 120 results out of 8760
-2025-03-06 16:29:00,233 - data_loader - INFO - Loaded 120 experiments</code></pre>
+<pre><code>2025-03-06 16:28:49,335 - data_loader - INFO - Filtered 120 results out of 8760
+2025-03-06 16:28:49,337 - data_loader - INFO - Loaded 120 experiments</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="search-comparison_files/figure-html/cell-4-output-2.png" width="758" height="564" class="figure-img"></p>
+<p><img src="oracle-comparison_files/figure-html/cell-4-output-2.png" width="758" height="564" class="figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
 </section>
-<section id="doom-wdeg-max-marginal-branching" class="level1">
-<h1>Doom WDeg + Max Marginal Branching</h1>
-<div id="f8fa3576" class="cell" data-execution_count="4">
+</section>
+<section id="sum-product" class="level1">
+<h1>Sum Product</h1>
+<section id="max-marginal-regret-1" class="level3">
+<h3 class="anchored" data-anchor-id="max-marginal-regret-1">Max Marginal Regret</h3>
+<div id="d5c4ab59" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a filter for all algorithms with max-marginal branching</span></span>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a filter for all algorithms with max-marginal-regret branching</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>all_algorithms_filter <span class="op">=</span> ExperimentFilter.from_dict({</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'algorithm.branching'</span>: <span class="st">'dom_wdeg_max_marginal'</span>,</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'algorithm.oracle_weight'</span>: <span class="fl">1.0</span>,</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'algorithm.max_iter'</span>: <span class="dv">10</span>,</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Load all data matching the filter</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>combined_df <span class="op">=</span> data_loader.load_experiments_for_comparison(all_algorithms_filter)</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the number of instances reaching optimal solutions, grouped by BP algorithm and search type</span></span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plot_optimal_solutions_reached(</span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    combined_df, </span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    group_by<span class="op">=</span>[<span class="st">'search_type'</span>, <span class="st">'bp'</span>], </span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    log_scale<span class="op">=</span><span class="va">True</span></span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Instances Reaching Optimal Solutions - All Search Strategies and BP Algorithms"</span>)</span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'algorithm.bp'</span>: BPAlgorithm.SUM_PRODUCT,</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'algorithm.branching'</span>: Branching.MAX_MARGINAL_REGRET,</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'search_type'</span>: <span class="st">'lds'</span>,</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">'algorithm.max_iter'</span>: <span class="dv">10</span>,</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Load all data matching the filter</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>combined_df <span class="op">=</span> data_loader.load_experiments_for_comparison(all_algorithms_filter)</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the number of instances reaching optimal solutions, grouped by BP algorithm and search type</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plot_optimal_solutions_reached(</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    combined_df,</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    group_by<span class="op">=</span>[<span class="st">'oracle_weight'</span>],</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>    log_scale<span class="op">=</span><span class="va">True</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Instances Reaching Optimal Solutions - All Search Strategies and BP Algorithms"</span>)</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stderr">
-<pre><code>2025-03-06 16:29:01,014 - data_loader - INFO - Filtered 120 results out of 8760
-2025-03-06 16:29:01,015 - data_loader - INFO - Loaded 120 experiments</code></pre>
+<pre><code>2025-03-06 16:28:49,943 - data_loader - INFO - Filtered 180 results out of 8760
+2025-03-06 16:28:49,943 - data_loader - INFO - Loaded 180 experiments</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="search-comparison_files/figure-html/cell-5-output-2.png" width="758" height="564" class="figure-img"></p>
+<p><img src="oracle-comparison_files/figure-html/cell-5-output-2.png" width="758" height="564" class="figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
 </section>
-<section id="max-marginal-branching" class="level1">
-<h1>Max Marginal Branching</h1>
-<div id="e82de723" class="cell" data-execution_count="5">
+<section id="max-marginal-strength" class="level3">
+<h3 class="anchored" data-anchor-id="max-marginal-strength">Max Marginal Strength</h3>
+<div id="443ca80e" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a filter for all algorithms with max-marginal branching</span></span>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a filter for all algorithms with max-marginal-strength branching</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>all_algorithms_filter <span class="op">=</span> ExperimentFilter.from_dict({</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'algorithm.branching'</span>: <span class="st">'max_marginal'</span>,</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'algorithm.oracle_weight'</span>: <span class="fl">1.0</span>,</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'algorithm.max_iter'</span>: <span class="dv">10</span>,</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Load all data matching the filter</span></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>combined_df <span class="op">=</span> data_loader.load_experiments_for_comparison(all_algorithms_filter)</span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the number of instances reaching optimal solutions, grouped by BP algorithm and search type</span></span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plot_optimal_solutions_reached(</span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    combined_df,</span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>    group_by<span class="op">=</span>[<span class="st">'search_type'</span>, <span class="st">'bp'</span>],</span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>    log_scale<span class="op">=</span><span class="va">True</span></span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Instances Reaching Optimal Solutions - All Search Strategies and BP Algorithms"</span>)</span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'algorithm.bp'</span>: BPAlgorithm.SUM_PRODUCT,</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'algorithm.branching'</span>: Branching.MAX_MARGINAL_STRENGTH,</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'search_type'</span>: <span class="st">'lds'</span>,</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">'algorithm.max_iter'</span>: <span class="dv">10</span>,</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Load all data matching the filter</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>combined_df <span class="op">=</span> data_loader.load_experiments_for_comparison(all_algorithms_filter)</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the number of instances reaching optimal solutions, grouped by BP algorithm and search type</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plot_optimal_solutions_reached(</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>    combined_df,</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>    group_by<span class="op">=</span>[<span class="st">'oracle_weight'</span>],</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>    log_scale<span class="op">=</span><span class="va">True</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Instances Reaching Optimal Solutions - All Search Strategies and BP Algorithms"</span>)</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stderr">
-<pre><code>2025-03-06 16:29:01,739 - data_loader - INFO - Filtered 120 results out of 8760
-2025-03-06 16:29:01,740 - data_loader - INFO - Loaded 120 experiments</code></pre>
+<pre><code>2025-03-06 16:28:50,719 - data_loader - INFO - Filtered 150 results out of 8760
+2025-03-06 16:28:50,720 - data_loader - INFO - Loaded 150 experiments</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="search-comparison_files/figure-html/cell-6-output-2.png" width="758" height="564" class="figure-img"></p>
+<p><img src="oracle-comparison_files/figure-html/cell-6-output-2.png" width="758" height="564" class="figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
+</section>
 </section>
 
 </main>

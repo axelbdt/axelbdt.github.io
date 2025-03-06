@@ -126,7 +126,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>This notebook compares the performance of constraint optimization algorithms for Latin Square problems.</p>
 <section id="setup-logging" class="level2">
 <h2 class="anchored" data-anchor-id="setup-logging">Setup Logging</h2>
-<div id="568937fc" class="cell" data-execution_count="1">
+<div id="b9ebdfcd" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> visualization <span class="im">import</span> set_log_level</span>
@@ -139,7 +139,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="dataset-wide-performance-comparison" class="level2">
 <h2 class="anchored" data-anchor-id="dataset-wide-performance-comparison">Dataset-wide Performance Comparison</h2>
 <p>First, let’s compare the performance of different algorithms across all instances (independent of hole count). This gives us a high-level view of how each algorithm performs on the entire dataset.</p>
-<div id="d4ff98d7" class="cell" data-execution_count="2">
+<div id="7b8ca81b" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import libraries</span></span>
@@ -180,11 +180,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stderr">
-<pre><code>2025-03-05 20:18:37,524 - data_loader - INFO - Loaded 30 optimal solutions from solutions
-2025-03-05 20:18:37,534 - data_loader - INFO - Scanning 6980 files in logs
-2025-03-05 20:18:46,093 - data_loader - INFO - Scanned 6980 files, loaded 6980 experiments
-2025-03-05 20:18:46,102 - data_loader - INFO - Filtered 60 results out of 1840
-2025-03-05 20:18:46,103 - data_loader - INFO - Loaded 60 experiments</code></pre>
+<pre><code>2025-03-06 11:00:47,423 - data_loader - INFO - Loaded 30 optimal solutions from solutions
+2025-03-06 11:00:47,430 - data_loader - INFO - Scanning 7080 files in logs
+2025-03-06 11:00:49,720 - data_loader - INFO - Scanned 7080 files, loaded 7080 experiments
+2025-03-06 11:00:49,725 - data_loader - INFO - Filtered 60 results out of 1860
+2025-03-06 11:00:49,726 - data_loader - INFO - Loaded 60 experiments</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div>
@@ -206,7 +206,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="holes" class="level3">
 <h3 class="anchored" data-anchor-id="holes">200 Holes</h3>
 <p>Same metrics on every graph, the slowest models are removed to change scale and make the graph more readable.</p>
-<div id="04f85140" class="cell" data-execution_count="3">
+<div id="ca50f143" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 200 Holes</span></span>
@@ -233,8 +233,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stderr">
-<pre><code>2025-03-05 20:18:48,195 - data_loader - INFO - Filtered 20 results out of 1840
-2025-03-05 20:18:48,198 - data_loader - INFO - Loaded 20 experiments</code></pre>
+<pre><code>2025-03-06 11:00:50,677 - data_loader - INFO - Filtered 20 results out of 1860
+2025-03-06 11:00:50,678 - data_loader - INFO - Loaded 20 experiments</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>### bp: sum_product
@@ -287,7 +287,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="holes-1" class="level3">
 <h3 class="anchored" data-anchor-id="holes-1">250 Holes</h3>
-<div id="7d7cf351" class="cell" data-execution_count="4">
+<div id="5a197464" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 250 Holes</span></span>
@@ -314,8 +314,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stderr">
-<pre><code>2025-03-05 20:18:50,561 - data_loader - INFO - Filtered 20 results out of 1840
-2025-03-05 20:18:50,565 - data_loader - INFO - Loaded 20 experiments</code></pre>
+<pre><code>2025-03-06 11:00:51,776 - data_loader - INFO - Filtered 20 results out of 1860
+2025-03-06 11:00:51,777 - data_loader - INFO - Loaded 20 experiments</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>### bp: max_product
@@ -368,7 +368,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="holes-2" class="level3">
 <h3 class="anchored" data-anchor-id="holes-2">300 Holes</h3>
-<div id="eb4cb02a" class="cell" data-execution_count="5">
+<div id="eb0f03d5" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 300 Holes</span></span>
@@ -395,8 +395,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stderr">
-<pre><code>2025-03-05 20:18:52,515 - data_loader - INFO - Filtered 20 results out of 1840
-2025-03-05 20:18:52,516 - data_loader - INFO - Loaded 20 experiments</code></pre>
+<pre><code>2025-03-06 11:00:52,855 - data_loader - INFO - Filtered 20 results out of 1860
+2025-03-06 11:00:52,856 - data_loader - INFO - Loaded 20 experiments</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>### bp: sum_product

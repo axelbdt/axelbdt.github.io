@@ -58,16 +58,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="search-comparison_files/libs/clipboard/clipboard.min.js"></script>
-<script src="search-comparison_files/libs/quarto-html/quarto.js"></script>
-<script src="search-comparison_files/libs/quarto-html/popper.min.js"></script>
-<script src="search-comparison_files/libs/quarto-html/tippy.umd.min.js"></script>
-<script src="search-comparison_files/libs/quarto-html/anchor.min.js"></script>
-<link href="search-comparison_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="search-comparison_files/libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="search-comparison_files/libs/bootstrap/bootstrap.min.js"></script>
-<link href="search-comparison_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="search-comparison_files/libs/bootstrap/bootstrap-4e36703a9dd4e0c5f2cd63618d5fc552.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="regret-strength-max-comparison_files/libs/clipboard/clipboard.min.js"></script>
+<script src="regret-strength-max-comparison_files/libs/quarto-html/quarto.js"></script>
+<script src="regret-strength-max-comparison_files/libs/quarto-html/popper.min.js"></script>
+<script src="regret-strength-max-comparison_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="regret-strength-max-comparison_files/libs/quarto-html/anchor.min.js"></script>
+<link href="regret-strength-max-comparison_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="regret-strength-max-comparison_files/libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="regret-strength-max-comparison_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="regret-strength-max-comparison_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="regret-strength-max-comparison_files/libs/bootstrap/bootstrap-4e36703a9dd4e0c5f2cd63618d5fc552.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 
 
 </head>
@@ -80,7 +80,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#latin-square-search-strategy-comparison-dfs-vs-lds" id="toc-latin-square-search-strategy-comparison-dfs-vs-lds" class="nav-link active" data-scroll-target="#latin-square-search-strategy-comparison-dfs-vs-lds">Latin Square: Search Strategy Comparison (DFS vs LDS)</a></li>
+  <li><a href="#latin-square-branching-heuristic-comparison-regret-strength-max-regret" id="toc-latin-square-branching-heuristic-comparison-regret-strength-max-regret" class="nav-link active" data-scroll-target="#latin-square-branching-heuristic-comparison-regret-strength-max-regret">Latin Square: Branching Heuristic Comparison (Regret, Strength, Max-Regret)</a></li>
   <li><a href="#overview-search-strategy-and-belief-propagation-comparison" id="toc-overview-search-strategy-and-belief-propagation-comparison" class="nav-link" data-scroll-target="#overview-search-strategy-and-belief-propagation-comparison">Overview: Search Strategy and Belief Propagation Comparison</a></li>
   </ul>
 </nav>
@@ -112,10 +112,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="latin-square-search-strategy-comparison-dfs-vs-lds" class="level1">
-<h1>Latin Square: Search Strategy Comparison (DFS vs LDS)</h1>
+<section id="latin-square-branching-heuristic-comparison-regret-strength-max-regret" class="level1">
+<h1>Latin Square: Branching Heuristic Comparison (Regret, Strength, Max-Regret)</h1>
 <p>This notebook compares Depth-First Search (DFS) and Limited Discrepancy Search (LDS) strategies for solving Latin Square optimization problems using both Sum-product and Max-product belief propagation algorithms.</p>
-<div id="bcb122aa" class="cell" data-execution_count="1">
+<div id="b0b0e7bd" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Configure logging for the notebook</span></span>
@@ -127,7 +127,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    BPAlgorithm, Branching, ExperimentFilter</span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> visualization <span class="im">import</span> (</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    create_comparison_table, </span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    create_comparison_table,</span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    plot_normalized_solution_quality,</span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    plot_optimal_solutions_reached</span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>)</span>
@@ -142,22 +142,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>all_instances <span class="op">=</span> <span class="bu">list</span>(<span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">11</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stderr">
-<pre><code>2025-03-06 11:49:21,898 - data_loader - INFO - Loaded 30 optimal solutions from solutions
-2025-03-06 11:49:21,906 - data_loader - INFO - Scanning 7080 files in logs
-2025-03-06 11:49:27,507 - data_loader - INFO - Scanned 7080 files, loaded 7080 experiments</code></pre>
+<pre><code>2025-03-06 11:49:27,968 - data_loader - INFO - Loaded 30 optimal solutions from solutions
+2025-03-06 11:49:27,984 - data_loader - INFO - Scanning 7080 files in logs
+2025-03-06 11:49:32,397 - data_loader - INFO - Scanned 7080 files, loaded 7080 experiments</code></pre>
 </div>
 </div>
 </section>
 <section id="overview-search-strategy-and-belief-propagation-comparison" class="level1">
 <h1>Overview: Search Strategy and Belief Propagation Comparison</h1>
 <p>In this section, we provide a comprehensive comparison of both search strategies (Depth-First Search and Limited Discrepancy Search) across both belief propagation algorithms (Sum-product and Max-product).</p>
-<div id="1029ad8d" class="cell" data-execution_count="2">
+<div id="63d9391d" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a filter for all algorithms with max-marginal-regret branching</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>all_algorithms_filter <span class="op">=</span> ExperimentFilter.from_dict({</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'algorithm.branching'</span>: <span class="st">'max_marginal_regret'</span>,</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'algorithm.oracle_weight'</span>: <span class="fl">1.0</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'algorithm.oracle_weight'</span>: <span class="fl">1.0</span>,</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'search_type'</span>: <span class="st">'lds'</span>,</span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>})</span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Load all data matching the filter</span></span>
@@ -166,20 +166,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the number of instances reaching optimal solutions, grouped by BP algorithm and search type</span></span>
 <span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plot_optimal_solutions_reached(</span>
 <span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    combined_df, </span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    group_by<span class="op">=</span>[<span class="st">'search_type'</span>, <span class="st">'bp'</span>], </span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    group_by<span class="op">=</span>[<span class="st">'search_type'</span>, <span class="st">'bp'</span>, <span class="st">'branching'</span>], </span>
 <span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    log_scale<span class="op">=</span><span class="va">True</span></span>
 <span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Instances Reaching Optimal Solutions - All Search Strategies and BP Algorithms"</span>)</span>
 <span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stderr">
-<pre><code>2025-03-06 11:49:27,535 - data_loader - INFO - Filtered 120 results out of 1860
-2025-03-06 11:49:27,537 - data_loader - INFO - Loaded 120 experiments</code></pre>
+<pre><code>2025-03-06 11:49:32,429 - data_loader - INFO - Filtered 180 results out of 1860
+2025-03-06 11:49:32,432 - data_loader - INFO - Loaded 180 experiments</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="search-comparison_files/figure-html/cell-3-output-2.png" width="758" height="372" class="figure-img"></p>
+<p><img src="regret-strength-max-comparison_files/figure-html/cell-3-output-2.png" width="758" height="372" class="figure-img"></p>
 </figure>
 </div>
 </div>

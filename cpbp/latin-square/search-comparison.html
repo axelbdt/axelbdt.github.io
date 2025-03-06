@@ -105,6 +105,80 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="latin-square-effect-of-ldsdfs-for-max-marginal-regret" class="level1">
 <h1>Latin Square : Effect of LDS/DFS for max-marginal regret</h1>
+<p>Comparison of DFS and LDS search for max-marginal-regret branching.</p>
+<section id="setup-logging" class="level2">
+<h2 class="anchored" data-anchor-id="setup-logging">Setup Logging</h2>
+<div id="8740c19c" class="cell" data-execution_count="1">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Configure logging for the notebook</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> logging</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> visualization <span class="im">import</span> set_log_level</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Set log level - change to DEBUG for more detailed logs or </span><span class="al">WARNING</span><span class="co"> to reduce output</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>set_log_level(<span class="st">'INFO'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="dataset-wide-performance-comparison" class="level2">
+<h2 class="anchored" data-anchor-id="dataset-wide-performance-comparison">Dataset-wide Performance Comparison</h2>
+<p>First, let’s compare the search strategies across all instances, independent of the belief propagation algorithm and hole count.</p>
+<div id="3b7c6dbf" class="cell" data-execution_count="2">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import the visualization library</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> data_loader <span class="im">import</span> DataLoader</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> experiment_config <span class="im">import</span> (</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    BPAlgorithm, Branching, ExperimentFilter</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Import our visualization functions</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> visualization <span class="im">import</span> (</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    create_comparison_table, </span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    plot_normalized_solution_quality,</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    plot_optimal_solutions_reached</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Set up the data loader - data will be loaded once on initialization</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>data_loader <span class="op">=</span> DataLoader(logs_dir<span class="op">=</span><span class="st">"logs"</span>)</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Define all instances</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>all_instances <span class="op">=</span> <span class="bu">list</span>(<span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">11</span>))</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a filter for all instances with max-marginal-regret branching</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>all_instances_filter <span class="op">=</span> ExperimentFilter.from_dict({</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>    <span class="st">'algorithm.branching'</span>: <span class="st">'max_marginal_regret'</span>,</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>    <span class="st">'algorithm.oracle_weight'</span>: <span class="fl">1.0</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Load all data matching the filter</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>all_instances_df <span class="op">=</span> data_loader.load_experiments_for_comparison(all_instances_filter)</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the number of instances reaching optimal solutions, grouped by search type</span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plot_optimal_solutions_reached(</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>    all_instances_df, </span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>    group_by<span class="op">=</span>[<span class="st">'search_type'</span>], </span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>    log_scale<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Instances Reaching Optimal Solutions - All BPs and Hole Counts"</span>)</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>2025-03-05 19:47:04,534 - data_loader - INFO - Loaded 30 optimal solutions from solutions
+2025-03-05 19:47:04,550 - data_loader - INFO - Scanning 6980 files in logs
+2025-03-05 19:47:08,667 - data_loader - INFO - Scanned 6980 files, loaded 6980 experiments
+2025-03-05 19:47:08,671 - data_loader - INFO - Filtered 120 results out of 1840
+2025-03-05 19:47:08,672 - data_loader - INFO - Loaded 120 experiments</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="search-comparison_files/figure-html/cell-3-output-2.png" width="758" height="372" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
 <section id="summary" class="level2">
 <h2 class="anchored" data-anchor-id="summary">Summary</h2>
 <section id="st-solution" class="level3">
@@ -126,68 +200,64 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="plots-sum-product" class="level2">
 <h2 class="anchored" data-anchor-id="plots-sum-product">Plots sum-product</h2>
-<div id="e64a2783" class="cell" data-execution_count="1">
+<div id="282c5aba" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import the new visualization library</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> data_loader <span class="im">import</span> DataLoader</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> experiment_config <span class="im">import</span> (</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    BPAlgorithm, Branching, ExperimentFilter, SearchType</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Import our modified visualization functions</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> visualization <span class="im">import</span> (</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    create_comparison_table, plot_normalized_solution_quality, </span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    plot_total_failures, plot_solution_quality</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Set up the data loader - data will be loaded once on initialization</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>data_loader <span class="op">=</span> DataLoader(logs_dir<span class="op">=</span><span class="st">"logs"</span>)</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Define all instances</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>all_instances <span class="op">=</span> <span class="bu">list</span>(<span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">11</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> data_loader <span class="im">import</span> DataLoader</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> experiment_config <span class="im">import</span> (</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    BPAlgorithm, Branching, ExperimentFilter</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> visualization <span class="im">import</span> (</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    create_comparison_table, plot_normalized_solution_quality</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Set up the data loader - data will be loaded once on initialization</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>data_loader <span class="op">=</span> DataLoader(logs_dir<span class="op">=</span><span class="st">"logs"</span>)</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Define all instances</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>all_instances <span class="op">=</span> <span class="bu">list</span>(<span class="bu">range</span>(<span class="dv">1</span>, <span class="dv">11</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stderr">
-<pre><code>2025-03-04 22:23:58,691 - data_loader - INFO - Loaded 30 optimal solutions from solutions
-2025-03-04 22:23:58,704 - data_loader - INFO - Scanning 2760 files in logs
-2025-03-04 22:24:01,467 - data_loader - INFO - Scanned 2760 files, loaded 2760 experiments</code></pre>
+<pre><code>2025-03-05 19:47:09,678 - data_loader - INFO - Loaded 30 optimal solutions from solutions
+2025-03-05 19:47:09,686 - data_loader - INFO - Scanning 6980 files in logs
+2025-03-05 19:47:11,984 - data_loader - INFO - Scanned 6980 files, loaded 6980 experiments</code></pre>
 </div>
 </div>
 <section id="holes" class="level4">
 <h4 class="anchored" data-anchor-id="holes">200 Holes</h4>
-<div id="eb0a4db1" class="cell" data-execution_count="2">
+<div id="a0a0aaa4" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 200 Holes - Sum-Product</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>sp_200_filter <span class="op">=</span> ExperimentFilter.from_dict({</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'instance.nb_holes'</span>: <span class="dv">200</span>,</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'algorithm.bp'</span>: <span class="st">'sum_product'</span>,</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'algorithm.branching'</span>: <span class="st">'max_marginal_regret'</span>,</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">'algorithm.oracle_weight'</span>: <span class="fl">1.0</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>sp_200_df <span class="op">=</span> data_loader.load_experiments_for_comparison(sp_200_filter)</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Create comparison table with separate tables for each search type</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(create_comparison_table(sp_200_df, group_by<span class="op">=</span>[<span class="st">'search_type'</span>]))</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot failures by algorithm</span></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plot_total_failures(sp_200_df, group_by<span class="op">=</span>[<span class="st">'search_type'</span>])</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot normalized solution quality</span></span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plot_normalized_solution_quality(sp_200_df, group_by<span class="op">=</span>[<span class="st">'search_type'</span>], log_scale<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Normalized Solution Quality - 200 Holes (Sum-Product)"</span>)</span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 200 Holes - Sum-Product</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>sp_200_filter <span class="op">=</span> ExperimentFilter.from_dict({</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'instance.nb_holes'</span>: <span class="dv">200</span>,</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'algorithm.bp'</span>: <span class="st">'sum_product'</span>,</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'algorithm.branching'</span>: <span class="st">'max_marginal_regret'</span>,</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">'algorithm.oracle_weight'</span>: <span class="fl">1.0</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>sp_200_df <span class="op">=</span> data_loader.load_experiments_for_comparison(sp_200_filter)</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Create comparison table with separate tables for each search type</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(create_comparison_table(sp_200_df, group_by<span class="op">=</span>[<span class="st">'search_type'</span>]))</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot normalized solution quality</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plot_normalized_solution_quality(sp_200_df, group_by<span class="op">=</span>[<span class="st">'search_type'</span>], log_scale<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Normalized Solution Quality - 200 Holes (Sum-Product)"</span>)</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot optimal solutions reached for this specific hole count</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plot_optimal_solutions_reached(sp_200_df, group_by<span class="op">=</span>[<span class="st">'search_type'</span>], log_scale<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Instances Reaching Optimal Solutions - 200 Holes (Sum-Product)"</span>)</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stderr">
-<pre><code>2025-03-04 22:24:01,518 - data_loader - INFO - Filtered 20 results out of 780
-2025-03-04 22:24:01,519 - data_loader - INFO - Loaded 20 experiments</code></pre>
+<pre><code>2025-03-05 19:47:12,011 - data_loader - INFO - Filtered 20 results out of 1840
+2025-03-05 19:47:12,012 - data_loader - INFO - Loaded 20 experiments</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>DataFrame columns: ['n', 'nb_holes', 'instance_id', 'objective', 'bp', 'branching', 'oracle_weight', 'max_iter', 'truncate_rate', 'search_type', 'total_fails', 'execution_time_ms', 'num_solutions', 'best_score', 'completed', 'first_solution_score', 'first_solution_fails', 'first_solution_time_ms', 'last_solution_score', 'last_solution_fails']
-Using modified group_by: ['search_type']
-### search_type: lds
+<pre><code>### search_type: lds
 
 |   i |   fs Sc |   fs #f |   ls Sc |   ls #f |   #fail |   #sols | comp.   |
 |----:|--------:|--------:|--------:|--------:|--------:|--------:|:--------|
@@ -206,54 +276,30 @@ Using modified group_by: ['search_type']
 
 |   i |   fs Sc |   fs #f |   ls Sc |   ls #f |   #fail |   #sols | comp.   |
 |----:|--------:|--------:|--------:|--------:|--------:|--------:|:--------|
-|   1 |     177 |       0 |     229 |    1033 | 6170927 |      17 | No      |
-|   2 |     229 |       0 |     284 |  713784 |  714085 |      16 | Yes     |
+|   1 |     177 |       0 |     229 |    1033 | 1296173 |      17 | No      |
+|   2 |     229 |       0 |     283 |   44367 |  277338 |      15 | No      |
 |   3 |     210 |       0 |     241 |     399 |     592 |      10 | Yes     |
 |   4 |     204 |       0 |     247 |     975 |    1162 |      12 | Yes     |
 |   5 |     212 |       0 |     244 |   21502 |   22137 |      13 | Yes     |
 |   6 |     174 |       0 |     232 |    1561 |    1823 |      22 | Yes     |
-|   7 |     210 |       0 |     249 |     712 | 1672002 |      16 | No      |
+|   7 |     210 |       0 |     249 |     712 |  408052 |      16 | No      |
 |   8 |     208 |       0 |     252 |     842 |     948 |      17 | Yes     |
 |   9 |     173 |       0 |     222 |   10686 |   11883 |      20 | Yes     |
 |  10 |     211 |       0 |     220 |    1163 |    2119 |       7 | Yes     |
 
-
-Summary data shape: (20, 20)
-Summary data columns: ['n', 'nb_holes', 'instance_id', 'objective', 'bp', 'branching', 'oracle_weight', 'max_iter', 'truncate_rate', 'search_type', 'total_fails', 'execution_time_ms', 'num_solutions', 'best_score', 'completed', 'first_solution_score', 'first_solution_fails', 'first_solution_time_ms', 'last_solution_score', 'last_solution_fails']
-Using group_by: ['search_type']
-Creating failures plot with data shape: (20, 20)
-Group by columns: ['search_type']
-Using pivot columns: ['search_type']
-Found 2 unique algorithm configurations
-Config 0: lds, color=(0.12156862745098039, 0.4666666666666667, 0.7058823529411765, 1.0)
-Config 3: dfs, color=(0.8392156862745098, 0.15294117647058825, 0.1568627450980392, 1.0)
-Found 10 unique instance IDs: [ 1  2  3  4  5  6  7  8  9 10]
-Config lds: found 10 matching rows
-Config dfs: found 10 matching rows</code></pre>
+</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="search-comparison_files/figure-html/cell-3-output-3.png" width="757" height="566" class="figure-img"></p>
+<p><img src="search-comparison_files/figure-html/cell-5-output-3.png" width="758" height="372" class="figure-img"></p>
 </figure>
 </div>
 </div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Normalized progress data shape: (289, 15)
-Normalized progress data columns: ['n', 'nb_holes', 'instance_id', 'objective', 'bp', 'branching', 'oracle_weight', 'max_iter', 'truncate_rate', 'search_type', 'solution_idx', 'score', 'fails', 'max_instance_score', 'norm_score']
-Using group_by: ['search_type']
-Plotting with single color per group. Data shape: (289, 15)
-Group by columns: ['search_type']
-Found 2 algorithm groups
-Algorithm group dfs: color=(0.12156862745098039, 0.4666666666666667, 0.7058823529411765, 1.0), label=dfs
-Algorithm group lds: color=(1.0, 0.4980392156862745, 0.054901960784313725, 1.0), label=lds
-Algorithm dfs: found 150 data points across 10 instances
-Algorithm lds: found 139 data points across 10 instances</code></pre>
-</div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="search-comparison_files/figure-html/cell-3-output-5.png" width="753" height="564" class="figure-img"></p>
+<p><img src="search-comparison_files/figure-html/cell-5-output-4.png" width="758" height="372" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -261,105 +307,80 @@ Algorithm lds: found 139 data points across 10 instances</code></pre>
 </section>
 <section id="holes-1" class="level4">
 <h4 class="anchored" data-anchor-id="holes-1">250 Holes</h4>
-<div id="73a2e70e" class="cell" data-execution_count="3">
+<div id="ce82ab5e" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 250 Holes - Sum-Product</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>sp_250_filter <span class="op">=</span> ExperimentFilter.from_dict({</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'instance.nb_holes'</span>: <span class="dv">250</span>,</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'algorithm.bp'</span>: <span class="st">'sum_product'</span>,</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'algorithm.branching'</span>: <span class="st">'max_marginal_regret'</span>,</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">'algorithm.oracle_weight'</span>: <span class="fl">1.0</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>sp_250_df <span class="op">=</span> data_loader.load_experiments_for_comparison(sp_250_filter)</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Create comparison table with separate tables for each search type</span></span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(create_comparison_table(sp_250_df, group_by<span class="op">=</span>[<span class="st">'search_type'</span>]))</span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot failures by algorithm</span></span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plot_total_failures(sp_250_df, group_by<span class="op">=</span>[<span class="st">'search_type'</span>])</span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot normalized solution quality</span></span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plot_normalized_solution_quality(sp_250_df, group_by<span class="op">=</span>[<span class="st">'search_type'</span>], log_scale<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Normalized Solution Quality - 250 Holes (Sum-Product)"</span>)</span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 250 Holes - Sum-Product</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>sp_250_filter <span class="op">=</span> ExperimentFilter.from_dict({</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'instance.nb_holes'</span>: <span class="dv">250</span>,</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'algorithm.bp'</span>: <span class="st">'sum_product'</span>,</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'algorithm.branching'</span>: <span class="st">'max_marginal_regret'</span>,</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">'algorithm.oracle_weight'</span>: <span class="fl">1.0</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>sp_250_df <span class="op">=</span> data_loader.load_experiments_for_comparison(sp_250_filter)</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Create comparison table with separate tables for each search type</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(create_comparison_table(sp_250_df, group_by<span class="op">=</span>[<span class="st">'search_type'</span>]))</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot normalized solution quality</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plot_normalized_solution_quality(sp_250_df, group_by<span class="op">=</span>[<span class="st">'search_type'</span>], log_scale<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Normalized Solution Quality - 250 Holes (Sum-Product)"</span>)</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot optimal solutions reached for this specific hole count</span></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plot_optimal_solutions_reached(sp_250_df, group_by<span class="op">=</span>[<span class="st">'search_type'</span>], log_scale<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Instances Reaching Optimal Solutions - 250 Holes (Sum-Product)"</span>)</span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stderr">
-<pre><code>2025-03-04 22:24:03,936 - data_loader - INFO - Filtered 20 results out of 780
-2025-03-04 22:24:03,938 - data_loader - INFO - Loaded 20 experiments</code></pre>
+<pre><code>2025-03-05 19:47:13,702 - data_loader - INFO - Filtered 20 results out of 1840
+2025-03-05 19:47:13,706 - data_loader - INFO - Loaded 20 experiments</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>DataFrame columns: ['n', 'nb_holes', 'instance_id', 'objective', 'bp', 'branching', 'oracle_weight', 'max_iter', 'truncate_rate', 'search_type', 'total_fails', 'execution_time_ms', 'num_solutions', 'best_score', 'completed', 'first_solution_score', 'first_solution_fails', 'first_solution_time_ms', 'last_solution_score', 'last_solution_fails']
-Using modified group_by: ['search_type']
-### search_type: dfs
+<pre><code>### search_type: dfs
 
 |   i |   fs Sc |   fs #f |   ls Sc |   ls #f |   #fail |   #sols | comp.   |
 |----:|--------:|--------:|--------:|--------:|--------:|--------:|:--------|
-|   1 |     211 |       0 |     256 | 1286080 | 8108562 |      14 | No      |
-|   2 |     229 |       0 |     245 | 4345530 | 8186047 |       4 | No      |
-|   3 |     184 |       0 |     208 |  818620 | 2902300 |       8 | No      |
+|   1 |     211 |       0 |     253 |     556 | 1061717 |      13 | No      |
+|   2 |     229 |       0 |     240 |    3562 | 1385449 |       3 | No      |
+|   3 |     184 |       0 |     207 |    1517 |  737550 |       7 | No      |
 |   4 |     215 |       0 |     275 |    1982 |    2459 |      16 | Yes     |
-|   5 |     216 |       0 |     233 |  464874 | 4875644 |       5 | No      |
-|   6 |     240 |       0 |     255 |     290 | 3823720 |       5 | No      |
-|   7 |     202 |       0 |     230 |     414 | 3099827 |      11 | No      |
+|   5 |     216 |       0 |     233 |  464874 | 1335972 |       5 | No      |
+|   6 |     240 |       0 |     255 |     290 |  984294 |       5 | No      |
+|   7 |     202 |       0 |     230 |     414 |  842360 |      11 | No      |
 |   8 |     226 |       0 |     286 |    2025 |    2377 |      21 | Yes     |
 |   9 |     193 |       0 |     241 |    2845 |    4468 |      17 | Yes     |
-|  10 |     225 |       0 |     242 |    1577 | 8902494 |       7 | No      |
+|  10 |     225 |       0 |     242 |    1577 | 1778716 |       7 | No      |
 
 ### search_type: lds
 
 |   i |   fs Sc |   fs #f |   ls Sc |   ls #f |   #fail |   #sols | comp.   |
 |----:|--------:|--------:|--------:|--------:|--------:|--------:|:--------|
 |   1 |     221 |       0 |     272 |     134 |    2578 |      21 | Yes     |
-|   2 |     204 |       0 |     266 |     181 |  132600 |      18 | No      |
+|   2 |     204 |       0 |     266 |     181 |   42971 |      18 | No      |
 |   3 |     184 |       0 |     224 |     219 |    3958 |      13 | Yes     |
 |   4 |     209 |       0 |     275 |     191 |     970 |      19 | Yes     |
 |   5 |     215 |       0 |     267 |     182 |    2670 |      18 | Yes     |
 |   6 |     199 |       0 |     266 |     190 |     407 |      25 | Yes     |
-|   7 |     202 |       0 |     265 |     218 |   76137 |      28 | No      |
+|   7 |     202 |       0 |     265 |     218 |   20947 |      28 | No      |
 |   8 |     226 |       0 |     286 |     188 |    1270 |      21 | Yes     |
 |   9 |     177 |       0 |     241 |     160 |    1839 |      15 | Yes     |
 |  10 |     222 |       0 |     270 |     151 |    1076 |      21 | Yes     |
 
-
-Summary data shape: (20, 20)
-Summary data columns: ['n', 'nb_holes', 'instance_id', 'objective', 'bp', 'branching', 'oracle_weight', 'max_iter', 'truncate_rate', 'search_type', 'total_fails', 'execution_time_ms', 'num_solutions', 'best_score', 'completed', 'first_solution_score', 'first_solution_fails', 'first_solution_time_ms', 'last_solution_score', 'last_solution_fails']
-Using group_by: ['search_type']
-Creating failures plot with data shape: (20, 20)
-Group by columns: ['search_type']
-Using pivot columns: ['search_type']
-Found 2 unique algorithm configurations
-Config 0: dfs, color=(0.12156862745098039, 0.4666666666666667, 0.7058823529411765, 1.0)
-Config 2: lds, color=(0.17254901960784313, 0.6274509803921569, 0.17254901960784313, 1.0)
-Found 10 unique instance IDs: [ 1  2  3  4  5  6  7  8  9 10]
-Config dfs: found 10 matching rows
-Config lds: found 10 matching rows</code></pre>
+</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="search-comparison_files/figure-html/cell-4-output-3.png" width="757" height="566" class="figure-img"></p>
+<p><img src="search-comparison_files/figure-html/cell-6-output-3.png" width="758" height="372" class="figure-img"></p>
 </figure>
 </div>
 </div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Normalized progress data shape: (307, 15)
-Normalized progress data columns: ['n', 'nb_holes', 'instance_id', 'objective', 'bp', 'branching', 'oracle_weight', 'max_iter', 'truncate_rate', 'search_type', 'solution_idx', 'score', 'fails', 'max_instance_score', 'norm_score']
-Using group_by: ['search_type']
-Plotting with single color per group. Data shape: (307, 15)
-Group by columns: ['search_type']
-Found 2 algorithm groups
-Algorithm group dfs: color=(0.12156862745098039, 0.4666666666666667, 0.7058823529411765, 1.0), label=dfs
-Algorithm group lds: color=(1.0, 0.4980392156862745, 0.054901960784313725, 1.0), label=lds
-Algorithm dfs: found 108 data points across 10 instances
-Algorithm lds: found 199 data points across 10 instances</code></pre>
-</div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="search-comparison_files/figure-html/cell-4-output-5.png" width="753" height="564" class="figure-img"></p>
+<p><img src="search-comparison_files/figure-html/cell-6-output-4.png" width="758" height="372" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -367,39 +388,38 @@ Algorithm lds: found 199 data points across 10 instances</code></pre>
 </section>
 <section id="holes-2" class="level4">
 <h4 class="anchored" data-anchor-id="holes-2">300 Holes</h4>
-<div id="cf3cea19" class="cell" data-execution_count="4">
+<div id="ad5509e8" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 300 Holes - Sum-Product</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>sp_300_filter <span class="op">=</span> ExperimentFilter.from_dict({</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'instance.nb_holes'</span>: <span class="dv">300</span>,</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'algorithm.bp'</span>: <span class="st">'sum_product'</span>,</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'algorithm.branching'</span>: <span class="st">'max_marginal_regret'</span>,</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">'algorithm.oracle_weight'</span>: <span class="fl">1.0</span></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>sp_300_df <span class="op">=</span> data_loader.load_experiments_for_comparison(sp_300_filter)</span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Create comparison table with separate tables for each search type</span></span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(create_comparison_table(sp_300_df, group_by<span class="op">=</span>[<span class="st">'search_type'</span>]))</span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot failures by algorithm</span></span>
-<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plot_total_failures(sp_300_df, group_by<span class="op">=</span>[<span class="st">'search_type'</span>])</span>
-<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
-<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot normalized solution quality</span></span>
-<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plot_normalized_solution_quality(sp_300_df, group_by<span class="op">=</span>[<span class="st">'search_type'</span>], log_scale<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Normalized Solution Quality - 300 Holes (Sum-Product)"</span>)</span>
-<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 300 Holes - Sum-Product</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>sp_300_filter <span class="op">=</span> ExperimentFilter.from_dict({</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'instance.nb_holes'</span>: <span class="dv">300</span>,</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'algorithm.bp'</span>: <span class="st">'sum_product'</span>,</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'algorithm.branching'</span>: <span class="st">'max_marginal_regret'</span>,</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">'algorithm.oracle_weight'</span>: <span class="fl">1.0</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>sp_300_df <span class="op">=</span> data_loader.load_experiments_for_comparison(sp_300_filter)</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Create comparison table with separate tables for each search type</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(create_comparison_table(sp_300_df, group_by<span class="op">=</span>[<span class="st">'search_type'</span>]))</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot normalized solution quality</span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plot_normalized_solution_quality(sp_300_df, group_by<span class="op">=</span>[<span class="st">'search_type'</span>], log_scale<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Normalized Solution Quality - 300 Holes (Sum-Product)"</span>)</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot optimal solutions reached for this specific hole count</span></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plot_optimal_solutions_reached(sp_300_df, group_by<span class="op">=</span>[<span class="st">'search_type'</span>], log_scale<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Instances Reaching Optimal Solutions - 300 Holes (Sum-Product)"</span>)</span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stderr">
-<pre><code>2025-03-04 22:24:06,268 - data_loader - INFO - Filtered 20 results out of 780
-2025-03-04 22:24:06,269 - data_loader - INFO - Loaded 20 experiments</code></pre>
+<pre><code>2025-03-05 19:47:15,472 - data_loader - INFO - Filtered 20 results out of 1840
+2025-03-05 19:47:15,473 - data_loader - INFO - Loaded 20 experiments</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>DataFrame columns: ['n', 'nb_holes', 'instance_id', 'objective', 'bp', 'branching', 'oracle_weight', 'max_iter', 'truncate_rate', 'search_type', 'total_fails', 'execution_time_ms', 'num_solutions', 'best_score', 'completed', 'first_solution_score', 'first_solution_fails', 'first_solution_time_ms', 'last_solution_score', 'last_solution_fails']
-Using modified group_by: ['search_type']
-### search_type: lds
+<pre><code>### search_type: lds
 
 |   i |   fs Sc |   fs #f |   ls Sc |   ls #f |   #fail |   #sols | comp.   |
 |----:|--------:|--------:|--------:|--------:|--------:|--------:|:--------|
@@ -409,63 +429,39 @@ Using modified group_by: ['search_type']
 |   4 |     219 |       0 |     302 |     268 |   36918 |      28 | Yes     |
 |   5 |     216 |       0 |     272 |     491 |   11419 |      23 | Yes     |
 |   6 |     245 |       0 |     282 |     238 |   37374 |      16 | Yes     |
-|   7 |     234 |       0 |     277 |     216 |  324382 |      14 | No      |
+|   7 |     234 |       0 |     277 |     216 |   99832 |      14 | No      |
 |   8 |     228 |       0 |     284 |     218 |  110039 |      20 | Yes     |
 |   9 |     243 |       0 |     280 |     254 |   28529 |      15 | Yes     |
-|  10 |     219 |       0 |     295 |     972 |  252956 |      34 | No      |
+|  10 |     219 |       0 |     295 |     972 |   97105 |      34 | No      |
 
 ### search_type: dfs
 
-|   i |   fs Sc |   fs #f |   ls Sc |   ls #f |    #fail |   #sols | comp.   |
-|----:|--------:|--------:|--------:|--------:|---------:|--------:|:--------|
-|   1 |     215 |       0 |     299 |    6009 |  6829800 |      27 | No      |
-|   2 |     247 |       0 |     276 |     138 | 22563533 |       7 | No      |
-|   3 |     248 |       0 |     306 |    9270 |  5802235 |      30 | No      |
-|   4 |     230 |       0 |     248 |     101 | 12981683 |       5 | No      |
-|   5 |     227 |       0 |     262 |    1079 |  5695779 |      13 | No      |
-|   6 |     245 |       0 |     282 |   18571 |    37737 |      14 | Yes     |
-|   7 |     231 |       0 |     275 |    5415 |  3307444 |      15 | No      |
-|   8 |     228 |       0 |     270 |    2609 |  1387131 |      13 | No      |
-|   9 |     232 |       0 |     236 |      59 | 16237308 |       3 | No      |
-|  10 |     225 |       0 |     254 |     751 |  3412716 |      12 | No      |
+|   i |   fs Sc |   fs #f |   ls Sc |   ls #f |   #fail |   #sols | comp.   |
+|----:|--------:|--------:|--------:|--------:|--------:|--------:|:--------|
+|   1 |     215 |       0 |     299 |    6009 | 1792275 |      27 | No      |
+|   2 |     247 |       0 |     276 |     138 | 5698784 |       7 | No      |
+|   3 |     248 |       0 |     306 |    9270 | 1358576 |      30 | No      |
+|   4 |     230 |       0 |     248 |     101 | 3455151 |       5 | No      |
+|   5 |     227 |       0 |     262 |    1079 | 1482567 |      13 | No      |
+|   6 |     245 |       0 |     282 |   18571 |   37737 |      14 | Yes     |
+|   7 |     231 |       0 |     275 |    5415 |  757135 |      15 | No      |
+|   8 |     228 |       0 |     270 |    2609 |  379279 |      13 | No      |
+|   9 |     232 |       0 |     236 |      59 | 4523292 |       3 | No      |
+|  10 |     225 |       0 |     254 |     751 |  857672 |      12 | No      |
 
-
-Summary data shape: (20, 20)
-Summary data columns: ['n', 'nb_holes', 'instance_id', 'objective', 'bp', 'branching', 'oracle_weight', 'max_iter', 'truncate_rate', 'search_type', 'total_fails', 'execution_time_ms', 'num_solutions', 'best_score', 'completed', 'first_solution_score', 'first_solution_fails', 'first_solution_time_ms', 'last_solution_score', 'last_solution_fails']
-Using group_by: ['search_type']
-Creating failures plot with data shape: (20, 20)
-Group by columns: ['search_type']
-Using pivot columns: ['search_type']
-Found 2 unique algorithm configurations
-Config 0: lds, color=(0.12156862745098039, 0.4666666666666667, 0.7058823529411765, 1.0)
-Config 2: dfs, color=(0.17254901960784313, 0.6274509803921569, 0.17254901960784313, 1.0)
-Found 10 unique instance IDs: [ 1  2  3  4  5  6  7  8  9 10]
-Config lds: found 10 matching rows
-Config dfs: found 10 matching rows</code></pre>
+</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="search-comparison_files/figure-html/cell-5-output-3.png" width="757" height="566" class="figure-img"></p>
+<p><img src="search-comparison_files/figure-html/cell-7-output-3.png" width="758" height="372" class="figure-img"></p>
 </figure>
 </div>
 </div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Normalized progress data shape: (383, 15)
-Normalized progress data columns: ['n', 'nb_holes', 'instance_id', 'objective', 'bp', 'branching', 'oracle_weight', 'max_iter', 'truncate_rate', 'search_type', 'solution_idx', 'score', 'fails', 'max_instance_score', 'norm_score']
-Using group_by: ['search_type']
-Plotting with single color per group. Data shape: (383, 15)
-Group by columns: ['search_type']
-Found 2 algorithm groups
-Algorithm group dfs: color=(0.12156862745098039, 0.4666666666666667, 0.7058823529411765, 1.0), label=dfs
-Algorithm group lds: color=(1.0, 0.4980392156862745, 0.054901960784313725, 1.0), label=lds
-Algorithm dfs: found 139 data points across 10 instances
-Algorithm lds: found 244 data points across 10 instances</code></pre>
-</div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="search-comparison_files/figure-html/cell-5-output-5.png" width="753" height="564" class="figure-img"></p>
+<p><img src="search-comparison_files/figure-html/cell-7-output-4.png" width="758" height="372" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -474,7 +470,7 @@ Algorithm lds: found 244 data points across 10 instances</code></pre>
 </section>
 <section id="plots-max-product" class="level2">
 <h2 class="anchored" data-anchor-id="plots-max-product">Plots max-product</h2>
-<div id="0ad8dabf" class="cell" data-execution_count="5">
+<div id="63df4176" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter for max-product with max-marginal-regret</span></span>
@@ -487,7 +483,7 @@ Algorithm lds: found 244 data points across 10 instances</code></pre>
 </div>
 <section id="holes-3" class="level4">
 <h4 class="anchored" data-anchor-id="holes-3">200 Holes</h4>
-<div id="fd0a4ab3" class="cell" data-execution_count="6">
+<div id="517bcb89" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 200 Holes - Max-Product</span></span>
@@ -503,23 +499,22 @@ Algorithm lds: found 244 data points across 10 instances</code></pre>
 <span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Create comparison table with separate tables for each search type</span></span>
 <span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(create_comparison_table(mp_200_df, group_by<span class="op">=</span>[<span class="st">'search_type'</span>]))</span>
 <span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot failures by algorithm</span></span>
-<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plot_total_failures(mp_200_df, group_by<span class="op">=</span>[<span class="st">'search_type'</span>])</span>
-<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
-<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot normalized solution quality</span></span>
-<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plot_normalized_solution_quality(mp_200_df, group_by<span class="op">=</span>[<span class="st">'search_type'</span>], log_scale<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Normalized Solution Quality - 200 Holes (Max-Product)"</span>)</span>
-<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot normalized solution quality</span></span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plot_normalized_solution_quality(mp_200_df, group_by<span class="op">=</span>[<span class="st">'search_type'</span>], log_scale<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Normalized Solution Quality - 200 Holes (Max-Product)"</span>)</span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot optimal solutions reached for this specific hole count</span></span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plot_optimal_solutions_reached(mp_200_df, group_by<span class="op">=</span>[<span class="st">'search_type'</span>], log_scale<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Instances Reaching Optimal Solutions - 200 Holes (Max-Product)"</span>)</span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stderr">
-<pre><code>2025-03-04 22:24:08,817 - data_loader - INFO - Filtered 20 results out of 780
-2025-03-04 22:24:08,818 - data_loader - INFO - Loaded 20 experiments</code></pre>
+<pre><code>2025-03-05 19:47:17,239 - data_loader - INFO - Filtered 20 results out of 1840
+2025-03-05 19:47:17,241 - data_loader - INFO - Loaded 20 experiments</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>DataFrame columns: ['n', 'nb_holes', 'instance_id', 'objective', 'bp', 'branching', 'oracle_weight', 'max_iter', 'truncate_rate', 'search_type', 'total_fails', 'execution_time_ms', 'num_solutions', 'best_score', 'completed', 'first_solution_score', 'first_solution_fails', 'first_solution_time_ms', 'last_solution_score', 'last_solution_fails']
-Using modified group_by: ['search_type']
-### search_type: dfs
+<pre><code>### search_type: dfs
 
 |   i |   fs Sc |   fs #f |   ls Sc |   ls #f |   #fail |   #sols | comp.   |
 |----:|--------:|--------:|--------:|--------:|--------:|--------:|:--------|
@@ -549,43 +544,19 @@ Using modified group_by: ['search_type']
 |   9 |     222 |      36 |     222 |      36 |     497 |       1 | Yes     |
 |  10 |     220 |       5 |     220 |       5 |     431 |       1 | Yes     |
 
-
-Summary data shape: (20, 20)
-Summary data columns: ['n', 'nb_holes', 'instance_id', 'objective', 'bp', 'branching', 'oracle_weight', 'max_iter', 'truncate_rate', 'search_type', 'total_fails', 'execution_time_ms', 'num_solutions', 'best_score', 'completed', 'first_solution_score', 'first_solution_fails', 'first_solution_time_ms', 'last_solution_score', 'last_solution_fails']
-Using group_by: ['search_type']
-Creating failures plot with data shape: (20, 20)
-Group by columns: ['search_type']
-Using pivot columns: ['search_type']
-Found 2 unique algorithm configurations
-Config 0: dfs, color=(0.12156862745098039, 0.4666666666666667, 0.7058823529411765, 1.0)
-Config 2: lds, color=(0.17254901960784313, 0.6274509803921569, 0.17254901960784313, 1.0)
-Found 10 unique instance IDs: [ 1  2  3  4  5  6  7  8  9 10]
-Config dfs: found 10 matching rows
-Config lds: found 10 matching rows</code></pre>
+</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="search-comparison_files/figure-html/cell-7-output-3.png" width="757" height="566" class="figure-img"></p>
+<p><img src="search-comparison_files/figure-html/cell-9-output-3.png" width="758" height="372" class="figure-img"></p>
 </figure>
 </div>
 </div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Normalized progress data shape: (23, 15)
-Normalized progress data columns: ['n', 'nb_holes', 'instance_id', 'objective', 'bp', 'branching', 'oracle_weight', 'max_iter', 'truncate_rate', 'search_type', 'solution_idx', 'score', 'fails', 'max_instance_score', 'norm_score']
-Using group_by: ['search_type']
-Plotting with single color per group. Data shape: (23, 15)
-Group by columns: ['search_type']
-Found 2 algorithm groups
-Algorithm group dfs: color=(0.12156862745098039, 0.4666666666666667, 0.7058823529411765, 1.0), label=dfs
-Algorithm group lds: color=(1.0, 0.4980392156862745, 0.054901960784313725, 1.0), label=lds
-Algorithm dfs: found 10 data points across 10 instances
-Algorithm lds: found 13 data points across 10 instances</code></pre>
-</div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="search-comparison_files/figure-html/cell-7-output-5.png" width="752" height="564" class="figure-img"></p>
+<p><img src="search-comparison_files/figure-html/cell-9-output-4.png" width="758" height="372" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -593,39 +564,38 @@ Algorithm lds: found 13 data points across 10 instances</code></pre>
 </section>
 <section id="holes-4" class="level4">
 <h4 class="anchored" data-anchor-id="holes-4">250 Holes</h4>
-<div id="e568fa56" class="cell" data-execution_count="7">
+<div id="bca252f7" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 250 Holes - Max-Product</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>mp_250_filter <span class="op">=</span> ExperimentFilter.from_dict({</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'instance.nb_holes'</span>: <span class="dv">250</span>,</span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'algorithm.bp'</span>: <span class="st">'max_product'</span>,</span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'algorithm.branching'</span>: <span class="st">'max_marginal_regret'</span>,</span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">'algorithm.oracle_weight'</span>: <span class="fl">1.0</span></span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>mp_250_df <span class="op">=</span> data_loader.load_experiments_for_comparison(mp_250_filter)</span>
-<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Create comparison table with separate tables for each search type</span></span>
-<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(create_comparison_table(mp_250_df, group_by<span class="op">=</span>[<span class="st">'search_type'</span>]))</span>
-<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot failures by algorithm</span></span>
-<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plot_total_failures(mp_250_df, group_by<span class="op">=</span>[<span class="st">'search_type'</span>])</span>
-<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
-<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot normalized solution quality</span></span>
-<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plot_normalized_solution_quality(mp_250_df, group_by<span class="op">=</span>[<span class="st">'search_type'</span>], log_scale<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Normalized Solution Quality - 250 Holes (Max-Product)"</span>)</span>
-<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 250 Holes - Max-Product</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>mp_250_filter <span class="op">=</span> ExperimentFilter.from_dict({</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'instance.nb_holes'</span>: <span class="dv">250</span>,</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'algorithm.bp'</span>: <span class="st">'max_product'</span>,</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'algorithm.branching'</span>: <span class="st">'max_marginal_regret'</span>,</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">'algorithm.oracle_weight'</span>: <span class="fl">1.0</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>mp_250_df <span class="op">=</span> data_loader.load_experiments_for_comparison(mp_250_filter)</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Create comparison table with separate tables for each search type</span></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(create_comparison_table(mp_250_df, group_by<span class="op">=</span>[<span class="st">'search_type'</span>]))</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot normalized solution quality</span></span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plot_normalized_solution_quality(mp_250_df, group_by<span class="op">=</span>[<span class="st">'search_type'</span>], log_scale<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Normalized Solution Quality - 250 Holes (Max-Product)"</span>)</span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot optimal solutions reached for this specific hole count</span></span>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plot_optimal_solutions_reached(mp_250_df, group_by<span class="op">=</span>[<span class="st">'search_type'</span>], log_scale<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Instances Reaching Optimal Solutions - 250 Holes (Max-Product)"</span>)</span>
+<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stderr">
-<pre><code>2025-03-04 22:24:10,783 - data_loader - INFO - Filtered 20 results out of 780
-2025-03-04 22:24:10,785 - data_loader - INFO - Loaded 20 experiments</code></pre>
+<pre><code>2025-03-05 19:47:18,589 - data_loader - INFO - Filtered 20 results out of 1840
+2025-03-05 19:47:18,590 - data_loader - INFO - Loaded 20 experiments</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>DataFrame columns: ['n', 'nb_holes', 'instance_id', 'objective', 'bp', 'branching', 'oracle_weight', 'max_iter', 'truncate_rate', 'search_type', 'total_fails', 'execution_time_ms', 'num_solutions', 'best_score', 'completed', 'first_solution_score', 'first_solution_fails', 'first_solution_time_ms', 'last_solution_score', 'last_solution_fails']
-Using modified group_by: ['search_type']
-### search_type: lds
+<pre><code>### search_type: lds
 
 |   i |   fs Sc |   fs #f |   ls Sc |   ls #f |   #fail |   #sols | comp.   |
 |----:|--------:|--------:|--------:|--------:|--------:|--------:|:--------|
@@ -655,43 +625,19 @@ Using modified group_by: ['search_type']
 |   9 |     241 |       2 |     241 |       2 |     186 |       1 | Yes     |
 |  10 |     270 |       0 |     270 |       0 |     176 |       1 | Yes     |
 
-
-Summary data shape: (20, 20)
-Summary data columns: ['n', 'nb_holes', 'instance_id', 'objective', 'bp', 'branching', 'oracle_weight', 'max_iter', 'truncate_rate', 'search_type', 'total_fails', 'execution_time_ms', 'num_solutions', 'best_score', 'completed', 'first_solution_score', 'first_solution_fails', 'first_solution_time_ms', 'last_solution_score', 'last_solution_fails']
-Using group_by: ['search_type']
-Creating failures plot with data shape: (20, 20)
-Group by columns: ['search_type']
-Using pivot columns: ['search_type']
-Found 2 unique algorithm configurations
-Config 0: lds, color=(0.12156862745098039, 0.4666666666666667, 0.7058823529411765, 1.0)
-Config 2: dfs, color=(0.17254901960784313, 0.6274509803921569, 0.17254901960784313, 1.0)
-Found 10 unique instance IDs: [ 1  2  3  4  5  6  7  8  9 10]
-Config lds: found 10 matching rows
-Config dfs: found 10 matching rows</code></pre>
+</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="search-comparison_files/figure-html/cell-8-output-3.png" width="757" height="566" class="figure-img"></p>
+<p><img src="search-comparison_files/figure-html/cell-10-output-3.png" width="758" height="372" class="figure-img"></p>
 </figure>
 </div>
 </div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Normalized progress data shape: (21, 15)
-Normalized progress data columns: ['n', 'nb_holes', 'instance_id', 'objective', 'bp', 'branching', 'oracle_weight', 'max_iter', 'truncate_rate', 'search_type', 'solution_idx', 'score', 'fails', 'max_instance_score', 'norm_score']
-Using group_by: ['search_type']
-Plotting with single color per group. Data shape: (21, 15)
-Group by columns: ['search_type']
-Found 2 algorithm groups
-Algorithm group dfs: color=(0.12156862745098039, 0.4666666666666667, 0.7058823529411765, 1.0), label=dfs
-Algorithm group lds: color=(1.0, 0.4980392156862745, 0.054901960784313725, 1.0), label=lds
-Algorithm dfs: found 10 data points across 10 instances
-Algorithm lds: found 11 data points across 10 instances</code></pre>
-</div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="search-comparison_files/figure-html/cell-8-output-5.png" width="752" height="564" class="figure-img"></p>
+<p><img src="search-comparison_files/figure-html/cell-10-output-4.png" width="758" height="372" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -699,39 +645,38 @@ Algorithm lds: found 11 data points across 10 instances</code></pre>
 </section>
 <section id="holes-5" class="level4">
 <h4 class="anchored" data-anchor-id="holes-5">300 Holes</h4>
-<div id="28d9b5b9" class="cell" data-execution_count="8">
+<div id="04373730" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 300 Holes - Max-Product</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>mp_300_filter <span class="op">=</span> ExperimentFilter.from_dict({</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'instance.nb_holes'</span>: <span class="dv">300</span>,</span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'algorithm.bp'</span>: <span class="st">'max_product'</span>,</span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'algorithm.branching'</span>: <span class="st">'max_marginal_regret'</span>,</span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">'algorithm.oracle_weight'</span>: <span class="fl">1.0</span></span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>mp_300_df <span class="op">=</span> data_loader.load_experiments_for_comparison(mp_300_filter)</span>
-<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Create comparison table with separate tables for each search type</span></span>
-<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(create_comparison_table(mp_300_df, group_by<span class="op">=</span>[<span class="st">'search_type'</span>]))</span>
-<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot failures by algorithm</span></span>
-<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plot_total_failures(mp_300_df, group_by<span class="op">=</span>[<span class="st">'search_type'</span>])</span>
-<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
-<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot normalized solution quality</span></span>
-<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plot_normalized_solution_quality(mp_300_df, group_by<span class="op">=</span>[<span class="st">'search_type'</span>], log_scale<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Normalized Solution Quality - 300 Holes (Max-Product)"</span>)</span>
-<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 300 Holes - Max-Product</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>mp_300_filter <span class="op">=</span> ExperimentFilter.from_dict({</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'instance.nb_holes'</span>: <span class="dv">300</span>,</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'algorithm.bp'</span>: <span class="st">'max_product'</span>,</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'algorithm.branching'</span>: <span class="st">'max_marginal_regret'</span>,</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">'algorithm.oracle_weight'</span>: <span class="fl">1.0</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>mp_300_df <span class="op">=</span> data_loader.load_experiments_for_comparison(mp_300_filter)</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Create comparison table with separate tables for each search type</span></span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(create_comparison_table(mp_300_df, group_by<span class="op">=</span>[<span class="st">'search_type'</span>]))</span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot normalized solution quality</span></span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plot_normalized_solution_quality(mp_300_df, group_by<span class="op">=</span>[<span class="st">'search_type'</span>], log_scale<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Normalized Solution Quality - 300 Holes (Max-Product)"</span>)</span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot optimal solutions reached for this specific hole count</span></span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plot_optimal_solutions_reached(mp_300_df, group_by<span class="op">=</span>[<span class="st">'search_type'</span>], log_scale<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Instances Reaching Optimal Solutions - 300 Holes (Max-Product)"</span>)</span>
+<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stderr">
-<pre><code>2025-03-04 22:24:12,746 - data_loader - INFO - Filtered 20 results out of 780
-2025-03-04 22:24:12,748 - data_loader - INFO - Loaded 20 experiments</code></pre>
+<pre><code>2025-03-05 19:47:19,742 - data_loader - INFO - Filtered 20 results out of 1840
+2025-03-05 19:47:19,743 - data_loader - INFO - Loaded 20 experiments</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>DataFrame columns: ['n', 'nb_holes', 'instance_id', 'objective', 'bp', 'branching', 'oracle_weight', 'max_iter', 'truncate_rate', 'search_type', 'total_fails', 'execution_time_ms', 'num_solutions', 'best_score', 'completed', 'first_solution_score', 'first_solution_fails', 'first_solution_time_ms', 'last_solution_score', 'last_solution_fails']
-Using modified group_by: ['search_type']
-### search_type: dfs
+<pre><code>### search_type: dfs
 
 |   i |   fs Sc |   fs #f |   ls Sc |   ls #f |   #fail |   #sols | comp.   |
 |----:|--------:|--------:|--------:|--------:|--------:|--------:|:--------|
@@ -750,212 +695,35 @@ Using modified group_by: ['search_type']
 
 |   i |   fs Sc |   fs #f |   ls Sc |   ls #f |   #fail |   #sols | comp.   |
 |----:|--------:|--------:|--------:|--------:|--------:|--------:|:--------|
-|   1 |     305 |       0 |     305 |       0 |  368252 |       1 | Yes     |
+|   1 |     305 |       0 |     305 |       0 |  324879 |       1 | No      |
 |   2 |     322 |       0 |     322 |       0 |  231270 |       1 | Yes     |
 |   3 |     308 |       1 |     308 |       1 |   40133 |       1 | Yes     |
-|   4 |     302 |       0 |     302 |       0 |  669502 |       1 | Yes     |
+|   4 |     302 |       0 |     302 |       0 |  317631 |       1 | No      |
 |   5 |     272 |       1 |     272 |       1 |   12526 |       1 | Yes     |
 |   6 |     282 |       0 |     282 |       0 |   62333 |       1 | Yes     |
 |   7 |     277 |       0 |     277 |       0 |   61335 |       1 | Yes     |
 |   8 |     284 |      10 |     284 |      10 |   26098 |       1 | Yes     |
 |   9 |     280 |       0 |     280 |       0 |   12543 |       1 | Yes     |
-|  10 |     294 |       0 |     294 |       0 |  278333 |       1 | No      |
+|  10 |     294 |       0 |     294 |       0 |   88719 |       1 | No      |
 
-
-Summary data shape: (20, 20)
-Summary data columns: ['n', 'nb_holes', 'instance_id', 'objective', 'bp', 'branching', 'oracle_weight', 'max_iter', 'truncate_rate', 'search_type', 'total_fails', 'execution_time_ms', 'num_solutions', 'best_score', 'completed', 'first_solution_score', 'first_solution_fails', 'first_solution_time_ms', 'last_solution_score', 'last_solution_fails']
-Using group_by: ['search_type']
-Creating failures plot with data shape: (20, 20)
-Group by columns: ['search_type']
-Using pivot columns: ['search_type']
-Found 2 unique algorithm configurations
-Config 0: dfs, color=(0.12156862745098039, 0.4666666666666667, 0.7058823529411765, 1.0)
-Config 2: lds, color=(0.17254901960784313, 0.6274509803921569, 0.17254901960784313, 1.0)
-Found 10 unique instance IDs: [ 1  2  3  4  5  6  7  8  9 10]
-Config dfs: found 10 matching rows
-Config lds: found 10 matching rows</code></pre>
+</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="search-comparison_files/figure-html/cell-9-output-3.png" width="757" height="566" class="figure-img"></p>
+<p><img src="search-comparison_files/figure-html/cell-11-output-3.png" width="758" height="372" class="figure-img"></p>
 </figure>
 </div>
 </div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Normalized progress data shape: (20, 15)
-Normalized progress data columns: ['n', 'nb_holes', 'instance_id', 'objective', 'bp', 'branching', 'oracle_weight', 'max_iter', 'truncate_rate', 'search_type', 'solution_idx', 'score', 'fails', 'max_instance_score', 'norm_score']
-Using group_by: ['search_type']
-Plotting with single color per group. Data shape: (20, 15)
-Group by columns: ['search_type']
-Found 2 algorithm groups
-Algorithm group dfs: color=(0.12156862745098039, 0.4666666666666667, 0.7058823529411765, 1.0), label=dfs
-Algorithm group lds: color=(1.0, 0.4980392156862745, 0.054901960784313725, 1.0), label=lds
-Algorithm dfs: found 10 data points across 10 instances
-Algorithm lds: found 10 data points across 10 instances</code></pre>
-</div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="search-comparison_files/figure-html/cell-9-output-5.png" width="751" height="564" class="figure-img"></p>
+<p><img src="search-comparison_files/figure-html/cell-11-output-4.png" width="758" height="372" class="figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
 </section>
-</section>
-<section id="direct-comparison-of-dfs-vs-lds" class="level2">
-<h2 class="anchored" data-anchor-id="direct-comparison-of-dfs-vs-lds">Direct Comparison of DFS vs LDS</h2>
-<p>To better understand the difference between search strategies, let’s compare DFS and LDS directly for both algorithms:</p>
-<div id="8cdfa267" class="cell" data-execution_count="9">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare DFS and LDS for 300 holes</span></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>compare_300_filter <span class="op">=</span> ExperimentFilter.from_dict({</span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'instance.nb_holes'</span>: <span class="dv">300</span>,</span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'algorithm.branching'</span>: <span class="st">'max_marginal_regret'</span>,</span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'algorithm.oracle_weight'</span>: <span class="fl">1.0</span></span>
-<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>compare_300_df <span class="op">=</span> data_loader.load_experiments_for_comparison(compare_300_filter)</span>
-<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Create comparison table with both BP algorithms and search types</span></span>
-<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(create_comparison_table(compare_300_df, group_by<span class="op">=</span>[<span class="st">'bp'</span>, <span class="st">'search_type'</span>]))</span>
-<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot normalized solution quality comparing all combinations</span></span>
-<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plot_normalized_solution_quality(</span>
-<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a>    compare_300_df, </span>
-<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a>    group_by<span class="op">=</span>[<span class="st">'bp'</span>, <span class="st">'search_type'</span>], </span>
-<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a>    log_scale<span class="op">=</span><span class="va">True</span>,</span>
-<span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a>    instance_numbers<span class="op">=</span>[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>]  <span class="co"># Limit to first 5 instances for clarity</span></span>
-<span id="cb28-19"><a href="#cb28-19" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb28-20"><a href="#cb28-20" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"DFS vs LDS Comparison - 300 Holes (First 5 Instances)"</span>)</span>
-<span id="cb28-21"><a href="#cb28-21" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
-<span id="cb28-22"><a href="#cb28-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-23"><a href="#cb28-23" aria-hidden="true" tabindex="-1"></a><span class="co"># All instances</span></span>
-<span id="cb28-24"><a href="#cb28-24" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plot_normalized_solution_quality(</span>
-<span id="cb28-25"><a href="#cb28-25" aria-hidden="true" tabindex="-1"></a>    compare_300_df, </span>
-<span id="cb28-26"><a href="#cb28-26" aria-hidden="true" tabindex="-1"></a>    group_by<span class="op">=</span>[<span class="st">'bp'</span>, <span class="st">'search_type'</span>], </span>
-<span id="cb28-27"><a href="#cb28-27" aria-hidden="true" tabindex="-1"></a>    log_scale<span class="op">=</span><span class="va">True</span></span>
-<span id="cb28-28"><a href="#cb28-28" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb28-29"><a href="#cb28-29" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"DFS vs LDS Comparison - 300 Holes (All Instances)"</span>)</span>
-<span id="cb28-30"><a href="#cb28-30" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stderr">
-<pre><code>2025-03-04 22:24:14,790 - data_loader - INFO - Filtered 40 results out of 780
-2025-03-04 22:24:14,792 - data_loader - INFO - Loaded 40 experiments</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>DataFrame columns: ['n', 'nb_holes', 'instance_id', 'objective', 'bp', 'branching', 'oracle_weight', 'max_iter', 'truncate_rate', 'search_type', 'total_fails', 'execution_time_ms', 'num_solutions', 'best_score', 'completed', 'first_solution_score', 'first_solution_fails', 'first_solution_time_ms', 'last_solution_score', 'last_solution_fails']
-Using modified group_by: ['bp', 'search_type']
-### bp: max_product search_type: dfs
-
-|   i |   fs Sc |   fs #f |   ls Sc |   ls #f |   #fail |   #sols | comp.   |
-|----:|--------:|--------:|--------:|--------:|--------:|--------:|:--------|
-|   1 |     305 |       0 |     305 |       0 |    2833 |       1 | Yes     |
-|   2 |     322 |       1 |     322 |       1 |    1171 |       1 | Yes     |
-|   3 |     308 |       0 |     308 |       0 |     998 |       1 | Yes     |
-|   4 |     302 |       0 |     302 |       0 |   39463 |       1 | Yes     |
-|   5 |     272 |       1 |     272 |       1 |   23949 |       1 | Yes     |
-|   6 |     282 |       0 |     282 |       0 |    7286 |       1 | Yes     |
-|   7 |     277 |       0 |     277 |       0 |    9496 |       1 | Yes     |
-|   8 |     284 |       2 |     284 |       2 |    3256 |       1 | Yes     |
-|   9 |     280 |       0 |     280 |       0 |    1519 |       1 | Yes     |
-|  10 |     295 |       2 |     295 |       2 |   91121 |       1 | Yes     |
-
-### bp: max_product search_type: lds
-
-|   i |   fs Sc |   fs #f |   ls Sc |   ls #f |   #fail |   #sols | comp.   |
-|----:|--------:|--------:|--------:|--------:|--------:|--------:|:--------|
-|   1 |     305 |       0 |     305 |       0 |  368252 |       1 | Yes     |
-|   2 |     322 |       0 |     322 |       0 |  231270 |       1 | Yes     |
-|   3 |     308 |       1 |     308 |       1 |   40133 |       1 | Yes     |
-|   4 |     302 |       0 |     302 |       0 |  669502 |       1 | Yes     |
-|   5 |     272 |       1 |     272 |       1 |   12526 |       1 | Yes     |
-|   6 |     282 |       0 |     282 |       0 |   62333 |       1 | Yes     |
-|   7 |     277 |       0 |     277 |       0 |   61335 |       1 | Yes     |
-|   8 |     284 |      10 |     284 |      10 |   26098 |       1 | Yes     |
-|   9 |     280 |       0 |     280 |       0 |   12543 |       1 | Yes     |
-|  10 |     294 |       0 |     294 |       0 |  278333 |       1 | No      |
-
-### bp: sum_product search_type: dfs
-
-|   i |   fs Sc |   fs #f |   ls Sc |   ls #f |    #fail |   #sols | comp.   |
-|----:|--------:|--------:|--------:|--------:|---------:|--------:|:--------|
-|   1 |     215 |       0 |     299 |    6009 |  6829800 |      27 | No      |
-|   2 |     247 |       0 |     276 |     138 | 22563533 |       7 | No      |
-|   3 |     248 |       0 |     306 |    9270 |  5802235 |      30 | No      |
-|   4 |     230 |       0 |     248 |     101 | 12981683 |       5 | No      |
-|   5 |     227 |       0 |     262 |    1079 |  5695779 |      13 | No      |
-|   6 |     245 |       0 |     282 |   18571 |    37737 |      14 | Yes     |
-|   7 |     231 |       0 |     275 |    5415 |  3307444 |      15 | No      |
-|   8 |     228 |       0 |     270 |    2609 |  1387131 |      13 | No      |
-|   9 |     232 |       0 |     236 |      59 | 16237308 |       3 | No      |
-|  10 |     225 |       0 |     254 |     751 |  3412716 |      12 | No      |
-
-### bp: sum_product search_type: lds
-
-|   i |   fs Sc |   fs #f |   ls Sc |   ls #f |   #fail |   #sols | comp.   |
-|----:|--------:|--------:|--------:|--------:|--------:|--------:|:--------|
-|   1 |     234 |       0 |     305 |     236 |   97045 |      35 | Yes     |
-|   2 |     223 |       0 |     322 |     684 |  234252 |      29 | Yes     |
-|   3 |     248 |       0 |     308 |     303 |   20126 |      30 | Yes     |
-|   4 |     219 |       0 |     302 |     268 |   36918 |      28 | Yes     |
-|   5 |     216 |       0 |     272 |     491 |   11419 |      23 | Yes     |
-|   6 |     245 |       0 |     282 |     238 |   37374 |      16 | Yes     |
-|   7 |     234 |       0 |     277 |     216 |  324382 |      14 | No      |
-|   8 |     228 |       0 |     284 |     218 |  110039 |      20 | Yes     |
-|   9 |     243 |       0 |     280 |     254 |   28529 |      15 | Yes     |
-|  10 |     219 |       0 |     295 |     972 |  252956 |      34 | No      |
-
-
-Normalized progress data shape: (403, 15)
-Normalized progress data columns: ['n', 'nb_holes', 'instance_id', 'objective', 'bp', 'branching', 'oracle_weight', 'max_iter', 'truncate_rate', 'search_type', 'solution_idx', 'score', 'fails', 'max_instance_score', 'norm_score']
-After filtering for instances [1, 2, 3, 4, 5], data shape: (237, 15)
-Using group_by: ['bp', 'search_type']
-Plotting with single color per group. Data shape: (237, 15)
-Group by columns: ['bp', 'search_type']
-Found 4 algorithm groups
-Algorithm group ('max_product', 'dfs'): color=(0.12156862745098039, 0.4666666666666667, 0.7058823529411765, 1.0), label=dfs
-Algorithm group ('max_product', 'lds'): color=(1.0, 0.4980392156862745, 0.054901960784313725, 1.0), label=lds
-Algorithm group ('sum_product', 'dfs'): color=(0.17254901960784313, 0.6274509803921569, 0.17254901960784313, 1.0), label=dfs
-Algorithm group ('sum_product', 'lds'): color=(0.8392156862745098, 0.15294117647058825, 0.1568627450980392, 1.0), label=lds
-Algorithm dfs: found 5 data points across 5 instances
-Algorithm lds: found 5 data points across 5 instances
-Algorithm dfs: found 82 data points across 5 instances
-Algorithm lds: found 145 data points across 5 instances</code></pre>
-</div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="search-comparison_files/figure-html/cell-10-output-3.png" width="753" height="564" class="figure-img"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Normalized progress data shape: (403, 15)
-Normalized progress data columns: ['n', 'nb_holes', 'instance_id', 'objective', 'bp', 'branching', 'oracle_weight', 'max_iter', 'truncate_rate', 'search_type', 'solution_idx', 'score', 'fails', 'max_instance_score', 'norm_score']
-Using group_by: ['bp', 'search_type']
-Plotting with single color per group. Data shape: (403, 15)
-Group by columns: ['bp', 'search_type']
-Found 4 algorithm groups
-Algorithm group ('max_product', 'dfs'): color=(0.12156862745098039, 0.4666666666666667, 0.7058823529411765, 1.0), label=dfs
-Algorithm group ('max_product', 'lds'): color=(1.0, 0.4980392156862745, 0.054901960784313725, 1.0), label=lds
-Algorithm group ('sum_product', 'dfs'): color=(0.17254901960784313, 0.6274509803921569, 0.17254901960784313, 1.0), label=dfs
-Algorithm group ('sum_product', 'lds'): color=(0.8392156862745098, 0.15294117647058825, 0.1568627450980392, 1.0), label=lds
-Algorithm dfs: found 10 data points across 10 instances
-Algorithm lds: found 10 data points across 10 instances
-Algorithm dfs: found 139 data points across 10 instances
-Algorithm lds: found 244 data points across 10 instances</code></pre>
-</div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="search-comparison_files/figure-html/cell-10-output-5.png" width="753" height="564" class="figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
 </section>
 </section>
 

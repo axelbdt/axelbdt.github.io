@@ -119,11 +119,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="latin-square-influence-of-the-oracle-weight" class="level1">
 <h1>Latin Square: Influence of the Oracle Weight</h1>
-<p>This notebook compares the influence of the oracle weight on the resolution performance using the clean experiment API.</p>
-<div id="3c3213e6" class="cell" data-execution_count="1">
+<p>This notebook compares the influence of the oracle weight on the resolution performance using the clean experiment API with the flat configuration structure.</p>
+<div id="5e07867b" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> experiment_api <span class="im">import</span> load_experiments, create_plots, set_log_level</span>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> experiment_api <span class="im">import</span> plot_optimal_solutions_reached, set_log_level</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Set log level to INFO</span></span>
@@ -131,38 +131,41 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Define common filter parameters</span></span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>base_filter <span class="op">=</span> {</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">'algorithm.bp'</span>: <span class="st">'max_product'</span>,</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">'algorithm.branching'</span>: <span class="st">'max_marginal_regret'</span>,</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">'bp'</span>: <span class="st">'max_product'</span>,</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">'branching'</span>: <span class="st">'max_marginal_regret'</span>,</span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">'search_type'</span>: <span class="st">'lds'</span>,</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">'algorithm.max_iter'</span>: <span class="dv">10</span>,</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">'max_iter'</span>: <span class="dv">10</span>,</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>group_by <span class="op">=</span> [<span class="st">'oracle_weight'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <section id="max-product---max-marginal-regret" class="level2">
 <h2 class="anchored" data-anchor-id="max-product---max-marginal-regret">Max Product - Max Marginal Regret</h2>
 <p>We compare how different Oracle weights affect the performance of the Max-Product algorithm with Max-Marginal-Regret branching strategy.</p>
-<div id="6ec878aa" class="cell" data-execution_count="2">
+<div id="7963a5d4" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load data and create plot in a single section</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> load_experiments(base_filter)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the number of instances reaching optimal solutions</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> create_plots.optimal_solutions_reached(</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    data,</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    group_by<span class="op">=</span>[<span class="st">'oracle_weight'</span>],</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    log_scale<span class="op">=</span><span class="va">True</span>,</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">"Instances Reaching Optimal Solutions by Oracle Weight (Max Product)"</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the number of instances reaching optimal solutions</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plot_optimal_solutions_reached(</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    base_filter,</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    group_by<span class="op">=</span>group_by,</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    log_scale<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">"Instances Reaching Optimal Solutions by Oracle Weight (Max Product)"</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-stdout">
-<pre><code>Filtered 150 results out of 8760</code></pre>
+<div class="cell-output cell-output-stderr">
+<pre><code>experiment_api - INFO - Loading data using provided filters
+experiment_api - INFO - Starting data processing pipeline from logs
+experiment_api - INFO - Loaded 10680 experiment records
+experiment_api - INFO - Applied filters, 150 records remaining
+experiment_api - INFO - Normalized scores relative to optimal solutions
+experiment_api - INFO - Plotting data for 5 groups</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="oracle-comparison_files/figure-html/cell-3-output-2.png" width="758" height="564" class="figure-img"></p>
+<p><img src="oracle-comparison_files/figure-html/cell-3-output-2.png" width="758" height="561" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -171,32 +174,34 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="max-product---dom-wdeg-max-marginal" class="level2">
 <h2 class="anchored" data-anchor-id="max-product---dom-wdeg-max-marginal">Max Product - DOM WDEG + Max Marginal</h2>
 <p>Now we look at the combination of DOM WDEG and Max Marginal branching.</p>
-<div id="ecd06734" class="cell" data-execution_count="3">
+<div id="d7889baf" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Update filter for different branching strategy</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>dom_wdeg_filter <span class="op">=</span> base_filter.copy()</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>dom_wdeg_filter[<span class="st">'algorithm.branching'</span>] <span class="op">=</span> <span class="st">'dom_wdeg_max_marginal'</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>dom_wdeg_filter[<span class="st">'branching'</span>] <span class="op">=</span> <span class="st">'dom_wdeg_max_marginal'</span></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Load data and create plot</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> load_experiments(dom_wdeg_filter)</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the number of instances reaching optimal solutions</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> create_plots.optimal_solutions_reached(</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    data,</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    group_by<span class="op">=</span>[<span class="st">'oracle_weight'</span>],</span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    log_scale<span class="op">=</span><span class="va">True</span>,</span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">"Instances Reaching Optimal Solutions by Oracle Weight (DOM WDEG + Max Marginal)"</span></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the number of instances reaching optimal solutions</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plot_optimal_solutions_reached(</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    dom_wdeg_filter,</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    group_by<span class="op">=</span>group_by,</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    log_scale<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">"Instances Reaching Optimal Solutions by Oracle Weight (DOM WDEG + Max Marginal)"</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-stdout">
-<pre><code>Filtered 120 results out of 8760</code></pre>
+<div class="cell-output cell-output-stderr">
+<pre><code>experiment_api - INFO - Loading data using provided filters
+experiment_api - INFO - Starting data processing pipeline from logs
+experiment_api - INFO - Loaded 10680 experiment records
+experiment_api - INFO - Applied filters, 150 records remaining
+experiment_api - INFO - Normalized scores relative to optimal solutions
+experiment_api - INFO - Plotting data for 5 groups</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="oracle-comparison_files/figure-html/cell-4-output-2.png" width="758" height="564" class="figure-img"></p>
+<p><img src="oracle-comparison_files/figure-html/cell-4-output-2.png" width="822" height="561" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -205,32 +210,34 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="sum-product---max-marginal-regret" class="level2">
 <h2 class="anchored" data-anchor-id="sum-product---max-marginal-regret">Sum Product - Max Marginal Regret</h2>
 <p>For comparison, let’s examine the Sum-Product algorithm as well.</p>
-<div id="a1987dcf" class="cell" data-execution_count="4">
+<div id="274304ac" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Update filter for Sum Product</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>sum_product_filter <span class="op">=</span> base_filter.copy()</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>sum_product_filter[<span class="st">'algorithm.bp'</span>] <span class="op">=</span> <span class="st">'sum_product'</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>sum_product_filter[<span class="st">'bp'</span>] <span class="op">=</span> <span class="st">'sum_product'</span></span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Load data and create plot</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> load_experiments(sum_product_filter)</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the number of instances reaching optimal solutions</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> create_plots.optimal_solutions_reached(</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    data,</span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    group_by<span class="op">=</span>[<span class="st">'oracle_weight'</span>],</span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    log_scale<span class="op">=</span><span class="va">True</span>,</span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">"Instances Reaching Optimal Solutions by Oracle Weight (Sum Product)"</span></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the number of instances reaching optimal solutions</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plot_optimal_solutions_reached(</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    sum_product_filter,</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    group_by<span class="op">=</span>group_by,</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    log_scale<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">"Instances Reaching Optimal Solutions by Oracle Weight (Sum Product)"</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-stdout">
-<pre><code>Filtered 180 results out of 8760</code></pre>
+<div class="cell-output cell-output-stderr">
+<pre><code>experiment_api - INFO - Loading data using provided filters
+experiment_api - INFO - Starting data processing pipeline from logs
+experiment_api - INFO - Loaded 10680 experiment records
+experiment_api - INFO - Applied filters, 180 records remaining
+experiment_api - INFO - Normalized scores relative to optimal solutions
+experiment_api - INFO - Plotting data for 6 groups</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="oracle-comparison_files/figure-html/cell-5-output-2.png" width="758" height="564" class="figure-img"></p>
+<p><img src="oracle-comparison_files/figure-html/cell-5-output-2.png" width="758" height="560" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -239,32 +246,34 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="sum-product---max-marginal-strength" class="level2">
 <h2 class="anchored" data-anchor-id="sum-product---max-marginal-strength">Sum Product - Max Marginal Strength</h2>
 <p>Finally, we look at the Sum-Product algorithm with Max-Marginal-Strength branching.</p>
-<div id="625ffeec" class="cell" data-execution_count="5">
+<div id="782e67ac" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Update filter for different branching strategy</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>strength_filter <span class="op">=</span> sum_product_filter.copy()</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>strength_filter[<span class="st">'algorithm.branching'</span>] <span class="op">=</span> <span class="st">'max_marginal_strength'</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>strength_filter[<span class="st">'branching'</span>] <span class="op">=</span> <span class="st">'max_marginal_strength'</span></span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Load data and create plot</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> load_experiments(strength_filter)</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the number of instances reaching optimal solutions</span></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> create_plots.optimal_solutions_reached(</span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    data,</span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    group_by<span class="op">=</span>[<span class="st">'oracle_weight'</span>],</span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    log_scale<span class="op">=</span><span class="va">True</span>,</span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">"Instances Reaching Optimal Solutions by Oracle Weight (Sum Product, Max Marginal Strength)"</span></span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the number of instances reaching optimal solutions</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plot_optimal_solutions_reached(</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    strength_filter,</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    group_by<span class="op">=</span>group_by,</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    log_scale<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">"Instances Reaching Optimal Solutions by Oracle Weight (Sum Product, Max Marginal Strength)"</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-stdout">
-<pre><code>Filtered 150 results out of 8760</code></pre>
+<div class="cell-output cell-output-stderr">
+<pre><code>experiment_api - INFO - Loading data using provided filters
+experiment_api - INFO - Starting data processing pipeline from logs
+experiment_api - INFO - Loaded 10680 experiment records
+experiment_api - INFO - Applied filters, 180 records remaining
+experiment_api - INFO - Normalized scores relative to optimal solutions
+experiment_api - INFO - Plotting data for 6 groups</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="oracle-comparison_files/figure-html/cell-6-output-2.png" width="788" height="564" class="figure-img"></p>
+<p><img src="oracle-comparison_files/figure-html/cell-6-output-2.png" width="901" height="560" class="figure-img"></p>
 </figure>
 </div>
 </div>

@@ -124,7 +124,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="latin-square-influence-of-bp-iteration-count" class="level1">
 <h1>Latin Square: Influence of BP Iteration Count</h1>
 <p>This notebook compares the influence of the belief propagation iteration count on the resolution performance. All experiments use the LDS search strategy.</p>
-<div id="6e58ff80" class="cell" data-execution_count="1">
+<div id="4c51c4e5" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> experiment_api <span class="im">import</span> plot_optimal_solutions_reached, set_log_level, plot_mean_normalized_score, COLUMN_FAILURES, COLUMN_EXECUTION_TIME</span>
@@ -136,18 +136,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Base filter parameters</span></span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>base_filter : Dict[<span class="bu">str</span>, Any] <span class="op">=</span> {</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">'bp'</span>: <span class="st">'max_product'</span>,</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">'branching'</span>: <span class="st">'max_marginal_regret'</span>,</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">'search_type'</span>: <span class="st">'lds'</span>,</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>group_by <span class="op">=</span> [<span class="st">'max_iter'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">'branching'</span>: <span class="st">'max_marginal_regret'</span>,</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">'search_type'</span>: <span class="st">'lds'</span>,</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>group_by <span class="op">=</span> [<span class="st">'bp'</span>, <span class="st">'max_iter'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <section id="max-product---max-marginal-regret" class="level2">
 <h2 class="anchored" data-anchor-id="max-product---max-marginal-regret">Max Product - Max Marginal Regret</h2>
 <section id="oracle-weight-1.0" class="level3">
 <h3 class="anchored" data-anchor-id="oracle-weight-1.0">Oracle Weight = 1.0</h3>
-<div id="d5a47f1c" class="cell" data-execution_count="2">
+<div id="55acd299" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set oracle weight to 1.0</span></span>
@@ -186,14 +185,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>experiment_api - INFO - Loading data using provided filters
 experiment_api - INFO - Starting data processing pipeline from logs
 experiment_api - INFO - Loaded 10680 experiment records
-experiment_api - INFO - Applied filters, 120 records remaining
+experiment_api - INFO - Applied filters, 240 records remaining
 experiment_api - INFO - Normalized scores relative to optimal solutions
-experiment_api - INFO - Plotting data for 4 groups</code></pre>
+experiment_api - INFO - Plotting data for 8 groups</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="iteration-comparison_files/figure-html/cell-3-output-2.png" width="769" height="564" class="figure-img"></p>
+<p><img src="iteration-comparison_files/figure-html/cell-3-output-2.png" width="769" height="559" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -201,14 +200,14 @@ experiment_api - INFO - Plotting data for 4 groups</code></pre>
 <pre><code>experiment_api - INFO - Loading data using provided filters
 experiment_api - INFO - Starting data processing pipeline from logs
 experiment_api - INFO - Loaded 10680 experiment records
-experiment_api - INFO - Applied filters, 120 records remaining
+experiment_api - INFO - Applied filters, 240 records remaining
 experiment_api - INFO - Normalized scores relative to optimal solutions
-experiment_api - INFO - Plotting data for 4 groups</code></pre>
+experiment_api - INFO - Plotting data for 8 groups</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="iteration-comparison_files/figure-html/cell-3-output-4.png" width="769" height="564" class="figure-img"></p>
+<p><img src="iteration-comparison_files/figure-html/cell-3-output-4.png" width="769" height="559" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -216,14 +215,14 @@ experiment_api - INFO - Plotting data for 4 groups</code></pre>
 <pre><code>experiment_api - INFO - Loading data using provided filters
 experiment_api - INFO - Starting data processing pipeline from logs
 experiment_api - INFO - Loaded 10680 experiment records
-experiment_api - INFO - Applied filters, 120 records remaining
+experiment_api - INFO - Applied filters, 240 records remaining
 experiment_api - INFO - Normalized scores relative to optimal solutions
-experiment_api - INFO - Plotting data for 4 groups</code></pre>
+experiment_api - INFO - Plotting data for 8 groups</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="iteration-comparison_files/figure-html/cell-3-output-6.png" width="758" height="564" class="figure-img"></p>
+<p><img src="iteration-comparison_files/figure-html/cell-3-output-6.png" width="735" height="559" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -231,7 +230,7 @@ experiment_api - INFO - Plotting data for 4 groups</code></pre>
 </section>
 <section id="oracle-weight-0.8" class="level3">
 <h3 class="anchored" data-anchor-id="oracle-weight-0.8">Oracle Weight = 0.8</h3>
-<div id="0d89e72e" class="cell" data-execution_count="3">
+<div id="06ba984d" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set oracle weight to 0.8</span></span>
@@ -277,14 +276,14 @@ experiment_api - INFO - Plotting data for 4 groups</code></pre>
 <pre><code>experiment_api - INFO - Loading data using provided filters
 experiment_api - INFO - Starting data processing pipeline from logs
 experiment_api - INFO - Loaded 10680 experiment records
-experiment_api - INFO - Applied filters, 120 records remaining
+experiment_api - INFO - Applied filters, 240 records remaining
 experiment_api - INFO - Normalized scores relative to optimal solutions
-experiment_api - INFO - Plotting data for 4 groups</code></pre>
+experiment_api - INFO - Plotting data for 8 groups</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="iteration-comparison_files/figure-html/cell-4-output-2.png" width="769" height="564" class="figure-img"></p>
+<p><img src="iteration-comparison_files/figure-html/cell-4-output-2.png" width="769" height="559" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -292,14 +291,14 @@ experiment_api - INFO - Plotting data for 4 groups</code></pre>
 <pre><code>experiment_api - INFO - Loading data using provided filters
 experiment_api - INFO - Starting data processing pipeline from logs
 experiment_api - INFO - Loaded 10680 experiment records
-experiment_api - INFO - Applied filters, 120 records remaining
+experiment_api - INFO - Applied filters, 240 records remaining
 experiment_api - INFO - Normalized scores relative to optimal solutions
-experiment_api - INFO - Plotting data for 4 groups</code></pre>
+experiment_api - INFO - Plotting data for 8 groups</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="iteration-comparison_files/figure-html/cell-4-output-4.png" width="769" height="564" class="figure-img"></p>
+<p><img src="iteration-comparison_files/figure-html/cell-4-output-4.png" width="769" height="559" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -307,14 +306,14 @@ experiment_api - INFO - Plotting data for 4 groups</code></pre>
 <pre><code>experiment_api - INFO - Loading data using provided filters
 experiment_api - INFO - Starting data processing pipeline from logs
 experiment_api - INFO - Loaded 10680 experiment records
-experiment_api - INFO - Applied filters, 120 records remaining
+experiment_api - INFO - Applied filters, 240 records remaining
 experiment_api - INFO - Normalized scores relative to optimal solutions
-experiment_api - INFO - Plotting data for 4 groups</code></pre>
+experiment_api - INFO - Plotting data for 8 groups</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="iteration-comparison_files/figure-html/cell-4-output-6.png" width="758" height="564" class="figure-img"></p>
+<p><img src="iteration-comparison_files/figure-html/cell-4-output-6.png" width="735" height="559" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -322,14 +321,14 @@ experiment_api - INFO - Plotting data for 4 groups</code></pre>
 <pre><code>experiment_api - INFO - Loading data using provided filters
 experiment_api - INFO - Starting data processing pipeline from logs
 experiment_api - INFO - Loaded 10680 experiment records
-experiment_api - INFO - Applied filters, 120 records remaining
+experiment_api - INFO - Applied filters, 240 records remaining
 experiment_api - INFO - Normalized scores relative to optimal solutions
-experiment_api - INFO - Plotting data for 4 groups</code></pre>
+experiment_api - INFO - Plotting data for 8 groups</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="iteration-comparison_files/figure-html/cell-4-output-8.png" width="758" height="564" class="figure-img"></p>
+<p><img src="iteration-comparison_files/figure-html/cell-4-output-8.png" width="735" height="559" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -337,7 +336,7 @@ experiment_api - INFO - Plotting data for 4 groups</code></pre>
 </section>
 <section id="oracle-weight-0.5" class="level3">
 <h3 class="anchored" data-anchor-id="oracle-weight-0.5">Oracle Weight = 0.5</h3>
-<div id="6ace4c82" class="cell" data-execution_count="4">
+<div id="fd9cb1fc" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set oracle weight to 0.5</span></span>
@@ -382,14 +381,14 @@ experiment_api - INFO - Plotting data for 4 groups</code></pre>
 <pre><code>experiment_api - INFO - Loading data using provided filters
 experiment_api - INFO - Starting data processing pipeline from logs
 experiment_api - INFO - Loaded 10680 experiment records
-experiment_api - INFO - Applied filters, 120 records remaining
+experiment_api - INFO - Applied filters, 240 records remaining
 experiment_api - INFO - Normalized scores relative to optimal solutions
-experiment_api - INFO - Plotting data for 4 groups</code></pre>
+experiment_api - INFO - Plotting data for 8 groups</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="iteration-comparison_files/figure-html/cell-5-output-2.png" width="769" height="564" class="figure-img"></p>
+<p><img src="iteration-comparison_files/figure-html/cell-5-output-2.png" width="769" height="559" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -397,14 +396,14 @@ experiment_api - INFO - Plotting data for 4 groups</code></pre>
 <pre><code>experiment_api - INFO - Loading data using provided filters
 experiment_api - INFO - Starting data processing pipeline from logs
 experiment_api - INFO - Loaded 10680 experiment records
-experiment_api - INFO - Applied filters, 120 records remaining
+experiment_api - INFO - Applied filters, 240 records remaining
 experiment_api - INFO - Normalized scores relative to optimal solutions
-experiment_api - INFO - Plotting data for 4 groups</code></pre>
+experiment_api - INFO - Plotting data for 8 groups</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="iteration-comparison_files/figure-html/cell-5-output-4.png" width="769" height="564" class="figure-img"></p>
+<p><img src="iteration-comparison_files/figure-html/cell-5-output-4.png" width="769" height="559" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -412,14 +411,14 @@ experiment_api - INFO - Plotting data for 4 groups</code></pre>
 <pre><code>experiment_api - INFO - Loading data using provided filters
 experiment_api - INFO - Starting data processing pipeline from logs
 experiment_api - INFO - Loaded 10680 experiment records
-experiment_api - INFO - Applied filters, 120 records remaining
+experiment_api - INFO - Applied filters, 240 records remaining
 experiment_api - INFO - Normalized scores relative to optimal solutions
-experiment_api - INFO - Plotting data for 4 groups</code></pre>
+experiment_api - INFO - Plotting data for 8 groups</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="iteration-comparison_files/figure-html/cell-5-output-6.png" width="758" height="564" class="figure-img"></p>
+<p><img src="iteration-comparison_files/figure-html/cell-5-output-6.png" width="735" height="559" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -427,21 +426,21 @@ experiment_api - INFO - Plotting data for 4 groups</code></pre>
 <pre><code>experiment_api - INFO - Loading data using provided filters
 experiment_api - INFO - Starting data processing pipeline from logs
 experiment_api - INFO - Loaded 10680 experiment records
-experiment_api - INFO - Applied filters, 120 records remaining
+experiment_api - INFO - Applied filters, 240 records remaining
 experiment_api - INFO - Normalized scores relative to optimal solutions
-experiment_api - INFO - Plotting data for 4 groups</code></pre>
+experiment_api - INFO - Plotting data for 8 groups</code></pre>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="4">
+<div class="cell-output cell-output-display" data-execution_count="10">
 <div>
 <figure class="figure">
-<p><img src="iteration-comparison_files/figure-html/cell-5-output-8.png" width="758" height="564" class="figure-img"></p>
+<p><img src="iteration-comparison_files/figure-html/cell-5-output-8.png" width="735" height="559" class="figure-img"></p>
 </figure>
 </div>
 </div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="iteration-comparison_files/figure-html/cell-5-output-9.png" width="758" height="564" class="figure-img"></p>
+<p><img src="iteration-comparison_files/figure-html/cell-5-output-9.png" width="735" height="559" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -449,7 +448,7 @@ experiment_api - INFO - Plotting data for 4 groups</code></pre>
 </section>
 <section id="oracle-weight-1.5" class="level3">
 <h3 class="anchored" data-anchor-id="oracle-weight-1.5">Oracle Weight = 1.5</h3>
-<div id="6a6e0119" class="cell" data-execution_count="5">
+<div id="efe92828" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set oracle weight to 1.5</span></span>
@@ -495,14 +494,14 @@ experiment_api - INFO - Plotting data for 4 groups</code></pre>
 <pre><code>experiment_api - INFO - Loading data using provided filters
 experiment_api - INFO - Starting data processing pipeline from logs
 experiment_api - INFO - Loaded 10680 experiment records
-experiment_api - INFO - Applied filters, 120 records remaining
+experiment_api - INFO - Applied filters, 240 records remaining
 experiment_api - INFO - Normalized scores relative to optimal solutions
-experiment_api - INFO - Plotting data for 4 groups</code></pre>
+experiment_api - INFO - Plotting data for 8 groups</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="iteration-comparison_files/figure-html/cell-6-output-2.png" width="769" height="564" class="figure-img"></p>
+<p><img src="iteration-comparison_files/figure-html/cell-6-output-2.png" width="769" height="559" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -510,14 +509,14 @@ experiment_api - INFO - Plotting data for 4 groups</code></pre>
 <pre><code>experiment_api - INFO - Loading data using provided filters
 experiment_api - INFO - Starting data processing pipeline from logs
 experiment_api - INFO - Loaded 10680 experiment records
-experiment_api - INFO - Applied filters, 120 records remaining
+experiment_api - INFO - Applied filters, 240 records remaining
 experiment_api - INFO - Normalized scores relative to optimal solutions
-experiment_api - INFO - Plotting data for 4 groups</code></pre>
+experiment_api - INFO - Plotting data for 8 groups</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="iteration-comparison_files/figure-html/cell-6-output-4.png" width="769" height="564" class="figure-img"></p>
+<p><img src="iteration-comparison_files/figure-html/cell-6-output-4.png" width="769" height="559" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -525,14 +524,14 @@ experiment_api - INFO - Plotting data for 4 groups</code></pre>
 <pre><code>experiment_api - INFO - Loading data using provided filters
 experiment_api - INFO - Starting data processing pipeline from logs
 experiment_api - INFO - Loaded 10680 experiment records
-experiment_api - INFO - Applied filters, 120 records remaining
+experiment_api - INFO - Applied filters, 240 records remaining
 experiment_api - INFO - Normalized scores relative to optimal solutions
-experiment_api - INFO - Plotting data for 4 groups</code></pre>
+experiment_api - INFO - Plotting data for 8 groups</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="iteration-comparison_files/figure-html/cell-6-output-6.png" width="758" height="564" class="figure-img"></p>
+<p><img src="iteration-comparison_files/figure-html/cell-6-output-6.png" width="735" height="559" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -540,14 +539,14 @@ experiment_api - INFO - Plotting data for 4 groups</code></pre>
 <pre><code>experiment_api - INFO - Loading data using provided filters
 experiment_api - INFO - Starting data processing pipeline from logs
 experiment_api - INFO - Loaded 10680 experiment records
-experiment_api - INFO - Applied filters, 120 records remaining
+experiment_api - INFO - Applied filters, 240 records remaining
 experiment_api - INFO - Normalized scores relative to optimal solutions
-experiment_api - INFO - Plotting data for 4 groups</code></pre>
+experiment_api - INFO - Plotting data for 8 groups</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="iteration-comparison_files/figure-html/cell-6-output-8.png" width="758" height="564" class="figure-img"></p>
+<p><img src="iteration-comparison_files/figure-html/cell-6-output-8.png" width="735" height="559" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -555,7 +554,7 @@ experiment_api - INFO - Plotting data for 4 groups</code></pre>
 </section>
 <section id="oracle-weight-2.0" class="level3">
 <h3 class="anchored" data-anchor-id="oracle-weight-2.0">Oracle Weight = 2.0</h3>
-<div id="411541e0" class="cell" data-execution_count="6">
+<div id="9d7c10dd" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set oracle weight to 2.0</span></span>
@@ -601,14 +600,14 @@ experiment_api - INFO - Plotting data for 4 groups</code></pre>
 <pre><code>experiment_api - INFO - Loading data using provided filters
 experiment_api - INFO - Starting data processing pipeline from logs
 experiment_api - INFO - Loaded 10680 experiment records
-experiment_api - INFO - Applied filters, 120 records remaining
+experiment_api - INFO - Applied filters, 240 records remaining
 experiment_api - INFO - Normalized scores relative to optimal solutions
-experiment_api - INFO - Plotting data for 4 groups</code></pre>
+experiment_api - INFO - Plotting data for 8 groups</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="iteration-comparison_files/figure-html/cell-7-output-2.png" width="769" height="564" class="figure-img"></p>
+<p><img src="iteration-comparison_files/figure-html/cell-7-output-2.png" width="769" height="559" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -616,14 +615,14 @@ experiment_api - INFO - Plotting data for 4 groups</code></pre>
 <pre><code>experiment_api - INFO - Loading data using provided filters
 experiment_api - INFO - Starting data processing pipeline from logs
 experiment_api - INFO - Loaded 10680 experiment records
-experiment_api - INFO - Applied filters, 120 records remaining
+experiment_api - INFO - Applied filters, 240 records remaining
 experiment_api - INFO - Normalized scores relative to optimal solutions
-experiment_api - INFO - Plotting data for 4 groups</code></pre>
+experiment_api - INFO - Plotting data for 8 groups</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="iteration-comparison_files/figure-html/cell-7-output-4.png" width="769" height="564" class="figure-img"></p>
+<p><img src="iteration-comparison_files/figure-html/cell-7-output-4.png" width="769" height="559" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -631,14 +630,14 @@ experiment_api - INFO - Plotting data for 4 groups</code></pre>
 <pre><code>experiment_api - INFO - Loading data using provided filters
 experiment_api - INFO - Starting data processing pipeline from logs
 experiment_api - INFO - Loaded 10680 experiment records
-experiment_api - INFO - Applied filters, 120 records remaining
+experiment_api - INFO - Applied filters, 240 records remaining
 experiment_api - INFO - Normalized scores relative to optimal solutions
-experiment_api - INFO - Plotting data for 4 groups</code></pre>
+experiment_api - INFO - Plotting data for 8 groups</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="iteration-comparison_files/figure-html/cell-7-output-6.png" width="758" height="564" class="figure-img"></p>
+<p><img src="iteration-comparison_files/figure-html/cell-7-output-6.png" width="735" height="559" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -646,14 +645,14 @@ experiment_api - INFO - Plotting data for 4 groups</code></pre>
 <pre><code>experiment_api - INFO - Loading data using provided filters
 experiment_api - INFO - Starting data processing pipeline from logs
 experiment_api - INFO - Loaded 10680 experiment records
-experiment_api - INFO - Applied filters, 120 records remaining
+experiment_api - INFO - Applied filters, 240 records remaining
 experiment_api - INFO - Normalized scores relative to optimal solutions
-experiment_api - INFO - Plotting data for 4 groups</code></pre>
+experiment_api - INFO - Plotting data for 8 groups</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="iteration-comparison_files/figure-html/cell-7-output-8.png" width="758" height="564" class="figure-img"></p>
+<p><img src="iteration-comparison_files/figure-html/cell-7-output-8.png" width="735" height="559" class="figure-img"></p>
 </figure>
 </div>
 </div>

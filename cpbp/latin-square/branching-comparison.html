@@ -118,7 +118,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="latin-square-branching-heuristic-comparison-regret-strength-max-regret" class="level1">
 <h1>Latin Square: Branching Heuristic Comparison (Regret, Strength, Max-Regret)</h1>
 <p>This notebook compares different branching heuristics for solving Latin Square optimization problems using both Sum-product and Max-product belief propagation algorithms.</p>
-<div id="c5b57cba" class="cell" data-execution_count="1">
+<div id="4be1c096" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> experiment_api <span class="im">import</span> set_log_level, plot_optimal_solutions_reached, plot_mean_normalized_score, COLUMN_FAILURES, COLUMN_EXECUTION_TIME</span>
@@ -139,7 +139,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="limited-discrepancy-search-lds" class="level2">
 <h2 class="anchored" data-anchor-id="limited-discrepancy-search-lds">Limited Discrepancy Search (LDS)</h2>
 <p>In this section, we compare different branching heuristics using the LDS search strategy.</p>
-<div id="c85da74d" class="cell" data-execution_count="2">
+<div id="260a8b50" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a filter for LDS search</span></span>
@@ -192,28 +192,28 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="branching-comparison_files/figure-html/cell-3-output-1.png" width="731" height="557" class="figure-img"></p>
+<p><img src="branching-comparison_files/figure-html/cell-3-output-1.png" width="800" height="564" class="figure-img"></p>
 </figure>
 </div>
 </div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="branching-comparison_files/figure-html/cell-3-output-2.png" width="731" height="557" class="figure-img"></p>
+<p><img src="branching-comparison_files/figure-html/cell-3-output-2.png" width="800" height="564" class="figure-img"></p>
 </figure>
 </div>
 </div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="branching-comparison_files/figure-html/cell-3-output-3.png" width="758" height="558" class="figure-img"></p>
+<p><img src="branching-comparison_files/figure-html/cell-3-output-3.png" width="735" height="564" class="figure-img"></p>
 </figure>
 </div>
 </div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="branching-comparison_files/figure-html/cell-3-output-4.png" width="758" height="558" class="figure-img"></p>
+<p><img src="branching-comparison_files/figure-html/cell-3-output-4.png" width="735" height="564" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -222,7 +222,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="depth-first-search-dfs" class="level2">
 <h2 class="anchored" data-anchor-id="depth-first-search-dfs">Depth-First Search (DFS)</h2>
 <p>In this section, we compare different branching heuristics using the DFS search strategy.</p>
-<div id="9dddcc95" class="cell" data-execution_count="3">
+<div id="8be78451" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>bp_filter_criteria <span class="op">=</span> bp_base_filter.copy()</span>
@@ -271,28 +271,28 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="branching-comparison_files/figure-html/cell-4-output-1.png" width="731" height="557" class="figure-img"></p>
+<p><img src="branching-comparison_files/figure-html/cell-4-output-1.png" width="800" height="564" class="figure-img"></p>
 </figure>
 </div>
 </div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="branching-comparison_files/figure-html/cell-4-output-2.png" width="731" height="557" class="figure-img"></p>
+<p><img src="branching-comparison_files/figure-html/cell-4-output-2.png" width="800" height="564" class="figure-img"></p>
 </figure>
 </div>
 </div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="branching-comparison_files/figure-html/cell-4-output-3.png" width="758" height="558" class="figure-img"></p>
+<p><img src="branching-comparison_files/figure-html/cell-4-output-3.png" width="735" height="564" class="figure-img"></p>
 </figure>
 </div>
 </div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="branching-comparison_files/figure-html/cell-4-output-4.png" width="758" height="558" class="figure-img"></p>
+<p><img src="branching-comparison_files/figure-html/cell-4-output-4.png" width="735" height="564" class="figure-img"></p>
 </figure>
 </div>
 </div>

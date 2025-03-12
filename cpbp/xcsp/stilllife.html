@@ -6,9 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Axel Baudot">
 
-<title>Still Life XCSP</title>
+<title>Still Life Experiment Analysis</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -67,32 +66,28 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="stilllife_files/libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="stilllife_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="stilllife_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="stilllife_files/libs/bootstrap/bootstrap-3a573759c8af697ec766c17f5d99f015.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="stilllife_files/libs/bootstrap/bootstrap-4e36703a9dd4e0c5f2cd63618d5fc552.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 
 
 </head>
 
-<body class="fullcontent">
+<body>
 
 <div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
-
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+  
+</div>
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Still Life XCSP</h1>
+<h1 class="title">Still Life Experiment Analysis</h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Axel Baudot </p>
-          </div>
-  </div>
     
   
     
@@ -103,418 +98,80 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<div id="70178b09" class="cell" data-execution_count="1">
+<p>This notebook demonstrates the functionality of the XCSP experiment analysis pipeline. We focus on loading experiment data, grouping by algorithm parameters, and preparing data for visualization.</p>
+<div id="744501f0" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> process</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>problem <span class="op">=</span> <span class="st">"stilllife"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> experiment_api <span class="im">as</span> api</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Set logging level</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>api.set_log_level(<span class="st">'INFO'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<section id="max-marginal-regret" class="level1">
-<h1>Max-Marginal-Regret</h1>
-<div id="cb9d7c85" class="cell" data-execution_count="2">
+<div id="1a6db4e6" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>models <span class="op">=</span> process.MAX_MARGINAL_REGRET_MODELS</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>process.plot_colors(models)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Try to load knapsack logs specifically</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>all_logs <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Loading tsp experiment logs..."</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>all_logs <span class="op">=</span> api.load_data(<span class="st">"logs/stilllife"</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Loaded </span><span class="sc">{</span><span class="bu">len</span>(all_logs)<span class="sc">}</span><span class="ss"> total experiment logs"</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="kw">not</span> all_logs.empty <span class="kw">and</span> <span class="bu">len</span>(all_logs) <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Creating mean normalized score plots..."</span>)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Normalize the data first</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    normalized_df <span class="op">=</span> api.normalize_data(all_logs)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="st">"norm_best_score"</span> <span class="kw">in</span> normalized_df.columns:</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"Data has been normalized successfully"</span>)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>        api.plot_comprehensive_comparison(</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>            normalized_df,</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>            group_by<span class="op">=</span>[<span class="st">'bp'</span>, <span class="st">'branching'</span>],</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>            title<span class="op">=</span><span class="st">"Algorithm Performance Comparison"</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Create plot grouped by BP algorithm</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>        <span class="co"># mean_score_plot = api.plot_mean_normalized_score(</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>        <span class="co">#     normalized_df,</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>        <span class="co">#     group_by=['bp', 'branching'],</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>        <span class="co">#     x_axis_metric=api.METRIC_FAILURES,</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>        <span class="co">#     log_scale=True,</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>        <span class="co">#     title="Mean Normalized Score vs Failures"</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>        <span class="co"># )</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>        <span class="co"># </span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>        <span class="co"># </span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>        <span class="co"># time_plot = api.plot_mean_normalized_score(</span></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>        <span class="co">#     normalized_df,</span></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>        <span class="co">#     group_by=['bp', 'branching'],</span></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>        <span class="co">#     x_axis_metric=api.METRIC_EXECUTION_TIME,</span></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>        <span class="co">#     log_scale=True,</span></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>        <span class="co">#     title="Mean Normalized Score vs Execution Time"</span></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>        <span class="co"># )</span></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"Normalization failed, cannot create mean score plot without normalized scores"</span>)</span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Cannot create mean score plot - no data available"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Loading tsp experiment logs...
+Loaded 455 total experiment logs
+Creating mean normalized score plots...
+Data has been normalized successfully</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>experiment_api - INFO - Creating comprehensive comparison plot with 2 subplots</code></pre>
+</div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="stilllife_files/figure-html/cell-3-output-1.png" width="787" height="115" class="figure-img"></p>
+<p><img src="stilllife_files/figure-html/cell-3-output-3.png" width="822" height="954" class="figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
-<section id="s4" class="level2">
-<h2 class="anchored" data-anchor-id="s4">s4</h2>
-<div id="660f0229" class="cell" data-execution_count="3">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>process.plot_quality_graph(problem, <span class="st">"s4"</span>, models)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="stilllife_files/figure-html/cell-4-output-1.png" width="758" height="564" class="figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="s8" class="level2">
-<h2 class="anchored" data-anchor-id="s8">s8</h2>
-<div id="5969102c" class="cell" data-execution_count="4">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>process.plot_quality_graph(problem, <span class="st">"s8"</span>, models)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="stilllife_files/figure-html/cell-5-output-1.png" width="758" height="564" class="figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="s12" class="level2">
-<h2 class="anchored" data-anchor-id="s12">s12</h2>
-<div id="8b21a9e1" class="cell" data-execution_count="5">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>process.plot_quality_graph(problem, <span class="st">"s12"</span>, models)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="stilllife_files/figure-html/cell-6-output-1.png" width="758" height="564" class="figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="wastage-8-ish" class="level2">
-<h2 class="anchored" data-anchor-id="wastage-8-ish">Wastage 8-ish</h2>
-<div id="2e9e2edd" class="cell" data-execution_count="6">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>process.plot_quality_graph(problem, <span class="st">"wst8"</span>, models)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="stilllife_files/figure-html/cell-7-output-1.png" width="758" height="564" class="figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-</section>
-<section id="switch" class="level1">
-<h1>Switch</h1>
-<div id="e77d4df1" class="cell" data-execution_count="7">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>models <span class="op">=</span> process.MAX_PRODUCT_SWITCH_MODELS</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>process.plot_colors(models)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="stilllife_files/figure-html/cell-8-output-1.png" width="787" height="67" class="figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-<section id="s4-1" class="level2">
-<h2 class="anchored" data-anchor-id="s4-1">s4</h2>
-<div id="4b37a1e7" class="cell" data-execution_count="8">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>process.plot_quality_graph(problem, <span class="st">"s4"</span>, models)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="stilllife_files/figure-html/cell-9-output-1.png" width="758" height="564" class="figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="s8-1" class="level2">
-<h2 class="anchored" data-anchor-id="s8-1">s8</h2>
-<div id="44557792" class="cell" data-execution_count="9">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>process.plot_quality_graph(problem, <span class="st">"s8"</span>, models)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="stilllife_files/figure-html/cell-10-output-1.png" width="758" height="564" class="figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="s12-1" class="level2">
-<h2 class="anchored" data-anchor-id="s12-1">s12</h2>
-<div id="9bc030f8" class="cell" data-execution_count="10">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>process.plot_quality_graph(problem, <span class="st">"s12"</span>, models)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="stilllife_files/figure-html/cell-11-output-1.png" width="758" height="564" class="figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="wastage-8-ish-1" class="level2">
-<h2 class="anchored" data-anchor-id="wastage-8-ish-1">Wastage 8-ish</h2>
-<div id="76896c88" class="cell" data-execution_count="11">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>process.plot_quality_graph(problem, <span class="st">"wst8"</span>, models)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="stilllife_files/figure-html/cell-12-output-1.png" width="758" height="564" class="figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-</section>
-<section id="dom-wdeg-max-marginal" class="level1">
-<h1>Dom-WDeg-Max-Marginal</h1>
-<div id="262820eb" class="cell" data-execution_count="12">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>models <span class="op">=</span> process.DOM_WDEG_MAX_MARGINAL_MODELS</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>process.plot_colors(models)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="stilllife_files/figure-html/cell-13-output-1.png" width="787" height="91" class="figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-<section id="s4-2" class="level2">
-<h2 class="anchored" data-anchor-id="s4-2">s4</h2>
-<div id="0538b368" class="cell" data-execution_count="13">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>process.plot_quality_graph(problem, <span class="st">"s4"</span>, models)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="stilllife_files/figure-html/cell-14-output-1.png" width="758" height="564" class="figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="s8-2" class="level2">
-<h2 class="anchored" data-anchor-id="s8-2">s8</h2>
-<div id="6094ad17" class="cell" data-execution_count="14">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>process.plot_quality_graph(problem, <span class="st">"s8"</span>, models)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="stilllife_files/figure-html/cell-15-output-1.png" width="758" height="564" class="figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="s12-2" class="level2">
-<h2 class="anchored" data-anchor-id="s12-2">s12</h2>
-<div id="ea9c98a0" class="cell" data-execution_count="15">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>process.plot_quality_graph(problem, <span class="st">"s12"</span>, models)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="stilllife_files/figure-html/cell-16-output-1.png" width="758" height="564" class="figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="wastage-8-ish-2" class="level2">
-<h2 class="anchored" data-anchor-id="wastage-8-ish-2">Wastage 8-ish</h2>
-<div id="36912fd9" class="cell" data-execution_count="16">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>process.plot_quality_graph(problem, <span class="st">"wst8"</span>, models)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="stilllife_files/figure-html/cell-17-output-1.png" width="758" height="564" class="figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-</section>
-<section id="max-product" class="level1">
-<h1>Max-Product</h1>
-<div id="3fc37f08" class="cell" data-execution_count="17">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>models <span class="op">=</span> process.MAX_PRODUCT_MODELS</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>process.plot_colors(models)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="stilllife_files/figure-html/cell-18-output-1.png" width="787" height="115" class="figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-<section id="s4-3" class="level2">
-<h2 class="anchored" data-anchor-id="s4-3">s4</h2>
-<div id="8d8b778d" class="cell" data-execution_count="18">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>process.plot_quality_graph(problem, <span class="st">"s4"</span>, models)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="stilllife_files/figure-html/cell-19-output-1.png" width="758" height="564" class="figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="s8-3" class="level2">
-<h2 class="anchored" data-anchor-id="s8-3">s8</h2>
-<div id="003c2545" class="cell" data-execution_count="19">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>process.plot_quality_graph(problem, <span class="st">"s8"</span>, models)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="stilllife_files/figure-html/cell-20-output-1.png" width="758" height="564" class="figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="s12-3" class="level2">
-<h2 class="anchored" data-anchor-id="s12-3">s12</h2>
-<div id="a4910279" class="cell" data-execution_count="20">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>process.plot_quality_graph(problem, <span class="st">"s12"</span>, models)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="stilllife_files/figure-html/cell-21-output-1.png" width="758" height="564" class="figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="wastage-8-ish-3" class="level2">
-<h2 class="anchored" data-anchor-id="wastage-8-ish-3">Wastage 8-ish</h2>
-<div id="cec6a95d" class="cell" data-execution_count="21">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>process.plot_quality_graph(problem, <span class="st">"wst8"</span>, models)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="stilllife_files/figure-html/cell-22-output-1.png" width="758" height="564" class="figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-</section>
-<section id="sum-product" class="level1">
-<h1>Sum-Product</h1>
-<div id="db81e39b" class="cell" data-execution_count="22">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>models <span class="op">=</span> process.SUM_PRODUCT_MODELS</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>process.plot_colors(models)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="stilllife_files/figure-html/cell-23-output-1.png" width="787" height="115" class="figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-<section id="s4-4" class="level2">
-<h2 class="anchored" data-anchor-id="s4-4">s4</h2>
-<div id="6a9b1d54" class="cell" data-execution_count="23">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>process.plot_quality_graph(problem, <span class="st">"s4"</span>, models)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="stilllife_files/figure-html/cell-24-output-1.png" width="758" height="564" class="figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="s8-4" class="level2">
-<h2 class="anchored" data-anchor-id="s8-4">s8</h2>
-<div id="4932db47" class="cell" data-execution_count="24">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>process.plot_quality_graph(problem, <span class="st">"s8"</span>, models)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="stilllife_files/figure-html/cell-25-output-1.png" width="757" height="564" class="figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="s12-4" class="level2">
-<h2 class="anchored" data-anchor-id="s12-4">s12</h2>
-<div id="bd69792e" class="cell" data-execution_count="25">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>process.plot_quality_graph(problem, <span class="st">"s12"</span>, models)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="stilllife_files/figure-html/cell-26-output-1.png" width="758" height="564" class="figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="wastage-8-ish-4" class="level2">
-<h2 class="anchored" data-anchor-id="wastage-8-ish-4">Wastage 8-ish</h2>
-<div id="b44a35cf" class="cell" data-execution_count="26">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>process.plot_quality_graph(problem, <span class="st">"wst8"</span>, models)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="stilllife_files/figure-html/cell-27-output-1.png" width="758" height="564" class="figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-</section>
 
 </main>
 <!-- /main column -->

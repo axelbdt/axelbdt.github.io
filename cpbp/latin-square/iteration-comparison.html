@@ -80,16 +80,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#latin-square-influence-of-bp-iteration-count" id="toc-latin-square-influence-of-bp-iteration-count" class="nav-link active" data-scroll-target="#latin-square-influence-of-bp-iteration-count">Latin Square: Influence of BP Iteration Count</a>
-  <ul class="collapse">
-  <li><a href="#max-product---max-marginal-regret" id="toc-max-product---max-marginal-regret" class="nav-link" data-scroll-target="#max-product---max-marginal-regret">Max Product - Max Marginal Regret</a>
+  <li><a href="#max-product---max-marginal-regret" id="toc-max-product---max-marginal-regret" class="nav-link active" data-scroll-target="#max-product---max-marginal-regret">Max Product - Max Marginal Regret</a>
   <ul class="collapse">
   <li><a href="#oracle-weight-1.0" id="toc-oracle-weight-1.0" class="nav-link" data-scroll-target="#oracle-weight-1.0">Oracle Weight = 1.0</a></li>
   <li><a href="#oracle-weight-0.8" id="toc-oracle-weight-0.8" class="nav-link" data-scroll-target="#oracle-weight-0.8">Oracle Weight = 0.8</a></li>
   <li><a href="#oracle-weight-0.5" id="toc-oracle-weight-0.5" class="nav-link" data-scroll-target="#oracle-weight-0.5">Oracle Weight = 0.5</a></li>
   <li><a href="#oracle-weight-1.5" id="toc-oracle-weight-1.5" class="nav-link" data-scroll-target="#oracle-weight-1.5">Oracle Weight = 1.5</a></li>
   <li><a href="#oracle-weight-2.0" id="toc-oracle-weight-2.0" class="nav-link" data-scroll-target="#oracle-weight-2.0">Oracle Weight = 2.0</a></li>
-  </ul></li>
   </ul></li>
   </ul>
 </nav>
@@ -121,10 +118,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="latin-square-influence-of-bp-iteration-count" class="level1">
-<h1>Latin Square: Influence of BP Iteration Count</h1>
 <p>This notebook compares the influence of the belief propagation iteration count on the resolution performance. All experiments use the LDS search strategy.</p>
-<div id="e62372a2" class="cell" data-execution_count="1">
+<div id="b2b6185a" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> experiment_api <span class="im">import</span> plot_optimal_solutions_reached, set_log_level, plot_mean_normalized_score, METRIC_EXECUTION_TIME, METRIC_FAILURES</span>
@@ -141,11 +136,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>group_by <span class="op">=</span> [<span class="st">'bp'</span>, <span class="st">'max_iter'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<section id="max-product---max-marginal-regret" class="level2">
-<h2 class="anchored" data-anchor-id="max-product---max-marginal-regret">Max Product - Max Marginal Regret</h2>
-<section id="oracle-weight-1.0" class="level3">
-<h3 class="anchored" data-anchor-id="oracle-weight-1.0">Oracle Weight = 1.0</h3>
-<div id="fa1b5031" class="cell" data-execution_count="2">
+<section id="max-product---max-marginal-regret" class="level1">
+<h1>Max Product - Max Marginal Regret</h1>
+<section id="oracle-weight-1.0" class="level2">
+<h2 class="anchored" data-anchor-id="oracle-weight-1.0">Oracle Weight = 1.0</h2>
+<div id="babcb133" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set oracle weight to 1.0</span></span>
@@ -203,9 +198,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="oracle-weight-0.8" class="level3">
-<h3 class="anchored" data-anchor-id="oracle-weight-0.8">Oracle Weight = 0.8</h3>
-<div id="1d7c957d" class="cell" data-execution_count="3">
+<section id="oracle-weight-0.8" class="level2">
+<h2 class="anchored" data-anchor-id="oracle-weight-0.8">Oracle Weight = 0.8</h2>
+<div id="93a14904" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set oracle weight to 0.8</span></span>
@@ -277,9 +272,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="oracle-weight-0.5" class="level3">
-<h3 class="anchored" data-anchor-id="oracle-weight-0.5">Oracle Weight = 0.5</h3>
-<div id="fa1e0222" class="cell" data-execution_count="4">
+<section id="oracle-weight-0.5" class="level2">
+<h2 class="anchored" data-anchor-id="oracle-weight-0.5">Oracle Weight = 0.5</h2>
+<div id="f9cce910" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set oracle weight to 0.5</span></span>
@@ -357,9 +352,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="oracle-weight-1.5" class="level3">
-<h3 class="anchored" data-anchor-id="oracle-weight-1.5">Oracle Weight = 1.5</h3>
-<div id="56d2411d" class="cell" data-execution_count="5">
+<section id="oracle-weight-1.5" class="level2">
+<h2 class="anchored" data-anchor-id="oracle-weight-1.5">Oracle Weight = 1.5</h2>
+<div id="a49cf665" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set oracle weight to 1.5</span></span>
@@ -431,9 +426,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="oracle-weight-2.0" class="level3">
-<h3 class="anchored" data-anchor-id="oracle-weight-2.0">Oracle Weight = 2.0</h3>
-<div id="780894ec" class="cell" data-execution_count="6">
+<section id="oracle-weight-2.0" class="level2">
+<h2 class="anchored" data-anchor-id="oracle-weight-2.0">Oracle Weight = 2.0</h2>
+<div id="c6a1d87e" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set oracle weight to 2.0</span></span>
@@ -504,7 +499,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-</section>
 </section>
 </section>
 

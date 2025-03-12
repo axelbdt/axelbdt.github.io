@@ -80,13 +80,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#latin-square-search-strategy-comparison-dfs-vs-lds" id="toc-latin-square-search-strategy-comparison-dfs-vs-lds" class="nav-link active" data-scroll-target="#latin-square-search-strategy-comparison-dfs-vs-lds">Latin Square: Search Strategy Comparison (DFS vs LDS)</a>
-  <ul class="collapse">
-  <li><a href="#max-marginal-regret-branching" id="toc-max-marginal-regret-branching" class="nav-link" data-scroll-target="#max-marginal-regret-branching">Max-marginal-regret Branching</a></li>
+  <li><a href="#max-marginal-regret-branching" id="toc-max-marginal-regret-branching" class="nav-link active" data-scroll-target="#max-marginal-regret-branching">Max-marginal-regret Branching</a></li>
   <li><a href="#max-marginal-strength-branching" id="toc-max-marginal-strength-branching" class="nav-link" data-scroll-target="#max-marginal-strength-branching">Max marginal strength Branching</a></li>
   <li><a href="#dom-wdeg-max-marginal-branching" id="toc-dom-wdeg-max-marginal-branching" class="nav-link" data-scroll-target="#dom-wdeg-max-marginal-branching">Dom WDeg + Max Marginal Branching</a></li>
   <li><a href="#max-marginal-branching" id="toc-max-marginal-branching" class="nav-link" data-scroll-target="#max-marginal-branching">Max Marginal Branching</a></li>
-  </ul></li>
   </ul>
 </nav>
 </div>
@@ -117,10 +114,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="latin-square-search-strategy-comparison-dfs-vs-lds" class="level1">
-<h1>Latin Square: Search Strategy Comparison (DFS vs LDS)</h1>
 <p>This notebook compares Depth-First Search (DFS) and Limited Discrepancy Search (LDS) strategies for solving Latin Square optimization problems using both Sum-product and Max-product belief propagation algorithms.</p>
-<div id="dab88ccc" class="cell" data-execution_count="1">
+<div id="24ea0268" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> experiment_api <span class="im">import</span> plot_optimal_solutions_reached, set_log_level, plot_mean_normalized_score</span>
@@ -132,55 +127,61 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">'oracle_weight'</span>: <span class="fl">1.0</span>,</span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">'max_iter'</span>: <span class="dv">10</span>,</span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>group_by <span class="op">=</span> [<span class="st">'bp'</span>, <span class="st">'search_type'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>no_bp_filter <span class="op">=</span> {</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">'bp'</span>: <span class="st">'no_bp'</span>,</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">'branching'</span>: <span class="st">'dom_wdeg_best_value'</span>,</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>group_by <span class="op">=</span> [<span class="st">'bp'</span>, <span class="st">'search_type'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<section id="max-marginal-regret-branching" class="level2">
-<h2 class="anchored" data-anchor-id="max-marginal-regret-branching">Max-marginal-regret Branching</h2>
-<div id="a6609de3" class="cell" data-execution_count="2">
+<section id="max-marginal-regret-branching" class="level1">
+<h1>Max-marginal-regret Branching</h1>
+<div id="9132648a" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a filter for all algorithms with max-marginal-regret branching</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>filter_criteria <span class="op">=</span> base_filter.copy()</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>filter_criteria[<span class="st">'branching'</span>] <span class="op">=</span> <span class="st">'max_marginal_regret'</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the number of instances reaching optimal solutions</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>plot_optimal_solutions_reached(</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    filter_criteria,</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    group_by<span class="op">=</span>group_by,</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    log_scale<span class="op">=</span><span class="va">True</span>,</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">"Optimal Solutions Reached - Max-marginal-regret Branching"</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the mean normalized score</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>plot_mean_normalized_score(</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    filter_criteria,</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    group_by<span class="op">=</span>group_by,</span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    log_scale<span class="op">=</span><span class="va">True</span>,</span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">"Mean Normalized Score - Max-marginal-regret Branching"</span></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>filter_sets <span class="op">=</span> [filter_criteria, no_bp_filter]</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the number of instances reaching optimal solutions</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>plot_optimal_solutions_reached(</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    filter_sets,</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    group_by<span class="op">=</span>group_by,</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    log_scale<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">"Optimal Solutions Reached - Max-marginal-regret Branching"</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the mean normalized score</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>plot_mean_normalized_score(</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    filter_sets,</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    group_by<span class="op">=</span>group_by,</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    log_scale<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">"Mean Normalized Score - Max-marginal-regret Branching"</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="search-comparison_files/figure-html/cell-3-output-1.png" width="758" height="572" class="figure-img"></p>
+<p><img src="search-comparison_files/figure-html/cell-3-output-1.png" width="757" height="570" class="figure-img"></p>
 </figure>
 </div>
 </div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="search-comparison_files/figure-html/cell-3-output-2.png" width="758" height="572" class="figure-img"></p>
+<p><img src="search-comparison_files/figure-html/cell-3-output-2.png" width="758" height="570" class="figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
 </section>
-<section id="max-marginal-strength-branching" class="level2">
-<h2 class="anchored" data-anchor-id="max-marginal-strength-branching">Max marginal strength Branching</h2>
-<div id="8a0ec756" class="cell" data-execution_count="3">
+<section id="max-marginal-strength-branching" class="level1">
+<h1>Max marginal strength Branching</h1>
+<div id="32742779" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a filter for all algorithms with max-marginal-strength branching</span></span>
@@ -221,9 +222,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="dom-wdeg-max-marginal-branching" class="level2">
-<h2 class="anchored" data-anchor-id="dom-wdeg-max-marginal-branching">Dom WDeg + Max Marginal Branching</h2>
-<div id="9c89a26b" class="cell" data-execution_count="4">
+<section id="dom-wdeg-max-marginal-branching" class="level1">
+<h1>Dom WDeg + Max Marginal Branching</h1>
+<div id="fbfa0557" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a filter for all algorithms with dom-wdeg-max-marginal branching</span></span>
@@ -264,9 +265,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="max-marginal-branching" class="level2">
-<h2 class="anchored" data-anchor-id="max-marginal-branching">Max Marginal Branching</h2>
-<div id="45b258a6" class="cell" data-execution_count="5">
+<section id="max-marginal-branching" class="level1">
+<h1>Max Marginal Branching</h1>
+<div id="ce9bb05a" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a filter for all algorithms with max-marginal branching</span></span>
@@ -306,7 +307,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-</section>
 </section>
 
 </main>

@@ -99,7 +99,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p>This notebook demonstrates the functionality of the XCSP experiment analysis pipeline. We focus on loading experiment data, grouping by algorithm parameters, and preparing data for visualization.</p>
-<div id="a033a589" class="cell" data-execution_count="1">
+<div id="13f1fb7b" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> experiment_api <span class="im">as</span> api</span>
@@ -132,11 +132,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
 <span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Cannot create mean score plot - no data available"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-stdout">
-<pre><code>Loading maximumdensityoscillatinglife experiment logs...
-Loaded 75 total experiment logs
-Creating mean normalized score plots...</code></pre>
-</div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Instance ('maximumdensityoscillatinglife', 'MaximumDensityOscillatingLife-mini-5-4_c24.xml.lzma') has identical best and worst scores (-45.0), normalizing to 1.0
 No valid scores found for instance ('maximumdensityoscillatinglife', 'MaximumDensityOscillatingLife-mini-7-4_c24.xml.lzma')
@@ -151,7 +146,10 @@ No valid scores found for instance ('maximumdensityoscillatinglife', 'MaximumDen
 No valid scores found for instance ('maximumdensityoscillatinglife', 'MaximumDensityOscillatingLife-mini-5-3_c24.xml.lzma')</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Data has been normalized successfully</code></pre>
+<pre><code>Loading maximumdensityoscillatinglife experiment logs...
+Loaded 75 total experiment logs
+Creating mean normalized score plots...
+Data has been normalized successfully</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>experiment_api - INFO - Creating comprehensive comparison plot with 2 subplots</code></pre>
@@ -159,7 +157,7 @@ No valid scores found for instance ('maximumdensityoscillatinglife', 'MaximumDen
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="maximumdensityoscillatinglife_files/figure-html/cell-2-output-5.png" width="822" height="954" class="figure-img"></p>
+<p><img src="maximumdensityoscillatinglife_files/figure-html/cell-2-output-4.png" width="822" height="954" class="figure-img"></p>
 </figure>
 </div>
 </div>

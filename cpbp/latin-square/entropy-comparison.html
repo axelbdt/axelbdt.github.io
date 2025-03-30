@@ -8,7 +8,7 @@
 
 <meta name="author" content="Axel Baudot">
 
-<title>Latin Square: Branching Strategy Comparison</title>
+<title>Latin Square: Entropy Threshold Comparison</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -58,16 +58,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="branching-comparison_files/libs/clipboard/clipboard.min.js"></script>
-<script src="branching-comparison_files/libs/quarto-html/quarto.js"></script>
-<script src="branching-comparison_files/libs/quarto-html/popper.min.js"></script>
-<script src="branching-comparison_files/libs/quarto-html/tippy.umd.min.js"></script>
-<script src="branching-comparison_files/libs/quarto-html/anchor.min.js"></script>
-<link href="branching-comparison_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="branching-comparison_files/libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="branching-comparison_files/libs/bootstrap/bootstrap.min.js"></script>
-<link href="branching-comparison_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="branching-comparison_files/libs/bootstrap/bootstrap-4e36703a9dd4e0c5f2cd63618d5fc552.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="entropy-comparison_files/libs/clipboard/clipboard.min.js"></script>
+<script src="entropy-comparison_files/libs/quarto-html/quarto.js"></script>
+<script src="entropy-comparison_files/libs/quarto-html/popper.min.js"></script>
+<script src="entropy-comparison_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="entropy-comparison_files/libs/quarto-html/anchor.min.js"></script>
+<link href="entropy-comparison_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="entropy-comparison_files/libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="entropy-comparison_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="entropy-comparison_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="entropy-comparison_files/libs/bootstrap/bootstrap-4e36703a9dd4e0c5f2cd63618d5fc552.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 
 
 </head>
@@ -80,9 +80,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#limited-discrepancy-search-lds" id="toc-limited-discrepancy-search-lds" class="nav-link active" data-scroll-target="#limited-discrepancy-search-lds">Limited Discrepancy Search (LDS)</a>
+  <li><a href="#sum-product-belief-propagation" id="toc-sum-product-belief-propagation" class="nav-link active" data-scroll-target="#sum-product-belief-propagation">Sum-Product Belief Propagation</a>
   <ul class="collapse">
   <li><a href="#first-solution-distribution" id="toc-first-solution-distribution" class="nav-link" data-scroll-target="#first-solution-distribution">First Solution Distribution</a></li>
+  </ul></li>
+  <li><a href="#max-product-belief-propagation" id="toc-max-product-belief-propagation" class="nav-link" data-scroll-target="#max-product-belief-propagation">Max-Product Belief Propagation</a>
+  <ul class="collapse">
+  <li><a href="#first-solution-distribution-1" id="toc-first-solution-distribution-1" class="nav-link" data-scroll-target="#first-solution-distribution-1">First Solution Distribution</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -91,7 +95,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Latin Square: Branching Strategy Comparison</h1>
+<h1 class="title">Latin Square: Entropy Threshold Comparison</h1>
 </div>
 
 
@@ -114,8 +118,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>This notebook compares different branching heuristics for solving Latin Square optimization problems using both Sum-product and Max-product belief propagation algorithms.</p>
-<div id="879607c3" class="cell" data-execution_count="1">
+<div id="3977c358" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> experiment_api <span class="im">as</span> api</span>
@@ -128,53 +131,49 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>Setting log level to INFO</code></pre>
 </div>
 </div>
-<section id="limited-discrepancy-search-lds" class="level1">
-<h1>Limited Discrepancy Search (LDS)</h1>
-<p>In this section, we compare different branching heuristics using the LDS search strategy.</p>
-<div id="b80ab0ee" class="cell" data-execution_count="2">
+<section id="sum-product-belief-propagation" class="level1">
+<h1>Sum-Product Belief Propagation</h1>
+<p>In this section, we compare different thresholds to branch on entropy with Sum-Product BP</p>
+<div id="7c2a7e7a" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># SQL condition to select LDS runs with oracle weight 1.0 or no_bp</span></span>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># SQL condition to select runs with Sum-Product BP</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>sql_conditions <span class="op">=</span> <span class="st">"""</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="st">    (search_type = 'lds'</span></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="st">    AND</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="st">    ((oracle = 1.0 AND max_iter = 10)</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="st">      OR</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="st">      bp = 'no_bp'))</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="st">    bp = 'sum_product'</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="st">    AND</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="st">    branching = 'min_normalized_entropy'</span></span>
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="st">    AND</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="st">    (branching != 'min_normalized_entropy'</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="st">      OR</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="st">      (bp = 'sum_product' and entropy_branching_threshold = 1.0)</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="st">      OR</span></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="st">      (bp = 'max_product' and entropy_branching_threshold = 0.7))</span></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Group by BP algorithm and branching strategy</span></span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>group_by <span class="op">=</span> [<span class="st">'bp'</span>, <span class="st">'branching'</span>]</span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Create comprehensive comparison plot</span></span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>fig1 <span class="op">=</span> api.plot_comprehensive_comparison(</span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>    sql_conditions<span class="op">=</span>sql_conditions,</span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>    group_by<span class="op">=</span>group_by,</span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">"Comparison of Branching Strategies (LDS)"</span></span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="st">    (oracle = 1.0 AND max_iter = 10 and entropy_branching_threshold &gt; 0.0))</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Group by BP algorithm and branching strategy</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>group_by <span class="op">=</span> [<span class="st">'entropy_branching_threshold'</span>]</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Create comprehensive comparison plot</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>fig1 <span class="op">=</span> api.plot_comprehensive_comparison(</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    sql_conditions<span class="op">=</span>sql_conditions,</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    group_by<span class="op">=</span>group_by,</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">"Comparison of Branching Strategies (LDS)"</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>Successfully normalized scores for 3372 rows</code></pre>
+<pre><code>Successfully normalized scores for 2142 rows</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="branching-comparison_files/figure-html/cell-3-output-2.png" width="1027" height="1487" class="figure-img"></p>
+<p><img src="entropy-comparison_files/figure-html/cell-3-output-2.png" width="942" height="1487" class="figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
 <section id="first-solution-distribution" class="level2">
 <h2 class="anchored" data-anchor-id="first-solution-distribution">First Solution Distribution</h2>
-<div id="cb2a9f64" class="cell" data-execution_count="3">
+<div id="cbda746d" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create first solution histogram using the same SQL conditions</span></span>
@@ -187,13 +186,81 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>Successfully normalized scores for 360 rows
-Successfully normalized scores for 360 rows</code></pre>
+<pre><code>Successfully normalized scores for 120 rows
+Successfully normalized scores for 120 rows</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="branching-comparison_files/figure-html/cell-4-output-2.png" width="1027" height="842" class="figure-img"></p>
+<p><img src="entropy-comparison_files/figure-html/cell-4-output-2.png" width="950" height="842" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="max-product-belief-propagation" class="level1">
+<h1>Max-Product Belief Propagation</h1>
+<p>In this section, we compare different thresholds to branch on entropy using Max-Product BP</p>
+<div id="42fe13e1" class="cell" data-execution_count="4">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># SQL condition to select runs with Sum-Product BP</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>sql_conditions <span class="op">=</span> <span class="st">"""</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="st">    (search_type = 'lds'</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="st">    AND</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="st">    bp = 'max_product'</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="st">    AND</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="st">    branching = 'min_normalized_entropy'</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="st">    AND</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="st">    (oracle = 1.0 AND max_iter = 10 and entropy_branching_threshold &gt; 0.0))</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Group by BP algorithm and branching strategy</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>group_by <span class="op">=</span> [<span class="st">'entropy_branching_threshold'</span>]</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Create comprehensive comparison plot</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>fig1 <span class="op">=</span> api.plot_comprehensive_comparison(</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>    sql_conditions<span class="op">=</span>sql_conditions,</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>    group_by<span class="op">=</span>group_by,</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">"Comparison of Branching Strategies (LDS)"</span></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Successfully normalized scores for 170 rows</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="entropy-comparison_files/figure-html/cell-5-output-2.png" width="950" height="1487" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<section id="first-solution-distribution-1" class="level2">
+<h2 class="anchored" data-anchor-id="first-solution-distribution-1">First Solution Distribution</h2>
+<div id="3c15b819" class="cell" data-execution_count="5">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create first solution histogram using the same SQL conditions</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>fig2 <span class="op">=</span> api.plot_first_solution_histogram(</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    sql_conditions<span class="op">=</span>sql_conditions,</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    group_by<span class="op">=</span>group_by,</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">"First Solution Distribution"</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Successfully normalized scores for 120 rows
+Successfully normalized scores for 120 rows</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="entropy-comparison_files/figure-html/cell-6-output-2.png" width="950" height="842" class="figure-img"></p>
 </figure>
 </div>
 </div>

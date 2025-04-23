@@ -1,0 +1,76 @@
+---
+title: "Latin Square: Shortcut Comparison"
+author: "Axel Baudot"
+format:
+  html:
+    code-fold: true
+    toc: true
+    toc-depth: 3
+    theme: cosmo
+---
+
+```{python}
+import experiment_api as api
+import matplotlib.pyplot as plt
+
+# Set log level to INFO
+api.set_log_level('INFO')
+
+branchings = ["max_marginal", "max_marginal_regret", "max_marginal_strength", "min_entropy", "min_normalized_entropy"]
+group_by = ['propagation_shortcut']
+```
+
+# Sum-Product Belief Propagation
+
+In this section, we compare different thresholds to branch on entropy with Sum-Product BP
+
+```{python}
+# SQL condition to select runs with Sum-Product BP
+for branching in branchings:
+    print(branching)
+    sql_conditions = f"""
+        (search_type = 'lds'
+        AND
+        bp = 'sum_product'
+        AND
+        branching = '{branching}'
+        AND
+        (oracle = 1.0 AND max_iter = 10 and entropy_branching_threshold < 1.0))
+    """
+
+    # Create comprehensive comparison plot
+    fig1 = api.plot_comprehensive_comparison(
+        sql_conditions=sql_conditions,
+        group_by=group_by,
+        title="Comparison of Branching Strategies (LDS)"
+    )
+
+    plt.show()
+```
+
+# Max-Product Belief Propagation
+
+In this section, we compare different thresholds to branch on entropy using Max-Product BP
+
+```{python}
+for branching in branchings:
+    print(branching)
+    sql_conditions = f"""
+        (search_type = 'lds'
+        AND
+        bp = 'max_product'
+        AND
+        branching = '{branching}'
+        AND
+        (oracle = 1.0 AND max_iter = 10 and entropy_branching_threshold = 1.0))
+    """
+
+    # Create comprehensive comparison plot
+    fig1 = api.plot_comprehensive_comparison(
+        sql_conditions=sql_conditions,
+        group_by=group_by,
+        title="Comparison of Branching Strategies (LDS)"
+    )
+
+    plt.show()
+```

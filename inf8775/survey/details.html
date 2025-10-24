@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Résultats du Sondage</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+        background: #f5f5f5;
+        padding: 20px;
+        line-height: 1.6;
+      }
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        background: white;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      h1 {
+        margin-bottom: 30px;
+        color: #333;
+      }
+      .question-block {
+        margin-bottom: 50px;
+      }
+      h2 {
+        margin-bottom: 20px;
+        color: #444;
+        font-size: 18px;
+      }
+      .chart-container {
+        position: relative;
+        height: 300px;
+        margin-bottom: 20px;
+      }
+      .response-count {
+        color: #666;
+        font-size: 14px;
+        margin-top: 10px;
+      }
+      .text-responses {
+        margin-top: 20px;
+      }
+      .text-response {
+        background: #f9f9f9;
+        padding: 15px;
+        margin-bottom: 10px;
+        border-radius: 4px;
+        border-left: 3px solid #4a90e2;
+      }
+      .response-number {
+        font-weight: bold;
+        color: #4a90e2;
+        margin-bottom: 5px;
+      }
+      .error {
+        color: #d32f2f;
+        padding: 20px;
+        background: #ffebee;
+        border-radius: 4px;
+        margin: 20px 0;
+      }
+      .loading {
+        text-align: center;
+        padding: 40px;
+        color: #666;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Résultats du Sondage de Cours</h1>
+      <div id="loading" class="loading">Chargement des données...</div>
+      <div id="error" class="error" style="display: none"></div>
+
+      <div id="content" style="display: none">
+        <div class="question-block">
+          <h2>Le rythme du cours en séance est :</h2>
+          <div class="chart-container">
+            <canvas id="chart1"></canvas>
+          </div>
+          <div class="response-count" id="count1"></div>
+        </div>
+
+        <div class="question-block">
+          <h2>Les explications et exemples sont :</h2>
+          <div class="chart-container">
+            <canvas id="chart2"></canvas>
+          </div>
+          <div class="response-count" id="count2"></div>
+        </div>
+
+        <div class="question-block">
+          <h2>Format Zoom : fonctionne bien / pose problème</h2>
+          <div class="chart-container" style="height: 400px">
+            <canvas id="chart3"></canvas>
+          </div>
+          <div class="response-count" id="count3"></div>
+        </div>
+
+        <div class="question-block">
+          <h2>Nommez 2 ou 3 aspects que vous aimeriez voir améliorés</h2>
+          <div class="text-responses" id="improvements"></div>
+        </div>
+
+        <div class="question-block">
+          <h2>Nommez 2 ou 3 aspects que vous appréciez dans ce cours</h2>
+          <div class="text-responses" id="appreciation"></div>
+        </div>
+
+        <div class="question-block">
+          <h2>Partagez ici n'importe quelle remarque ou précision</h2>
+          <div class="text-responses" id="comments"></div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      let surveyData = null;
+
+      function countResponses(field, splitMultiple = false, fixedOrder = null) {
+        const counts = {};
+        surveyData.forEach((response) => {
+          const value = response[field];
+          if (!value || value.trim() === "") return;
+
+          if (splitMultiple) {
+            const options = value
+              .split("   ")
+              .map((s) => s.trim())
+              .filter((s) => s);
+            options.forEach((option) => {
+              counts[option] = (counts[option] || 0) + 1;
+            });
+          } else {
+            counts[value] = (counts[value] || 0) + 1;
+          }
+        });
+
+        if (fixedOrder) {
+          const orderedCounts = {};
+          fixedOrder.forEach((key) => {
+            orderedCounts[key] = counts[key] || 0;
+          });
+          return orderedCounts;
+        }
+
+        return counts;
+      }
+
+      function createBarChart(canvasId, data, title) {
+        const ctx = document.getElementById(canvasId).getContext("2d");
+        const labels = Object.keys(data);
+        const values = Object.values(data);
+
+        new Chart(ctx, {
+          type: "bar",
+          data: {
+            labels: labels,
+            datasets: [
+              {
+                label: "Nombre de réponses",
+                data: values,
+                backgroundColor: "#4a90e2",
+                borderColor: "#357abd",
+                borderWidth: 1,
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+              y: {
+                beginAtZero: true,
+                ticks: {
+                  stepSize: 1,
+                },
+              },
+            },
+            plugins: {
+              legend: {
+                display: false,
+              },
+            },
+          },
+        });
+      }
+
+      function createGroupedBarChart(
+        canvasId,
+        data1,
+        data2,
+        labels,
+        label1,
+        label2,
+      ) {
+        const ctx = document.getElementById(canvasId).getContext("2d");
+        const values1 = labels.map((l) => data1[l] || 0);
+        const values2 = labels.map((l) => data2[l] || 0);
+
+        new Chart(ctx, {
+          type: "bar",
+          data: {
+            labels: labels,
+            datasets: [
+              {
+                label: label1,
+                data: values1,
+                backgroundColor: "#4a90e2",
+                borderColor: "#357abd",
+                borderWidth: 1,
+              },
+              {
+                label: label2,
+                data: values2,
+                backgroundColor: "#e74c3c",
+                borderColor: "#c0392b",
+                borderWidth: 1,
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+              y: {
+                beginAtZero: true,
+                ticks: {
+                  stepSize: 1,
+                },
+              },
+            },
+            plugins: {
+              legend: {
+                display: true,
+                position: "top",
+              },
+            },
+          },
+        });
+      }
+
+      function displayTextResponses(containerId, field) {
+        const container = document.getElementById(containerId);
+        const responses = surveyData
+          .filter((r) => r[field] && r[field].trim() !== "")
+          .map((r) => ({ number: r.rponseno, text: r[field] }));
+
+        if (responses.length === 0) {
+          container.innerHTML =
+            '<p style="color: #999; font-style: italic;">Aucune réponse</p>';
+          return;
+        }
+
+        responses.forEach((r) => {
+          const div = document.createElement("div");
+          div.className = "text-response";
+          div.innerHTML = `<div class="response-number">Réponse #${r.number}</div>${r.text}`;
+          container.appendChild(div);
+        });
+      }
+
+      function renderCharts() {
+        const rhythmOrder = ["Trop rapide", "Adéquat", "Trop lent"];
+        const q1Data = countResponses(
+          "lerythmeducoursensanceest",
+          false,
+          rhythmOrder,
+        );
+        createBarChart("chart1", q1Data, "Le rythme du cours");
+        const q1Total = Object.values(q1Data).reduce((a, b) => a + b, 0);
+        document.getElementById("count1").textContent =
+          `Total: ${q1Total} réponses`;
+
+        const explanationOrder = [
+          "Clairs et suffisants",
+          "Généralement clairs",
+          "Souvent difficiles à suivre",
+        ];
+        const q2Data = countResponses(
+          "lesexplicationsetexemplessont",
+          false,
+          explanationOrder,
+        );
+        createBarChart("chart2", q2Data, "Les explications et exemples");
+        const q2Total = Object.values(q2Data).reduce((a, b) => a + b, 0);
+        document.getElementById("count2").textContent =
+          `Total: ${q2Total} réponses`;
+
+        const zoomAspects = [
+          "Suivre les explications",
+          "Poser des questions",
+          "Faire les exercices/activités",
+          "Rester engagé",
+        ];
+        const q3Data = countResponses(
+          "lescoursenformatzoomfonctionnentbienpour",
+          true,
+          zoomAspects,
+        );
+        const q4Data = countResponses(
+          "leformatzoomposeproblmepour",
+          true,
+          zoomAspects,
+        );
+        createGroupedBarChart(
+          "chart3",
+          q3Data,
+          q4Data,
+          zoomAspects,
+          "Fonctionne bien",
+          "Pose problème",
+        );
+        const q3Total = Object.values(q3Data).reduce((a, b) => a + b, 0);
+        const q4Total = Object.values(q4Data).reduce((a, b) => a + b, 0);
+        document.getElementById("count3").textContent =
+          `Total: ${q3Total} mentions positives, ${q4Total} mentions négatives`;
+
+        displayTextResponses(
+          "improvements",
+          "nommez2ou3aspectsquevousaimeriezvoiramliors",
+        );
+        displayTextResponses(
+          "appreciation",
+          "nommez2ou3aspectsquevousapprciezdanscecours",
+        );
+        displayTextResponses(
+          "comments",
+          "partagezicinimportequelleremarqueouprcision",
+        );
+      }
+
+      async function loadData() {
+        try {
+          const response = await fetch("survey_data.json");
+          if (!response.ok) {
+            throw new Error(`Erreur HTTP: ${response.status}`);
+          }
+
+          const data = await response.json();
+
+          if (Array.isArray(data) && Array.isArray(data[0])) {
+            surveyData = data[0];
+          } else if (Array.isArray(data)) {
+            surveyData = data;
+          } else {
+            throw new Error("Format de données invalide");
+          }
+
+          document.getElementById("loading").style.display = "none";
+          document.getElementById("content").style.display = "block";
+
+          renderCharts();
+        } catch (error) {
+          document.getElementById("loading").style.display = "none";
+          const errorDiv = document.getElementById("error");
+          errorDiv.style.display = "block";
+          errorDiv.innerHTML = `<strong>Erreur de chargement:</strong> ${error.message}<br><br>
+                    Assurez-vous que le fichier <code>survey_data.json</code> se trouve dans le même dossier que ce fichier HTML.`;
+        }
+      }
+
+      loadData();
+    </script>
+  </body>
+</html>

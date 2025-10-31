@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retour sur vos commentaires</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 40px;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1500px;
+            margin: 0 auto;
+            background: white;
+            padding: 60px;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        h1 {
+            color: #2c3e50;
+            font-size: 48px;
+            margin-bottom: 15px;
+            text-align: center;
+            font-weight: 700;
+        }
+        .subtitle {
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 20px;
+            margin-bottom: 50px;
+        }
+        .charts-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 35px;
+            margin-bottom: 50px;
+        }
+        .chart-card {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .chart-card.full {
+            grid-column: 1 / -1;
+        }
+        .chart-title {
+            font-size: 22px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .chart-container {
+            position: relative;
+            height: 300px;
+        }
+        .chart-card.full .chart-container {
+            height: 380px;
+        }
+        .section-header {
+            font-size: 32px;
+            font-weight: 700;
+            color: #2c3e50;
+            margin: 60px 0 30px 0;
+            text-align: center;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #4a90e2;
+        }
+        .section-header.improve {
+            border-bottom-color: #e67e22;
+        }
+        .section-header.positive {
+            border-bottom-color: #27ae60;
+        }
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        .content-column {
+            background: #f8f9fa;
+            padding: 35px;
+            border-radius: 12px;
+            border-left: 6px solid #e67e22;
+        }
+        .content-column.positive {
+            border-left-color: #27ae60;
+        }
+        .category-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #e67e22;
+            margin-bottom: 15px;
+        }
+        .content-column.positive .category-title {
+            color: #27ae60;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 20px;
+        }
+        li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+            font-size: 17px;
+            color: #34495e;
+            font-weight: 500;
+        }
+        li:before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: #e67e22;
+            font-weight: bold;
+            font-size: 20px;
+        }
+        .content-column.positive li:before {
+            color: #27ae60;
+        }
+        .quote-box {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #3498db;
+            margin-top: 15px;
+            font-style: italic;
+            color: #5a6c7d;
+            font-size: 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .quote-box:before {
+            content: "💬 ";
+            font-style: normal;
+        }
+        .thanks {
+            text-align: center;
+            font-size: 24px;
+            color: #2c3e50;
+            margin-top: 60px;
+            padding: 30px;
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            border-radius: 12px;
+            font-weight: 500;
+        }
+        .loading {
+            text-align: center;
+            padding: 60px;
+            font-size: 20px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Vos retours : Sondage Mi-Session</h1>
+        <div class="subtitle">Merci pour votre participation 🎓</div>
+        
+        <div id="loading" class="loading">Chargement des données...</div>
+        
+        <div id="content" style="display: none;">
+            <div class="charts-section">
+                <div class="chart-card">
+                    <div class="chart-title">📊 Rythme du cours</div>
+                    <div class="chart-container">
+                        <canvas id="chart1"></canvas>
+                    </div>
+                </div>
+
+                <div class="chart-card">
+                    <div class="chart-title">📝 Clarté des explications</div>
+                    <div class="chart-container">
+                        <canvas id="chart2"></canvas>
+                    </div>
+                </div>
+
+                <div class="chart-card full">
+                    <div class="chart-title">💻 Format Zoom : Qu'est-ce qui fonctionne ? Qu'est-ce qui pose problème ?</div>
+                    <div class="chart-container">
+                        <canvas id="chart3"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-header improve">🔧 Ce que vous souhaitez améliorer</div>
+
+            <div class="content-grid">
+                <div class="content-column">
+                    <div class="category-title">Ressources et matériel</div>
+                    <ul>
+                        <li>Accès permanent aux exercices</li>
+                        <li>Enregistrements des séances Zoom</li>
+                        <li>Plus d'exercices pour pratiquer</li>
+                        <li>Corrections plus détaillées</li>
+                    </ul>
+                    <div class="quote-box">Avoir les cours enregistrés puisqu'ils sont déjà sur zoom</div>
+                    <div class="quote-box">J'aimerais aussi avoir plus d'exercices résolus sur Moodle pour pratiquer</div>
+                </div>
+
+                <div class="content-column">
+                    <div class="category-title">Pédagogie et format</div>
+                    <ul>
+                        <li>Mini-révision avant les exercices</li>
+                        <li>Capsules plus détaillées sur concepts complexes</li>
+                        <li>Exemples d'algorithmes étape par étape</li>
+                        <li>Clarification sur ce qu'il faut retenir</li>
+                    </ul>
+                    <div class="quote-box">j'aurai bien aimé que le chargé fasse une petite révision de la matière avant de commencer avec les exos</div>
+                    <div class="quote-box">Avoir plus d'exemples d'algorithmes à travers de simulation avec tous les étapes</div>
+                </div>
+
+                <div class="content-column">
+                    <div class="category-title">Organisation Zoom</div>
+                    <ul>
+                        <li>Choix des équipes de travail</li>
+                        <li>Salles plus dynamiques</li>
+                        <li>Alternative : Discord ?</li>
+                    </ul>
+                    <div class="quote-box">Les salles de travail sur Zoom sont souvent vides. Pe Trouver un moyen pour que les etudiants choisissent leur groupe</div>
+                </div>
+
+                <div class="content-column">
+                    <div class="category-title">Autres</div>
+                    <ul>
+                        <li>Horaire matinal (8h30) difficile</li>
+                        <li>Quiz formatifs avec corrections accessibles</li>
+                        <li>Organisation du matériel sur Moodle</li>
+                    </ul>
+                    <div class="quote-box">Le cours se donne trop tot</div>
+                </div>
+            </div>
+
+            <div class="section-header positive">✨ Ce que vous appréciez</div>
+
+            <div class="content-grid">
+                <div class="content-column positive">
+                    <div class="category-title">L'enseignant</div>
+                    <ul>
+                        <li>Motivation et dynamisme contagieux</li>
+                        <li>Disponibilité et rapidité de réponse</li>
+                        <li>Explications claires et patientes</li>
+                        <li>Se rappelle des noms</li>
+                        <li>Souci que tout le monde comprenne</li>
+                    </ul>
+                    <div class="quote-box">La motivation et le dynamisme du charge de cours. On peut voir qu'il aime enseigner</div>
+                    <div class="quote-box">Axel est un très bon pédagogue, j'apprécie sa disponibilité</div>
+                </div>
+
+                <div class="content-column positive">
+                    <div class="category-title">Format du cours</div>
+                    <ul>
+                        <li>Classe inversée = focus sur la pratique</li>
+                        <li>Exercices pertinents et stimulants</li>
+                        <li>Vidéos courtes et efficaces</li>
+                        <li>Format à distance pratique</li>
+                    </ul>
+                    <div class="quote-box">Le format inverse du cours et le fait qu'on passe le cours a faire des exercices</div>
+                    <div class="quote-box">Les exos sont le fun ça permet de comprendre le raisonnement</div>
+                </div>
+
+                <div class="content-column positive">
+                    <div class="category-title">Corrections et supports</div>
+                    <ul>
+                        <li>Notes manuscrites très utiles</li>
+                        <li>Caméra pour voir les dessins</li>
+                        <li>Explications détaillées</li>
+                    </ul>
+                    <div class="quote-box">Les corrections sont généralement claires (grâce aux notes: explications, dessins...)</div>
+                </div>
+
+                <div class="content-column positive">
+                    <div class="category-title">Évaluations</div>
+                    <ul>
+                        <li>Séances de révision supplémentaires</li>
+                        <li>Format des examens juste</li>
+                        <li>Niveau de difficulté adéquat</li>
+                        <li>Considération du contexte difficile</li>
+                    </ul>
+                    <div class="quote-box">Le format et niveau des examens étaient adéquats</div>
+                </div>
+            </div>
+
+            <div class="thanks">
+                Merci pour vos retours constructifs ! 🙏<br>
+                Ils seront pris en compte pour améliorer le cours.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let surveyData = null;
+
+        function countResponses(field, splitMultiple = false, fixedOrder = null) {
+            const counts = {};
+            surveyData.forEach(response => {
+                const value = response[field];
+                if (!value || value.trim() === '') return;
+                
+                if (splitMultiple) {
+                    const options = value.split('   ').map(s => s.trim()).filter(s => s);
+                    options.forEach(option => {
+                        counts[option] = (counts[option] || 0) + 1;
+                    });
+                } else {
+                    counts[value] = (counts[value] || 0) + 1;
+                }
+            });
+            
+            if (fixedOrder) {
+                const orderedCounts = {};
+                fixedOrder.forEach(key => {
+                    orderedCounts[key] = counts[key] || 0;
+                });
+                return orderedCounts;
+            }
+            
+            return counts;
+        }
+
+        function createBarChart(canvasId, data, colors = null) {
+            const ctx = document.getElementById(canvasId).getContext('2d');
+            const labels = Object.keys(data);
+            const values = Object.values(data);
+            
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data: values,
+                        backgroundColor: colors || '#667eea',
+                        borderColor: '#5568d3',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                stepSize: 1,
+                                font: { size: 14, weight: '500' }
+                            }
+                        },
+                        x: {
+                            ticks: {
+                                font: { size: 14, weight: '500' }
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false }
+                    }
+                }
+            });
+        }
+
+        function createGroupedBarChart(canvasId, data1, data2, labels) {
+            const ctx = document.getElementById(canvasId).getContext('2d');
+            const values1 = labels.map(l => data1[l] || 0);
+            const values2 = labels.map(l => data2[l] || 0);
+            
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: '✅ Fonctionne bien',
+                        data: values1,
+                        backgroundColor: '#27ae60',
+                        borderColor: '#229954',
+                        borderWidth: 2
+                    }, {
+                        label: '⚠️ Pose problème',
+                        data: values2,
+                        backgroundColor: '#e74c3c',
+                        borderColor: '#c0392b',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                stepSize: 1,
+                                font: { size: 14, weight: '500' }
+                            }
+                        },
+                        x: {
+                            ticks: {
+                                font: { size: 14, weight: '500' }
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top',
+                            labels: {
+                                font: { size: 16, weight: 'bold' },
+                                padding: 15
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function renderCharts() {
+            const rhythmOrder = ['Trop rapide', 'Adéquat', 'Trop lent'];
+            const q1Data = countResponses('lerythmeducoursensanceest', false, rhythmOrder);
+            createBarChart('chart1', q1Data, ['#e74c3c', '#27ae60', '#f39c12']);
+
+            const explanationOrder = ['Clairs et suffisants', 'Généralement clairs', 'Souvent difficiles à suivre'];
+            const q2Data = countResponses('lesexplicationsetexemplessont', false, explanationOrder);
+            createBarChart('chart2', q2Data, ['#27ae60', '#3498db', '#e74c3c']);
+
+            const zoomAspects = [
+                'Suivre les explications',
+                'Poser des questions',
+                'Faire les exercices/activités',
+                'Rester engagé'
+            ];
+            const q3Data = countResponses('lescoursenformatzoomfonctionnentbienpour', true, zoomAspects);
+            const q4Data = countResponses('leformatzoomposeproblmepour', true, zoomAspects);
+            createGroupedBarChart('chart3', q3Data, q4Data, zoomAspects);
+        }
+
+        async function loadData() {
+            try {
+                const response = await fetch('survey_data.json');
+                if (!response.ok) throw new Error(`Erreur HTTP: ${response.status}`);
+                
+                const data = await response.json();
+                
+                if (Array.isArray(data) && Array.isArray(data[0])) {
+                    surveyData = data[0];
+                } else if (Array.isArray(data)) {
+                    surveyData = data;
+                } else {
+                    throw new Error('Format invalide');
+                }
+                
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('content').style.display = 'block';
+                
+                renderCharts();
+                
+            } catch (error) {
+                document.getElementById('loading').innerHTML = `<strong>Erreur:</strong> ${error.message}`;
+            }
+        }
+
+        loadData();
+    </script>
+</body>
+</html>
